@@ -8,7 +8,8 @@ from pathlib import Path
 import xml.etree.ElementTree as ET
 
 ROOT = Path(__file__).resolve().parents[1]
-ART = ROOT / 'static/images/fieldguide'
+ART = ROOT / 'design/robots'
+OUTPUT = ROOT / 'static/images/fieldguide'
 NS = 'http://www.w3.org/2000/svg'
 ET.register_namespace('', NS)
 
@@ -218,5 +219,5 @@ for index, (letter, view) in enumerate(VIEWS):
     sprite.append(frame)
 
 ET.indent(sprite, space='  ')
-ET.ElementTree(sprite).write(ART / 'finding-agents.svg', encoding='unicode')
+ET.ElementTree(sprite).write(OUTPUT / 'finding-agents.svg', encoding='unicode')
 print(f'Built {len(VIEWS)} expression views with one shared artwork.')

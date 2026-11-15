@@ -1,0 +1,60 @@
+/* Current research diagrams share the site's original robot artwork and palette. */
+.current-scene {margin:12px 0 10px;color:var(--text);--scene-accent:var(--discovery,#3672a5);}
+.misalignment-findings .current-scene,.current-taxonomy .current-scene {--scene-accent:var(--misalignment,#b44f44);}
+.current-scene svg{display:block;width:100%;height:auto;max-height:220px;overflow:visible;}
+.current-scene text{font:500 18px var(--font);fill:var(--text);}
+.current-scene .scene-small{font-size:16px;}
+.current-scene .scene-line,.current-scene .scene-arrow{fill:none;stroke:var(--scene-accent);stroke-width:2;stroke-linecap:round;stroke-linejoin:round;}
+.current-scene .scene-arrow{marker-end:var(--arrow);}
+.current-scene .scene-boundary{fill:none;stroke:var(--muted);stroke-opacity:.5;stroke-dasharray:5 5;stroke-width:1.3;}
+.current-scene .scene-paper{fill:var(--bg);stroke:var(--scene-accent);stroke-opacity:.75;stroke-width:1.5;}
+.current-scene .scene-safe{fill:color-mix(in srgb,var(--discovery) 12%,var(--bg));stroke:var(--discovery);stroke-width:1.5;}
+.current-scene .scene-safe-line{fill:none;stroke:var(--discovery);stroke-width:2.5;stroke-linecap:round;}
+.current-scene .scene-risk{fill:color-mix(in srgb,#c44743 20%,var(--bg));stroke:#c44743;stroke-width:1.5;}
+.current-scene .scene-risk-text{fill:var(--scene-red);}
+.current-scene .scene-divider{fill:none;stroke:var(--muted);stroke-width:1.2;stroke-dasharray:5 5;}
+.study-setting{font:400 14px/1.55 var(--font);color:var(--muted);margin:12px 0 20px;}
+.study-setting summary{cursor:pointer;width:fit-content;}
+.study-setting p{font:inherit!important;max-width:85ch;}
+.current-taxonomy{margin:54px 0 62px;}
+.current-taxonomy header>p{margin:8px 0 24px;color:var(--muted);font:400 16px/1.6 var(--font);}
+.threat-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));column-gap:28px;row-gap:26px;}
+.threat-card{min-width:0;padding:18px 0 6px;border-top:1px solid color-mix(in srgb,var(--muted) 28%,transparent);}
+.threat-card h3{font:600 clamp(15px,1.6vw,20px)/1.3 var(--font);margin:0;letter-spacing:-.025em;}
+.threat-card p{font:400 14px/1.5 var(--font);margin:10px 0;color:var(--muted);min-height:42px;}
+.threat-card .current-scene svg{max-height:190px;}
+.threat-cases{display:flex;gap:14px;flex-wrap:wrap;font:500 12px/1.5 var(--font);}
+.threat-cases a{color:var(--scene-red);text-decoration:none;}
+.threat-cases a:hover{text-decoration:underline;}
+.taxonomy-evidence{margin-top:22px;}
+@media(max-width:1279px){.threat-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:20px;}.threat-card h3{font-size:18px;}}
+@media(max-width:800px){.threat-grid{grid-template-columns:1fr;}.threat-card h3{font-size:20px;}.threat-card p{min-height:0;}.current-scene svg{max-height:190px;}}
+
+summary::-webkit-details-marker{display:none;}
+.experiment-heading h3 small{font:400 12px var(--font);margin-left:10px;color:var(--muted);}
+@media print{.finding-explanation>p{display:block;}}
+
+.organization-finding{margin:40px 0 28px;}
+.organization-finding h2{font:400 28px/1.2 var(--editorial);}
+.organization-finding header p{margin:8px 0 18px;color:var(--muted);font:400 15px/1.5 var(--font);}
+.organization-pair{display:grid;grid-template-columns:1fr 1fr;gap:36px;}
+.organization-pair article{padding:14px 0;border-top:1px solid var(--line);}
+.organization-pair h3{font:500 15px/1.4 var(--font);color:var(--scene-blue);}
+.organization-flow{display:flex;align-items:center;gap:16px;margin-top:10px;}
+.organization-flow>span:nth-child(2){font-size:24px;color:var(--scene-blue);}
+.organization-flow strong{display:block;font:500 16px/1.4 var(--font);}
+.organization-flow small{display:block;color:var(--muted);font:400 13px/1.5 var(--font);margin-top:3px;}
+.organization-peers{display:flex;width:150px;flex-shrink:0;justify-content:center;}
+.organization-peers img{width:80px;height:60px;}
+.organization-peers img+img{margin-left:-8px;}
+@media(max-width:700px){.organization-pair{grid-template-columns:1fr;gap:10px;}.organization-peers{width:110px;}.organization-peers img{width:62px;height:47px;}.organization-flow{gap:12px;}}
+
+/* Keep explanations at reading size instead of scaling them inside the SVG. */
+.current-scene figcaption{margin:8px auto 0;text-align:center;font:400 14px/1.5 var(--font);max-width:44ch;color:var(--text);}
+@media(max-width:520px){
+ .current-scene text{font-size:22px;}
+ .current-scene .scene-small{font-size:21px;}
+ .current-scene figcaption{font-size:13px;}
+}
+
+@media(max-width:900px){.findings-primary .life-halves{grid-template-columns:minmax(0,1fr);}}

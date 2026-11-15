@@ -97,6 +97,7 @@
   }
 
   window.createLinearTimeline = ({actors,moments,sendIndex,eventFraction,fontFamily}) => {
+    const actorName=id=>'Agent '+(actors.find(a=>a.id===id)?.name||id);
     const lanes=new Map(actors.map((actor,i)=>[actor.id,i]));
     const floorEvents=moments.map(m=>({moment:m,t:eventFraction(m.event),lane:lanes.get(m.actor)}));
     const laneEvents=actors.map((_,lane)=>floorEvents.filter(event=>event.lane===lane));
@@ -176,7 +177,7 @@
         const head=heads[row];
         if(head)stroke(ctx,[origin,project(head.t,row)],color+(involved?'ef':'b5'),involved?2.1:1.6);
         ctx.font='500 11px '+fontFamily; ctx.textAlign='right'; ctx.fillStyle=color;
-        ctx.fillText('Agent '+actor.id,origin[0]-7,origin[1]+3);
+        ctx.fillText(actorName(actor.id),origin[0]-7,origin[1]+3);
         ctx.globalAlpha=1;
       });
       ctx.textAlign='left';

@@ -7,7 +7,16 @@ const root=path.resolve(__dirname,'..');
 const api={window:{}};
 vm.runInNewContext(fs.readFileSync(path.join(root,'static/js/trajectory-graph.js'),'utf8'),api);
 const {connectionsAtTime}=api.window.swarmTrajectorySelection;
-const data=JSON.parse(fs.readFileSync(path.join(root,'static/data/trajectories/r136.json'),'utf8'));
+// Synthetic selection fixture. These are UI test events, not research evidence.
+const event=(id,actor)=>({id,actor,turn:id,time:'00:00:'+String(id).padStart(2,'0'),operation:'test',messages:[],reads:[]});
+const note=(id,event,actor,recipients)=>({id,event,actor,turn:event,time:'00:00:'+event,body:'Synthetic test note',kind:'Message',reads:recipients.map(([actor,event])=>({actor,event,turn:event,time:'00:00:'+event})),repeatReads:[]});
+const data={actors:['A','B','C','D'].map(id=>({id,name:id})),events:[event(1,'A'),event(38,'C'),event(40,'D'),event(46,'B'),event(47,'D'),event(49,'A'),event(51,'C'),event(52,'A'),event(53,'D')],messages:[
+  note('m38-0',38,'C',[['D',40]]),
+  note('m46-1',46,'B',[['C',51],['A',52],['D',53]]),
+  note('m46-2',46,'B',[['C',51],['A',52],['D',53]]),
+  note('m47-3',47,'D',[['C',51]]),
+  note('m49-4',49,'A',[['C',51]])
+]};
 const events=new Map(data.events.map(event=>[event.id,event]));
 const second=id=>events.get(id).time.split(':').reduce((total,n)=>total*60+Number(n),0);
 const reads=data.messages.flatMap((message,index)=>[...message.reads,...(message.repeatReads||[])].map(receipt=>

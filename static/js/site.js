@@ -24,6 +24,17 @@
     const closeMenu = () => {
       findingsMenu.open = false;
     };
+    const fitMenu = () => {
+      if (!findingsMenu.open) return;
+      const menu = findingsMenu.querySelector('.finding-links');
+      const viewportBottom = window.visualViewport
+        ? window.visualViewport.offsetTop + window.visualViewport.height : innerHeight;
+      menu.style.maxHeight = Math.max(44, viewportBottom - menu.getBoundingClientRect().top - 12) + 'px';
+    };
+    findingsMenu.addEventListener('toggle', fitMenu);
+    window.addEventListener('resize', fitMenu);
+    window.addEventListener('scroll', fitMenu, {passive:true});
+    window.visualViewport?.addEventListener('resize', fitMenu);
     document.addEventListener('click', event => {
       if (findingsMenu.open && (event.target.closest('a') || !findingsMenu.contains(event.target))) closeMenu();
     });

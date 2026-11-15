@@ -441,6 +441,7 @@
   }
 
   window.createTrajectoryOrbitView = ({canvas, actors, actorEvents, reads, sendIndex, fontFamily, recordedSecond}) => {
+    const actorName=id=>'Agent '+(actors.find(a=>a.id===id)?.name||id);
     const ctx = canvas.getContext('2d');
     const instructions = canvas.getAttribute('aria-label');
 
@@ -581,7 +582,7 @@
       arc=readArcs.get(next);
       featured=arc || readArcs.get(reads.findLast(read=>read.order<next.order));
       const receipt=featured?.receipt;
-      const description=receipt ? (arc?'Current':'Last')+' read from Agent '+receipt.message.actor+' to Agent '+receipt.actor+'. ' : '';
+      const description=receipt ? (arc?'Current':'Last')+' read from '+actorName(receipt.message.actor)+' to '+actorName(receipt.actor)+'. ' : '';
       canvas.setAttribute('aria-label',description+instructions);
       selectRoutes(history,connections,animate);
       selectedFocus=featured?.focus || CENTER;
@@ -708,7 +709,7 @@
         const dx = rim[0]-center[0], dy = rim[1]-center[1], length = Math.hypot(dx,dy) || 1;
         const anchor = [rim[0]+6*dx/length,rim[1]+6*dy/length];
         const marked=Math.max(0,...Array.from(participants,([node,item])=>node.track===track?item.alpha:0));
-        labels.push({text:'Agent '+track.id,at:anchor,color:ink,emphasis:involved,opacity:(.25+.75*strength)*(1-marked)});
+        labels.push({text:actorName(track.id),at:anchor,color:ink,emphasis:involved,opacity:(.25+.75*strength)*(1-marked)});
         occupied.push({x:anchor[0]-4,y:anchor[1]-4,w:8,h:8});
       }
       for (const [link,style] of routes) {
@@ -758,14 +759,14 @@
           const [x,y]=project(featured.path[i]);
           occupied.push({x:x-4,y:y-4,w:8,h:8});
         }
-        labels.unshift({text:(arc?'Message '+String((receipt.index??0)+1).padStart(2,'0')+' · ':'Last read · ')+pair,at:project(featured.focus),
+        labels.unshift({text:(arc?(receipt.message.kind==='Message'?'Message ':'Artifact ')+String((receipt.index??0)+1).padStart(2,'0')+' · ':'Last read · ')+pair,at:project(featured.focus),
           color:arc?paint.paper:paint.muted,current:Boolean(arc),receipt,opacity:Math.min(1,style.last+style.current)});
       }
       if (post) {
         const ink = paint.agents.get(post.event.actor);
         if(!arc) {bloom(ctx,...post.screenTip,17*post.size,ink,'78');circle(ctx,...post.screenTip,6.2*post.size,ink,true);}
         hits.push({x:post.screenTip[0],y:post.screenTip[1],r:8,event:post.event.id,moment:sendIndex.get(moment.message.id)});
-        callouts.push({name:'Agent '+post.event.actor,detail:'Sender · '+moment.message.time,ink});
+        callouts.push({name:actorName(post.event.actor),detail:'Sender · '+moment.message.time,ink});
       }
       if (selected && (arc || !post)) {
         const ink = paint.agents.get(selected.event.actor);
@@ -776,7 +777,7 @@
           circle(ctx,...selected.screenTip,(6.2+13*arrival)*selected.size,ink,true);
           ctx.globalAlpha=1;
         }
-        callouts.push({name:'Agent '+selected.event.actor,detail:(arc?'Reader':'Turn '+selected.event.turn)+' · '+selected.event.time,ink});
+        callouts.push({name:actorName(selected.event.actor),detail:(arc?'Reader':'Turn '+selected.event.turn)+' · '+selected.event.time,ink});
       }
       if (gutter) drawCallouts(ctx,callouts,gutter,height,paint,fontFamily);
       const endpointLabels=[];
@@ -784,7 +785,7 @@
         const ink=paint.agents.get(node.event.actor), at=node.screenTip;
         const radius=drawParticipant(ctx,node,ink,paint,fontFamily,width,alpha);
         occupied.push({x:at[0]-radius,y:at[1]-radius,w:radius*2,h:radius*2});
-        endpointLabels.push({text:'Agent '+node.event.actor+' · '+role,key:'pin-'+node.event.id+'-'+role,
+        endpointLabels.push({text:actorName(node.event.actor)+' · '+role,key:'pin-'+node.event.id+'-'+role,
           at,color:ink,endpoint:true,opacity:alpha,receiptTarget:receipt});
         hits.push({x:at[0],y:at[1],r:radius,event:receipt.event,moment:receipt.order,message:receipt.message.id});
       }

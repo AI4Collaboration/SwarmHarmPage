@@ -1,6 +1,6 @@
 (() => {
   const esc = value => String(value ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
-  const actorStyle = id => window.swarmAgentPalette?.[id] || 'var(--scene-muted)';
+  const actorStyle = id => typeof id === 'string' ? `var(--agent-${id.toLowerCase()},var(--scene-muted))` : 'var(--scene-muted)';
   const playIcon = '<svg viewBox="0 0 20 20" aria-hidden="true"><path d="m7 4 9 6-9 6Z"/></svg>';
   const pauseIcon = '<svg viewBox="0 0 20 20" aria-hidden="true"><path d="M7 4v12M13 4v12"/></svg>';
   const arrow = direction => `<svg viewBox="0 0 20 20" aria-hidden="true"><path d="${direction<0?'m12 5-5 5 5 5':'m8 5 5 5-5 5'}"/></svg>`;
@@ -19,7 +19,7 @@
     const controller = new AbortController();
     const on = (el,type,fn,options={}) => el.addEventListener(type,fn,{...options,signal:controller.signal});
     const actors=data.actors, events=[...data.events].sort((a,b)=>a.id-b.id);
-    const names=new Map(actors.map(a=>[a.id,'Agent '+a.id]));
+    const names=new Map(actors.map(a=>[a.id,'Agent '+a.name]));
     const contexts=new Map(actors.map(a=>{
       const account=events.some(e=>e.actor===a.id && e.result?.account===a.name);
       return [a.id,a.name===names.get(a.id)?'':(account?'Account · ':'Recorded as · ')+a.name];
@@ -34,8 +34,8 @@
     const messageById=new Map(messages.map(m=>[m.id,m]));
     const messageNumberById=new Map(messages.map((m,i)=>[m.id,i+1]));
     const noMessages=!messages.length;
-    const sharedRecords = !noMessages && messages.every(message => message.kind === 'Released dispatch record');
-    const entryLabel = sharedRecords ? 'shared record' : 'message';
+    const sharedRecords = !noMessages && messages.every(message => message.kind !== 'Message');
+    const entryLabel = sharedRecords ? 'artifact' : 'message';
     const moments=[];
     messages.forEach((message,index)=>{
       moments.push({kind:'send',event:message.event,actor:message.actor,time:message.time,turn:message.turn,message,index});
@@ -146,8 +146,8 @@
       const receipts=reads.filter(read=>read.message===message && read.firstRead).map(read=>{
         return `<button type="button" data-obs-receipt="${read.order}" style="--reader:${actorStyle(read.actor)}" aria-label="${esc(names.get(read.actor))} reads message ${number} at turn ${read.turn}">${esc(names.get(read.actor))}</button>`;
       }).join('');
-      return `<article class="obs-chat-message" data-chat-message="${esc(message.id)}" style="--agent:${actorStyle(message.actor)}" aria-label="Message ${number} from ${esc(names.get(message.actor))}">
-        <span class="obs-chat-avatar" aria-hidden="true"><img src="${esc(window.swarmAgentImage?.(message.actor,'message')||`static/images/fieldguide/finding-agents.svg?v=8#${message.actor.toLowerCase()}-speaking`)}" width="210" height="150" alt=""></span>
+      return `<article class="obs-chat-message" data-chat-message="${esc(message.id)}" style="--agent:${actorStyle(message.actor)}" aria-label="Artifact ${number} from ${esc(names.get(message.actor))}">
+        <span class="obs-chat-avatar" aria-hidden="true"><img src="${esc(`static/images/fieldguide/finding-agents.svg?v=8#${message.actor.toLowerCase()}-speaking`)}" width="210" height="150" alt=""></span>
         <div class="obs-chat-content">
           <header class="obs-chat-heading"><button class="obs-chat-select" type="button" data-message="${esc(message.id)}"><span>Posted by <strong title="${esc(contexts.get(message.actor))}">${esc(names.get(message.actor))}</strong></span><span aria-hidden="true">·</span><span><span data-read-label hidden>Read by </span><strong data-chat-recipient>${esc(messageSource(message))}</strong></span></button><span class="obs-chat-stamp"><span data-chat-number>#${number}</span><time>${esc(message.time)}</time></span></header>
           ${parent?`<button class="obs-chat-reply" type="button" data-message="${esc(parent.id)}" aria-label="Reply to Message ${messageNumberById.get(parent.id)} from ${esc(names.get(parent.actor))}">↳ Reply to #${messageNumberById.get(parent.id)}</button>`:''}
@@ -170,7 +170,7 @@
       <span data-message-number></span>
       <button type="button" data-next-message aria-label="Next ${noMessages?'action':entryLabel}">${arrow(1)}</button>
     </div>`;
-    host.innerHTML=`<header class="obs-topbar"><div class="obs-title"><span class="obs-title-mark" aria-hidden="true"><i></i><i></i><i></i><i></i></span><h4>${noMessages?'Agent actions':'Agent communication'}</h4></div><div class="obs-top-stats"><span><b>${messages.length}</b> ${entryLabel}${messages.length === 1 ? '' : 's'}</span><span><b>${receiptCount}</b> verified reads</span></div><button class="obs-play" type="button" data-play aria-label="Play trajectory">${playIcon}<span>Play</span></button></header>
+    host.innerHTML=`<header class="obs-topbar"><div class="obs-title"><span class="obs-title-mark" aria-hidden="true"><i></i><i></i><i></i><i></i></span><h4>${receiptCount?'Agent communication':noMessages?'Agent actions':'Agent activity'}</h4></div><div class="obs-top-stats"><span><b>${messages.length}</b> ${entryLabel}${messages.length === 1 ? '' : 's'}</span><span><b>${receiptCount}</b> verified reads</span></div><button class="obs-play" type="button" data-play aria-label="Play trajectory">${playIcon}<span>Play</span></button></header>
       <div class="obs-workbench">
         <section class="obs-inspector" aria-label="Selected record">
           <section class="obs-action-panel" data-action-panel aria-label="Action">
@@ -178,8 +178,8 @@
             <div class="obs-action-line"><strong data-action-actor></strong><span data-action-label></span></div>
             <details class="obs-action-args" data-action-args hidden><summary>Tool arguments</summary><pre></pre></details>
           </section>
-          <section class="obs-message-panel" data-message-panel aria-label="Message">
-            <header class="obs-panel-heading"><h5>${sharedRecords ? 'Shared record' : 'Message'}</h5>${noMessages?'':stepControls}<button class="obs-source-link" type="button" data-original="message" aria-label="View original ${entryLabel}" title="View original ${entryLabel}">↗</button></header>
+          <section class="obs-message-panel" data-message-panel aria-label="Shared artifact">
+            <header class="obs-panel-heading"><h5>${sharedRecords ? 'Shared artifact' : 'Message'}</h5>${noMessages?'':stepControls}<button class="obs-source-link" type="button" data-original="message" aria-label="View original ${entryLabel}" title="View original ${entryLabel}">↗</button></header>
             <div class="obs-document" tabindex="0" role="region" aria-label="Conversation history">
               <div class="obs-chat" data-chat-log>${messages.map(chatMessage).join('')}</div>
               <p class="obs-message-empty" data-message-empty hidden></p>
@@ -197,7 +197,7 @@
           <div class="obs-route" id="obs-current-route" data-route><div class="obs-route-heading"></div><blockquote class="obs-route-quote" hidden><button type="button" data-original="message" title="View original ${entryLabel}"><span data-excerpt></span><span aria-hidden="true">↗</span></button></blockquote></div>
           <div class="obs-stage"><canvas class="obs-space-canvas" tabindex="0" role="img" aria-label="Agents and their recorded message exchanges. Select an agent to highlight its actions and messages. Arrow keys step through events." aria-describedby="obs-current-route"></canvas><i class="obs-arc-signal" aria-hidden="true" hidden></i><div class="obs-stage-key"><span><i class="obs-key-action"></i>Action</span>${noMessages?'':'<span><i class="obs-key-post"></i>Shared</span><span><i class="obs-key-read"></i>Read</span><span class="obs-key-history"><i></i>Other reads</span>'}</div><div class="obs-graph-tooltip" role="tooltip" hidden></div><div class="obs-stage-hint">Select an agent or message</div></div>
           <div class="obs-focus-status" hidden><span data-focus-label></span><button type="button" data-clear-focus>Show all agents</button></div>
-          <div class="obs-agent-strip" role="group" aria-label="Highlight an agent">${actors.map(a=>`<button type="button" data-strip-actor="${a.id}" aria-pressed="false" aria-label="Highlight Agent ${a.id} actions and messages" style="--agent:${actorStyle(a.id)}" title="${esc(contexts.get(a.id))}"><span class="obs-agent-letter" aria-hidden="true"></span><span><strong>${esc(names.get(a.id))}</strong><small><b data-actor-role hidden></b><span data-actor-count="${a.id}"></span></small></span></button>`).join('')}</div>
+          <div class="obs-agent-strip" role="group" aria-label="Highlight an agent">${actors.map(a=>`<button type="button" data-strip-actor="${a.id}" aria-pressed="false" aria-label="Highlight ${esc(names.get(a.id))} actions and artifacts" style="--agent:${actorStyle(a.id)}" title="${esc(contexts.get(a.id))}"><span class="obs-agent-letter" aria-hidden="true"></span><span><strong>${esc(names.get(a.id))}</strong><small><b data-actor-role hidden></b><span data-actor-count="${a.id}"></span></small></span></button>`).join('')}</div>
         </section>
         <section class="obs-flow" id="timeline" aria-labelledby="obs-timeline-title">
           <header class="obs-panel-heading"><h5 id="obs-timeline-title">Timeline</h5><div class="obs-run-clock"><span>Run time</span><time data-current-time></time><span>/ ${clockLabel(duration)}</span></div></header>
@@ -362,7 +362,7 @@
       timeConnections=window.swarmTrajectorySelection.connectionsAtTime(reads,moment,recordedSecond,focusedActor);
       connectionsPanel.hidden=!timeConnections.length;
       const later=timeConnections.some(read=>recordedSecond(read.event)>recordedSecond(moment.event));
-      connectionsPanel.innerHTML=timeConnections.length ? `<span>Messages to/from this time${later?' · Dashed: later reads':''}</span><div class="obs-connection-list" role="group" aria-label="All message reads connected to the selected time">${timeConnections.map(read=>`<button type="button" data-time-read="${read.order}" aria-pressed="${read===moment}" title="${esc(short(read.message.body,160))}"><strong>${esc(read.message.actor)} → ${esc(read.actor)}</strong><span>#${messageNumberById.get(read.message.id)}</span><time>${clockLabel(recordedSecond(read.message.event))} → ${clockLabel(recordedSecond(read.event))}</time></button>`).join('')}</div>` : '';
+      connectionsPanel.innerHTML=timeConnections.length ? `<span>Exchanges at this time${later?' · Dashed: later reads':''}</span><div class="obs-connection-list" role="group" aria-label="All content reads connected to the selected time">${timeConnections.map(read=>`<button type="button" data-time-read="${read.order}" aria-pressed="${read===moment}" title="${esc(short(read.message.body,160))}"><strong>${esc(names.get(read.message.actor))} → ${esc(names.get(read.actor))}</strong><span>#${messageNumberById.get(read.message.id)}</span><time>${clockLabel(recordedSecond(read.message.event))} → ${clockLabel(recordedSecond(read.event))}</time></button>`).join('')}</div>` : '';
     }
     function showExchange(moment) {
       const message = moment.message;
@@ -377,7 +377,7 @@
 
       const number = document.createElement('span');
       number.className = 'obs-route-number';
-      number.textContent = (sharedRecords ? 'Record ' : 'Message ') + String(moment.index + 1).padStart(2, '0');
+      number.textContent = (sharedRecords ? 'Artifact ' : 'Message ') + String(moment.index + 1).padStart(2, '0');
       const sender = document.createElement('strong');
       sender.textContent = names.get(message.actor);
       sender.style.color = actorStyle(message.actor);
@@ -476,7 +476,7 @@
         else row.removeAttribute('aria-current');
         row.querySelector('[data-message-body]').toggleAttribute('data-original-text',selected);
         row.querySelector('[data-chat-number]').textContent=selected
-          ? (sharedRecords?'Record ':'Message ')+String(messageNumberById.get(item.id)).padStart(2,'0')
+          ? (sharedRecords?'Artifact ':'Message ')+String(messageNumberById.get(item.id)).padStart(2,'0')
           : '#'+messageNumberById.get(item.id);
         const selectMessage = row.querySelector('.obs-chat-select');
         selectMessage.setAttribute('aria-pressed', String(selected));

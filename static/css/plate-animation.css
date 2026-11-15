@@ -1,7 +1,0 @@
-/* Static case illustrations, including files entering shared storage. */
-.life-cycle { position:relative; }
-.life-half .life-phase { padding-right:0; }
-.life-step > img { display:block; width:100%; height:auto; aspect-ratio:1; object-fit:contain; filter:none; mix-blend-mode:normal; }
-@media(max-width:760px) {
-  .life-step > img { max-width:210px; }
-}

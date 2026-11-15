@@ -10,6 +10,7 @@
   window.swarmTrajectorySelection = {connectionsAtTime, related};
 
   window.createMessageGraph = ({actors, actorEvents, fontFamily}) => {
+    const actorName=id=>'Agent '+(actors.find(a=>a.id===id)?.name||id);
     let paths = [], transitioning=false, hasDrawn=false;
     const emphasis=new Map();
     function emphasisAt(key,target,now,reduced) {
@@ -88,7 +89,7 @@
         ctx.beginPath(); ctx.moveTo(a.x,a.y); ctx.quadraticCurveTo(c.x,c.y,b.x,b.y); ctx.stroke();
         ctx.setLineDash([]); arrow(ctx,path,path.selected?ink:paint.guide);
         if(path.selected) {
-          const p=pointOn(path,.48), label=isCurrent?'Message '+((active.index??0)+1):bundle.selected.length>1?bundle.selected.length+' reads':future?'Later read':'Read';
+          const p=pointOn(path,.48), label=isCurrent?(active.message?.kind==='Message'?'Message ':'Artifact ')+((active.index??0)+1):bundle.selected.length>1?bundle.selected.length+' reads':future?'Later read':'Read';
           ctx.font='10px '+fontFamily; ctx.textAlign='center';
           const w=ctx.measureText(label).width+10;
           ctx.fillStyle=paint.paper; ctx.fillRect(p.x-w/2,p.y-7,w,14);
@@ -112,7 +113,7 @@
         ctx.strokeStyle=ink+(selected?'ff':involved?'ba':'60'); ctx.lineWidth=1+strength; ctx.stroke();
         ctx.fillStyle=ink; ctx.beginPath(); ctx.arc(x+13,y+17,3,0,Math.PI*2); ctx.fill();
         ctx.textAlign='left'; ctx.font='600 12px '+fontFamily; ctx.fillStyle=paint.ink;
-        ctx.fillText('Agent '+id,x+23,y+21);
+        ctx.fillText(actorName(id),x+23,y+21);
         const latest=actorEvents.get(id).findLast(event=>event.id<=active.event);
         const status=active.kind==='outcome'?'Complete':active.kind==='read'&&active.message.actor===id?'Sender':active.actor===id?
           active.kind==='read'?'Reader':active.kind==='send'?'Sharing':'Acting':latest?'Working':'Not started';

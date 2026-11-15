@@ -1,18 +1,15 @@
 (() => {
-  const root=document.querySelector('.trajectory-viewer'),cases=window.SWARMHARM_CASES?.concat(window.SWARMHARM_ARCHIVED_CASES||[]);
+  const root=document.querySelector('.trajectory-viewer'),cases=window.SWARMHARM_CASES;
   if(!root||!cases?.length)return;
   const select=root.querySelector('[data-case-select]'),intro=root.querySelector('[data-case-intro]');
   const review=root.querySelector('[data-case-review]'),full=root.querySelector('[data-case-full]');
   const details=root.querySelector('[data-case-details]');
   const cache=new Map();let version=0,dispose=null,request=null;
   const loading=root.querySelector('[data-case-loading]');
+  const notice=root.querySelector('[data-case-notice]');
   let renderedSearch,mountedKey;
   const escape=value=>String(value).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
-  const models={
-    'gpt-6.1-sol':{name:'Sol 6.1',logo:'openai'},
-    'gpt-5.6-sol':{name:'Sol 5.6',logo:'openai'},
-    'claude-haiku-5.5':{name:'Haiku 5.5',logo:'claude'}
-  };
+  const models={'gpt-6.1-sol':{name:'Sol',logo:'openai'}};
   function modelLabel(id){
     const model=models[id];
     if(!model)return escape(id);
@@ -41,24 +38,23 @@
     if(!visual)return `<div class="case-result" data-result="${item.phase===1?'formation':'impact'}"><span class="case-result-label">Outcome</span><p>${escape(item.outcome)}</p></div>`;
     return `<div class="case-result" data-result="${item.phase===1?'formation':'impact'}"><span class="case-result-label">Outcome</span><p>${escape(visual.action)}</p><dl class="case-result-metrics">${visual.metrics.map(m=>`<div data-tone="${escape(m.tone)}"><dt>${escape(m.label)}</dt><dd>${escape(m.value)}</dd></div>`).join('')}</dl>${visual.note?`<small class="case-result-note">${escape(visual.note)}</small>`:''}</div>`;
   }
-  for(const mode of ['Swarm Formation','Collective Misalignment','Earlier outcomes']){
-    const group=document.createElement('optgroup');group.label=mode==='Earlier outcomes'?mode:(mode==='Swarm Formation'?'Experiment 1: ':'Experiment 2: ')+mode;
-    cases.filter(c=>!c.replication&&!c.archived&&(c.earlier?'Earlier outcomes':c.mode)===mode).forEach(c=>{const option=document.createElement('option');option.value=c.key;option.textContent=`${c.claim} · ${c.domain}`;group.append(option);});
+  for(const mode of ['SwarmForm','SwarmHarm']){
+    const group=document.createElement('optgroup');group.label=mode;
+    cases.filter(c=>c.mode===mode).forEach(c=>{const option=document.createElement('option');option.value=c.key;option.textContent=`${c.claim} · ${c.domain}`;group.append(option);});
     select.append(group);
   }
   function renderSummary(item) {
     root.dataset.caseMode=item.full?'full':'review';full.hidden=!item.full;review.hidden=item.full;
-    intro.innerHTML=`<div class="case-setup">${item.variants?'':`<p class="case-meta">${modelLabel(item.model)}</p>`}<p class="case-context">${escape(item.context)}</p>${item.settings?settingsMarkup(item):''}</div>`;
+    intro.innerHTML=`<div class="case-setup"><p class="case-meta">${modelLabel(item.model)}</p><p class="case-context">${escape(item.context)}</p>${item.settings?settingsMarkup(item):''}</div>`;
     details.innerHTML=item.composition?'':outcomeMarkup(item);
-    if(item.variants)intro.insertAdjacentHTML('afterbegin',`<div class="case-variants" role="group" aria-label="Composition model cases">${item.variants.map(key=>{const c=cases.find(c=>c.key===key);return `<button type="button" data-case-variant="${escape(key)}" aria-pressed="${key===item.key}">${modelLabel(c.model)}</button>`;}).join('')}</div>`);
     if(item.composition){
       const p=item.composition;
       details.insertAdjacentHTML('beforeend',`<div class="composition-proof" aria-label="Full-sequence counterfactual replay"><div><small>Each agent alone</small><strong>${escape(p.alone)}</strong><small>${escape(p.aloneDetail)}</small></div><span aria-hidden="true">→</span><div class="combined"><small>The same actions combined</small><strong>${escape(p.combined)}</strong><small>${escape(p.combinedDetail)}</small></div></div>`);
     }
     const parameters=visibleSettings(item.parameters);
-    details.insertAdjacentHTML('beforeend',`<details class="case-evidence"><summary><span>Case evidence</span><span class="case-evidence-action"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="m5 8 5 5 5-5"/></svg></span></summary><ol>${item.steps.map(step=>`<li>${escape(step)}</li>`).join('')}</ol><div class="case-downloads">${item.full?`<a href="${escape(item.trajectory)}" download>Trajectory JSON ↗</a>`:''}${item.review?`<a href="${escape(item.review)}" download>Case evidence JSON ↗</a>`:item.composition?'<a href="static/data/composition-review.json" download>Replay evidence JSON ↗</a>':''}</div><details class="case-technical"><summary>Run details</summary><p class="case-scope">${escape(item.scope)}</p>${parameters.length?`<dl class="case-parameters">${parameters.map(([key,value])=>`<div><dt>${escape(key)}</dt><dd>${escape(value)}</dd></div>`).join('')}</dl>`:''}<p>Case: ${escape(item.id)}<br>Original rollout: <code>${escape(item.runId)}</code></p></details></details>`);
+    details.insertAdjacentHTML('beforeend',`<details class="case-evidence"><summary><span>Case evidence</span><span class="case-evidence-action"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="m5 8 5 5 5-5"/></svg></span></summary><p class="case-scope">${escape(item.scope)}</p><div class="case-downloads">${item.full?`<a href="${escape(item.trajectory)}" download>Trajectory JSON ↗</a>`:''}${item.review?`<a href="${escape(item.review)}" download>Case evidence JSON ↗</a>`:''}</div><details class="case-technical"><summary>Run details</summary><p class="case-scope">${escape(item.provenance.scope)}</p>${parameters.length?`<dl class="case-parameters">${parameters.map(([key,value])=>`<div><dt>${escape(key)}</dt><dd>${escape(value)}</dd></div>`).join('')}</dl>`:''}<p>Case: ${escape(item.id)}<br>Original rollout: <code>${escape(item.runId)}</code></p></details></details>`);
     if(!item.full){
-      review.innerHTML=`<h4>Reviewed sequence</h4><ol>${item.steps.map(step=>`<li>${escape(step)}</li>`).join('')}</ol><p class="case-scope">${escape(item.scope)}</p><p class="case-pending">Full messages and per-turn records are not yet available here.</p>`;
+      review.innerHTML=`<h4>Reviewed sequence</h4><p class="case-scope">${escape(item.scope)}</p><p class="case-scope">${escape(item.scope)}</p><p class="case-pending">Full messages and per-turn records are not yet available here.</p>`;
     }
   }
   function positionFromUrl(url) {
@@ -86,10 +82,11 @@
   async function show(id, position = {}, hash = location.hash){
     const layout=new URL(location.href).searchParams.get('layout');
     position={...position,layout:['straight','graph'].includes(layout)?layout:'spiral'};
-    const item=cases.find(c=>c.key===id)||cases.find(c=>c.id===id&&c.phase===2)||cases.find(c=>c.id===id)||cases[0];
-    select.querySelector('[data-archived-option]')?.remove();
-    if(item.archived){const option=document.createElement('option');option.dataset.archivedOption='';option.value=item.key;option.textContent=`Earlier case · ${item.domain} · ${item.id}`;select.append(option);}
-    select.value=item.selectionKey||item.key;
+    const selected=cases.find(c=>c.key===id)||cases.find(c=>c.id===id);
+    const retired=Boolean(id&&!selected),item=selected||cases[0];
+    notice.hidden=!retired;
+    if(retired) position={layout:position.layout};
+    select.value=item.key;
     const current=++version;
     request?.abort();
     updateAddress(item, position, hash);
@@ -145,7 +142,6 @@
     }
   }
   select.addEventListener('change',()=>show(select.value, {}, '#trajectory'));
-  intro.addEventListener('click',event=>{const button=event.target.closest('[data-case-variant]');if(button)show(button.dataset.caseVariant, {}, '#trajectory');});
   document.querySelectorAll('[data-show-case]').forEach(link=>link.addEventListener('click',async event=>{
     if (event.defaultPrevented || event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
     event.preventDefault();
