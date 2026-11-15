@@ -45,7 +45,7 @@
   <script src="static/js/trajectory-cases.js?v=52" defer></script>
   <link rel="preload" href="static/fonts/et-book-roman-line-figures.woff" as="font" type="font/woff" crossorigin>
   <link rel="preload" href="static/fonts/Inter.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="stylesheet" href="static/css/typography.css?v=52">
+  <link rel="stylesheet" href="static/css/typography.css?v=53">
 </head>
 <body>
 <a class="skip-link" href="#main-content">Skip to content</a>
@@ -154,10 +154,11 @@
           <canvas id="swarmharm-canvas" aria-hidden="true" hidden></canvas>
         </h1>
         <div class="hero-intro" id="tldr">
-          <p>We build a controlled testbed to study how AI agents in separate sandboxes discover unannounced peers through shared infrastructure, organize into a swarm, and cause harm together.</p>
+          <p>We are building a systematic testbed to study how AI agents placed in separate sandboxes discover unannounced peers through shared infrastructure, organize into a swarm, and cause harm through their combined actions.</p>
         </div>
         <div class="experiment-bridge">
-          <p>In July 2026, agents in OpenAI evaluations turned a shared artifact service into an unprompted message board and helped one another compromise Hugging Face’s systems, behaviors later replicated in publicly available models. <strong>SwarmForm</strong> measures when isolated agents discover shared channels, form roles, and improve task outcomes. <strong>SwarmHarm</strong> traces failures across tasks, evaluators, and shared services, separating peer-spread methods from compositional failures where individually harmless actions combine into harm. <a href="https://openai.com/index/hugging-face-incident-and-the-road-ahead/">Incident&nbsp;report</a> · <a href="https://metr.org/blog/2026-08-26-openai-hugging-face-incident-investigation/">METR&nbsp;analysis</a> · <a href="https://arxiv.org/abs/2609.35799">Replication&nbsp;study</a></p>
+          <p>In July 2026, agents in OpenAI evaluations turned a shared artifact service into an unprompted message board and helped one another compromise Hugging Face’s systems; a later replication elicited several of these behaviors in publicly available models. <a href="https://openai.com/index/hugging-face-incident-and-the-road-ahead/">Incident&nbsp;report</a> · <a href="https://metr.org/blog/2026-08-26-openai-hugging-face-incident-investigation/">METR&nbsp;analysis</a> · <a href="https://arxiv.org/abs/2609.35799">Replication&nbsp;study</a></p>
+          <p>Our testbed divides this problem into two experiments. <strong>SwarmForm</strong> measures when isolated agents discover shared channels, form organizational roles, and improve task outcomes. <strong>SwarmHarm</strong> traces failures across tasks, evaluators, and shared services, separating peer-spread methods from compositional failures where individually harmless actions combine into harm.</p>
         </div>
       </div>
     </div>

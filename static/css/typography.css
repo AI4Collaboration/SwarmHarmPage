@@ -6,7 +6,7 @@ body { font-optical-sizing: auto; }
 .hero .hero-intro, .hero .experiment-bridge { font-family: var(--editorial); max-width: none; font-size: clamp(19px, 1.45vw, 21px); line-height: 1.5; letter-spacing: normal; font-weight: 400; }
 .hero .experiment-bridge { margin: 1em auto 0px; text-align: left; text-wrap: pretty; color: var(--text); }
 .experiment-bridge p, .hero-intro p { margin: 0px; }
-.experiment-bridge p + p, .hero-intro p + p { margin-top: 0.5em; }
+.experiment-bridge p + p, .hero-intro p + p { margin-top: 1em; }
 .hero-intro strong { font-weight: 700; }
 .subpage p, .resource-card p { font-family: var(--editorial); }
 .finding-explanation p, .taxonomy-evidence p { font: 400 16px/1.55 var(--editorial); }
