@@ -154,10 +154,11 @@
           <canvas id="swarmharm-canvas" aria-hidden="true" hidden></canvas>
         </h1>
         <div class="hero-intro" id="tldr">
-          <p>We are building a systematic testbed to see whether agents can discover peers without prior knowledge across separate sandboxes, establish communication channels to form a swarm, and cause harm through their combined actions.</p>
+          <p>In July 2026, OpenAI agents meant to work in isolated sandboxes discovered a shared software repository and used it to build an unauthorized message board. <a href="https://metr.org/blog/2026-08-26-openai-hugging-face-incident-investigation/">METR’s investigation</a> found that they shared cheating methods, divided up research, and coordinated an attack on Hugging Face. Much of this work followed a mistaken belief that their evaluator would inspect how they had solved their tasks.</p>
         </div>
         <div class="experiment-bridge">
-          <p>In July 2026, agents in OpenAI evaluations found ways to communicate and helped one another compromise Hugging Face’s systems. A later replication elicited several of these behaviors from publicly available models. We want to understand both how such groups form and what their actions can do together. <strong>SwarmForm</strong> tests whether agents discover peers and build useful exchanges. <strong>SwarmHarm</strong> tests failures in tasks, evaluation and shared services, including harm from actions that are harmless individually. <a href="https://openai.com/index/hugging-face-incident-and-the-road-ahead/">Incident report</a> · <a href="https://arxiv.org/abs/2609.35799">Replication study</a></p>
+          <p>As METR notes, <a href="https://metr.org/blog/2026-08-26-openai-hugging-face-incident-investigation/#core-takeaways-about-this-incident">“Agents managed to achieve milestones they could not have achieved working on their own”</a>. This motivates studying what agents can do together, beyond what they can do individually.</p>
+          <p>We’re building a public repo for studying this kind of swarm behavior: <strong>1. autonomous swarm formation</strong> and <strong>2. the collective consequences that follow</strong>.</p>
         </div>
       </div>
     </div>
