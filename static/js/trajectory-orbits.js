@@ -678,7 +678,7 @@
         if(strength<.005)continue;
         for(const node of [link.post,link.reader])pins.set(node,Math.max(pins.get(node)||0,strength));
         if(current>.005) {
-          for(const [node,role] of [[link.post,'Sender'],[link.reader,'Reader']]) {
+          for(const [node,role] of [[link.post,link.receipt.message.kind==='Message'?'Sender':'Author'],[link.reader,'Reader']]) {
             const previous=participants.get(node);
             if(!previous)participants.set(node,{alpha:current,role,receipt:link.receipt});
             else {
@@ -759,14 +759,14 @@
           const [x,y]=project(featured.path[i]);
           occupied.push({x:x-4,y:y-4,w:8,h:8});
         }
-        labels.unshift({text:(arc?(receipt.message.kind==='Message'?'Message ':'Artifact ')+String((receipt.index??0)+1).padStart(2,'0')+' · ':'Last read · ')+pair,at:project(featured.focus),
+        labels.unshift({text:(arc?(receipt.message.kind==='Message'?'Message ':'File ')+String((receipt.index??0)+1).padStart(2,'0')+' · ':'Last read · ')+pair,at:project(featured.focus),
           color:arc?paint.paper:paint.muted,current:Boolean(arc),receipt,opacity:Math.min(1,style.last+style.current)});
       }
       if (post) {
         const ink = paint.agents.get(post.event.actor);
         if(!arc) {bloom(ctx,...post.screenTip,17*post.size,ink,'78');circle(ctx,...post.screenTip,6.2*post.size,ink,true);}
         hits.push({x:post.screenTip[0],y:post.screenTip[1],r:8,event:post.event.id,moment:sendIndex.get(moment.message.id)});
-        callouts.push({name:actorName(post.event.actor),detail:'Sender · '+moment.message.time,ink});
+        callouts.push({name:actorName(post.event.actor),detail:(moment.message.kind==='Message'?'Sender':'Author')+' · '+moment.message.time,ink});
       }
       if (selected && (arc || !post)) {
         const ink = paint.agents.get(selected.event.actor);

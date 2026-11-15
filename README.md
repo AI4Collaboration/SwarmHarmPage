@@ -130,6 +130,7 @@ node --test tests/*.test.cjs
 # With Playwright available and the preview running:
 node tests/browser-smoke.cjs
 node tests/responsive-browser.cjs
+node tests/raw-content-browser.cjs
 ```
 
 Check every case, finding link and artifact receipt in 3D, Straight and Graph.
@@ -142,7 +143,7 @@ The footer credits the Academic Project Page Template and AI Safety HOT.
 
 ### Verification for the current content update
 
-The fifteen data-integrity and trajectory-selection tests pass. Edge was exercised
+The seventeen data-integrity, file-preview and trajectory-selection tests pass. Edge was exercised
 with all thirteen cases and all three layouts, including agent focus and source
 records. The responsive suite passes 282 layout checks: all three pages at
 30 widths from 320 to 3840 CSS px in both themes, plus 12 device configurations
@@ -159,3 +160,9 @@ on ultrawide screens. Retired case URLs and current finding links also pass.
 No page exceptions, missing local resources, broken internal links or horizontal
 overflow were found in these checks.
 Chrome is not installed on the review machine and was not independently tested.
+
+Shared-file contents use compact previews throughout the viewer, action log and
+turn summaries. Full JSON/file bodies appear only inside a user-opened disclosure,
+including in original-record dialogs. The raw-content browser check covers all
+13 cases and 126 file bodies, verifies exact content when expanded, keyboard
+collapse, and the collapsed state when reopening a dialog.

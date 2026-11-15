@@ -10,6 +10,41 @@
     const minutes = Math.floor(seconds / 60);
     return minutes + ':' + String(seconds % 60).padStart(2,'0');
   }
+  // Present structured files as files. The original body remains unchanged in the log dialog.
+  function isJsonContent(body) {
+    try { JSON.parse(body); return true; } catch {}
+    const lines = body.trim().split('\n').filter(line => line.trim());
+    if (lines.length < 2) return false;
+    try { lines.forEach(line => JSON.parse(line)); return true; } catch { return false; }
+  }
+  window.swarmIsJsonContent = isJsonContent;
+  function artifactPreview(message) {
+    if (message.kind === 'Message') return null;
+    const filename = (message.sourceReference || '').split('/').pop() || message.kind;
+    const body = message.body.trim();
+    const humanize = key => key.replace(/_/g, ' ');
+    let description = message.kind;
+    try {
+      const rows = body.split('\n').filter(line => line.trim()).map(line => JSON.parse(line));
+      if (rows.length && rows.every(row => row && typeof row === 'object' && row.kind === 'term' && typeof row.field === 'string')) {
+        description = 'Customer terms: ' + [...new Set(rows.map(row => humanize(row.field)))].join(', ') + '.';
+      } else if (rows.length > 1) {
+        description = rows.length + ' records in a shared data file.';
+      } else throw new Error('Check complete JSON');
+    } catch {
+      try {
+        const value = JSON.parse(body);
+        if (value?.type === 'object' && Array.isArray(value.required)) {
+          description = 'Schema requirements: ' + value.required.map(humanize).join(', ') + '.';
+        } else description = 'Shared JSON data.';
+      } catch {
+        if (/\.csv$/i.test(filename)) description = 'Data columns: ' + body.split('\n')[0].split(',').map(humanize).join(', ') + '.';
+        else description = short(body, 220);
+      }
+    }
+    return {filename, description:short(description,220)};
+  }
+  window.swarmArtifactPreview = artifactPreview;
   const homeView = {yaw:-.35,pitch:.99};
   const clockwiseRate=2*Math.PI/288_000;
   const straightHome = {yaw:-.22, pitch:.72};
@@ -32,6 +67,8 @@
       return post && actorIndex.has(message.actor) && post.actor===message.actor && post.messages?.includes(message.id);
     }).sort((a,b)=>a.event-b.event);
     const messageById=new Map(messages.map(m=>[m.id,m]));
+    const previews=new Map(messages.map(m=>[m.id,artifactPreview(m)]));
+    const previewText = message => previews.get(message.id)?.description || message.body;
     const messageNumberById=new Map(messages.map((m,i)=>[m.id,i+1]));
     const noMessages=!messages.length;
     const sharedRecords = !noMessages && messages.every(message => message.kind !== 'Message');
@@ -149,9 +186,11 @@
       return `<article class="obs-chat-message" data-chat-message="${esc(message.id)}" style="--agent:${actorStyle(message.actor)}" aria-label="Artifact ${number} from ${esc(names.get(message.actor))}">
         <span class="obs-chat-avatar" aria-hidden="true"><img src="${esc(`static/images/fieldguide/finding-agents.svg?v=8#${message.actor.toLowerCase()}-speaking`)}" width="210" height="150" alt=""></span>
         <div class="obs-chat-content">
-          <header class="obs-chat-heading"><button class="obs-chat-select" type="button" data-message="${esc(message.id)}"><span>Posted by <strong title="${esc(contexts.get(message.actor))}">${esc(names.get(message.actor))}</strong></span><span aria-hidden="true">·</span><span><span data-read-label hidden>Read by </span><strong data-chat-recipient>${esc(messageSource(message))}</strong></span></button><span class="obs-chat-stamp"><span data-chat-number>#${number}</span><time>${esc(message.time)}</time></span></header>
+          <header class="obs-chat-heading"><button class="obs-chat-select" type="button" data-message="${esc(message.id)}"><span>${message.kind === 'Message' ? 'Sent' : 'Shared'} by <strong title="${esc(contexts.get(message.actor))}">${esc(names.get(message.actor))}</strong></span><span aria-hidden="true">·</span><span><span data-read-label hidden>Read by </span><strong data-chat-recipient>${esc(messageSource(message))}</strong></span></button><span class="obs-chat-stamp"><span data-chat-number>#${number}</span><time>${esc(message.time)}</time></span></header>
           ${parent?`<button class="obs-chat-reply" type="button" data-message="${esc(parent.id)}" aria-label="Reply to Message ${messageNumberById.get(parent.id)} from ${esc(names.get(parent.actor))}">↳ Reply to #${messageNumberById.get(parent.id)}</button>`:''}
-          <p class="obs-chat-text" data-message-body>${esc(message.body)}</p>
+          ${previews.get(message.id)?`<button class="obs-file-link" type="button" data-original-artifact="${esc(message.id)}">${esc(previews.get(message.id).filename)} ↗</button>`:''}
+          <p class="obs-chat-text" data-message-body>${esc(previewText(message))}</p>
+          ${previews.get(message.id)?`<details class="obs-full-file"><summary><span class="full-show">Show</span><span class="full-hide">Hide</span> full ${isJsonContent(message.body)?'JSON':'file'}</summary><pre>${esc(message.body)}</pre></details>`:''}
           ${receipts?`<div class="obs-chat-readers"><span>Read by</span>${receipts}</div>`:''}
         </div>
       </article>`;
@@ -180,7 +219,7 @@
           </section>
           <section class="obs-message-panel" data-message-panel aria-label="Shared artifact">
             <header class="obs-panel-heading"><h5>${sharedRecords ? 'Shared artifact' : 'Message'}</h5>${noMessages?'':stepControls}<button class="obs-source-link" type="button" data-original="message" aria-label="View original ${entryLabel}" title="View original ${entryLabel}">↗</button></header>
-            <div class="obs-document" tabindex="0" role="region" aria-label="Conversation history">
+            <div class="obs-document" tabindex="0" role="region" aria-label="${sharedRecords ? 'Shared file history' : 'Conversation history'}">
               <div class="obs-chat" data-chat-log>${messages.map(chatMessage).join('')}</div>
               <p class="obs-message-empty" data-message-empty hidden></p>
             </div>
@@ -194,7 +233,7 @@
               <button type="button" data-track-layout="straight" aria-pressed="false">Straight</button>
               <button type="button" data-track-layout="graph" aria-pressed="false">Graph</button>
             </div></div><span class="obs-view-tools"><button class="obs-timeline-jump" type="button" data-timeline-jump title="Go to this moment on the timeline"><time></time> <span aria-hidden="true">↓</span></button><small data-share-status role="status"></small><button class="obs-share" type="button" data-share aria-label="Copy link to this moment" title="Copy link to this moment"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="m8 12 4-4m-1.5-2.5 1.8-1.8a3.5 3.5 0 0 1 5 5l-3 3a3.5 3.5 0 0 1-5 0m.2 2.8-1.8 1.8a3.5 3.5 0 0 1-5-5l3-3a3.5 3.5 0 0 1 5 0"/></svg></button><button class="obs-reset" type="button" data-reset aria-label="Reset spatial view"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M4 7a6 6 0 1 1 0 6M4 3v4h4"/></svg></button></span></header>
-          <div class="obs-route" id="obs-current-route" data-route><div class="obs-route-heading"></div><blockquote class="obs-route-quote" hidden><button type="button" data-original="message" title="View original ${entryLabel}"><span data-excerpt></span><span aria-hidden="true">↗</span></button></blockquote></div>
+          <div class="obs-route" id="obs-current-route" data-route><div class="obs-route-heading"></div><div class="obs-route-quote" hidden><button type="button" data-original="message" title="View original ${entryLabel}"><span data-excerpt></span><span aria-hidden="true">↗</span></button></div></div>
           <div class="obs-stage"><canvas class="obs-space-canvas" tabindex="0" role="img" aria-label="Agents and their recorded message exchanges. Select an agent to highlight its actions and messages. Arrow keys step through events." aria-describedby="obs-current-route"></canvas><i class="obs-arc-signal" aria-hidden="true" hidden></i><div class="obs-stage-key"><span><i class="obs-key-action"></i>Action</span>${noMessages?'':'<span><i class="obs-key-post"></i>Shared</span><span><i class="obs-key-read"></i>Read</span><span class="obs-key-history"><i></i>Other reads</span>'}</div><div class="obs-graph-tooltip" role="tooltip" hidden></div><div class="obs-stage-hint">Select an agent or message</div></div>
           <div class="obs-focus-status" hidden><span data-focus-label></span><button type="button" data-clear-focus>Show all agents</button></div>
           <div class="obs-agent-strip" role="group" aria-label="Highlight an agent">${actors.map(a=>`<button type="button" data-strip-actor="${a.id}" aria-pressed="false" aria-label="Highlight ${esc(names.get(a.id))} actions and artifacts" style="--agent:${actorStyle(a.id)}" title="${esc(contexts.get(a.id))}"><span class="obs-agent-letter" aria-hidden="true"></span><span><strong>${esc(names.get(a.id))}</strong><small><b data-actor-role hidden></b><span data-actor-count="${a.id}"></span></small></span></button>`).join('')}</div>
@@ -362,7 +401,7 @@
       timeConnections=window.swarmTrajectorySelection.connectionsAtTime(reads,moment,recordedSecond,focusedActor);
       connectionsPanel.hidden=!timeConnections.length;
       const later=timeConnections.some(read=>recordedSecond(read.event)>recordedSecond(moment.event));
-      connectionsPanel.innerHTML=timeConnections.length ? `<span>Exchanges at this time${later?' · Dashed: later reads':''}</span><div class="obs-connection-list" role="group" aria-label="All content reads connected to the selected time">${timeConnections.map(read=>`<button type="button" data-time-read="${read.order}" aria-pressed="${read===moment}" title="${esc(short(read.message.body,160))}"><strong>${esc(names.get(read.message.actor))} → ${esc(names.get(read.actor))}</strong><span>#${messageNumberById.get(read.message.id)}</span><time>${clockLabel(recordedSecond(read.message.event))} → ${clockLabel(recordedSecond(read.event))}</time></button>`).join('')}</div>` : '';
+      connectionsPanel.innerHTML=timeConnections.length ? `<span>Exchanges at this time${later?' · Dashed: later reads':''}</span><div class="obs-connection-list" role="group" aria-label="All content reads connected to the selected time">${timeConnections.map(read=>`<button type="button" data-time-read="${read.order}" aria-pressed="${read===moment}" title="${esc(short(previewText(read.message),160))}"><strong>${esc(names.get(read.message.actor))} → ${esc(names.get(read.actor))}</strong><span>#${messageNumberById.get(read.message.id)}</span><time>${clockLabel(recordedSecond(read.message.event))} → ${clockLabel(recordedSecond(read.event))}</time></button>`).join('')}</div>` : '';
     }
     function showExchange(moment) {
       const message = moment.message;
@@ -377,12 +416,12 @@
 
       const number = document.createElement('span');
       number.className = 'obs-route-number';
-      number.textContent = (sharedRecords ? 'Artifact ' : 'Message ') + String(moment.index + 1).padStart(2, '0');
+      number.textContent = (message.kind !== 'Message' ? 'File ' : 'Message ') + String(moment.index + 1).padStart(2, '0');
       const sender = document.createElement('strong');
       sender.textContent = names.get(message.actor);
       sender.style.color = actorStyle(message.actor);
       const author = document.createElement('span');
-      author.append('Posted by ', sender);
+      author.append(message.kind === 'Message' ? 'Sent by ' : 'Shared by ', sender);
       const separator = document.createElement('span');
       separator.textContent = moment.kind === 'read' ? '→' : '·';
       separator.setAttribute('aria-hidden', 'true');
@@ -398,6 +437,18 @@
       destination.append(recipient);
       routeHeading.append(number, author, separator, destination);
 
+      const preview = previews.get(message.id);
+      routeQuote.toggleAttribute('data-artifact', Boolean(preview));
+      if (preview) {
+        routeQuote.removeAttribute('data-passage');
+        const sourceImport = message.kind === 'Shared source file' && moment.kind === 'read' && eventById.get(moment.event)?.label === 'Import peer source documents';
+        quoteText.textContent = sourceImport
+          ? names.get(moment.actor) + ' imports ' + names.get(message.actor) + '’s source documents. ' + preview.description
+          : preview.description;
+        routeQuote.querySelector('button').title = 'View original file: ' + preview.filename;
+        return;
+      }
+      routeQuote.querySelector('button').title = 'View original message';
       const body = message.body.trim();
       const passage = meta.messageExcerpts?.[message.id];
       const quotedPassage = Boolean(passage && body.includes(passage));
@@ -449,6 +500,8 @@
       actionPanel.querySelector('[data-action-actor]').title = contexts.get(event.actor);
       actionPanel.querySelector('[data-action-label]').textContent = event.label;
       actionPanel.querySelector('[data-action-stamp]').textContent = 'Turn ' + event.turn + ' · ' + event.time;
+      if (actionArgs.dataset.event !== String(event.id)) actionArgs.open = false;
+      actionArgs.dataset.event = String(event.id);
       const args = event.arguments;
       const hasArgs = args != null && (typeof args !== 'object' || Object.keys(args).length > 0);
       actionArgs.hidden = Boolean(message) || !hasArgs;
@@ -476,7 +529,7 @@
         else row.removeAttribute('aria-current');
         row.querySelector('[data-message-body]').toggleAttribute('data-original-text',selected);
         row.querySelector('[data-chat-number]').textContent=selected
-          ? (sharedRecords?'Artifact ':'Message ')+String(messageNumberById.get(item.id)).padStart(2,'0')
+          ? (item.kind !== 'Message'?'File ':'Message ')+String(messageNumberById.get(item.id)).padStart(2,'0')
           : '#'+messageNumberById.get(item.id);
         const selectMessage = row.querySelector('.obs-chat-select');
         selectMessage.setAttribute('aria-pressed', String(selected));
@@ -528,7 +581,7 @@
         roleLabel.hidden = !role;
         const sent=messages.filter(x=>x.actor===a.id&&x.event<=m.event).length;
         const reads=moments.filter(x=>x.kind==='read'&&x.actor===a.id&&x.event<=m.event).length;
-        host.querySelector(`[data-actor-count="${a.id}"]`).textContent=(noMessages||m.kind==='action')?`${events.filter(e=>e.actor===a.id&&e.id<=m.event).length} actions`:`${sent} sent · ${reads} read`;
+        host.querySelector(`[data-actor-count="${a.id}"]`).textContent=(noMessages||m.kind==='action')?`${events.filter(e=>e.actor===a.id&&e.id<=m.event).length} actions`:`${sent} ${sharedRecords?'shared':'sent'} · ${reads} read`;
       });
       updateControls();draw();ensureFrame();
     }
@@ -897,7 +950,7 @@
       if (hit.arc) label = hit.earlierRead ? 'Select recorded read' : 'View original '+entryLabel;
       const participant=hit.arc ? names.get(message.actor)+' → '+names.get(e.actor) : names.get(e.actor);
       const stamp = surface === flow ? clockLabel(recordedSecond(e.id)) + ' elapsed' : e.time;
-      tip.innerHTML=`<strong style="color:${actorStyle(e.actor)}">${esc(participant)}<time>${esc(stamp)}</time></strong><span>${esc(message?short(message.body,170):e.label)}</span><small>Turn ${e.turn} · ${label}</small>`;tip.hidden=false;
+      tip.innerHTML=`<strong style="color:${actorStyle(e.actor)}">${esc(participant)}<time>${esc(stamp)}</time></strong><span>${esc(message?short(previewText(message),170):e.label)}</span><small>Turn ${e.turn} · ${label}</small>`;tip.hidden=false;
       tip.style.left=clamp(x-60,10,box.width-tip.offsetWidth-10)+'px';tip.style.top=Math.max(7,y-tip.offsetHeight-14)+'px';redrawHover(surface);
     }
     function pick(surface,event) {
@@ -992,6 +1045,7 @@
       else if(button.hasAttribute('data-prev-message'))moveMessage(-1);
       else if(button.hasAttribute('data-next-message'))moveMessage(1);
       else if(button.classList.contains('obs-chat-select'))inspectMessage(button.dataset.message);
+      else if(button.hasAttribute('data-original-artifact')){const item=messageById.get(button.dataset.originalArtifact);if(item){stop();openRecord([item.event],item.id);}}
       else if(button.hasAttribute('data-message'))seek(sendIndex.get(button.dataset.message));
       else if(button.hasAttribute('data-obs-receipt'))seek(Number(button.dataset.obsReceipt));
       else if(button.hasAttribute('data-original'))openOriginal(button.dataset.original,button.closest('.obs-spatial') ? sceneAnchor() : '#trajectory');

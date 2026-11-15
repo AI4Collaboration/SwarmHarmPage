@@ -11,6 +11,9 @@
     const controller=new AbortController(),signal=controller.signal,on=(el,type,fn,options={})=>el.addEventListener(type,fn,{...options,signal});
     const events=new Map(data.events.map(e=>[e.id,e])),messages=new Map(data.messages.map(m=>[m.id,m]));
     const names=new Map(data.actors.map(a=>[a.id,'Agent '+a.name]));
+    const previews=new Map(data.messages.map(m=>[m.id,window.swarmArtifactPreview(m)]));
+    const previewText=m=>previews.get(m.id)?.description || m.body;
+    const readLabel=e=>e.reads.every(id=>messages.get(id).kind!=='Message')?'files':'messages';
     const selectedFields=data.provenance?.selectedActionFields===true;
     const offset=a=>data.turnOffsets?.[a]||0;
     const turnIds=(a,n)=>data.turns[a][n-1-offset(a)];
@@ -32,7 +35,7 @@
       const ms=e.messages.map(id=>messages.get(id)),isRead=!ms.length&&e.reads.length;
       const role=ms.length?'message':isRead?'read':'action';
       const kind=ms.length?ms.map(m=>m.kind).filter((x,i,a)=>a.indexOf(x)===i).join(' / '):isRead?'Read':'Action';
-      const preview=(ms.length?ms.map(m=>`<div class="record-message"><p>${source(m.body.length>260?m.body.slice(0,260)+'…':m.body)}</p>${readers(m)}<button type="button" class="record-original-link" data-open-event="${e.id}" aria-controls="record-original" aria-expanded="false">Original message</button></div>`).join(''):isRead?`<p class="record-action-copy">Reads ${[...new Set(e.reads.map(id=>messages.get(id).actor))].map(a=>esc(names.get(a))).join(', ')}’s messages.</p>`:'')+(failed(e)?'<p class="record-failed">Request failed</p>':'');
+      const preview=(ms.length?ms.map(m=>`<div class="record-message"><p>${source(previewText(m).length>220?previewText(m).slice(0,220)+'…':previewText(m))}</p>${readers(m)}<button type="button" class="record-original-link" data-open-event="${e.id}" aria-controls="record-original" aria-expanded="false">${m.kind==='Message'?'Original message':'Original file'}</button></div>`).join(''):isRead?`<p class="record-action-copy">Reads ${[...new Set(e.reads.map(id=>messages.get(id).actor))].map(a=>esc(names.get(a))).join(', ')}’s ${readLabel(e)}.</p>`:'')+(failed(e)?'<p class="record-failed">Request failed</p>':'');
       const title=ms[0]?.kind==='Shared-file note'?'Writes a shared source note':ms[0]?.kind==='Version comment'?'Files a section with a version comment':e.label;
       return `<article class="record-event ${ms.length?'has-message':''}" data-event="${e.id}" data-agent="${e.actor}" data-event-kind="${role}"><div class="record-who">${avatar(e.actor,role)}<span>${esc(names.get(e.actor))}</span><small>Turn ${e.turn}</small></div><div class="record-content"><button type="button" class="record-open" data-open-event="${e.id}" aria-controls="record-original" aria-expanded="false"><span class="record-type">${esc(kind)}</span><strong>${esc(title)}</strong><time>${esc(e.time)}</time></button>${preview}</div></article>`;
     }
@@ -43,12 +46,12 @@
       list.scrollTop=0;container.querySelectorAll('[data-record-mode]').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.recordMode===mode)));
     }
     function argumentsMarkup(args){return Object.entries(args).map(([k,v])=>`<div><dt><code>${esc(k)}</code></dt><dd>${typeof v==='string'?(k==='command'?`<pre><code>${esc(v)}</code></pre>`:source(v)):typeof v==='object'?`<pre><code>${esc(JSON.stringify(v,null,2))}</code></pre>`:`<code>${esc(v)}</code>`}</dd></div>`).join('');}
-    function messageMarkup(m,read=false){return `<section class="record-original-message" data-agent="${m.actor}"><p class="record-message-meta"><strong>${esc(names.get(m.actor))}</strong><span>${esc(m.kind)}</span><time>${esc(m.time)}</time>${read?'<span class="record-read-label">Read in this event</span>':''}</p><blockquote>${source(m.body)}</blockquote>${readers(m)}</section>`;}
+    function messageMarkup(m,read=false){return `<section class="record-original-message" data-agent="${m.actor}"><p class="record-message-meta"><strong>${esc(names.get(m.actor))}</strong><span>${esc(m.kind)}</span><time>${esc(m.time)}</time>${read?'<span class="record-read-label">Read in this event</span>':''}</p>${previews.get(m.id)?`<p>${esc(previews.get(m.id).description)}</p><details class="record-tool record-full-file"><summary><span class="full-show">Show</span><span class="full-hide">Hide</span> full ${window.swarmIsJsonContent(m.body)?'JSON':'file'}</summary><pre>${esc(m.body)}</pre></details>`:`<blockquote>${source(m.body)}</blockquote>`}${readers(m)}</section>`;}
     function eventMarkup(e,requestedMessage){
       const posted = e.messages.includes(requestedMessage) ? [requestedMessage] : e.messages;
       const original=posted.map(id=>messageMarkup(messages.get(id))).join('');
       const read=e.reads.filter(id=>!requestedMessage||requestedMessage===id).map(id=>messageMarkup(messages.get(id),true)).join('');
-      return `<section class="record-source-event" data-agent="${e.actor}"><h5><span class="record-author">${esc(names.get(e.actor))}</span> · Turn ${e.turn} · ${esc(e.label)}</h5>${original}${read}${e.resultText?`<div class="record-final">${source(e.resultText)}</div>`:''}${e.operation==='final_output'?'':selectedFields&&!Object.keys(e.arguments).length?`<p class="record-action-copy"><code>${esc(e.operation)}</code>${e.status!=null?' · status '+esc(e.status):''}</p>`:`<details class="record-tool" open${failed(e)?' data-failed="true"':''}><summary><code>${esc(e.operation)}</code><span>${selectedFields?'Recorded business fields':'Tool arguments'}${e.status!=null?` · <span class="record-status">status ${e.status}</span>`:''}</span></summary><dl>${argumentsMarkup(e.arguments)}</dl>${e.error?`<p class="record-failed">${source(typeof e.error==='string'?e.error:JSON.stringify(e.error))}</p>`:''}</details>`}${e.result?`<details class="record-tool"><summary>Original tool result</summary><pre class="record-result">${esc(JSON.stringify(e.result,null,2))}</pre></details>`:''}</section>`;
+      return `<section class="record-source-event" data-agent="${e.actor}"><h5><span class="record-author">${esc(names.get(e.actor))}</span> · Turn ${e.turn} · ${esc(e.label)}</h5>${original}${read}${e.resultText?`<div class="record-final">${source(e.resultText)}</div>`:''}${e.operation==='final_output'?'':selectedFields&&!Object.keys(e.arguments).length?`<p class="record-action-copy"><code>${esc(e.operation)}</code>${e.status!=null?' · status '+esc(e.status):''}</p>`:`<details class="record-tool"${failed(e)?' data-failed="true"':''}><summary><code>${esc(e.operation)}</code><span>${selectedFields?'Recorded business fields':'Tool arguments'}${e.status!=null?` · <span class="record-status">status ${e.status}</span>`:''}</span></summary><dl>${argumentsMarkup(e.arguments)}</dl>${e.error?`<p class="record-failed">${source(typeof e.error==='string'?e.error:JSON.stringify(e.error))}</p>`:''}</details>`}${e.result?`<details class="record-tool"><summary>Original tool result</summary><pre class="record-result">${esc(JSON.stringify(e.result,null,2))}</pre></details>`:''}</section>`;
     }
     let returnFocus=null;
     function showDetail(){
@@ -64,7 +67,7 @@
     }
     function turnSummary(a,n){
       const key=a+":"+n;if(summaries.has(key))return summaries.get(key);
-      const ids=turnIds(a,n),counts=new Map();ids.forEach(id=>{const e=events.get(id);const text=e.messages.length?e.messages.map(id=>messages.get(id).body).join(' '):e.reads.length?'Reads messages from '+[...new Set(e.reads.map(id=>names.get(messages.get(id).actor)))].join(', '):e.label+(failed(e)?' (request failed)':'');counts.set(text,(counts.get(text)||0)+1);});
+      const ids=turnIds(a,n),counts=new Map();ids.forEach(id=>{const e=events.get(id);const text=e.messages.length?e.label+' · '+e.messages.map(id=>previewText(messages.get(id))).join(' '):e.reads.length?'Reads '+readLabel(e)+' from '+[...new Set(e.reads.map(id=>names.get(messages.get(id).actor)))].join(', '):e.label+(failed(e)?' (request failed)':'');counts.set(text,(counts.get(text)||0)+1);});
       const markup=`<strong>${esc(names.get(a))} · Turn ${n}</strong>${counts.size?`<ul>${[...counts].map(([text,count])=>`<li>${count>1?count+' × ':''}${source(text.length>260?text.slice(0,260)+'…':text)}</li>`).join('')}</ul>`:'<p>No tool action is displayed for this turn.</p>'}`;
       summaries.set(key,markup);return markup;
     }

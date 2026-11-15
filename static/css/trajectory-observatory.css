@@ -356,3 +356,18 @@
 @media(prefers-reduced-motion:reduce) { .obs-connection-list button { transition:none; } }
 
 .trajectory-observatory[data-moment="read"] .obs-agent-strip > [data-participant] { opacity:1; }
+
+/* File previews are evidence summaries, not dialogue quotations. */
+.obs-file-link{display:block;max-width:100%;padding:4px 0;border:0;background:none;text-align:left;overflow-wrap:anywhere;color:var(--scene-blue);font:500 12px/1.5 var(--font);cursor:pointer;}
+.obs-file-link:hover{text-decoration:underline;}
+.obs-route-quote[data-artifact] [data-excerpt]{display:block;}
+
+.obs-full-file{margin:6px 0;color:var(--scene-muted);font:400 12px/1.5 var(--font);}
+.obs-full-file summary{cursor:pointer;min-height:32px;display:flex;align-items:center;gap:4px;}
+.obs-full-file summary::before{content:'▸';margin-right:3px;}
+.obs-full-file[open] summary::before{content:'▾';}
+.obs-full-file pre{max-height:240px;overflow:auto;white-space:pre-wrap;overflow-wrap:anywhere;padding:10px;background:color-mix(in srgb,var(--scene-ink) 4%,var(--scene-bg));font:12px/1.6 var(--mono);color:var(--scene-ink);}
+:is(.obs-full-file,.record-full-file) .full-hide{display:none;}
+:is(.obs-full-file,.record-full-file)[open] .full-hide{display:inline;}
+:is(.obs-full-file,.record-full-file)[open] .full-show{display:none;}
+.record-full-file summary{gap:4px;}
