@@ -1,17 +1,26 @@
 @font-face {
   font-family:"ET Book";
+  font-style:normal;
   src:url("../fonts/et-book-roman-line-figures.woff") format("woff");
   font-weight:400;
   font-display:swap;
 }
 @font-face {
   font-family:"ET Book";
+  font-style:normal;
   src:url("../fonts/et-book-bold-line-figures.woff") format("woff");
   font-weight:700;
   font-display:swap;
 }
+@font-face {
+  font-family:"Inter";
+  src:url("../fonts/Inter.woff2") format("woff2");
+  font-style:normal;
+  font-weight:100 900;
+  font-display:swap;
+}
 :root {
-  --font:Calibri,"Gill Sans","Gill Sans MT","Segoe UI",sans-serif;
+  --font:"Inter",system-ui,sans-serif;
   --editorial:"ET Book",Palatino,"Book Antiqua",Georgia,serif;
 }
 body { font-optical-sizing:auto; }
@@ -28,7 +37,10 @@ body { font-optical-sizing:auto; }
 .experiment-bridge p,.hero-intro p { margin:0; }
 .experiment-bridge p + p,.hero-intro p + p { margin-top:.5em; }
 .hero-intro strong { font-weight:700; }
-.subpage p,.finding-explanation p,.tax-detail p,.resource-card p { font-family:var(--editorial); }
+.subpage p,.resource-card p { font-family:var(--editorial); }
+.finding-explanation p,.tax-detail p {
+  font:400 16px/1.55 var(--editorial);
+}
 .findings-primary .life-phase,
 #trajectory-title,
 .detection-section h2,
@@ -37,7 +49,7 @@ body { font-optical-sizing:auto; }
 .subpage h1,
 .subpage h2 {
   font-family:var(--editorial);
-  font-weight:500;
+  font-weight:400;
   letter-spacing:-.018em;
   line-height:1.18;
 }
@@ -45,7 +57,7 @@ body { font-optical-sizing:auto; }
 .tax-heading p { max-width:47ch; }
 .finding-heading h4 {
   font-family:var(--editorial);
-  font-weight:500;
+  font-weight:400;
   font-size:clamp(16px,1.3vw,18px);
   letter-spacing:-.012em;
   line-height:1.25;

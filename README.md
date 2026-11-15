@@ -248,8 +248,9 @@ backward scrubbing and graph geometry on narrow screens.
   event. Keep original messages and actions verbatim. Website source belongs in
   the footer, with attribution.
 - First visits open in dark mode. The Light/Dark toggle remembers the visitor's choice.
-- Use self-hosted ET Book for headings and reading text, with a humanist sans serif
-  for navigation and diagram labels. The ET Book license is in `static/fonts`.
+- Use self-hosted ET Book for headings and reading text, with self-hosted Inter
+  for navigation, controls and diagram labels on every page. Both font licenses
+  are in `static/fonts`.
   Keep summaries short; put originals and
   structured tool results in disclosures.
 - Keep case settings compact; Run details visibly expands on click.

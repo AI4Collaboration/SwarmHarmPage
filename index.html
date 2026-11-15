@@ -21,7 +21,7 @@
   <link rel="stylesheet" href="static/css/story.css?v=25">
   <link rel="stylesheet" href="static/css/flight.css?v=85">
   <link rel="stylesheet" href="static/css/fieldguide.css?v=18">
-  <script src="static/js/site.js?v=26" defer></script>
+  <script src="static/js/site.js?v=27" defer></script>
   <link rel="stylesheet" href="static/css/maintenance-case.css?v=2">
   <link rel="stylesheet" href="static/css/orbit.css?v=51">
   <link rel="stylesheet" href="static/css/plate-animation.css?v=10">
@@ -33,14 +33,13 @@
   <link rel="stylesheet" href="static/css/findings.css?v=37">
   <link rel="stylesheet" href="static/css/finding-visuals.css?v=8">
   <link rel="stylesheet" href="static/css/institution-belt.css?v=19">
-  <link rel="stylesheet" href="static/css/sidebar.css?v=28">
+  <link rel="stylesheet" href="static/css/sidebar.css?v=29">
   <link rel="stylesheet" href="static/css/project-page.css?v=16">
   <link rel="stylesheet" href="static/css/visual-system.css?v=6">
   <link rel="stylesheet" href="static/css/harm-taxonomy.css?v=8">
   <script src="static/js/harm-taxonomy.js?v=8" defer></script>
   <script src="static/js/finding-diagrams.js?v=12" defer></script>
   <script src="static/js/swarmharm_title_demo_v3.js?v=16" defer></script>
-  <script src="static/js/tldr-ripple.js?v=2" defer></script>
   <script src="static/js/trajectory-cases-data.js?v=36" defer></script>
   <script src="static/js/trajectory-orbits.js?v=21" defer></script>
   <script src="static/js/trajectory-graph.js?v=2" defer></script>
@@ -49,7 +48,8 @@
   <script src="static/js/recorded-timeline.js?v=23" defer></script>
   <script src="static/js/trajectory-cases.js?v=31" defer></script>
   <link rel="preload" href="static/fonts/et-book-roman-line-figures.woff" as="font" type="font/woff" crossorigin>
-  <link rel="stylesheet" href="static/css/typography.css?v=9">
+  <link rel="preload" href="static/fonts/Inter.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="static/css/typography.css?v=11">
 </head>
 <body>
 <a class="skip-link" href="#main-content">Skip to content</a>
@@ -110,6 +110,10 @@
         <details class="nav-findings" name="research-navigation">
           <summary>SwarmForm</summary>
           <div class="finding-links">
+            <div class="compact-shortcuts">
+              <a href="#swarmform-setting">Setting</a>
+              <a href="#swarmform-findings">Findings</a>
+            </div>
             <a href="#finding-1-1">Peer Discovery</a>
             <a href="#finding-1-2">Communication</a>
             <a href="#finding-1-3">Propagation</a>
@@ -124,6 +128,10 @@
         <details class="nav-findings" name="research-navigation">
           <summary>SwarmHarm</summary>
           <div class="finding-links">
+            <div class="compact-shortcuts">
+              <a href="#swarmharm-setting">Setting</a>
+              <a href="#swarmharm-findings">Findings</a>
+            </div>
             <a href="#harm-taxonomy">Threat models</a>
             <a href="#finding-2-3">Imagined Grader</a>
             <a href="#finding-2-1">Record Errors</a>
@@ -150,7 +158,7 @@
           <canvas id="swarmharm-canvas" aria-hidden="true" hidden></canvas>
         </h1>
         <div class="hero-intro" id="tldr">
-          <p><strong>TLDR:</strong> We are building a systematic testbed to see whether agents can actively discover one another across separate sandboxes without knowing other agents exist, and establish communication channels to form a swarm.</p>
+          <p>We are building a systematic testbed to see whether agents can actively discover one another across separate sandboxes without knowing other agents exist, and establish communication channels to form a swarm.</p>
           <p><strong>What kinds of consequences can follow?</strong> We found three recurring threat models: <a href="?case=r165&amp;phase=2&amp;event=174&amp;message=m171-12#trajectory" data-show-case="r165" data-show-phase="2">external-service overreach</a>, <a href="?case=r178&amp;phase=2&amp;event=108#trajectory" data-show-case="r178" data-show-phase="2">evaluation gaming/hacking</a>, and <a href="?case=r261&amp;phase=2&amp;event=152&amp;message=m144-2#trajectory" data-show-case="r261" data-show-phase="2">trace tampering</a>.</p>
         </div>
         <div class="experiment-bridge">
@@ -397,6 +405,11 @@
 
 </main>
 <footer class="site-footer">
+  <nav class="compact-page-links" aria-label="Project links">
+      <a href="#trajectory">Explore Trajectory</a>
+      <a href="team/">Team</a>
+      <a href="call-to-action/">Get involved</a>
+  </nav>
   <div class="container footer-bottom">
     <p><a href="https://github.com/AI4Collaboration/swarmharm-page" target="_blank" rel="noopener noreferrer">Website source</a> · Adapted from <a href="https://github.com/eliahuhorwitz/Academic-project-page-template" target="_blank" rel="noopener noreferrer">Academic Project Page Template</a> · CC BY-SA 4.0</p>
     <p>Trajectory visualization adapted from <a href="https://aisafetyhot.com/en" target="_blank" rel="noopener noreferrer">AI Safety HOT</a>.</p>

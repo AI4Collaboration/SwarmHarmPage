@@ -41,7 +41,7 @@
       sections.findLast(item => item.element.contains(target)) ||
       sections.find(item => target.contains(item.element)));
     sectionLinks.forEach(link => {
-      if (link === selected?.link) link.setAttribute('aria-current', 'location');
+      if (link.hash === selected?.link.hash) link.setAttribute('aria-current', 'location');
       else link.removeAttribute('aria-current');
     });
   }

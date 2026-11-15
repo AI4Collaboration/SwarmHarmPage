@@ -11,11 +11,12 @@
   <script src="../static/js/theme.js?v=27"></script>
   <link rel="stylesheet" href="../static/css/brand.css?v=20">
   <link rel="stylesheet" href="../static/css/project-page.css?v=16">
-  <link rel="stylesheet" href="../static/css/sidebar.css?v=28">
+  <link rel="stylesheet" href="../static/css/sidebar.css?v=29">
   <link rel="stylesheet" href="../static/css/project-subpages.css?v=3">
-  <script src="../static/js/site.js?v=26" defer></script>
+  <script src="../static/js/site.js?v=27" defer></script>
   <link rel="preload" href="../static/fonts/et-book-roman-line-figures.woff" as="font" type="font/woff" crossorigin>
-  <link rel="stylesheet" href="../static/css/typography.css?v=9">
+  <link rel="preload" href="../static/fonts/Inter.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="../static/css/typography.css?v=11">
 </head>
 <body>
   <a class="skip-link" href="#main">Skip to content</a>
@@ -25,6 +26,10 @@
         <details class="nav-findings" name="research-navigation">
           <summary>SwarmForm</summary>
           <div class="finding-links">
+            <div class="compact-shortcuts">
+              <a href="../#swarmform-setting">Setting</a>
+              <a href="../#swarmform-findings">Findings</a>
+            </div>
             <a href="../#finding-1-1">Peer Discovery</a>
             <a href="../#finding-1-2">Communication</a>
             <a href="../#finding-1-3">Propagation</a>
@@ -39,6 +44,10 @@
         <details class="nav-findings" name="research-navigation">
           <summary>SwarmHarm</summary>
           <div class="finding-links">
+            <div class="compact-shortcuts">
+              <a href="../#swarmharm-setting">Setting</a>
+              <a href="../#swarmharm-findings">Findings</a>
+            </div>
             <a href="../#harm-taxonomy">Threat models</a>
             <a href="../#finding-2-3">Imagined Grader</a>
             <a href="../#finding-2-1">Record Errors</a>
@@ -57,32 +66,40 @@
     <button type="button" data-theme-toggle hidden aria-label="Switch theme"><span aria-hidden="true">◐</span></button>
   </div></header>
   <main id="main" class="subpage"><h1>Team</h1>
-    <section class="directory-group"><h2>Project Leads</h2>
-      <ul class="directory">        <li><a href="mailto:terry@safe.eu">Terry Jingcheng Zhang</a><small>University of Oxford</small></li>
-      </ul>
-    </section>
-    <section class="directory-group"><h2>Members</h2>
-      <ul class="directory">        <li><a href="https://de.linkedin.com/in/agokrani">Aman Gokrani</a><small>Aasra</small></li>
-        <li><a href="https://flecart.github.io/">Xuanqiang Angelo Huang</a><small>ETH Zürich</small></li>
-        <li><a href="https://ethics.aclweb.org/committee/">Arian Khorasani</a><small>University of Toronto</small></li>
-        <li><a href="https://www.arthsingh.com/">Arth Singh</a><small>University of Toronto</small></li>
-        <li><a href="https://ayushnangia.github.io/">Ayush Nangia</a><small>University of Toronto</small></li>
-        <li><a href="https://changlingli.com/">Changling Li</a></li>
-        <li><a href="https://pli.princeton.edu/events/2026/do-thinking-tokens-help-safety">Narutatsu Ri</a><small>Princeton University</small></li>
-        <li><a href="https://ch.linkedin.com/in/pepijn-cobben">Pepijn Cobben</a><small>University of Toronto</small></li>
-        <li><a href="https://www.robots.ox.ac.uk/~mosb/bgl/people/">Rahul Marchand</a><small>University of Oxford</small></li>
-        <li><a href="https://rishitdagli.com/">Rishit Dagli</a><small>University of Toronto</small></li>
-        <li><a href="https://au.linkedin.com/in/stephen-elliott231">Stephen Elliott</a></li>
+    <section class="directory-group"><h2>Technical Members</h2>
+      <ul class="directory">
+        <li><a href="mailto:terry@safe.eu">Terry Jingcheng Zhang</a><small>University of Oxford</small></li>
         <li><a href="https://github.com/jwyjohn">Wenyuan Jiang</a><small>ETH Zürich</small></li>
+        <li><a href="https://changlingli.com/">Changling Li</a><small>ELLIS Tübingen &amp; Max Planck Institute for Intelligent Systems</small></li>
+        <li><a href="https://rishitdagli.com/">Rishit Dagli</a><small>University of Toronto</small></li>
+        <li><a href="https://de.linkedin.com/in/agokrani">Aman Gokrani</a><small>Aasra</small></li>
+        <li><a href="https://flecart.github.io/">Xuanqiang Angelo Huang</a><small>ETH Zürich</small></li>
+        <li><a href="https://ethics.aclweb.org/committee/">Arian Khorasani</a><small>University of Toronto &amp; Vector Institute</small></li>
+        <li><a href="https://www.arthsingh.com/">Arth Singh</a><small>University of Toronto &amp; Georgia Institute of Technology</small></li>
+        <li><a href="https://ayushnangia.github.io/">Ayush Nangia</a><small>University of Toronto</small></li>
+        <li><a href="https://wittlab.ai/people/carissa-cullen/">Carissa Cullen</a><small>University of Oxford</small></li>
+        <li><a href="https://pli.princeton.edu/events/2026/do-thinking-tokens-help-safety">Narutatsu Ri</a><small>Princeton University</small></li>
+        <li><a href="https://ch.linkedin.com/in/pepijn-cobben">Pepijn Cobben</a><small>University of Toronto &amp; ETH Zürich</small></li>
+        <li><a href="https://www.robots.ox.ac.uk/~mosb/bgl/people/">Rahul Marchand</a><small>University of Oxford</small></li>
+        <li><a href="https://au.linkedin.com/in/stephen-elliott231">Stephen Elliott</a><small>Gigascale Labs</small></li>
         <li><a href="https://symsys.stanford.edu/people/xi-jia-zhou">Xi Jia Zhou</a><small>Stanford University</small></li>
       </ul>
     </section>
-    <section class="directory-group"><h2>Advisors</h2>
-      <ul class="directory">        <li><a href="https://www.oii.ox.ac.uk/people/profiles/adam-mahdi/">Adam Mahdi</a><small>University of Oxford</small></li>
-        <li><a href="https://zhijing-jin.com/home/">Zhijing Jin</a><small>University of Toronto</small></li>
-        <li><a href="https://www.andriushchenko.me/">Maksym Andriushchenko</a><small>ELLIS Tübingen</small></li>
+    <section class="directory-group"><h2>Senior Advisors</h2>
+      <ul class="directory">
+        <li><a href="https://www.oii.ox.ac.uk/people/profiles/adam-mahdi/">Adam Mahdi</a><small>University of Oxford</small></li>
+        <li><a href="https://zhijing-jin.com/home/">Zhijing Jin</a><small>University of Toronto &amp; Max Planck Institute for Intelligent Systems</small></li>
+        <li><a href="https://www.andriushchenko.me/">Maksym Andriushchenko</a><small>ELLIS Tübingen &amp; Max Planck Institute for Intelligent Systems</small></li>
+        <li><a href="https://wittlab.ai/people/christian-schroeder-de-witt/">Christian Schroeder de Witt</a><small>University College London &amp; University of Oxford</small></li>
       </ul>
     </section>
   </main>
+  <footer>
+  <nav class="compact-page-links" aria-label="Project links">
+      <a href="../#trajectory">Explore Trajectory</a>
+      <a href="../team/" aria-current="page">Team</a>
+      <a href="../call-to-action/">Get involved</a>
+  </nav>
+  </footer>
 </body>
 </html>
