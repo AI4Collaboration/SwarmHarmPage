@@ -49,8 +49,8 @@ summary::-webkit-details-marker{display:none;}
 .featured-pill:hover{color:var(--text);border-color:var(--scene-blue);}
 .featured-pill[aria-current="true"]{color:var(--scene-ink);border-color:var(--scene-blue);background:color-mix(in srgb,var(--scene-blue) 14%,var(--bg));}
 @media(max-width:520px){
- .current-scene text{font-size:24px;}
- .current-scene .scene-small{font-size:23px;}
+ .current-scene text{font-size:25px;}
+ .current-scene .scene-small{font-size:24px;}
  .current-scene figcaption{font-size:12.5px;}
 }
 
