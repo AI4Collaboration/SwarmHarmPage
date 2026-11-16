@@ -51,8 +51,7 @@
       const p=item.composition;
       details.insertAdjacentHTML('beforeend',`<div class="composition-proof" aria-label="Full-sequence counterfactual replay"><div><small>Each agent alone</small><strong>${escape(p.alone)}</strong><small>${escape(p.aloneDetail)}</small></div><span aria-hidden="true">→</span><div class="combined"><small>The same actions combined</small><strong>${escape(p.combined)}</strong><small>${escape(p.combinedDetail)}</small></div></div>`);
     }
-    const parameters=visibleSettings(item.parameters);
-    details.insertAdjacentHTML('beforeend',`<details class="case-evidence"><summary><span>Run notes</span><span class="case-evidence-action"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="m5 8 5 5 5-5"/></svg></span></summary><p class="case-scope">${escape(item.scope)}</p><details class="case-technical"><summary>Run details</summary><p class="case-scope">${escape(item.provenance.scope)}</p>${parameters.length?`<dl class="case-parameters">${parameters.map(([key,value])=>`<div><dt>${escape(key)}</dt><dd>${escape(value)}</dd></div>`).join('')}</dl>`:''}<p>Case: ${escape(item.id)}<br>Original rollout: <code>${escape(item.runId)}</code></p></details></details>`);
+    details.insertAdjacentHTML('beforeend',`<details class="case-evidence"><summary><span>Case summary</span><span class="case-evidence-action"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="m5 8 5 5 5-5"/></svg></span></summary><p class="case-scope">${escape(item.scope)}</p></details>`);
     if(!item.full){
       review.innerHTML=`<h4>Reviewed sequence</h4><p class="case-scope">${escape(item.scope)}</p><p class="case-scope">${escape(item.scope)}</p><p class="case-pending">Full messages and per-turn records are not yet available here.</p>`;
     }

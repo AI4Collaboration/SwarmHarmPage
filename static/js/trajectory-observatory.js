@@ -188,9 +188,7 @@
         <div class="obs-chat-content">
           <header class="obs-chat-heading"><button class="obs-chat-select" type="button" data-message="${esc(message.id)}"><span>${message.kind === 'Message' ? 'Sent' : 'Shared'} by <strong title="${esc(contexts.get(message.actor))}">${esc(names.get(message.actor))}</strong></span><span aria-hidden="true">·</span><span><span data-read-label hidden>Read by </span><strong data-chat-recipient>${esc(messageSource(message))}</strong></span></button><span class="obs-chat-stamp"><span data-chat-number>#${number}</span><time>${esc(message.time)}</time></span></header>
           ${parent?`<button class="obs-chat-reply" type="button" data-message="${esc(parent.id)}" aria-label="Reply to Message ${messageNumberById.get(parent.id)} from ${esc(names.get(parent.actor))}">↳ Reply to #${messageNumberById.get(parent.id)}</button>`:''}
-          ${previews.get(message.id)?`<button class="obs-file-link" type="button" data-original-artifact="${esc(message.id)}">${esc(previews.get(message.id).filename)} ↗</button>`:''}
           <p class="obs-chat-text" data-message-body>${esc(previewText(message))}</p>
-          ${previews.get(message.id)?`<details class="obs-full-file"><summary><span class="full-show">Show</span><span class="full-hide">Hide</span> full ${isJsonContent(message.body)?'JSON':'file'}</summary><pre>${esc(message.body)}</pre></details>`:''}
           ${receipts?`<div class="obs-chat-readers"><span>Read by</span>${receipts}</div>`:''}
         </div>
       </article>`;
@@ -215,7 +213,7 @@
           <section class="obs-action-panel" data-action-panel aria-label="Action">
             <header class="obs-panel-heading"><h5>Action</h5><small data-action-stamp></small>${noMessages?stepControls:''}<button class="obs-source-link" type="button" data-original="action" aria-label="View action record" title="View action record">↗</button></header>
             <div class="obs-action-line"><strong data-action-actor></strong><span data-action-label></span></div>
-            <details class="obs-action-args" data-action-args hidden><summary>Tool arguments</summary><pre></pre></details>
+            <details class="obs-action-args" data-action-args hidden><summary>Recorded note</summary><p class="obs-action-note"></p></details>
           </section>
           <section class="obs-message-panel" data-message-panel aria-label="Shared artifact">
             <header class="obs-panel-heading"><h5>${sharedRecords ? 'Shared artifact' : 'Message'}</h5>${noMessages?'':stepControls}<button class="obs-source-link" type="button" data-original="message" aria-label="View original ${entryLabel}" title="View original ${entryLabel}">↗</button></header>
@@ -502,12 +500,11 @@
       actionPanel.querySelector('[data-action-stamp]').textContent = 'Turn ' + event.turn + ' · ' + event.time;
       if (actionArgs.dataset.event !== String(event.id)) actionArgs.open = false;
       actionArgs.dataset.event = String(event.id);
-      const args = event.arguments;
-      const hasArgs = args != null && (typeof args !== 'object' || Object.keys(args).length > 0);
-      actionArgs.hidden = Boolean(message) || !hasArgs;
+      const note = typeof event.arguments?.note === 'string' ? event.arguments.note.trim() : '';
+      actionArgs.hidden = Boolean(message) || !note;
       if (!actionArgs.hidden) {
-        actionArgs.querySelector('summary').textContent = data.provenance?.selectedActionFields ? 'Recorded business fields' : 'Tool arguments';
-        actionArgs.querySelector('pre').textContent = typeof args === 'string' ? args : JSON.stringify(args, null, 2);
+        actionArgs.querySelector('summary').textContent = 'Recorded note';
+        actionArgs.querySelector('.obs-action-note').textContent = note;
       }
 
       messagePanel.querySelector('[data-original="message"]').hidden = !message;
