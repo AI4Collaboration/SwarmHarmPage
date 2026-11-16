@@ -194,7 +194,7 @@
   }
 
   // These badges sit on the exact post/read pins, not at the ends of the tracks.
-  function drawParticipant(ctx,node,ink,paint,font,width,alpha) {
+  function drawParticipant(ctx,node,badgeText,ink,paint,font,width,alpha) {
     const [x,y]=node.screenTip, radius=width<440?10:12;
     ctx.save(); ctx.globalAlpha=alpha;
     bloom(ctx,x,y,radius*2.5,ink,paint.dark?'75':'35');
@@ -203,7 +203,7 @@
     circle(ctx,x,y,radius,ink);
     ctx.fillStyle=paint.paper; ctx.font='750 '+(width<440?11:13)+'px '+font;
     ctx.textAlign='center'; ctx.textBaseline='middle';
-    ctx.fillText(node.event.actor,x,y+.5);
+    ctx.fillText(badgeText,x,y+.5);
     ctx.restore();
     return radius+4;
   }
@@ -441,7 +441,9 @@
   }
 
   window.createTrajectoryOrbitView = ({canvas, actors, actorEvents, reads, sendIndex, fontFamily, recordedSecond}) => {
-    const actorName=id=>'Agent '+(actors.find(a=>a.id===id)?.name||id);
+    const actorShort=id=>actors.find(a=>a.id===id)?.name||id;
+    const actorInitial=id=>actorShort(id)[0]||id;
+    const actorName=id=>'Agent '+actorShort(id);
     const ctx = canvas.getContext('2d');
     const instructions = canvas.getAttribute('aria-label');
 
@@ -748,7 +750,7 @@
       ctx.globalAlpha = 1;
       if (featured) {
         const receipt=featured.receipt;
-        const pair=receipt.message.actor+' → '+receipt.actor;
+        const pair=actorShort(receipt.message.actor)+' → '+actorShort(receipt.actor);
         const style=appearance(routes.get(featured));
         drawRead(ctx,featured,projection,paint,hits,style,true,arc ? travel : null);
         if (arc && travel<1) {
@@ -783,7 +785,7 @@
       const endpointLabels=[];
       for(const [node,{alpha,role,receipt}] of participants) {
         const ink=paint.agents.get(node.event.actor), at=node.screenTip;
-        const radius=drawParticipant(ctx,node,ink,paint,fontFamily,width,alpha);
+        const radius=drawParticipant(ctx,node,actorInitial(node.event.actor),ink,paint,fontFamily,width,alpha);
         occupied.push({x:at[0]-radius,y:at[1]-radius,w:radius*2,h:radius*2});
         endpointLabels.push({text:actorName(node.event.actor)+' · '+role,key:'pin-'+node.event.id+'-'+role,
           at,color:ink,endpoint:true,opacity:alpha,receiptTarget:receipt});

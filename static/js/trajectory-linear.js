@@ -209,7 +209,8 @@
         arrow(ctx,pointAt(.73),pointAt(.75),paint.packet);
         mark(ctx,points[post.order],post,sender,true);
         ctx.font='600 11px '+fontFamily;
-        const label='Now · '+post.actor+' → '+active.actor;
+        const actorShort=id=>actors.find(a=>a.id===id)?.name||id;
+        const label='Now · '+actorShort(post.actor)+' → '+actorShort(active.actor);
         const w=ctx.measureText(label).width+21, h=20;
         badge=placeBadge(currentArc,earlierArcs,width,w,h);
         const {x,y,anchor}=badge;

@@ -123,7 +123,10 @@
     runDisclosure.append(container.querySelector('.record-run'));
     const log=document.createElement('details');log.className='record-evidence record-log';log.innerHTML=`<summary><span><b>Artifact and action log</b><small>${data.counts.actions} recorded actions</small></span><i aria-hidden="true"></i></summary>`;
     log.append(container.querySelector('.record-controls'),container.querySelector('.record-counts'),list);
-    evidence.append(runDisclosure,log);mapSection.after(evidence);container.append(detail);
+    const caseDetails=container.parentElement?.querySelector('[data-case-details]');
+    evidence.append(runDisclosure,log);
+    if(caseDetails)caseDetails.after(evidence); else mapSection.after(evidence);
+    container.append(detail);
     const disposeMap=window.mountTrajectoryObservatory(graph,data,meta,(ids,message)=>{
       if(ids){const event=events.get(ids[0]);selectTurn(event.actor,event.turn);openEvents(ids,message);}
       else {hideTip();detail.innerHTML=`<header><h4>Outcome</h4><button type="button" data-close-record aria-label="Close original record">×</button></header><p class="case-outcome">${esc(meta.outcome)}</p><p class="case-scope">${esc(meta.scope)}</p>`;showDetail();}
@@ -132,6 +135,6 @@
     on(log,'toggle',()=>{if(log.open)render();});
     on(detail,'click',event=>{if(event.target===detail){const r=detail.getBoundingClientRect();if(event.clientX<r.left||event.clientX>r.right||event.clientY<r.top||event.clientY>r.bottom)closeDetail();}});
     on(detail,'cancel',event=>{event.preventDefault();closeDetail();});
-    return ()=>{hideTip();disposeMap();controller.abort();gridObserver.disconnect();tip.remove();container.replaceChildren();};
+    return ()=>{hideTip();disposeMap();controller.abort();gridObserver.disconnect();tip.remove();evidence.remove();container.replaceChildren();};
   };
 })();

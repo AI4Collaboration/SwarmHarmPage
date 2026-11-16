@@ -42,7 +42,16 @@
         else description = short(body, 220);
       }
     }
-    return {filename, description:short(description,220)};
+    const stem = filename.replace(/\.(jsonl|json|csv|zip|previous|candidate)+$/gi, '').replace(/^[A-Za-z]+-(?=opening|terms|publication)/, '');
+    const title = message.kind === 'Published acceptance rule' ? 'Published acceptance rule'
+      : message.kind === 'Published completion record' ? 'Published completion record (' + humanize(stem) + ')'
+      : /descriptor|policy/i.test(filename) ? (/previous|original/i.test(filename) ? 'Original release rule' : /candidate/i.test(filename) ? 'Updated release rule' : 'Release rule')
+      : /opening-sources/i.test(filename) ? 'Opening source terms'
+      : /terms_update-sources/i.test(filename) ? 'Mid-run source updates'
+      : /publication_close-sources/i.test(filename) ? 'Closing source terms'
+      : /\.csv$/i.test(filename) ? 'October ' + humanize(stem.replace(/^[a-z]+-october-?/i, '')) + ' report'
+      : humanize(stem);
+    return {filename, title, description:short(description,220)};
   }
   window.swarmArtifactPreview = artifactPreview;
   const homeView = {yaw:-.35,pitch:.99};
@@ -188,7 +197,7 @@
         <div class="obs-chat-content">
           <header class="obs-chat-heading"><button class="obs-chat-select" type="button" data-message="${esc(message.id)}"><span>${message.kind === 'Message' ? 'Sent' : 'Shared'} by <strong title="${esc(contexts.get(message.actor))}">${esc(names.get(message.actor))}</strong></span><span aria-hidden="true">·</span><span><span data-read-label hidden>Read by </span><strong data-chat-recipient>${esc(messageSource(message))}</strong></span></button><span class="obs-chat-stamp"><span data-chat-number>#${number}</span><time>${esc(message.time)}</time></span></header>
           ${parent?`<button class="obs-chat-reply" type="button" data-message="${esc(parent.id)}" aria-label="Reply to Message ${messageNumberById.get(parent.id)} from ${esc(names.get(parent.actor))}">↳ Reply to #${messageNumberById.get(parent.id)}</button>`:''}
-          ${previews.get(message.id)?`<button class="obs-file-link" type="button" data-original-artifact="${esc(message.id)}">${esc(previews.get(message.id).filename)} ↗</button>`:''}
+          ${previews.get(message.id)?`<button class="obs-file-link" type="button" data-original-artifact="${esc(message.id)}">${esc(previews.get(message.id).title)} ↗</button>`:''}
           <p class="obs-chat-text" data-message-body>${esc(previewText(message))}</p>
           ${previews.get(message.id)?`<details class="obs-full-file"><summary><span class="full-show">Show</span><span class="full-hide">Hide</span> full ${isJsonContent(message.body)?'JSON':'file'}</summary><pre>${esc(message.body)}</pre></details>`:''}
           ${receipts?`<div class="obs-chat-readers"><span>Read by</span>${receipts}</div>`:''}

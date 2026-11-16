@@ -152,22 +152,22 @@
   .institution-collaborators { border-left: 0; border-top: 1px solid var(--line); padding: 10px 0 0; }
 }
 @media (max-width: 600px) {
-  .institutions.institution-band { padding: 8px 14px 16px; }
-  .institution-leads { gap: 12px; }
-  .institution-band .institution-lead-list { gap: 12px; }
+  .institutions.institution-band { padding: 6px 12px 10px; }
+  .institution-leads { gap: 10px; }
+  .institution-band .institution-lead-list { gap: 10px; }
   .institution-caption { font-size: 11px; }
-  .institution-collaborators { gap: 8px; }
-  .institution-collaborators .institution-list { gap: 22px; padding-inline: 11px; }
+  .institution-collaborators { gap: 6px; padding-top: 6px; }
+  .institution-collaborators .institution-list { gap: 18px; padding-inline: 10px; }
   .institution-collaborators .institution-list li,
   .institution-collaborators .institution-list a { width: auto; flex-basis: auto; }
-  .institution-collaborators .institution-list img { max-width: 140px; }
-  .institution-band .institution-ellis { --institution-logo-width:140px; }
+  .institution-collaborators .institution-list img { max-width: 120px; }
+  .institution-band .institution-ellis { --institution-logo-width:120px; }
   .institution-band .institution-lead-list li,
-  .institution-band .institution-lead-list a { width: 46px; height: 46px; flex-basis: 46px; }
-  .institution-band .institution-lead-list img { width: 46px; height: 46px; }
+  .institution-band .institution-lead-list a { width: 38px; height: 38px; flex-basis: 38px; }
+  .institution-band .institution-lead-list img { width: 38px; height: 38px; }
   .institution-band .institution-lead-list .institution-oxford,
-  .institution-band .institution-lead-list .institution-oxford a { width: 46px; flex-basis: 46px; }
-  .institution-band .institution-lead-list .institution-oxford img { width: 46px; height: 46px; }
+  .institution-band .institution-lead-list .institution-oxford a { width: 38px; flex-basis: 38px; }
+  .institution-band .institution-lead-list .institution-oxford img { width: 38px; height: 38px; }
 }
 
 /* One visible icon, with room for a finger or keyboard focus. */
