@@ -103,10 +103,10 @@
 }
 .record-result { max-height: 420px; overflow: auto; padding: 14px; white-space: pre-wrap; overflow-wrap: anywhere; font-size: 13px; line-height: 1.55; }
 @media (min-width: 761px) {
-.findings-primary .life-halves { grid-template-rows: repeat(10, auto); gap: 0px 40px; }
-.findings-primary .life-half { display: grid; grid-template-rows: subgrid; grid-row: span 10; }
-.findings-primary .phase-findings { display: grid; grid-template-rows: subgrid; grid-row: 2 / span 9; }
-.findings .finding { display: grid; grid-template-rows: subgrid; grid-row: span 3; }
+.findings-primary .life-halves { grid-template-rows: repeat(13, auto); gap: 0px 40px; }
+.findings-primary .life-half { display: grid; grid-template-rows: subgrid; grid-row: span 13; }
+.findings-primary .phase-findings { display: grid; grid-template-rows: subgrid; grid-row: 2 / span 12; }
+.findings .finding { display: grid; grid-template-rows: subgrid; grid-row: span 4; }
 }
 @media (max-width: 600px) {
 .case-evidence { overflow-wrap: anywhere; }
