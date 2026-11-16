@@ -43,12 +43,14 @@
       }
     }
     const stem = filename.replace(/\.(jsonl|json|csv|zip|previous|candidate)+$/gi, '').replace(/^[A-Za-z]+-(?=opening|terms|publication)/, '');
-    const title = message.kind === 'Published acceptance rule' ? 'Published acceptance rule'
-      : message.kind === 'Published completion record' ? 'Published completion record (' + humanize(stem) + ')'
-      : /descriptor|policy/i.test(filename) ? (/previous|original/i.test(filename) ? 'Original release rule' : /candidate/i.test(filename) ? 'Updated release rule' : 'Release rule')
+    const title = message.kind === 'Published acceptance rule' ? 'Published grading rule'
+      : message.kind === 'Published completion record' ? 'Completion record (' + humanize(stem) + ')'
+      : /descriptor|policy/i.test(filename) ? (/previous|original/i.test(filename) ? 'Original grading rule' : /candidate/i.test(filename) ? 'Updated grading rule' : 'Grading rule')
       : /opening-sources/i.test(filename) ? 'Opening customer terms'
-      : /terms_update-sources/i.test(filename) ? 'Mid-run term updates'
+      : /terms_update-sources/i.test(filename) ? 'Updated customer terms'
       : /publication_close-sources/i.test(filename) ? 'Closing customer terms'
+      : /source-audit/i.test(filename) ? 'Audit report'
+      : /^reports$/i.test(stem) ? 'Combined reports'
       : /\.csv$/i.test(filename) ? 'October ' + humanize(stem.replace(/^[a-z]+-october-?/i, '')) + ' report'
       : humanize(stem);
     return {filename, title, description:short(description,220)};
@@ -178,6 +180,7 @@
       const surface = eventById.get(message.event)?.arguments?.channel;
       if (surface === 'private') return 'Private discussion';
       if (surface === 'public') return 'Public discussion';
+      if (message.kind === 'Shared source file') return 'Shared file';
       return message.kind === 'Message' ? 'Shared channel' : message.kind;
     }
 
