@@ -46,9 +46,9 @@
     const title = message.kind === 'Published acceptance rule' ? 'Published acceptance rule'
       : message.kind === 'Published completion record' ? 'Published completion record (' + humanize(stem) + ')'
       : /descriptor|policy/i.test(filename) ? (/previous|original/i.test(filename) ? 'Original release rule' : /candidate/i.test(filename) ? 'Updated release rule' : 'Release rule')
-      : /opening-sources/i.test(filename) ? 'Opening source terms'
-      : /terms_update-sources/i.test(filename) ? 'Mid-run source updates'
-      : /publication_close-sources/i.test(filename) ? 'Closing source terms'
+      : /opening-sources/i.test(filename) ? 'Opening customer terms'
+      : /terms_update-sources/i.test(filename) ? 'Mid-run term updates'
+      : /publication_close-sources/i.test(filename) ? 'Closing customer terms'
       : /\.csv$/i.test(filename) ? 'October ' + humanize(stem.replace(/^[a-z]+-october-?/i, '')) + ' report'
       : humanize(stem);
     return {filename, title, description:short(description,220)};
@@ -452,7 +452,7 @@
         routeQuote.removeAttribute('data-passage');
         const sourceImport = message.kind === 'Shared source file' && moment.kind === 'read' && eventById.get(moment.event)?.label === 'Import peer source documents';
         quoteText.textContent = sourceImport
-          ? names.get(moment.actor) + ' imports ' + names.get(message.actor) + '’s source documents. ' + preview.description
+          ? names.get(moment.actor) + ' imports ' + names.get(message.actor) + '’s published records. ' + preview.description
           : preview.description;
         routeQuote.querySelector('button').title = 'View original file: ' + preview.filename;
         return;
