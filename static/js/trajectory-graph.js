@@ -41,9 +41,15 @@
     function draw({ctx,width,height,paint,active,connections,history,focus,second,progress,animate,reduced=false}) {
       const now=typeof performance==='undefined'?0:performance.now();
       transitioning=false;
-      const compact=width<420, cardWidth=compact?96:114, cardHeight=54;
+      const compact=width<420, cardHeight=54;
+      const nodeLabel=id=>compact?(actors.find(a=>a.id===id)?.name||id):actorName(id);
+      ctx.font=(compact?'600 11px ':'600 12px ')+fontFamily;
+      const maxLabel=Math.max(0,...actors.map(a=>ctx.measureText(nodeLabel(a.id)).width));
+      const minCard=compact?96:114, maxCard=Math.max(minCard,Math.floor((width-24)/2));
+      const cardWidth=clamp(Math.ceil(maxLabel)+36,minCard,maxCard);
       const cx=width/2, cy=height/2+9;
-      const rx=Math.max(42,(width-cardWidth-44)/2), ry=Math.max(45,(height-cardHeight-110)/2);
+      const rx=clamp((width-cardWidth-36)/2,Math.min(42,Math.max(0,(width-cardWidth-8)/2)),Math.max(0,(width-cardWidth-8)/2));
+      const ry=Math.max(45,(height-cardHeight-110)/2);
       const nodes=new Map(actors.map((actor,i)=>{
         const angle=-Math.PI*.75+i*2*Math.PI/actors.length;
         // Four nodes use the corners of a rectangle, with room for cross-agent links.
@@ -112,8 +118,8 @@
         ctx.fillStyle=ink+Math.round(8+30*strength).toString(16).padStart(2,'0'); ctx.fill();
         ctx.strokeStyle=ink+(selected?'ff':involved?'ba':'60'); ctx.lineWidth=1+strength; ctx.stroke();
         ctx.fillStyle=ink; ctx.beginPath(); ctx.arc(x+13,y+17,3,0,Math.PI*2); ctx.fill();
-        ctx.textAlign='left'; ctx.font='600 12px '+fontFamily; ctx.fillStyle=paint.ink;
-        ctx.fillText(actorName(id),x+23,y+21);
+        ctx.textAlign='left'; ctx.font=(compact?'600 11px ':'600 12px ')+fontFamily; ctx.fillStyle=paint.ink;
+        ctx.fillText(nodeLabel(id),x+23,y+21);
         const latest=actorEvents.get(id).findLast(event=>event.id<=active.event);
         const status=active.kind==='outcome'?'Complete':active.kind==='read'&&active.message.actor===id?(active.message.kind==='Message'?'Sender':'Author'):active.actor===id?
           active.kind==='read'?'Reader':active.kind==='send'?'Sharing':'Acting':latest?'Working':'Not started';

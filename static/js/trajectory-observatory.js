@@ -581,7 +581,8 @@
         roleLabel.hidden = !role;
         const sent=messages.filter(x=>x.actor===a.id&&x.event<=m.event).length;
         const reads=moments.filter(x=>x.kind==='read'&&x.actor===a.id&&x.event<=m.event).length;
-        host.querySelector(`[data-actor-count="${a.id}"]`).textContent=(noMessages||m.kind==='action')?`${events.filter(e=>e.actor===a.id&&e.id<=m.event).length} actions`:`${sent} ${sharedRecords?'shared':'sent'} · ${reads} read`;
+        const actionCount=events.filter(e=>e.actor===a.id&&e.id<=m.event).length;
+        host.querySelector(`[data-actor-count="${a.id}"]`).textContent=(noMessages||m.kind==='action')?`${actionCount} action${actionCount===1?'':'s'}`:`${sent} ${sharedRecords?'shared':'sent'} · ${reads} read`;
       });
       updateControls();draw();ensureFrame();
     }
@@ -740,7 +741,8 @@
         connections:timeConnections,history:readHistory,focus:focusedActor,
         second:recordedSecond,progress:progress*progress*(3-2*progress),animate:playing&&!reduced,reduced});
     }
-    const axisLeft = 64, axisRight = 16, laneHeight = 26;
+    let axisLeft = 96;
+    const axisRight = 16, laneHeight = 26;
     const lanesBottom = actors.length * laneHeight + 4, chartHeight = lanesBottom + 45;
     flowStage.style.setProperty('--axis-left', axisLeft + 'px');
     flowStage.style.setProperty('--axis-right', axisRight + 'px');
@@ -750,9 +752,13 @@
     const flowPoints = [];
     let ticks = [];
     const laneY = row => 16 + row * laneHeight;
+    const laneLabel = a => flowWidth && flowWidth < 500 ? a.name : names.get(a.id);
     const timeX = second => axisLeft + (duration ? second / duration : 0) * (flowWidth - axisLeft - axisRight);
 
     function layoutTimeline() {
+      fctx.font = '11px ' + fontFamily;
+      axisLeft = Math.max(64, Math.ceil(Math.max(0, ...actors.map(a => fctx.measureText(laneLabel(a)).width))) + 20);
+      flowStage.style.setProperty('--axis-left', axisLeft + 'px');
       const span = flowWidth - axisLeft - axisRight;
       // Keep simultaneous moments on the same timestamp. Spread their markers within the lane.
       laneMoments.forEach((lane, row) => {
@@ -810,7 +816,7 @@
         const y = laneY(i), ink = color(a.id);
         fctx.globalAlpha=focusedActor&&focusedActor!==a.id ? .3 : 1;
         strokePoints(fctx,[[axisLeft,y],[flowWidth-axisRight,y]],ink+'46',.8);
-        fctx.fillStyle = ink; fctx.fillText(names.get(a.id),7,y+4);
+        fctx.fillStyle = ink; fctx.fillText(laneLabel(a),7,y+4);
       });
       fctx.globalAlpha=1;
       strokePoints(fctx,[[cursor,3],[cursor,lanesBottom+7]],paint.packet+'86',1);

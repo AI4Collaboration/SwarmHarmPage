@@ -1,7 +1,13 @@
 :root { --bg:#fff; --text:#171b20; --muted:#526171; --line:#d7dee6; --scene-edge:#a5b1bd; --scene-blue:#285f97; --accent:var(--scene-blue); }
 :root[data-theme="dark"] { --bg:#111315; --text:#e5edf5; --muted:#a8b5c4; --line:#30363e; --scene-edge:#596675; --scene-blue:#89bff1; }
 .subpage { width:min(1060px,calc(100% - 36px)); margin-inline:auto; }
-.site-header [data-theme-toggle] { margin-left:8px; padding:5px; border:0; background:transparent; color:var(--text); font-size:20px; cursor:pointer; }
+.site-header .subpage-theme-toggle { position:relative; display:grid; place-items:center; flex:none; width:36px; height:36px; margin-left:8px; padding:0; border:0; border-radius:50%; background:transparent; color:var(--text); cursor:pointer; }
+.site-header .subpage-theme-toggle::before { content:""; position:absolute; width:28px; height:28px; border:1px solid var(--line); border-radius:50%; background:var(--bg); transition:border-color .18s; }
+.site-header .subpage-theme-toggle:hover::before { border-color:var(--muted); }
+.site-header .subpage-theme-toggle[hidden], .site-header .subpage-theme-toggle .theme-option { display:none; }
+:root[data-theme="light"] .site-header .subpage-theme-toggle .theme-option-dark,
+:root[data-theme="dark"] .site-header .subpage-theme-toggle .theme-option-light { position:relative; display:grid; place-items:center; }
+.site-header .subpage-theme-toggle svg { display:block; width:14px; height:14px; }
 .subpage { padding-block:clamp(30px,6vw,78px); }
 .subpage h1 { font-size:clamp(40px,6vw,68px); letter-spacing:-.045em; }
 .subpage h2 { font-size:clamp(21px,2.5vw,28px); }

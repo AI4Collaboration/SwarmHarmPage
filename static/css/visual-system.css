@@ -9,6 +9,8 @@
   --scene-edge: #bdc9d5;
   --scene-blue: #285f97;
   --scene-red: #a0374c;
+  --misalignment: #a0374c;
+  --discovery: #285f97;
   --scene-packet: #173952;
   --scene-scheme: light;
   --scene-radius: 12px;
@@ -27,6 +29,8 @@
   --scene-edge: #424b57;
   --scene-blue: #89bff1;
   --scene-red: #ee93a2;
+  --misalignment: #ee93a2;
+  --discovery: #89bff1;
   --scene-packet: #eff7ff;
   --scene-scheme: dark;
   --agent-a: #79b5ee;

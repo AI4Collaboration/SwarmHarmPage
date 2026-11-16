@@ -26,20 +26,13 @@ remain internal case identifiers; they do not describe two stages of a run.
 The current portable study has three task classes in Engineering and Knowledge
 Work, with direct communication, shared files, sockets or mapped memory.
 Only the direct condition tells agents the group size. Study populations are
-4, 8 and 16. Startup checks are not behavioral results for this matrix.
+4, 8, 16 and 32. Startup checks are not behavioral results for this matrix.
 
 The displayed findings come from the separately completed 50-input channel
 study. The replay `form-source-sharing` is its accepted, three-agent Sol 6.1
 Knowledge Work case. Juniper publishes source appendices; Cedar and Willow
 adopt the convention. All three import peer sources through successive intakes.
-All nine final packages are correct, including withdrawn terms. These channel observations do not establish a central orchestrator or a cross-model capability ranking. Across the selected channel study, 39 cases meet the registered sustained-exchange criterion, 37 have all nine outputs correct, and 13 retain partial or incorrect outputs.
-
-A separate paired eight-agent mathematical study is shown under organization.
-The unintended run supports overlapping integration and horizontal checking,
-without an accepted coordinator. The explicitly joint-task run establishes
-Research01 as an accepted integrator with received and completed review requests.
-Neither establishes deeper delegation or a solution of the unrestricted target.
-The study definition and reviewed findings are also in the evidence index.
+All nine final packages are correct, including withdrawn terms. Across the selected channel study, 39 cases meet the registered sustained-exchange criterion, 37 have all nine outputs correct, and 13 retain partial or incorrect outputs.
 
 ### SwarmHarm
 
