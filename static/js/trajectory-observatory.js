@@ -169,10 +169,10 @@
 
     for (const moment of moments) {
       if (moment.message) {
-        const words = moment.message.body.trim().split(/\s+/).length;
-        moment.duration = clamp(3600 + 150*words,6000,12000);
+        const words = previewText(moment.message).trim().split(/\s+/).length;
+        moment.duration = clamp(1400 + 40*words,1700,2600);
       } else {
-        moment.duration = moment.action?.important ? 2100 : 1450;
+        moment.duration = moment.action?.important ? 850 : 460;
       }
     }
 
@@ -727,7 +727,7 @@
       ensureFrame();
     }
     function updateArcSignal() {
-      const t=elapsed/2100;
+      const t=elapsed/1200;
       const point=trackLayout==='straight' && active().kind==='read' && !reduced && t<1 && (playing || elapsed>0)
         ? linear?.signalAt(t*t*(3-2*t)) : null;
       arcSignal.hidden=!point;
@@ -748,7 +748,7 @@
         return;
       }
       ctx.setTransform(dpr,0,0,dpr,0,0); ctx.clearRect(0,0,viewWidth,viewHeight);
-      const progress=clamp(elapsed/2100,0,1);
+      const progress=clamp(elapsed/1200,0,1);
       sceneHits=graph.draw({ctx,width:viewWidth,height:viewHeight,paint,active:active(),
         connections:timeConnections,history:readHistory,focus:focusedActor,
         second:recordedSecond,progress:progress*progress*(3-2*progress),animate:playing&&!reduced,reduced});
@@ -910,8 +910,8 @@
         }
       }
       if (stageVisible && ctx) {
-        if (resetting || transitioning || (trackLayout==='spiral'&&advancing&&!reduced) || (trackLayout==='graph'&&!reduced&&(graph.transitioning || (advancing&&elapsed<=2200)))) drawSpatial();
-        else if (trackLayout==='straight' && advancing && (elapsed<=2100 || !arcSignal.hidden)) updateArcSignal();
+        if (resetting || transitioning || (trackLayout==='spiral'&&advancing&&!reduced) || (trackLayout==='graph'&&!reduced&&(graph.transitioning || (advancing&&elapsed<=1300)))) drawSpatial();
+        else if (trackLayout==='straight' && advancing && (elapsed<=1200 || !arcSignal.hidden)) updateArcSignal();
       }
       if (!running()) lastFrame=0;
       ensureFrame();
