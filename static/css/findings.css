@@ -166,19 +166,16 @@
 .findings-primary .life-phase { margin: 0px; padding-top: 0px; }
 #sample-steps { scroll-margin-top: 80px; }
 #trajectory-title, #setup-title { margin: 0px 0px 20px; color: var(--text); font: 500 clamp(24px,3vw,32px)/1.2 var(--font); letter-spacing: -0.025em; }
-.detection-section { margin: 48px 0px 8px; padding: clamp(24px, 3vw, 32px); border-radius: 12px; background: var(--scene-panel,var(--surface)); scroll-margin-top: 100px; }
-.detection-heading { display: grid; grid-template-columns: minmax(0px, 1fr); max-width: 720px; margin-bottom: 22px; }
-.detection-heading > p:first-child { margin: 0px 0px 6px; color: var(--discovery); font: 650 12px/1.4 var(--font); letter-spacing: 0.1em; text-transform: uppercase; }
-.detection-heading h2 { margin: 0px; font: 500 clamp(24px,3vw,34px)/1.2 var(--display); letter-spacing: -0.025em; }
-.detection-heading > p:last-child { margin: 8px 0px 0px; color: var(--muted); font: 15px/1.6 var(--font); }
-.detection-pipeline { display: grid; grid-template-columns: minmax(0px, 1fr) 48px minmax(0px, 1.7fr) 48px minmax(0px, 1fr); align-items: center; gap: 10px; margin: 0px; }
-.detection-pipeline h3 { margin: 0px; color: var(--scene-ink,var(--text)); font: 600 15px/1.4 var(--font); }
-.detection-pipeline p { margin: 3px 0px 0px; color: var(--scene-muted,var(--muted)); font: 12px/1.5 var(--font); }
-.detection-stage { min-width: 0px; text-align: center; }
-.detection-icon { width: 36px; height: 36px; color: var(--scene-guide,var(--muted)); fill: none; stroke: currentcolor; stroke-width: 1.6; stroke-linecap: round; stroke-linejoin: round; }
-.detection-stage > .detection-icon { display: block; margin: 0px auto 8px; }
-.detection-checks { display: grid; grid-template-rows: 1fr 1fr; gap: 12px; min-width: 0px; }
-.detection-check { display: grid; grid-template-columns: 36px minmax(0px, 1fr); align-items: center; gap: 12px; padding: 12px 14px; min-width: 0px; border-radius: 8px; background: var(--scene-bg,var(--bg)); }
+.detection-section { margin: 20px 0px 2px; padding: 14px 0px 0px; border-top: 1px solid var(--line); scroll-margin-top: 100px; }
+.detection-subheading { display: flex; flex-wrap: wrap; align-items: baseline; gap: 8px; margin: 0px 0px 12px; color: var(--misalignment-ink); font: 500 13px/1.35 var(--font); }
+.detection-subheading small { color: var(--muted); font: 400 12px/1.35 var(--font); margin-left: 6px; }
+.detection-pipeline { display: grid; grid-template-columns: minmax(0px, 1fr) 44px minmax(0px, 1.55fr) 44px minmax(0px, 1fr); align-items: center; gap: 8px; margin: 0px; padding: 12px 14px; border: 1px solid var(--line); border-radius: 8px; background: color-mix(in srgb, var(--bg) 62%, var(--surface)); }
+.detection-pipeline h4 { margin: 0px; color: var(--scene-ink,var(--text)); font: 550 14px/1.35 var(--font); }
+.detection-pipeline p { margin: 2px 0px 0px; color: var(--scene-muted,var(--muted)); font: 12px/1.45 var(--font); }
+.detection-stage { display: flex; align-items: center; justify-content: center; gap: 10px; min-width: 0px; padding: 10px 12px; border: 1px solid var(--line); border-radius: 7px; background: var(--scene-bg,var(--bg)); text-align: left; }
+.detection-icon { flex: 0 0 auto; width: 30px; height: 30px; color: var(--scene-guide,var(--muted)); fill: none; stroke: currentcolor; stroke-width: 1.6; stroke-linecap: round; stroke-linejoin: round; }
+.detection-checks { display: grid; grid-template-rows: 1fr 1fr; gap: 8px; min-width: 0px; }
+.detection-check { display: grid; grid-template-columns: 30px minmax(0px, 1fr); align-items: center; gap: 10px; padding: 9px 12px; min-width: 0px; border: 1px solid var(--line); border-radius: 7px; background: var(--scene-bg,var(--bg)); }
 .detection-action .detection-icon { color: var(--scene-blue,var(--discovery)); }
 .detection-transcript .detection-icon { color: var(--scene-red,var(--risk)); }
 .detection-connector { align-self: stretch; min-width: 0px; }
@@ -188,14 +185,13 @@
 .detection-action-line { stroke: var(--scene-blue,var(--discovery)); }
 .detection-transcript-line { stroke: var(--scene-red,var(--risk)); }
 @media (max-width: 760px) {
-.detection-section { margin-top: 36px; padding: 24px 18px; border-radius: 12px; }
-.detection-pipeline { grid-template-columns: minmax(0px, 1fr); gap: 8px; }
-.detection-checks { grid-template-columns: repeat(2, minmax(0px, 1fr)); grid-template-rows: auto; gap: 12px; }
-.detection-check { display: flex; flex-direction: column; justify-content: flex-start; gap: 7px; padding: 12px 8px; text-align: center; }
-.detection-pipeline h3 { font-size: 14px; }
-.detection-pipeline p { font-size: 12px; }
-.detection-stage > .detection-icon { margin-bottom: 5px; }
-.detection-connector { height: 28px; }
+.detection-section { margin-top: 16px; padding-top: 12px; }
+.detection-pipeline { grid-template-columns: minmax(0px, 1fr); gap: 6px; padding: 10px; }
+.detection-checks { grid-template-columns: repeat(2, minmax(0px, 1fr)); grid-template-rows: auto; gap: 8px; }
+.detection-check, .detection-stage { display: flex; flex-direction: column; justify-content: flex-start; gap: 5px; padding: 10px 8px; text-align: center; }
+.detection-pipeline h4 { font-size: 13.5px; }
+.detection-pipeline p { font-size: 11.5px; }
+.detection-connector { height: 24px; }
 .detection-connector .detection-horizontal { display: none; }
 .detection-connector .detection-vertical { display: block; }
 }
