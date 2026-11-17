@@ -48,9 +48,16 @@ summary::-webkit-details-marker{display:none;}
 .featured-pill{display:inline-flex;align-items:center;min-height:32px;padding:5px 12px;border:1px solid var(--line);border-radius:999px;background:var(--surface);color:var(--muted);font:500 12.5px/1.3 var(--font);text-decoration:none;transition:border-color .18s,color .18s,background .18s;}
 .featured-pill:hover{color:var(--text);border-color:var(--scene-blue);}
 .featured-pill[aria-current="true"]{color:var(--scene-ink);border-color:var(--scene-blue);background:color-mix(in srgb,var(--scene-blue) 14%,var(--bg));}
+.takeaways-section{margin:40px 0 8px;padding-top:28px;border-top:1px solid var(--line);}
+.takeaways-section h2{margin:0 0 16px;font:400 clamp(24px,2.8vw,30px)/1.2 var(--editorial);letter-spacing:-.018em;}
+.takeaways-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px 20px;}
+.takeaway-card{padding:14px 16px;border:1px solid var(--line);border-radius:10px;background:var(--surface);}
+.takeaway-card h3{margin:0 0 6px;color:var(--text);font:550 15px/1.35 var(--font);}
+.takeaway-card p{margin:0;color:var(--muted);font:400 13.5px/1.5 var(--font);}
+@media(max-width:900px){.takeaways-grid{grid-template-columns:minmax(0,1fr);}}
 @media(max-width:520px){
- .current-scene text{font-size:25px;}
- .current-scene .scene-small{font-size:24px;}
+ .current-scene text{font-size:22px;}
+ .current-scene .scene-small{font-size:21px;}
  .current-scene figcaption{font-size:12.5px;}
 }
 
