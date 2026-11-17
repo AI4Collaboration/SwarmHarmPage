@@ -102,13 +102,16 @@
 .composition-proof strong { font-size: 21px; }
 }
 .record-result { max-height: 420px; overflow: auto; padding: 14px; white-space: pre-wrap; overflow-wrap: anywhere; font-size: 13px; line-height: 1.55; }
-.findings-primary .life-halves { display: grid; grid-template-columns: minmax(0px, 1fr); gap: 28px; }
-.findings-primary .phase-findings { display: grid; grid-template-columns: repeat(3, minmax(0px, 1fr)); gap: 16px 20px; margin: 12px 0px 0px; }
-@media (max-width: 1120px) {
-.findings-primary .phase-findings { grid-template-columns: repeat(2, minmax(0px, 1fr)); }
+@media (min-width: 761px) {
+.findings-primary .life-halves { display: grid; grid-template-columns: repeat(2, minmax(0px, 1fr)); grid-template-rows: repeat(13, auto); gap: 0px 24px; }
+.findings-primary .life-half { display: grid; grid-template-rows: subgrid; grid-row: span 13; }
+.findings-primary .phase-findings { display: grid; grid-template-rows: subgrid; grid-row: 2 / span 12; margin: 10px 0px 0px; }
+.findings .finding { display: grid; grid-template-rows: subgrid; grid-row: span 4; padding: 10px 6px 12px; border: 0px; border-top: 1px solid var(--line); border-radius: 0px; background: transparent; }
+.findings .finding:first-child { border-top: 0px; }
 }
-@media (max-width: 720px) {
-.findings-primary .phase-findings { grid-template-columns: minmax(0px, 1fr); }
+@media (max-width: 760px) {
+.findings-primary .life-halves { display: grid; grid-template-columns: minmax(0px, 1fr); gap: 20px; }
+.findings-primary .phase-findings { display: grid; grid-template-columns: minmax(0px, 1fr); gap: 12px; margin: 10px 0px 0px; }
 }
 @media (max-width: 600px) {
 .case-evidence { overflow-wrap: anywhere; }
@@ -166,10 +169,10 @@
 .findings-primary .life-phase { margin: 0px; padding-top: 0px; }
 #sample-steps { scroll-margin-top: 80px; }
 #trajectory-title, #setup-title { margin: 0px 0px 20px; color: var(--text); font: 500 clamp(24px,3vw,32px)/1.2 var(--font); letter-spacing: -0.025em; }
-.detection-section { margin: 20px 0px 2px; padding: 14px 0px 0px; border-top: 1px solid var(--line); scroll-margin-top: 100px; }
-.detection-subheading { display: flex; flex-wrap: wrap; align-items: baseline; gap: 8px; margin: 0px 0px 12px; color: var(--misalignment-ink); font: 500 13px/1.35 var(--font); }
+.detection-section { margin: 22px 0px 4px; padding: 16px 20px; border: 1px solid var(--line); border-radius: 12px; background: var(--surface); scroll-margin-top: 100px; }
+.detection-subheading { display: flex; flex-wrap: wrap; align-items: baseline; gap: 8px; margin: 0px 0px 12px; color: var(--text); font: 500 14px/1.35 var(--font); }
 .detection-subheading small { color: var(--muted); font: 400 12px/1.35 var(--font); margin-left: 6px; }
-.detection-pipeline { display: grid; grid-template-columns: minmax(0px, 1fr) 44px minmax(0px, 1.55fr) 44px minmax(0px, 1fr); align-items: center; gap: 8px; margin: 0px; padding: 12px 14px; border: 1px solid var(--line); border-radius: 8px; background: color-mix(in srgb, var(--bg) 62%, var(--surface)); }
+.detection-pipeline { display: grid; grid-template-columns: minmax(0px, 1fr) 44px minmax(0px, 1.55fr) 44px minmax(0px, 1fr); align-items: center; gap: 8px; margin: 0px; }
 .detection-pipeline h4 { margin: 0px; color: var(--scene-ink,var(--text)); font: 550 14px/1.35 var(--font); }
 .detection-pipeline p { margin: 2px 0px 0px; color: var(--scene-muted,var(--muted)); font: 12px/1.45 var(--font); }
 .detection-stage { display: flex; align-items: center; justify-content: center; gap: 10px; min-width: 0px; padding: 10px 12px; border: 1px solid var(--line); border-radius: 7px; background: var(--scene-bg,var(--bg)); text-align: left; }
