@@ -62,3 +62,68 @@ summary::-webkit-details-marker{display:none;}
 }
 
 @media(max-width:900px){.findings-primary .life-halves{grid-template-columns:minmax(0,1fr);}}
+
+.experiment-taxonomy {
+  min-width: 0;
+  margin-top: 12px;
+  padding-top: 16px;
+  border-top: 1px solid var(--line);
+  scroll-margin-top: 88px;
+  container-type: inline-size;
+}
+.experiment-taxonomy h3 {
+  margin: 0;
+  color: var(--text);
+  font: 400 22px/1.25 var(--editorial);
+}
+.experiment-taxonomy > p {
+  margin: 6px 0 12px;
+  color: var(--muted);
+  font: 400 13.5px/1.5 var(--font);
+}
+.taxonomy-table-scroll {
+  overflow-x: auto;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+}
+.taxonomy-table-scroll:focus-visible {
+  outline: 2px solid var(--finding-ink);
+  outline-offset: 3px;
+}
+.experiment-taxonomy table {
+  width: 100%;
+  min-width: 31rem;
+  table-layout: fixed;
+  border-collapse: collapse;
+  color: var(--muted);
+  background: var(--bg);
+  font: 400 13px/1.45 var(--font);
+}
+.experiment-taxonomy :is(th, td) {
+  padding: 10px;
+  border-right: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+  text-align: left;
+  vertical-align: top;
+}
+.experiment-taxonomy tr > :last-child { border-right: 0; }
+.experiment-taxonomy tbody tr:last-child > * { border-bottom: 0; }
+.experiment-taxonomy th {
+  color: var(--text);
+  background: var(--surface);
+  font-weight: 600;
+}
+.experiment-taxonomy th:first-child { width: 19%; }
+.experiment-taxonomy th span { display: block; color: var(--muted); font-weight: 400; }
+.experiment-taxonomy td strong { display: block; margin-bottom: 4px; color: var(--text); font-weight: 600; }
+.experiment-taxonomy .taxonomy-peer-mesh { background: var(--finding-fill); }
+.experiment-taxonomy .taxonomy-peer-mesh strong { color: var(--finding-ink); }
+#swarmharm-taxonomy table { min-width: 38rem; }
+.experiment-taxonomy .taxonomy-proposed { background: var(--finding-fill); color: var(--finding-ink); }
+.experiment-taxonomy .taxonomy-scroll-hint { display: none; margin-bottom: 6px; font-size: 12px; }
+@container (width < calc(31rem + 2px)) {
+  #swarmform-taxonomy .taxonomy-scroll-hint { display: block; }
+}
+@container (width < calc(38rem + 2px)) {
+  #swarmharm-taxonomy .taxonomy-scroll-hint { display: block; }
+}

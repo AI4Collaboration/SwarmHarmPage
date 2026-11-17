@@ -103,8 +103,8 @@
 }
 .record-result { max-height: 420px; overflow: auto; padding: 14px; white-space: pre-wrap; overflow-wrap: anywhere; font-size: 13px; line-height: 1.55; }
 @media (min-width: 761px) {
-.findings-primary .life-halves { display: grid; grid-template-columns: repeat(2, minmax(0px, 1fr)); grid-template-rows: repeat(13, auto); gap: 0px 24px; }
-.findings-primary .life-half { display: grid; grid-template-rows: subgrid; grid-row: span 13; }
+.findings-primary .life-halves { display: grid; grid-template-columns: repeat(2, minmax(0px, 1fr)); grid-template-rows: repeat(14, auto); gap: 0px 24px; }
+.findings-primary .life-half { display: grid; grid-template-rows: subgrid; grid-row: span 14; }
 .findings-primary .phase-findings { display: grid; grid-template-rows: subgrid; grid-row: 2 / span 12; margin: 10px 0px 0px; }
 .findings .finding { display: grid; grid-template-rows: subgrid; grid-row: span 4; padding: 10px 6px 12px; border: 0px; border-top: 1px solid var(--line); border-radius: 0px; background: transparent; }
 .findings .finding:first-child { border-top: 0px; }
