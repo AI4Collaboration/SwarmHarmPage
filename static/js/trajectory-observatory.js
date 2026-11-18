@@ -757,16 +757,16 @@
         second:recordedSecond,progress:progress*progress*(3-2*progress),animate:playing&&!reduced,reduced});
     }
     let axisLeft = 96;
-    const axisRight = 16, laneHeight = 26;
-    const lanesBottom = actors.length * laneHeight + 4, chartHeight = lanesBottom + 45;
+    const axisRight = 16, laneHeight = 32;
+    const lanesBottom = actors.length * laneHeight + 8, chartHeight = lanesBottom + 48;
     flowStage.style.setProperty('--axis-left', axisLeft + 'px');
     flowStage.style.setProperty('--axis-right', axisRight + 'px');
-    flowStage.style.setProperty('--scrub-center', (lanesBottom + 9) + 'px');
+    flowStage.style.setProperty('--scrub-center', (lanesBottom + 10) + 'px');
     flowStage.style.height = chartHeight + 'px';
     const laneMoments = actors.map(a => recordedMoments.filter(m => m.actor === a.id));
     const flowPoints = [];
     let ticks = [];
-    const laneY = row => 16 + row * laneHeight;
+    const laneY = row => 19 + row * laneHeight;
     const laneLabel = a => flowWidth && flowWidth < 500 ? a.name : names.get(a.id);
     const timeX = second => axisLeft + (duration ? second / duration : 0) * (flowWidth - axisLeft - axisRight);
 

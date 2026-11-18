@@ -40,7 +40,7 @@
 .obs-panel-heading { display:flex; align-items:center; justify-content:space-between; gap:12px; min-height:47px; padding:9px 17px; }
 .obs-panel-heading h5 { color:var(--scene-muted); font:500 12px/1.4 var(--font); letter-spacing:.01em; }
 .obs-panel-heading h5 > span { margin-left:10px; color:var(--scene-muted); font:10px/1.4 var(--font); }
-.obs-inspector { display:flex; flex-direction:column; gap:12px; height:600px; min-width:0; padding:12px; border-right:1px solid var(--scene-line); background:var(--scene-bg); }
+.obs-inspector { display:flex; flex-direction:column; gap:14px; height:640px; min-width:0; padding:14px; border-right:1px solid var(--scene-line); background:var(--scene-bg); }
 .obs-action-panel,.obs-message-panel,.obs-outcome-panel { min-width:0; border:1px solid var(--scene-line); border-radius:9px; overflow:hidden; }
 .obs-action-panel { flex:none; padding-bottom:15px; background:var(--scene-bg); }
 .obs-inspector .obs-panel-heading { justify-content:initial; min-height:44px; padding:8px 14px; gap:9px; border-bottom:1px solid var(--scene-line); margin-bottom:10px; }
@@ -118,7 +118,7 @@
 .obs-share { border-color:transparent; }
 .obs-share:hover { background:var(--scene-panel); }
 .obs-reset svg,.obs-share svg { width:14px; height:14px; }
-.obs-stage { position:relative; flex:1; min-height:320px; overflow:hidden; background:radial-gradient(ellipse at 23% 31%,color-mix(in srgb,var(--agent-a) 4%,transparent),transparent 53%),radial-gradient(ellipse at 74% 68%,color-mix(in srgb,var(--agent-c) 3%,transparent),transparent 48%),var(--scene-bg); }
+.obs-stage { position:relative; flex:1; min-height:360px; overflow:hidden; background:radial-gradient(ellipse at 23% 31%,color-mix(in srgb,var(--agent-a) 4%,transparent),transparent 53%),radial-gradient(ellipse at 74% 68%,color-mix(in srgb,var(--agent-c) 3%,transparent),transparent 48%),var(--scene-bg); }
 .obs-space-canvas { display:block; width:100%; height:100%; position:absolute; inset:0; touch-action:pan-y; cursor:grab; }
 .obs-space-canvas:active { cursor:grabbing; }
 .obs-spatial[data-layout="straight"] .obs-stage:has(.obs-graph-tooltip:not([hidden])) .obs-space-canvas { cursor:pointer; }

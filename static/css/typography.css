@@ -3,10 +3,10 @@
 @font-face { font-family: Inter; src: url("../fonts/Inter.woff2") format("woff2"); font-style: normal; font-weight: 100 900; font-display: swap; }
 :root { --font: "Inter",system-ui,sans-serif; --editorial: "ET Book",Palatino,"Book Antiqua",Georgia,serif; }
 body { font-optical-sizing: auto; }
-.hero .hero-intro, .hero .experiment-bridge { font-family: var(--editorial); max-width: none; font-size: clamp(19px, 1.45vw, 21px); line-height: 1.5; letter-spacing: normal; font-weight: 400; }
-.hero .experiment-bridge { margin: 1em auto 0px; text-align: left; text-wrap: pretty; color: var(--text); }
+.hero .hero-intro, .hero .experiment-bridge { font-family: var(--editorial); max-width: none; font-size: clamp(19px, 1.45vw, 21px); line-height: 1.65; letter-spacing: normal; font-weight: 400; }
+.hero .experiment-bridge { margin: 1.35em auto 0px; text-align: left; text-wrap: pretty; color: var(--text); }
 .experiment-bridge p, .hero-intro p { margin: 0px; }
-.experiment-bridge p + p, .hero-intro p + p { margin-top: 1em; }
+.experiment-bridge p + p, .hero-intro p + p { margin-top: 1.35em; }
 .hero-intro strong { font-weight: 700; }
 .subpage p, .resource-card p { font-family: var(--editorial); }
 .finding-explanation p, .taxonomy-evidence p { font: 400 16px/1.55 var(--editorial); }

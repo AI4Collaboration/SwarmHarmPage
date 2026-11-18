@@ -13,11 +13,11 @@
 .findings-primary .phase-findings { margin: 8px 0px 0px; }
 .finding { display: flex; flex-direction: column; min-width: 0px; margin: 0px; padding: 12px; border: 1px solid var(--line); border-radius: 8px; background: color-mix(in srgb, var(--bg) 62%, var(--surface)); }
 .finding:last-child { margin-bottom: 0px; }
-.finding-heading { display: grid; grid-template-columns: minmax(0px, 1fr) auto; align-items: center; gap: 10px; padding: 6px 10px; border-radius: 4px; background: var(--finding-fill); }
-.finding-heading h4 { margin: 0px; text-wrap: balance; color: var(--finding-ink); font: 550 clamp(14.5px,1.2vw,17px)/1.28 var(--font); }
+.finding-heading { display: grid; grid-template-columns: minmax(0px, 1fr) auto; align-items: center; gap: 10px; padding: 9px 13px; border-radius: 5px; background: var(--finding-fill); }
+.finding-heading h4 { margin: 0px; text-wrap: balance; color: var(--finding-ink); font: 550 clamp(15px,1.25vw,17.5px)/1.32 var(--font); }
 .finding-heading .model-tag { min-height: 26px; margin-block: -4px; color: var(--text); font: 500 12px/1.4 var(--font); text-decoration: underline color-mix(in srgb, currentcolor 45%, transparent 55%); text-underline-offset: 3px; }
 .finding-heading .model-tag:hover { color: var(--finding-ink); text-decoration-color: currentcolor; }
-.finding-foot { display: flex; flex-wrap: wrap; align-items: center; gap: 6px 14px; padding-inline: 4px; margin-top: auto; padding-top: 6px; }
+.finding-foot { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 16px; padding-inline: 4px; margin-top: auto; padding-top: 10px; }
 .finding-trace, .finding-trace-secondary, .finding-scope-note a, .finding-explanation summary { display: inline-flex; align-items: center; gap: 5px; min-height: 26px; font: 500 12px/1.35 var(--font); }
 .finding-trace, .finding-trace-secondary { color: var(--finding-ink); text-decoration: none; }
 .finding-explanation { grid-area: 1 / 1 / 2 / -1; min-width: 0px; }
@@ -104,8 +104,8 @@
 .record-result { max-height: 420px; overflow: auto; padding: 14px; white-space: pre-wrap; overflow-wrap: anywhere; font-size: 13px; line-height: 1.55; }
 .findings-primary .life-halves { display: block; }
 .findings-primary .life-half[hidden] { display: none !important; }
-.findings-primary .phase-findings { display: grid; grid-template-columns: repeat(3, minmax(0px, 1fr)); gap: 16px 20px; margin: 12px 0px 0px; }
-.findings .finding { display: flex; flex-direction: column; padding: 12px; border: 1px solid var(--line); border-radius: 8px; background: color-mix(in srgb, var(--bg) 62%, var(--surface)); }
+.findings-primary .phase-findings { display: grid; grid-template-columns: repeat(3, minmax(0px, 1fr)); gap: 22px 24px; margin: 18px 0px 0px; }
+.findings .finding { display: flex; flex-direction: column; padding: 18px; border: 1px solid var(--line); border-radius: 10px; background: color-mix(in srgb, var(--bg) 62%, var(--surface)); }
 @media (max-width: 1080px) {
 .findings-primary .phase-findings { grid-template-columns: repeat(2, minmax(0px, 1fr)); }
 }
@@ -163,21 +163,22 @@
 }
 .threat-models { margin-top: 36px; }
 .threat-models h3 { margin: 0px 0px 18px; color: var(--misalignment-ink); font-size: 22px; line-height: 1.3; }
-.overview { padding-top: 12px; }
-.findings-primary { padding: 0px 0px 28px; }
+.overview { padding-top: 28px; }
+.findings-primary { padding: 4px 0px 52px; }
 .findings-primary .life-phase { margin: 0px; padding-top: 0px; }
 #sample-steps { scroll-margin-top: 80px; }
-#trajectory-title, #setup-title { margin: 0px 0px 20px; color: var(--text); font: 500 clamp(24px,3vw,32px)/1.2 var(--font); letter-spacing: -0.025em; }
-.detection-section { margin: 22px 0px 4px; padding: 16px 20px; border: 1px solid var(--line); border-radius: 12px; background: var(--surface); scroll-margin-top: 100px; }
-.detection-subheading { display: flex; flex-wrap: wrap; align-items: baseline; gap: 8px; margin: 0px 0px 12px; color: var(--text); font: 500 14px/1.35 var(--font); }
-.detection-subheading small { color: var(--muted); font: 400 12px/1.35 var(--font); margin-left: 6px; }
-.detection-pipeline { display: grid; grid-template-columns: minmax(0px, 1fr) 44px minmax(0px, 1.55fr) 44px minmax(0px, 1fr); align-items: center; gap: 8px; margin: 0px; }
-.detection-pipeline h4 { margin: 0px; color: var(--scene-ink,var(--text)); font: 550 14px/1.35 var(--font); }
-.detection-pipeline p { margin: 2px 0px 0px; color: var(--scene-muted,var(--muted)); font: 12px/1.45 var(--font); }
-.detection-stage { display: flex; align-items: center; justify-content: center; gap: 10px; min-width: 0px; padding: 10px 12px; border: 1px solid var(--line); border-radius: 7px; background: var(--scene-bg,var(--bg)); text-align: left; }
-.detection-icon { flex: 0 0 auto; width: 30px; height: 30px; color: var(--scene-guide,var(--muted)); fill: none; stroke: currentcolor; stroke-width: 1.6; stroke-linecap: round; stroke-linejoin: round; }
-.detection-checks { display: grid; grid-template-rows: 1fr 1fr; gap: 8px; min-width: 0px; }
-.detection-check { display: grid; grid-template-columns: 30px minmax(0px, 1fr); align-items: center; gap: 10px; padding: 9px 12px; min-width: 0px; border: 1px solid var(--line); border-radius: 7px; background: var(--scene-bg,var(--bg)); }
+.trajectory-viewer { padding-top: 12px; margin-bottom: 36px; }
+#trajectory-title, #setup-title { margin: 0px 0px 14px; color: var(--text); font: 500 clamp(26px,3vw,34px)/1.2 var(--font); letter-spacing: -0.025em; }
+.detection-section { margin: 32px 0px 4px; padding: 22px 24px; border: 1px solid var(--line); border-radius: 12px; background: var(--surface); scroll-margin-top: 100px; }
+.detection-subheading { display: flex; flex-wrap: wrap; align-items: baseline; gap: 8px; margin: 0px 0px 16px; color: var(--text); font: 500 14.5px/1.35 var(--font); }
+.detection-subheading small { color: var(--muted); font: 400 12.5px/1.35 var(--font); margin-left: 6px; }
+.detection-pipeline { display: grid; grid-template-columns: minmax(0px, 1fr) 48px minmax(0px, 1.55fr) 48px minmax(0px, 1fr); align-items: center; gap: 12px; margin: 0px; }
+.detection-pipeline h4 { margin: 0px; color: var(--scene-ink,var(--text)); font: 550 14.5px/1.35 var(--font); }
+.detection-pipeline p { margin: 3px 0px 0px; color: var(--scene-muted,var(--muted)); font: 12.5px/1.5 var(--font); }
+.detection-stage { display: flex; align-items: center; justify-content: center; gap: 12px; min-width: 0px; padding: 14px 16px; border: 1px solid var(--line); border-radius: 8px; background: var(--scene-bg,var(--bg)); text-align: left; }
+.detection-icon { flex: 0 0 auto; width: 32px; height: 32px; color: var(--scene-guide,var(--muted)); fill: none; stroke: currentcolor; stroke-width: 1.6; stroke-linecap: round; stroke-linejoin: round; }
+.detection-checks { display: grid; grid-template-rows: 1fr 1fr; gap: 12px; min-width: 0px; }
+.detection-check { display: grid; grid-template-columns: 32px minmax(0px, 1fr); align-items: center; gap: 12px; padding: 13px 16px; min-width: 0px; border: 1px solid var(--line); border-radius: 8px; background: var(--scene-bg,var(--bg)); }
 .detection-action .detection-icon { color: var(--scene-blue,var(--discovery)); }
 .detection-transcript .detection-icon { color: var(--scene-red,var(--risk)); }
 .detection-connector { align-self: stretch; min-width: 0px; }
@@ -200,8 +201,8 @@
 .model-tag { display: inline-flex; align-items: center; gap: 5px; vertical-align: baseline; white-space: nowrap; }
 .model-logo { display: block; flex: 0 0 auto; width: 15px; height: 15px; object-fit: contain; }
 :is(:root[data-theme="dark"], :root[data-darkreader-scheme="dark"]) .model-logo-openai { filter: invert(1); }
-.findings-primary .life-half { padding: 18px 20px; border-radius: 12px; background: color-mix(in srgb,var(--finding-ink) 4%,var(--bg)); }
-.findings-primary .life-phase { gap: 4px; padding: 0px 4px 4px; font-size: 20px; line-height: 1.3; }
+.findings-primary .life-half { padding: 28px 30px 32px; border-radius: 12px; background: color-mix(in srgb,var(--finding-ink) 4%,var(--bg)); }
+.findings-primary .life-phase { gap: 6px; padding: 0px 4px 6px; font-size: 22px; line-height: 1.3; }
 .experiment-label { color: var(--muted); font: 550 11px/1.4 var(--font); letter-spacing: 0.02em; }
 .case-downloads { display: flex; flex-wrap: wrap; gap: 8px 20px; margin: 14px 0px; }
 .case-evidence .case-technical { margin-top: 18px; padding-top: 12px; border-top: 1px solid var(--line); }

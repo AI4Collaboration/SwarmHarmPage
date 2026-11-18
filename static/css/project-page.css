@@ -1,6 +1,6 @@
-.hero .hero-layout { padding-block: 0px 16px; }
-.hero-copy .emergence-title { width: min(100%, 540px); aspect-ratio: 470 / 106; margin: 2px auto 0px; transform: translateY(clamp(-16px, -1.3vw, -7px)); }
-.hero .hero-intro { margin: 26px auto 0px; scroll-margin-top: 80px; }
+.hero .hero-layout { padding-block: 24px 36px; }
+.hero-copy .emergence-title { width: min(100%, 540px); aspect-ratio: 470 / 106; margin: 8px auto 0px; transform: translateY(clamp(-12px, -1vw, -4px)); }
+.hero .hero-intro { margin: 36px auto 0px; scroll-margin-top: 80px; }
 .hero-intro a { color: inherit; text-decoration: underline color-mix(in srgb, currentcolor 45%, transparent 55%); text-underline-offset: 0.18em; }
 .hero-intro a:is(:hover, :focus-visible) { color: var(--scene-red); text-decoration-color: currentcolor; }
 .project-resources { padding-block: 56px 24px; scroll-margin-top: 80px; }
