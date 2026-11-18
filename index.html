@@ -27,12 +27,12 @@
   <link rel="stylesheet" href="static/css/research-layout.css?v=52">
   <link rel="stylesheet" href="static/css/recorded-timeline.css?v=52">
   <link rel="stylesheet" href="static/css/trajectory-observatory.css?v=71">
-  <link rel="stylesheet" href="static/css/findings.css?v=71">
+  <link rel="stylesheet" href="static/css/findings.css?v=72">
   <link rel="stylesheet" href="static/css/institution-belt.css?v=57">
   <link rel="stylesheet" href="static/css/sidebar.css?v=52">
   <link rel="stylesheet" href="static/css/project-page.css?v=71">
   <link rel="stylesheet" href="static/css/visual-system.css?v=53">
-  <link rel="stylesheet" href="static/css/current-research.css?v=71">
+  <link rel="stylesheet" href="static/css/current-research.css?v=72">
 
 
   <script src="static/js/swarmharm_title_demo_v3.js?v=53" defer></script>
@@ -158,15 +158,8 @@
         </div>
         <div class="experiment-bridge">
           <p>In July 2026, agents in <a href="https://openai.com/index/hugging-face-incident-and-the-road-ahead/">OpenAI evaluations</a> turned a shared artifact service into an <a href="https://metr.org/blog/2026-08-26-openai-hugging-face-incident-investigation/">unprompted message board</a> and helped one another compromise Hugging Face’s systems; a <a href="https://arxiv.org/abs/2609.35799">later replication</a> elicited several of these behaviors in publicly available models.</p>
-          <p>Our testbed divides this problem into two key research questions. <strong>SwarmForm</strong> asks how isolated agents discover shared channels, form organizational roles, and improve task outcomes. <strong>SwarmHarm</strong> asks how multi-agent interaction drives failures across tasks, evaluators, and shared services, separating behaviors that spread between peers from compositional failures where individually harmless actions combine into harm.</p>
-        </div>
-        <div class="hero-findings-summary" aria-label="Summary of findings">
-          <p class="hero-summary-heading">Summary of findings</p>
-          <ul class="hero-summary-list">
-            <li><strong>Unprompted channel formation:</strong> Isolated agents without peer awareness turn shared folders into structured file-exchange channels, adopting a common schema to pool distributed records and solve tasks no single agent can finish alone.</li>
-            <li><strong>Rule contagion &amp; disclosed shortcuts:</strong> Weakened grading rules spread when peers copy an author’s submission, while budget overruns and unrun-task completions occur as pragmatic shortcuts that agents openly document in notes.</li>
-            <li><strong>Harm without communication:</strong> Individually harmless trajectories can exhaust shared capacity and delay critical work when replayed together—even with zero messages exchanged.</li>
-          </ul>
+          <p>Our testbed divides this problem into two key research questions. <strong>SwarmForm</strong> asks how isolated agents—given no peer roster or cooperation prompt—discover shared files, sockets, or memory, establish communication conventions, and organize to solve tasks that no single agent can finish alone. <strong>SwarmHarm</strong> asks how multi-agent interaction drives failures across tasks, evaluators, and shared services, using counterfactual replay to separate individual violations from behaviors that spread between peers and compositional failures where individually harmless actions combine into harm.</p>
+          <p>In our initial studies, isolated agents reliably turn shared directories into structured file-exchange channels, adopting a peer’s schema to pool missing records and complete distributed tasks—though unprompted discovery produces flat peer-to-peer cross-checking rather than multi-hop hierarchy. When task or evaluation boundaries are flawed, weakened grading rules spread across peers who inspect and copy an author’s submission, whereas budget overruns and unrun-task completions occur as pragmatic shortcuts that agents openly document in their notes rather than conceal. Even when agents exchange no messages at all, trajectories that are harmless in isolation can exhaust shared capacity when replayed together and delay critical work.</p>
         </div>
       </div>
     </div>
@@ -183,12 +176,10 @@
           <button class="study-tab study-tab-form" type="button" role="tab" id="tab-swarmform" aria-selected="true" aria-controls="panel-swarmform" data-study-tab="swarmform">
             <span class="study-tab-eyebrow">Research Question 1</span>
             <strong>SwarmForm</strong>
-            <small>Channel discovery, conventions &amp; organization</small>
           </button>
           <button class="study-tab study-tab-harm" type="button" role="tab" id="tab-swarmharm" aria-selected="false" aria-controls="harm-taxonomy" data-study-tab="swarmharm">
             <span class="study-tab-eyebrow">Research Question 2</span>
             <strong>SwarmHarm</strong>
-            <small>Rule contagion, disclosed shortcuts &amp; compositional harm</small>
           </button>
         </div>
         <div class="life-halves">
