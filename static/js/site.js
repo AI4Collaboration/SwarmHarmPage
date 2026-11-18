@@ -90,6 +90,38 @@
     'setup', 'p1-summary-title', 'p2-summary-title', 'threat-models', 'threat-models-title'
   ];
 
+  const findingsRoot = document.getElementById('findings');
+  const studyTabs = [...document.querySelectorAll('[data-study-tab]')];
+  const studyPanels = [...document.querySelectorAll('[data-study-panel]')];
+  function setActiveStudy(study, syncViewer = false) {
+    if (!studyTabs.length || !['swarmform', 'swarmharm'].includes(study)) return;
+    findingsRoot?.setAttribute('data-active-study', study);
+    studyTabs.forEach(tab => {
+      const active = tab.dataset.studyTab === study;
+      tab.setAttribute('aria-selected', String(active));
+    });
+    studyPanels.forEach(panel => {
+      panel.hidden = panel.dataset.studyPanel !== study;
+    });
+    if (syncViewer) {
+      const targetLink = document.querySelector(study === 'swarmform'
+        ? '.featured-pill[data-show-case="form-source-sharing"]'
+        : '.featured-pill[data-show-case="harm-knowledge-grader"]');
+      targetLink?.click();
+    }
+  }
+  studyTabs.forEach(tab => {
+    tab.addEventListener('click', () => setActiveStudy(tab.dataset.studyTab, false));
+  });
+  function syncStudyForElement(element) {
+    const panel = element?.closest?.('[data-study-panel]');
+    if (panel) setActiveStudy(panel.dataset.studyPanel, false);
+  }
+  const initialParams = new URLSearchParams(location.search);
+  if (initialParams.get('study') === 'swarmharm' || initialParams.get('phase') === '2' || (initialParams.get('case') || '').startsWith('harm-')) {
+    setActiveStudy('swarmharm', false);
+  }
+
   function revealTarget(hash, scroll = false) {
     if (!hash || hash === '#') return;
     let id;
@@ -104,6 +136,7 @@
     if (formerReplayAnchors.includes(id) || id.startsWith('setup-') || id.startsWith('case-')) id = 'trajectory';
     const target = document.getElementById(id);
     if (!target) return;
+    syncStudyForElement(target);
     if (target instanceof HTMLDetailsElement) target.open = true;
     let parent = target.parentElement;
     while (parent) {

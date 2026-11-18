@@ -2,8 +2,8 @@
 .current-scene {margin:6px 0 4px;color:var(--text);--scene-accent:var(--scene-blue,#285f97);}
 .misalignment-findings .current-scene,.current-taxonomy .current-scene {--scene-accent:var(--scene-red,#a0374c);}
 .current-scene svg{display:block;width:100%;height:auto;max-height:152px;overflow:visible;}
-.current-scene text{font:500 18px var(--font);fill:var(--text);}
-.current-scene .scene-small{font-size:16px;}
+.current-scene text{font:500 18.5px var(--font);fill:var(--text);}
+.current-scene .scene-small{font-size:17.5px;}
 .current-scene .scene-line,.current-scene .scene-arrow{fill:none;stroke:var(--scene-accent);stroke-width:2;stroke-linecap:round;stroke-linejoin:round;}
 .current-scene .scene-arrow{marker-end:var(--arrow);}
 .current-scene .scene-boundary{fill:none;stroke:var(--muted);stroke-opacity:.5;stroke-dasharray:5 5;stroke-width:1.3;}
@@ -37,6 +37,23 @@ summary::-webkit-details-marker{display:none;}
 /* Keep explanations at reading size instead of scaling them inside the SVG. */
 .experiment-bridge a{text-decoration:underline;text-decoration-color:color-mix(in srgb,currentColor 45%,transparent);text-underline-offset:3px;transition:text-decoration-color .15s,color .15s;}
 .experiment-bridge a:hover{text-decoration-color:currentColor;}
+.hero-findings-summary{max-width:min(90%,104ch);margin:20px auto 0;padding:14px 18px;border:1px solid var(--line);border-radius:10px;background:color-mix(in srgb,var(--surface) 78%,var(--bg));text-align:left;}
+.hero-summary-heading{margin:0 0 8px;color:var(--text);font:600 12px/1.35 var(--font);letter-spacing:.04em;text-transform:uppercase;}
+.hero-summary-list{margin:0;padding:0 0 0 18px;display:grid;gap:6px;color:var(--muted);font:400 14.5px/1.5 var(--font);}
+.hero-summary-list strong{color:var(--text);font-weight:600;}
+.study-tabs{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin:0 0 18px;}
+.study-tab{display:flex;flex-direction:column;align-items:flex-start;gap:2px;padding:13px 16px;border:1px solid var(--line);border-radius:10px;background:var(--surface);color:var(--muted);text-align:left;cursor:pointer;transition:border-color .18s,background .18s,color .18s;}
+.study-tab-eyebrow{font:550 11px/1.3 var(--font);letter-spacing:.02em;color:var(--muted);}
+.study-tab strong{font:400 22px/1.2 var(--editorial);color:var(--text);}
+.study-tab small{font:400 12.5px/1.4 var(--font);color:var(--muted);}
+.study-tab-form[aria-selected="true"]{border-color:var(--scene-blue);background:color-mix(in srgb,var(--scene-blue) 12%,var(--bg));}
+.study-tab-form[aria-selected="true"] strong{color:var(--scene-blue);}
+.study-tab-harm[aria-selected="true"]{border-color:var(--scene-red);background:color-mix(in srgb,var(--scene-red) 12%,var(--bg));}
+.study-tab-harm[aria-selected="true"] strong{color:var(--scene-red);}
+@media(max-width:640px){
+ .hero-findings-summary{max-width:none;padding:12px 14px;}
+ .study-tabs{grid-template-columns:minmax(0,1fr);gap:8px;}
+}
 .current-scene figcaption{margin:4px auto 0;text-align:center;font:400 12.5px/1.4 var(--font);max-width:44ch;color:var(--muted);}
 .study-prose{margin:6px 4px 10px;}
 .study-prose p{margin:0;color:var(--muted);font:400 14px/1.48 var(--font);}
@@ -55,6 +72,10 @@ summary::-webkit-details-marker{display:none;}
 .takeaway-card h3{margin:0 0 6px;color:var(--text);font:550 15px/1.35 var(--font);}
 .takeaway-card p{margin:0;color:var(--muted);font:400 13.5px/1.5 var(--font);}
 @media(max-width:900px){.takeaways-grid{grid-template-columns:minmax(0,1fr);}}
+@media(max-width:1080px){
+ .current-scene text{font-size:19.5px;}
+ .current-scene .scene-small{font-size:18.5px;}
+}
 @media(max-width:520px){
  .current-scene text{font-size:22px;}
  .current-scene .scene-small{font-size:21px;}

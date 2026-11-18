@@ -44,6 +44,8 @@ const base=process.env.SWARMHARM_PREVIEW_URL||'http://127.0.0.1:8793';
     assert.equal(new URL(page.url()).searchParams.get('case'),'form-source-sharing');
     assert.notEqual(new URL(page.url()).searchParams.get('event'),'999');
     for(const id of ['finding-1-3','finding-2-3','finding-2-1','finding-2-2']){
+      if(id.startsWith('finding-2-'))await page.locator('[data-study-tab="swarmharm"]').click();
+      else await page.locator('[data-study-tab="swarmform"]').click();
       await page.locator(`#${id} a.finding-trace`).click();
       await page.waitForFunction(()=>!document.querySelector('.trajectory-viewer').hasAttribute('aria-busy'));
       await page.waitForSelector('.obs-workbench');

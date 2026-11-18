@@ -57,7 +57,7 @@
   }
   window.swarmArtifactPreview = artifactPreview;
   const homeView = {yaw:-.35,pitch:.99};
-  const clockwiseRate=2*Math.PI/288_000;
+  const clockwiseRate = 0;
   const straightHome = {yaw:-.22, pitch:.72};
   const cameras = new WeakMap();
 
@@ -246,7 +246,7 @@
               <button type="button" data-track-layout="graph" aria-pressed="false">Graph</button>
             </div></div><span class="obs-view-tools"><button class="obs-timeline-jump" type="button" data-timeline-jump title="Go to this moment on the timeline"><time></time> <span aria-hidden="true">↓</span></button><small data-share-status role="status"></small><button class="obs-share" type="button" data-share aria-label="Copy link to this moment" title="Copy link to this moment"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="m8 12 4-4m-1.5-2.5 1.8-1.8a3.5 3.5 0 0 1 5 5l-3 3a3.5 3.5 0 0 1-5 0m.2 2.8-1.8 1.8a3.5 3.5 0 0 1-5-5l3-3a3.5 3.5 0 0 1 5 0"/></svg></button><button class="obs-reset" type="button" data-reset aria-label="Reset spatial view"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M4 7a6 6 0 1 1 0 6M4 3v4h4"/></svg></button></span></header>
           <div class="obs-route" id="obs-current-route" data-route><div class="obs-route-heading"></div><div class="obs-route-quote" hidden><button type="button" data-original="message" title="View original ${entryLabel}"><span data-excerpt></span><span aria-hidden="true">↗</span></button></div></div>
-          <div class="obs-stage"><canvas class="obs-space-canvas" tabindex="0" role="img" aria-label="Agents and their recorded message exchanges. Select an agent to highlight its actions and messages. Arrow keys step through events." aria-describedby="obs-current-route"></canvas><i class="obs-arc-signal" aria-hidden="true" hidden></i><div class="obs-stage-key"><span><i class="obs-key-action"></i>Action</span>${noMessages?'':'<span><i class="obs-key-post"></i>Shared</span><span><i class="obs-key-read"></i>Read</span><span class="obs-key-history"><i></i>Other reads</span>'}</div><div class="obs-graph-tooltip" role="tooltip" hidden></div><div class="obs-stage-hint">Select an agent or message</div></div>
+          <div class="obs-stage"><canvas class="obs-space-canvas" tabindex="0" role="img" aria-label="Agents and their recorded message exchanges. Select an agent to highlight its actions and messages. Arrow keys step through events." aria-describedby="obs-current-route"></canvas><i class="obs-arc-signal" aria-hidden="true" hidden></i><div class="obs-stage-key"><span><i class="obs-key-action"></i>Track: agent actions over time</span>${noMessages?'':'<span><i class="obs-key-post"></i>Diamond: shared file</span><span><i class="obs-key-read"></i>Arc: peer read</span><span class="obs-key-history"><i></i>Dashed: other reads</span>'}</div><div class="obs-graph-tooltip" role="tooltip" hidden></div><div class="obs-stage-hint">Select an agent or message</div></div>
           <div class="obs-focus-status" hidden><span data-focus-label></span><button type="button" data-clear-focus>Show all agents</button></div>
           <div class="obs-agent-strip" role="group" aria-label="Highlight an agent">${actors.map(a=>`<button type="button" data-strip-actor="${a.id}" aria-pressed="false" aria-label="Highlight ${esc(names.get(a.id))} actions and artifacts" style="--agent:${actorStyle(a.id)}" title="${esc(contexts.get(a.id))}"><span class="obs-agent-letter" aria-hidden="true"></span><span><strong>${esc(names.get(a.id))}</strong><small><b data-actor-role hidden></b><span data-actor-count="${a.id}"></span></small></span></button>`).join('')}</div>
         </section>
@@ -631,7 +631,10 @@
     function togglePlay(hash = '#trajectory') {
       started = true;
       if (playing) { stop(); pinMoment(hash); return; }
-      if (active().kind === 'outcome') select(0);
+      if (active().kind === 'outcome') {
+        const firstExchange = !noMessages ? moments.findIndex(m => m.kind === 'send' || m.kind === 'read') : 0;
+        select(firstExchange >= 0 ? firstExchange : 0);
+      }
       playing = true;
       lastFrame = 0;
       updateControls();
@@ -904,8 +907,12 @@
           if (t===1) transcriptScroll=null;
         }
         if (elapsed >= active().duration) {
-          if (current === moments.length - 1) { stop(); return; }
-          select(current + 1);
+          let next = current + 1;
+          if (!noMessages && !focusedActor) {
+            while (next < moments.length - 1 && moments[next].kind === 'action') next++;
+          }
+          if (current === moments.length - 1 || next >= moments.length) { stop(); return; }
+          select(next);
           return;
         }
       }

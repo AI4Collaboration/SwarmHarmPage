@@ -587,7 +587,7 @@
       const description=receipt ? (arc?'Current':'Last')+' read from '+actorName(receipt.message.actor)+' to '+actorName(receipt.actor)+'. ' : '';
       canvas.setAttribute('aria-label',description+instructions);
       selectRoutes(history,connections,animate);
-      selectedFocus=featured?.focus || CENTER;
+      selectedFocus=featured ? featured.focus.map(v=>v*.15) : CENTER;
       setFocus(selectedFocus,easeFocus);
       for (const track of tracks) {
         const last = track.nodes.findLast(node => node.event.id <= next.event);
@@ -761,8 +761,10 @@
           const [x,y]=project(featured.path[i]);
           occupied.push({x:x-4,y:y-4,w:8,h:8});
         }
-        labels.unshift({text:(arc?(receipt.message.kind==='Message'?'Message ':'File ')+String((receipt.index??0)+1).padStart(2,'0')+' · ':'Last read · ')+pair,at:project(featured.focus),
-          color:arc?paint.paper:paint.muted,current:Boolean(arc),receipt,opacity:Math.min(1,style.last+style.current)});
+        if (arc || !post) {
+          labels.unshift({text:(arc?(receipt.message.kind==='Message'?'Message ':'File ')+String((receipt.index??0)+1).padStart(2,'0')+' · ':'Last read · ')+pair,at:project(featured.focus),
+            color:arc?paint.paper:paint.muted,current:Boolean(arc),receipt,opacity:Math.min(1,style.last+style.current)});
+        }
       }
       if (post) {
         const ink = paint.agents.get(post.event.actor);
@@ -783,6 +785,13 @@
       }
       if (gutter) drawCallouts(ctx,callouts,gutter,height,paint,fontFamily);
       const endpointLabels=[];
+      if (post && !arc) {
+        const ink=paint.agents.get(post.event.actor), at=post.screenTip;
+        const radius=drawParticipant(ctx,post,actorInitial(post.event.actor),ink,paint,fontFamily,width,1);
+        occupied.push({x:at[0]-radius,y:at[1]-radius,w:radius*2,h:radius*2});
+        const fileTag=(moment.message?.kind==='Message'?'Sent Message ':'Shared File ')+String((moment.index??0)+1).padStart(2,'0');
+        endpointLabels.push({text:actorName(post.event.actor)+' · '+fileTag,key:'pin-'+post.event.id+'-send',at,color:ink,endpoint:true,opacity:1});
+      }
       for(const [node,{alpha,role,receipt}] of participants) {
         const ink=paint.agents.get(node.event.actor), at=node.screenTip;
         const radius=drawParticipant(ctx,node,actorInitial(node.event.actor),ink,paint,fontFamily,width,alpha);
