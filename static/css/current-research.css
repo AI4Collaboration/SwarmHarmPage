@@ -60,9 +60,6 @@ summary::-webkit-details-marker{display:none;}
 .traces-back-link a{color:var(--muted);text-decoration:none;}
 .traces-back-link a:hover{color:var(--text);}
 .traces-page-title{margin:0 0 10px;font:400 clamp(32px,3.6vw,44px)/1.15 var(--editorial);letter-spacing:-.02em;color:var(--text);}
-.taxonomy-trace-links{display:flex;flex-wrap:wrap;gap:6px 14px;margin-top:8px;font:500 12px/1.4 var(--font);}
-.taxonomy-trace-links a{color:var(--scene-red);text-decoration:none;}
-.taxonomy-trace-links a:hover{text-decoration:underline;text-underline-offset:3px;}
 .featured-cases{display:flex;flex-wrap:wrap;gap:10px;margin:0 0 22px;}
 .featured-pill{display:inline-flex;align-items:center;min-height:32px;padding:5px 12px;border:1px solid var(--line);border-radius:999px;background:var(--surface);color:var(--muted);font:500 12.5px/1.3 var(--font);text-decoration:none;transition:border-color .18s,color .18s,background .18s;}
 .featured-pill:hover{color:var(--text);border-color:var(--scene-blue);}
@@ -142,12 +139,62 @@ summary::-webkit-details-marker{display:none;}
 .experiment-taxonomy td strong { display: block; margin-bottom: 4px; color: var(--text); font-weight: 600; }
 .experiment-taxonomy .taxonomy-peer-mesh { background: var(--finding-fill); }
 .experiment-taxonomy .taxonomy-peer-mesh strong { color: var(--finding-ink); }
-#swarmharm-taxonomy table { min-width: 42rem; }
-#swarmharm-taxonomy thead th:first-child { width: 17%; }
-#swarmharm-taxonomy thead th:nth-child(2) { width: 23%; }
-#swarmharm-taxonomy tbody + tbody { border-top: 1px solid var(--line); }
-@container (width < calc(42rem + 2px)) {
-  #swarmharm-taxonomy .taxonomy-scroll-hint { display: block; }
+.harm-taxonomy-groups {
+  display: grid;
+  gap: 24px clamp(24px, 3vw, 48px);
+  align-items: start;
+  margin-top: 18px;
+}
+@container (min-width: 76rem) {
+  .harm-taxonomy-groups { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+.harm-taxonomy-groups table { min-width: 0; background: transparent; }
+.harm-taxonomy-groups caption {
+  padding: 10px 0;
+  border-top: 2px solid var(--scene-red);
+  color: var(--text);
+  font: 400 21px/1.25 var(--editorial);
+  text-align: left;
+}
+.harm-taxonomy-groups :is(th, td) {
+  border: 0;
+  border-bottom: 1px solid var(--line);
+  padding: 9px 10px;
+  background: transparent;
+}
+.harm-taxonomy-groups thead th {
+  color: var(--muted);
+  background: var(--surface);
+  font-size: 12px;
+}
+.harm-taxonomy-groups th:first-child { width: 25%; }
+.harm-taxonomy-groups tbody th { font-weight: 600; }
+@container (max-width: 34rem) {
+  .harm-taxonomy-groups thead {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip-path: inset(50%);
+  }
+  .harm-taxonomy-groups tbody { display: block; }
+  .harm-taxonomy-groups tbody tr {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 6px 16px;
+    padding: 12px 0;
+    border-top: 1px solid var(--line);
+  }
+  .harm-taxonomy-groups tbody :is(th, td) { padding: 0; border: 0; }
+  .harm-taxonomy-groups tbody th:first-child { grid-column: 1 / -1; width: auto; }
+  .harm-taxonomy-groups td::before {
+    display: block;
+    margin-bottom: 3px;
+    font-size: 12px;
+    font-weight: 600;
+  }
+  .harm-taxonomy-groups td:nth-child(2)::before { content: "What the agent does" / ""; }
+  .harm-taxonomy-groups td:nth-child(3)::before { content: "Impact" / ""; }
 }
 .taxonomy-measures { margin-top: 24px; display: grid; gap: 6px; }
 .taxonomy-measures h4 { margin: 0 0 6px; color: var(--text); font: 600 14px/1.45 var(--font); }
