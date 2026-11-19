@@ -62,6 +62,7 @@
   const cameras = new WeakMap();
 
   window.mountTrajectoryObservatory = (host,data,meta,openRecord) => {
+    const assetRoot = typeof document !== 'undefined' ? (document.body?.dataset?.root || '') : '';
     const controller = new AbortController();
     const on = (el,type,fn,options={}) => el.addEventListener(type,fn,{...options,signal:controller.signal});
     const actors=data.actors, events=[...data.events].sort((a,b)=>a.id-b.id);
@@ -196,7 +197,7 @@
         return `<button type="button" data-obs-receipt="${read.order}" style="--reader:${actorStyle(read.actor)}" aria-label="${esc(names.get(read.actor))} reads message ${number} at turn ${read.turn}">${esc(names.get(read.actor))}</button>`;
       }).join('');
       return `<article class="obs-chat-message" data-chat-message="${esc(message.id)}" style="--agent:${actorStyle(message.actor)}" aria-label="Artifact ${number} from ${esc(names.get(message.actor))}">
-        <span class="obs-chat-avatar" aria-hidden="true"><img src="${esc(`static/images/fieldguide/finding-agents.svg?v=8#${message.actor.toLowerCase()}-speaking`)}" width="210" height="150" alt=""></span>
+        <span class="obs-chat-avatar" aria-hidden="true"><img src="${esc(`${assetRoot}static/images/fieldguide/finding-agents.svg?v=8#${message.actor.toLowerCase()}-speaking`)}" width="210" height="150" alt=""></span>
         <div class="obs-chat-content">
           <header class="obs-chat-heading"><button class="obs-chat-select" type="button" data-message="${esc(message.id)}"><span>${message.kind === 'Message' ? 'Sent' : 'Shared'} by <strong title="${esc(contexts.get(message.actor))}">${esc(names.get(message.actor))}</strong></span><span aria-hidden="true">·</span><span><span data-read-label hidden>Read by </span><strong data-chat-recipient>${esc(messageSource(message))}</strong></span></button><span class="obs-chat-stamp"><span data-chat-number>#${number}</span><time>${esc(message.time)}</time></span></header>
           ${parent?`<button class="obs-chat-reply" type="button" data-message="${esc(parent.id)}" aria-label="Reply to Message ${messageNumberById.get(parent.id)} from ${esc(names.get(parent.actor))}">↳ Reply to #${messageNumberById.get(parent.id)}</button>`:''}

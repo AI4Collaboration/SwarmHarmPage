@@ -84,11 +84,14 @@ test('formation imports match the reviewed source-copy count and use three named
 });
 
 test('all inline finding and threat-model links select a current case and existing event',()=>{
-  const html=fs.readFileSync(path.join(root,'index.html'),'utf8');
-  for(const match of html.matchAll(/href="\?case=([^&]+)&amp;phase=(\d)(?:&amp;event=(\d+))?#trajectory"/g)){
+  const html=fs.readFileSync(path.join(root,'index.html'),'utf8')+'\n'+fs.readFileSync(path.join(root,'traces/index.html'),'utf8');
+  let count=0;
+  for(const match of html.matchAll(/href="(?:traces\/)?\?case=([^&]+)&amp;phase=(\d)(?:&amp;event=(\d+))?(?:#trajectory)?"/g)){
+    count++;
     const item=cases.find(c=>c.id===match[1]);assert.ok(item,match[1]);
     assert.equal(item.phase,Number(match[2]));
     if(match[3])assert.ok(read(item.trajectory).events.some(e=>e.id===Number(match[3])));
   }
+  assert.ok(count>=16);
   assert.ok(!/balanced-v2|SWARMHARM_ARCHIVED_CASES|data-tax-cell/.test(html));
 });

@@ -1,6 +1,7 @@
 (() => {
   const root=document.querySelector('.trajectory-viewer'),cases=window.SWARMHARM_CASES;
   if(!root||!cases?.length)return;
+  const assetRoot=document.body?.dataset?.root||'';
   const select=root.querySelector('[data-case-select]'),intro=root.querySelector('[data-case-intro]');
   const review=root.querySelector('[data-case-review]'),full=root.querySelector('[data-case-full]');
   const details=root.querySelector('[data-case-details]');
@@ -13,7 +14,7 @@
   function modelLabel(id){
     const model=models[id];
     if(!model)return escape(id);
-    return `<span class="model-tag"><img class="model-logo model-logo-${model.logo}" src="static/images/${model.logo}.svg?v=2" width="16" height="16" alt="">${model.name}</span>`;
+    return `<span class="model-tag"><img class="model-logo model-logo-${model.logo}" src="${assetRoot}static/images/${model.logo}.svg?v=2" width="16" height="16" alt="">${model.name}</span>`;
   }
   const icons={
     Agents:'<circle cx="8" cy="7" r="2.5"/><circle cx="24" cy="7" r="2.5"/><circle cx="8" cy="23" r="2.5"/><circle cx="24" cy="23" r="2.5"/><path d="M3 15v-2a5 5 0 0 1 10 0v2m6 0v-2a5 5 0 0 1 10 0v2M3 31v-2a5 5 0 0 1 10 0v2m6 0v-2a5 5 0 0 1 10 0v2"/>',
@@ -115,7 +116,7 @@
       if (!data) {
         loading.textContent='Loading…';
         request=new AbortController();
-        const response=await fetch(item.trajectory,{signal:request.signal});
+        const response=await fetch(assetRoot+item.trajectory,{signal:request.signal});
         if (!response.ok) throw new Error('Could not load recorded events');
         data=await response.json();
         if (data.id!==item.id||!Array.isArray(data.events)||!Array.isArray(data.messages)||!data.turns) throw new Error('Invalid trajectory');

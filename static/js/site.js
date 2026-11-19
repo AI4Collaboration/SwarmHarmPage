@@ -117,9 +117,12 @@
     const panel = element?.closest?.('[data-study-panel]');
     if (panel) setActiveStudy(panel.dataset.studyPanel, false);
   }
-  const initialParams = new URLSearchParams(location.search);
-  if (initialParams.get('study') === 'swarmharm' || initialParams.get('phase') === '2' || (initialParams.get('case') || '').startsWith('harm-')) {
-    setActiveStudy('swarmharm', false);
+  if (!document.querySelector('.trajectory-viewer') && document.getElementById('findings')) {
+    const query = new URLSearchParams(location.search);
+    if (query.has('case') || location.hash === '#trajectory' || location.hash === '#swarm-trajectory' || location.hash === '#timeline') {
+      location.replace('traces/' + location.search + location.hash);
+      return;
+    }
   }
 
   function revealTarget(hash, scroll = false) {

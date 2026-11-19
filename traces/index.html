@@ -1,0 +1,127 @@
+<!doctype html>
+<html lang="en" data-theme="dark" style="color-scheme:dark">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#111315">
+  <meta name="description" content="Explore recorded multi-agent trajectories across SwarmForm and SwarmHarm.">
+  <title>Traces | SwarmHarm</title>
+  <link rel="canonical" href="https://swarmharm.com/traces/">
+  <link rel="icon" href="../static/images/swarmharm-mark.svg?v=11">
+  <script src="../static/js/theme.js?v=52"></script>
+  <link rel="stylesheet" href="../static/css/brand.css?v=52">
+  <link rel="stylesheet" href="../static/css/orbit.css?v=52">
+  <link rel="stylesheet" href="../static/css/fieldguide.css?v=52">
+  <link rel="stylesheet" href="../static/css/trajectory.css?v=52">
+  <link rel="stylesheet" href="../static/css/surfaces.css?v=52">
+  <link rel="stylesheet" href="../static/css/research-layout.css?v=52">
+  <link rel="stylesheet" href="../static/css/recorded-timeline.css?v=52">
+  <link rel="stylesheet" href="../static/css/trajectory-observatory.css?v=71">
+  <link rel="stylesheet" href="../static/css/findings.css?v=74">
+  <link rel="stylesheet" href="../static/css/sidebar.css?v=52">
+  <link rel="stylesheet" href="../static/css/project-page.css?v=71">
+  <link rel="stylesheet" href="../static/css/project-subpages.css?v=53">
+  <link rel="stylesheet" href="../static/css/visual-system.css?v=53">
+  <link rel="stylesheet" href="../static/css/current-research.css?v=74">
+  <script src="../static/js/site.js?v=74" defer></script>
+  <script src="../static/js/trajectory-cases-data.js?v=59" defer></script>
+  <script src="../static/js/trajectory-orbits.js?v=68" defer></script>
+  <script src="../static/js/trajectory-graph.js?v=54" defer></script>
+  <script src="../static/js/trajectory-linear.js?v=57" defer></script>
+  <script src="../static/js/trajectory-observatory.js?v=74" defer></script>
+  <script src="../static/js/recorded-timeline.js?v=74" defer></script>
+  <script src="../static/js/trajectory-cases.js?v=74" defer></script>
+  <link rel="preload" href="../static/fonts/et-book-roman-line-figures.woff" as="font" type="font/woff" crossorigin>
+  <link rel="preload" href="../static/fonts/Inter.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="../static/css/typography.css?v=70">
+</head>
+<body data-root="../">
+  <a class="skip-link" href="#main-content">Skip to content</a>
+  <header class="site-header"><div class="container nav-inner">
+    <nav id="primary-navigation" aria-label="Main navigation">
+      <div class="experiment-nav" role="group" aria-label="SwarmForm">
+        <details class="nav-findings" name="research-navigation">
+          <summary>SwarmForm</summary>
+          <div class="finding-links">
+            <div class="compact-shortcuts">
+              <a href="../#swarmform-setting">Setting</a>
+              <a href="../#swarmform-findings">Findings</a>
+            </div>
+            <a href="../#finding-1-1">Channel Discovery</a>
+            <a href="../#finding-1-2">Sustained Exchange</a>
+            <a href="../#finding-1-3">Task Performance</a>
+          </div>
+        </details>
+        <div class="experiment-shortcuts">
+          <a href="../#swarmform-setting" aria-label="SwarmForm setting">Setting</a>
+          <a href="../#swarmform-findings" aria-label="SwarmForm findings">Findings</a>
+        </div>
+      </div>
+      <div class="experiment-nav" role="group" aria-label="SwarmHarm">
+        <details class="nav-findings" name="research-navigation">
+          <summary>SwarmHarm</summary>
+          <div class="finding-links">
+            <div class="compact-shortcuts">
+              <a href="../#swarmharm-setting">Setting</a>
+              <a href="../#swarmharm-findings">Findings</a>
+            </div>
+            <a href="../#finding-2-3">Rule Propagation</a>
+            <a href="../#finding-2-1">Disclosed Shortcuts</a>
+            <a href="../#finding-2-2">Compositional Harm</a>
+            <a href="../#detection">How We Detect</a>
+          </div>
+        </details>
+        <div class="experiment-shortcuts">
+          <a href="../#swarmharm-setting" aria-label="SwarmHarm setting">Setting</a>
+          <a href="../#swarmharm-findings" aria-label="SwarmHarm findings">Findings</a>
+        </div>
+      </div>
+      <a href="../traces/" aria-current="page">Traces</a>
+      <a href="../team/">Team</a>
+      <a class="nav-cta" href="../call-to-action/">Get involved</a>
+    </nav>
+    <button class="subpage-theme-toggle" type="button" data-theme-toggle hidden aria-label="Switch theme">
+      <span class="theme-option theme-option-light"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2m0 16v2M2 12h2m16 0h2M4.9 4.9l1.4 1.4m11.4 11.4 1.4 1.4m0-14.2-1.4 1.4M6.3 17.7l-1.4 1.4"/></svg></span>
+      <span class="theme-option theme-option-dark"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" aria-hidden="true"><path d="M20.4 14.7A8.6 8.6 0 0 1 9.3 3.6 8.6 8.6 0 1 0 20.4 14.7Z"/></svg></span>
+    </button>
+  </div></header>
+  <main id="main-content">
+    <section class="overview" aria-labelledby="trajectory-title">
+      <div class="container">
+        <section class="trajectory-viewer" id="trajectory" aria-labelledby="trajectory-title">
+          <p class="traces-back-link"><a href="../">← Back to overview</a></p>
+          <h1 class="traces-page-title" id="trajectory-title" tabindex="-1">Agent Trajectories</h1>
+          <p class="section-lead">Step through each run turn by turn in 3D, timeline, or graph view, or jump to a highlighted trace:</p>
+          <div class="featured-cases" role="group" aria-label="Featured trajectories">
+            <a class="featured-pill" href="?case=form-source-sharing&amp;phase=1&amp;event=23#trajectory" data-show-case="form-source-sharing" data-show-phase="1">Channel discovery</a>
+            <a class="featured-pill" href="?case=harm-knowledge-grader&amp;phase=2&amp;event=131#trajectory" data-show-case="harm-knowledge-grader" data-show-phase="2">Grader manipulation</a>
+            <a class="featured-pill" href="?case=harm-knowledge-records&amp;phase=2&amp;event=98#trajectory" data-show-case="harm-knowledge-records" data-show-phase="2">Trace tampering</a>
+            <a class="featured-pill" href="?case=harm-knowledge-capacity&amp;phase=2&amp;event=68#trajectory" data-show-case="harm-knowledge-capacity" data-show-phase="2">Shared-resource interference</a>
+          </div>
+          <div class="trajectory-content">
+            <div class="case-picker"><label for="trajectory-case">All recorded runs <small data-case-loading role="status"></small></label><select id="trajectory-case" data-case-select></select></div>
+            <p class="case-notice" data-case-notice hidden>This older case is no longer in the website collection. Showing the current channel-discovery example.</p>
+            <div class="case-intro" data-case-intro></div>
+            <section class="case-review" data-case-review aria-label="Reviewed case sequence" hidden></section>
+            <div data-case-full></div>
+            <div class="case-details" data-case-details></div>
+            <noscript><p>Enable JavaScript to explore recorded actions and messages.</p></noscript>
+          </div>
+        </section>
+      </div>
+    </section>
+  </main>
+  <footer class="site-footer">
+  <nav class="compact-page-links" aria-label="Project links">
+      <a href="../">Overview</a>
+      <a href="../traces/" aria-current="page">Traces</a>
+      <a href="../team/">Team</a>
+      <a href="../call-to-action/">Get involved</a>
+  </nav>
+  <div class="container footer-bottom">
+    <p><a href="https://github.com/AI4Collaboration/swarmharm-page" target="_blank" rel="noopener noreferrer">Website source</a> · Adapted from <a href="https://github.com/eliahuhorwitz/Academic-project-page-template" target="_blank" rel="noopener noreferrer">Academic Project Page Template</a> · CC BY-SA 4.0</p>
+    <p>Trajectory visualization adapted from <a href="https://aisafetyhot.com/en" target="_blank" rel="noopener noreferrer">AI Safety HOT</a>.</p>
+  </div>
+  </footer>
+</body>
+</html>

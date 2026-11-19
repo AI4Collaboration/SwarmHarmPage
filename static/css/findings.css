@@ -201,8 +201,9 @@
 .model-tag { display: inline-flex; align-items: center; gap: 5px; vertical-align: baseline; white-space: nowrap; }
 .model-logo { display: block; flex: 0 0 auto; width: 15px; height: 15px; object-fit: contain; }
 :is(:root[data-theme="dark"], :root[data-darkreader-scheme="dark"]) .model-logo-openai { filter: invert(1); }
-.findings-primary .life-half { padding: 4px 0px 12px; border: 0px; border-radius: 0px; background: transparent; }
-.findings-primary .life-phase { display: none; }
+.findings-primary .life-half { padding: 12px 0px 28px; border: 0px; border-radius: 0px; background: transparent; }
+.findings-primary .life-half + .life-half { margin-top: 36px; padding-top: 44px; border-top: 1px solid var(--line); }
+.findings-primary .life-phase { gap: 6px; padding: 0px 0px 6px; font-size: clamp(28px, 2.6vw, 36px); line-height: 1.2; }
 .experiment-label { color: var(--muted); font: 550 11px/1.4 var(--font); letter-spacing: 0.02em; }
 .case-downloads { display: flex; flex-wrap: wrap; gap: 8px 20px; margin: 14px 0px; }
 .case-evidence .case-technical { margin-top: 18px; padding-top: 12px; border-top: 1px solid var(--line); }
