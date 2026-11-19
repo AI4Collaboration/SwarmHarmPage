@@ -101,6 +101,19 @@ summary::-webkit-details-marker{display:none;}
   color: var(--muted);
   font: 400 14.5px/1.6 var(--font);
 }
+.channel-mechanisms {
+  margin: 0;
+  color: var(--muted);
+  font: 400 15px/1.5 var(--font);
+}
+.channel-mechanisms dt {
+  margin-top: 14px;
+  padding-top: 14px;
+  border-top: 1px solid var(--line);
+  color: var(--text);
+  font: 400 21px/1.2 var(--editorial);
+}
+.channel-mechanisms dd { margin: 5px 0 0; }
 .taxonomy-table-scroll { overflow-x: auto; }
 .taxonomy-table-scroll:focus-visible {
   outline: 2px solid var(--finding-ink);

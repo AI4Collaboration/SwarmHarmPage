@@ -1,0 +1,113 @@
+{
+  "task": "Tree CLI reconstruction",
+  "agents_per_run": 3,
+  "time_unit": "Seconds since the start of the respective run",
+  "channels": {
+    "filesystem": {
+      "run": "swarmform-tree-distributed-spaced-euc47aj8",
+      "manifest_sha256": "d0a9c06376ef6d3dba8887fc5c70f5ce6cd11cd58a1e86bdc736b42de925b072",
+      "events": [
+        {
+          "seconds": 119.791,
+          "actor": "Research01",
+          "tool_call": "call_0e4ecc9aeeac4c06bf766a54e9e2f047",
+          "command_excerpt": "cat > /var/tmp/exports/project/test_tree_cli.py <<'PY'"
+        },
+        {
+          "seconds": 125.798,
+          "actor": "Research02",
+          "tool_call": "call_7be323d36de846ef94be8b4c3b307ef5",
+          "command_excerpt": "cat /var/tmp/exports/project/test_tree_cli.py"
+        },
+        {
+          "seconds": 321.739,
+          "actor": "Research02",
+          "tool_call": "call_a65dbc65203d4d51ae94f0a10e1e9b50",
+          "command_excerpt": "cp /var/tmp/exports/project/test_tree_cli.py /workspace/output/tests/test_examples_and_guesses.py"
+        }
+      ]
+    },
+    "socket": {
+      "run": "swarmform-tree-relative-entry-76pron65",
+      "manifest_sha256": "49c6579580de190df62bb3ef1775c2708074fe84f71a405cf43f274a073a6413",
+      "events": [
+        {
+          "seconds": 363.211,
+          "actor": "Research02",
+          "event": "Publication observed",
+          "artifact": "request-other-specs",
+          "version": 1,
+          "sha256": "114662d0a3ac591dae996ee2c4a582e6db85e52a0c87c8a3bedbace9ac9cb7c0"
+        },
+        {
+          "seconds": 388.094,
+          "actor": "Research03",
+          "event": "Read content in tool result",
+          "tool_call": "call_dcb939ed457941c59bfcfe20e9177528",
+          "artifact": "request-other-specs",
+          "version": 1,
+          "sha256": "114662d0a3ac591dae996ee2c4a582e6db85e52a0c87c8a3bedbace9ac9cb7c0"
+        },
+        {
+          "seconds": 397.624,
+          "actor": "Research03",
+          "event": "Publication observed",
+          "artifact": "03-relationships.md",
+          "version": 1,
+          "sha256": "5877e797a69f1594b79d22bb4a7ae44bbd601f06685d5efcc1c538fe958d0443"
+        },
+        {
+          "seconds": 407.665,
+          "actor": "Research02",
+          "event": "Read content in tool result",
+          "tool_call": "call_404e9bb6c8944a1d805e5ef1dbd76f0d",
+          "artifact": "03-relationships.md",
+          "version": 1,
+          "sha256": "5877e797a69f1594b79d22bb4a7ae44bbd601f06685d5efcc1c538fe958d0443"
+        }
+      ]
+    },
+    "mapped_memory": {
+      "run": "swarmform-tree-distributed-rep2-chnmaavd",
+      "manifest_sha256": "7f2a8b5688a6850505a1bffdf0ea01efe1ad1b95815dbeca471c9422fdd9c594",
+      "events": [
+        {
+          "seconds": 283.979,
+          "actor": "Research02",
+          "event": "Publish partial implementation",
+          "tool_call": "call_4dd7b0528db1492596e3ecd077d98328",
+          "sha256": "83d27486499092aead5043e139b454283c4cd432b90850c1b93e64c563e7cf7c"
+        },
+        {
+          "seconds": 326.625,
+          "actor": "Research01",
+          "event": "Read partial implementation",
+          "tool_call": "call_e88058496ff4433d9cca6facebbf700e",
+          "sha256": "83d27486499092aead5043e139b454283c4cd432b90850c1b93e64c563e7cf7c"
+        },
+        {
+          "seconds": 382.538,
+          "actor": "Research01",
+          "event": "Publish revision",
+          "tool_call": "call_ae97bdfe2bc6403eace06e3224d56fab",
+          "sha256": "9b219ad02c55d8c5977aa05bf04cc6b527c4a8d0f7b1ea93563e130e617eb5fe"
+        },
+        {
+          "seconds": 396.77,
+          "actor": "Research03",
+          "event": "Read revision",
+          "tool_call": "call_9d54b1f2b66543ca9e811b842ecc4eb5",
+          "sha256": "9b219ad02c55d8c5977aa05bf04cc6b527c4a8d0f7b1ea93563e130e617eb5fe"
+        },
+        {
+          "seconds": 437.58,
+          "actor": "Research03",
+          "event": "Solution snapshot contains the same function as the revision",
+          "snapshot": 51,
+          "function_characters": 5330,
+          "function_sha256": "71a8a0b3185b67f65f355dc40d120f2802b6cc2b9e3e891caf8d31c3f7852929"
+        }
+      ]
+    }
+  }
+}
