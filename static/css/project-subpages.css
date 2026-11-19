@@ -31,3 +31,9 @@
 }
 @media(max-width:420px) { .directory { grid-template-columns:1fr; } }
 @media(prefers-reduced-motion:reduce) { html { scroll-behavior:auto; } }
+
+.subpage { padding-block: clamp(36px, 5vw, 64px) clamp(48px, 6vw, 80px); }
+.site-footer { margin-top: 24px; padding-block: 26px 36px; border-top: 1px solid var(--line); }
+.site-footer .footer-bottom { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 8px 24px; font: 400 13px/1.5 var(--font); color: var(--muted); }
+.site-footer .footer-bottom p { margin: 0; font-family: var(--font); }
+.site-footer .footer-bottom a { color: inherit; text-decoration: underline; text-underline-offset: 3px; }

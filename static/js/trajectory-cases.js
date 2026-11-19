@@ -99,7 +99,7 @@
   });
   function renderSummary(item) {
     root.dataset.caseMode=item.full?'full':'review';full.hidden=!item.full;review.hidden=item.full;
-    intro.innerHTML=`<div class="case-setup"><p class="case-meta">${modelLabel(item.model)}</p><p class="case-context">${escape(item.context)}</p>${item.settings?settingsMarkup(item):''}</div>`;
+    const agentCount=(item.settings||[]).find(([k])=>k==='Agents')?.[1];intro.innerHTML=`<div class="case-setup-inline">${modelLabel(item.model)}<span class="case-inline-sep">·</span><span class="case-inline-meta">${escape(item.mode)} · ${escape(item.domain)}${agentCount?` · ${escape(agentCount)} agents`:''}</span><span class="case-inline-sep">—</span><span class="case-inline-context">${escape(item.context)}</span></div>`;
     details.innerHTML=item.composition?'':outcomeMarkup(item);
     if(item.composition){
       const p=item.composition;

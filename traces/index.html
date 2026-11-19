@@ -17,13 +17,13 @@
   <link rel="stylesheet" href="../static/css/research-layout.css?v=52">
   <link rel="stylesheet" href="../static/css/recorded-timeline.css?v=52">
   <link rel="stylesheet" href="../static/css/trajectory-observatory.css?v=71">
-  <link rel="stylesheet" href="../static/css/trajectory-swimlane.css?v=77">
-  <link rel="stylesheet" href="../static/css/findings.css?v=76">
-  <link rel="stylesheet" href="../static/css/sidebar.css?v=77">
-  <link rel="stylesheet" href="../static/css/project-page.css?v=71">
-  <link rel="stylesheet" href="../static/css/project-subpages.css?v=53">
+  <link rel="stylesheet" href="../static/css/trajectory-swimlane.css?v=78">
+  <link rel="stylesheet" href="../static/css/findings.css?v=78">
+  <link rel="stylesheet" href="../static/css/sidebar.css?v=78">
+  <link rel="stylesheet" href="../static/css/project-page.css?v=78">
+  <link rel="stylesheet" href="../static/css/project-subpages.css?v=78">
   <link rel="stylesheet" href="../static/css/visual-system.css?v=53">
-  <link rel="stylesheet" href="../static/css/current-research.css?v=76">
+  <link rel="stylesheet" href="../static/css/current-research.css?v=78">
   <script src="../static/js/site.js?v=76" defer></script>
   <script src="../static/js/trajectory-cases-data.js?v=76" defer></script>
   <script src="../static/js/trajectory-orbits.js?v=68" defer></script>
@@ -32,10 +32,10 @@
   <script src="../static/js/trajectory-observatory.js?v=76" defer></script>
   <script src="../static/js/trajectory-swimlane.js?v=77" defer></script>
   <script src="../static/js/recorded-timeline.js?v=76" defer></script>
-  <script src="../static/js/trajectory-cases.js?v=76" defer></script>
+  <script src="../static/js/trajectory-cases.js?v=78" defer></script>
   <link rel="preload" href="../static/fonts/et-book-roman-line-figures.woff" as="font" type="font/woff" crossorigin>
   <link rel="preload" href="../static/fonts/Inter.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="stylesheet" href="../static/css/typography.css?v=70">
+  <link rel="stylesheet" href="../static/css/typography.css?v=78">
 </head>
 <body data-root="../">
   <a class="skip-link" href="#main-content">Skip to content</a>
@@ -92,12 +92,17 @@
     <section class="overview" aria-labelledby="trajectory-title">
       <div class="container">
         <section class="trajectory-viewer" id="trajectory" aria-labelledby="trajectory-title">
-          <h1 class="traces-page-title" id="trajectory-title" tabindex="-1">Agent Trajectories</h1>
-          <p class="section-lead">Follow each agent’s vertical lane to see what it does on its own and how files, grading rules, and completion records cross between peers:</p>
-          <div class="traces-study-filter" role="group" aria-label="Filter runs by study">
-            <button type="button" class="traces-study-btn" data-traces-study="all" aria-pressed="true">All runs <small></small></button>
-            <button type="button" class="traces-study-btn" data-traces-study="swarmharm" aria-pressed="false">SwarmHarm <small></small></button>
-            <button type="button" class="traces-study-btn" data-traces-study="swarmform" aria-pressed="false">SwarmForm <small></small></button>
+          <header class="traces-hero">
+            <h1 class="traces-page-title" id="trajectory-title" tabindex="-1">Traces</h1>
+            <p class="sub-intro">Follow each agent’s vertical lane to see what it does on its own and how files, grading rules, and completion records move between peers.</p>
+          </header>
+          <div class="traces-toolbar">
+            <div class="traces-study-filter" role="group" aria-label="Filter runs by study">
+              <button type="button" class="traces-study-btn" data-traces-study="all" aria-pressed="true">All runs <small></small></button>
+              <button type="button" class="traces-study-btn" data-traces-study="swarmharm" aria-pressed="false">SwarmHarm <small></small></button>
+              <button type="button" class="traces-study-btn" data-traces-study="swarmform" aria-pressed="false">SwarmForm <small></small></button>
+            </div>
+            <div class="case-picker"><label class="sr-only" for="trajectory-case">Select recorded run</label><span data-case-loading role="status" class="traces-loading"></span><select id="trajectory-case" data-case-select aria-label="Select recorded run"></select></div>
           </div>
           <div class="featured-cases" role="group" aria-label="Featured trajectories">
             <a class="featured-pill" href="?case=n4-deepseek-eng-records&amp;phase=2&amp;event=95#trajectory" data-show-case="n4-deepseek-eng-records" data-show-phase="2">Two-way trace tampering · DeepSeek V4.1</a>
@@ -110,7 +115,6 @@
             <a class="featured-pill" href="?case=form-source-sharing&amp;phase=1&amp;event=23#trajectory" data-show-case="form-source-sharing" data-show-phase="1">Channel discovery · SwarmForm</a>
           </div>
           <div class="trajectory-content">
-            <div class="case-picker"><label for="trajectory-case">All recorded runs <small data-case-loading role="status"></small></label><select id="trajectory-case" data-case-select></select></div>
             <p class="case-notice" data-case-notice hidden>This older case is no longer in the website collection. Showing the current channel-discovery example.</p>
             <div class="case-intro" data-case-intro></div>
             <section class="case-review" data-case-review aria-label="Reviewed case sequence" hidden></section>
