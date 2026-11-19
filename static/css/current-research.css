@@ -142,8 +142,13 @@ summary::-webkit-details-marker{display:none;}
 .experiment-taxonomy td strong { display: block; margin-bottom: 4px; color: var(--text); font-weight: 600; }
 .experiment-taxonomy .taxonomy-peer-mesh { background: var(--finding-fill); }
 .experiment-taxonomy .taxonomy-peer-mesh strong { color: var(--finding-ink); }
-#swarmharm-taxonomy table { min-width: 0; overflow-wrap: anywhere; }
-#swarmharm-taxonomy th:first-child { width: 32%; }
+#swarmharm-taxonomy table { min-width: 42rem; }
+#swarmharm-taxonomy thead th:first-child { width: 17%; }
+#swarmharm-taxonomy thead th:nth-child(2) { width: 23%; }
+#swarmharm-taxonomy tbody + tbody { border-top: 1px solid var(--line); }
+@container (width < calc(42rem + 2px)) {
+  #swarmharm-taxonomy .taxonomy-scroll-hint { display: block; }
+}
 .taxonomy-measures { margin-top: 24px; display: grid; gap: 6px; }
 .taxonomy-measures h4 { margin: 0 0 6px; color: var(--text); font: 600 14px/1.45 var(--font); }
 .taxonomy-measures p { margin: 4px 0 0; color: var(--muted); font: 400 13.5px/1.58 var(--font); }
