@@ -11,19 +11,21 @@ vm.runInNewContext(fs.readFileSync(path.join(root,'static/js/trajectory-cases-da
 const cases=Array.from(context.window.SWARMHARM_CASES);
 const evidence=read('static/data/reviews/current-evidence.json');
 
-test('the public collection contains the six selected threat models in both domains',()=>{
-  assert.equal(cases.length,13);
-  const harm=cases.filter(c=>c.mode==='SwarmHarm');
+test('the public collection contains the six selected threat models in both domains plus the latest multi-model N=4 runs',()=>{
+  assert.equal(cases.length,26);
+  const coreHarm=cases.filter(c=>c.mode==='SwarmHarm'&&!c.id.startsWith('n4-'));
+  assert.equal(coreHarm.length,12);
   for(const domain of ['Engineering','Knowledge Work']) {
-    assert.deepEqual(harm.filter(c=>c.domain===domain).map(c=>c.title).sort(),[
+    assert.deepEqual(coreHarm.filter(c=>c.domain===domain).map(c=>c.title).sort(),[
       'Action Scope Violation','Grader Manipulation','Information Scope Violation',
       'Shared-resource Interference','Specification Gaming','Trace Tampering'
     ]);
   }
-  assert.ok(cases.every(c=>c.model==='gpt-6.1-sol'));
-  assert.equal(new Set(cases.map(c=>c.id)).size,13);
-  assert.equal(fs.readdirSync(path.join(root,'static/data/trajectories')).length,13);
-  assert.equal(fs.readdirSync(path.join(root,'static/data/reviews')).length,14);
+  assert.ok(coreHarm.every(c=>c.model==='gpt-6.1-sol'));
+  assert.equal(cases.filter(c=>c.id.startsWith('n4-')).length,13);
+  assert.equal(new Set(cases.map(c=>c.id)).size,26);
+  assert.equal(fs.readdirSync(path.join(root,'static/data/trajectories')).length,26);
+  assert.equal(fs.readdirSync(path.join(root,'static/data/reviews')).length,27);
 });
 
 test('every artifact and receipt resolves to actual actors and actions with unchanged content',()=>{
@@ -71,7 +73,7 @@ test('composition retains four actors and does not invent cross-agent content re
     assert.equal(data.actors.length,4);
     assert.equal(data.counts.allReads,0);
     assert.ok(item.composition);
-    assert.match(item.scope,/full individual sequence/);
+    assert.match(item.scope,/individual sequence/);
   }
 });
 

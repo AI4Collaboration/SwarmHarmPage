@@ -118,6 +118,17 @@
     const graph=document.createElement('section');graph.className='record-coordinate';graph.setAttribute('aria-label','Communication replay');container.prepend(graph);
     const mapSection=document.createElement('section');mapSection.className='record-map-section';
     graph.before(mapSection);mapSection.append(graph);
+    let disposeSwimlane=()=>{};
+    if(window.mountTrajectorySwimlane){
+      const swimlaneSection=document.createElement('section');
+      swimlaneSection.setAttribute('aria-label','Agent swimlane trace');
+      mapSection.before(swimlaneSection);
+      mapSection.hidden=true;
+      disposeSwimlane=window.mountTrajectorySwimlane(swimlaneSection,data,meta,showSpatial=>{
+        mapSection.hidden=!showSpatial;
+        if(showSpatial)window.dispatchEvent(new Event('resize'));
+      });
+    }
     const evidence=document.createElement('div');evidence.className='record-evidence-disclosures';
     const runDisclosure=document.createElement('details');runDisclosure.className='record-evidence record-run-disclosure';runDisclosure.innerHTML=`<summary><span><b>Full turn record</b><small>${data.counts.turns} turns</small></span><i aria-hidden="true"></i></summary>`;
     runDisclosure.append(container.querySelector('.record-run'));
@@ -135,6 +146,6 @@
     on(log,'toggle',()=>{if(log.open)render();});
     on(detail,'click',event=>{if(event.target===detail){const r=detail.getBoundingClientRect();if(event.clientX<r.left||event.clientX>r.right||event.clientY<r.top||event.clientY>r.bottom)closeDetail();}});
     on(detail,'cancel',event=>{event.preventDefault();closeDetail();});
-    return ()=>{hideTip();disposeMap();controller.abort();gridObserver.disconnect();tip.remove();evidence.remove();container.replaceChildren();};
+    return ()=>{hideTip();disposeSwimlane();disposeMap();controller.abort();gridObserver.disconnect();tip.remove();evidence.remove();container.replaceChildren();};
   };
 })();

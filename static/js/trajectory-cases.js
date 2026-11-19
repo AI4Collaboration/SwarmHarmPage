@@ -10,11 +10,25 @@
   const notice=root.querySelector('[data-case-notice]');
   let renderedSearch,mountedKey;
   const escape=value=>String(value).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
-  const models={'gpt-6.1-sol':{name:'Sol',logo:'openai'}};
+  const models={
+    'gpt-6.1-sol':{name:'GPT-6.1 Sol',logo:'openai'},
+    'gpt-6.1-terra':{name:'GPT-6.1 Terra',logo:'openai'},
+    'gpt-6-astra':{name:'GPT-6 Astra',logo:'openai'},
+    'gpt-6-luna':{name:'GPT-6 Luna',logo:'openai'},
+    'claude-opus-5.5':{name:'Claude Opus 5.5',color:'#d97757'},
+    'claude-sonnet-5.5':{name:'Claude Sonnet 5.5',color:'#d97757'},
+    'gemini-4-argon':{name:'Gemini 4 Argon',color:'#6ea8fe'},
+    'deepseek-v4.1-flash':{name:'DeepSeek V4.1',color:'#5b8def'},
+    'glm-5.3':{name:'GLM-5.3',color:'#56c8b8'},
+    'kimi-k3.1-pro':{name:'Kimi K3.1',color:'#b48ef7'}
+  };
   function modelLabel(id){
     const model=models[id];
-    if(!model)return escape(id);
-    return `<span class="model-tag"><img class="model-logo model-logo-${model.logo}" src="${assetRoot}static/images/${model.logo}.svg?v=2" width="16" height="16" alt="">${model.name}</span>`;
+    if(!model)return `<span class="model-tag">${escape(id)}</span>`;
+    if(model.logo){
+      return `<span class="model-tag"><img class="model-logo model-logo-${model.logo}" src="${assetRoot}static/images/${model.logo}.svg?v=2" width="16" height="16" alt="">${escape(model.name)}</span>`;
+    }
+    return `<span class="model-tag"><span aria-hidden="true" style="width:8px;height:8px;border-radius:999px;background:${model.color};display:inline-block"></span>${escape(model.name)}</span>`;
   }
   const icons={
     Agents:'<circle cx="8" cy="7" r="2.5"/><circle cx="24" cy="7" r="2.5"/><circle cx="8" cy="23" r="2.5"/><circle cx="24" cy="23" r="2.5"/><path d="M3 15v-2a5 5 0 0 1 10 0v2m6 0v-2a5 5 0 0 1 10 0v2M3 31v-2a5 5 0 0 1 10 0v2m6 0v-2a5 5 0 0 1 10 0v2"/>',
@@ -39,11 +53,50 @@
     if(!visual)return `<div class="case-result" data-result="${item.phase===1?'formation':'impact'}"><span class="case-result-label">Outcome</span><p>${escape(item.outcome)}</p></div>`;
     return `<div class="case-result" data-result="${item.phase===1?'formation':'impact'}"><span class="case-result-label">Outcome</span><p>${escape(visual.action)}</p><dl class="case-result-metrics">${visual.metrics.map(m=>`<div data-tone="${escape(m.tone)}"><dt>${escape(m.label)}</dt><dd>${escape(m.value)}</dd></div>`).join('')}</dl>${visual.note?`<small class="case-result-note">${escape(visual.note)}</small>`:''}</div>`;
   }
-  for(const mode of ['SwarmForm','SwarmHarm']){
-    const group=document.createElement('optgroup');group.label=mode;
-    cases.filter(c=>c.mode===mode).forEach(c=>{const option=document.createElement('option');option.value=c.key;option.textContent=`${c.claim} · ${c.domain}`;group.append(option);});
-    select.append(group);
+  let activeStudyFilter='all';
+  function populateSelect(){
+    const prev=select.value;
+    select.replaceChildren();
+    const groups=[
+      {label:'SwarmHarm · Latest 11-model N=4 benchmark',items:cases.filter(c=>c.mode==='SwarmHarm'&&c.id.startsWith('n4-')),mode:'SwarmHarm'},
+      {label:'SwarmHarm · Core Sol 6.1 threat models',items:cases.filter(c=>c.mode==='SwarmHarm'&&!c.id.startsWith('n4-')),mode:'SwarmHarm'},
+      {label:'SwarmForm · Channel discovery',items:cases.filter(c=>c.mode==='SwarmForm'),mode:'SwarmForm'}
+    ];
+    for(const g of groups){
+      if(activeStudyFilter!=='all'&&g.mode.toLowerCase()!==activeStudyFilter)continue;
+      if(!g.items.length)continue;
+      const group=document.createElement('optgroup');group.label=g.label;
+      g.items.forEach(c=>{
+        const option=document.createElement('option');
+        option.value=c.key;
+        const mName=models[c.model]?.name||c.modelLabel||c.model;
+        option.textContent=`${c.claim} · ${c.domain} (${mName})`;
+        group.append(option);
+      });
+      select.append(group);
+    }
+    if(prev&&[...select.options].some(o=>o.value===prev))select.value=prev;
   }
+  populateSelect();
+  root.querySelectorAll('[data-traces-study]').forEach(btn=>{
+    const st=btn.dataset.tracesStudy;
+    const cnt=st==='all'?cases.length:cases.filter(c=>c.mode.toLowerCase()===st).length;
+    const small=btn.querySelector('small');if(small)small.textContent=`(${cnt})`;
+    btn.addEventListener('click',()=>{
+      activeStudyFilter=st;
+      root.querySelectorAll('[data-traces-study]').forEach(b=>b.setAttribute('aria-pressed',String(b===btn)));
+      populateSelect();
+      root.querySelectorAll('.featured-pill').forEach(pill=>{
+        const pillCase=cases.find(c=>c.id===pill.dataset.showCase);
+        pill.hidden=Boolean(st!=='all'&&pillCase&&pillCase.mode.toLowerCase()!==st);
+      });
+      const currentCase=cases.find(c=>c.key===mountedKey);
+      if(st!=='all'&&currentCase&&currentCase.mode.toLowerCase()!==st){
+        const firstMatch=cases.find(c=>c.mode.toLowerCase()===st&&(c.id.startsWith('n4-')||st==='swarmform'))||cases.find(c=>c.mode.toLowerCase()===st);
+        if(firstMatch)show(firstMatch.key,{},'#trajectory');
+      }
+    });
+  });
   function renderSummary(item) {
     root.dataset.caseMode=item.full?'full':'review';full.hidden=!item.full;review.hidden=item.full;
     intro.innerHTML=`<div class="case-setup"><p class="case-meta">${modelLabel(item.model)}</p><p class="case-context">${escape(item.context)}</p>${item.settings?settingsMarkup(item):''}</div>`;
@@ -82,7 +135,7 @@
     const layout=new URL(location.href).searchParams.get('layout');
     position={...position,layout:['straight','graph'].includes(layout)?layout:'spiral'};
     const selected=cases.find(c=>c.key===id)||cases.find(c=>c.id===id);
-    const retired=Boolean(id&&!selected),item=selected||cases[0];
+    const retired=Boolean(id&&!selected),defaultCase=cases.find(c=>c.id==='n4-deepseek-eng-records')||cases[0],item=selected||(retired?cases[0]:defaultCase);
     notice.hidden=!retired;
     if(retired) position={layout:position.layout};
     select.value=item.key;

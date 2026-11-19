@@ -17,20 +17,22 @@
   <link rel="stylesheet" href="../static/css/research-layout.css?v=52">
   <link rel="stylesheet" href="../static/css/recorded-timeline.css?v=52">
   <link rel="stylesheet" href="../static/css/trajectory-observatory.css?v=71">
-  <link rel="stylesheet" href="../static/css/findings.css?v=74">
-  <link rel="stylesheet" href="../static/css/sidebar.css?v=52">
+  <link rel="stylesheet" href="../static/css/trajectory-swimlane.css?v=77">
+  <link rel="stylesheet" href="../static/css/findings.css?v=76">
+  <link rel="stylesheet" href="../static/css/sidebar.css?v=77">
   <link rel="stylesheet" href="../static/css/project-page.css?v=71">
   <link rel="stylesheet" href="../static/css/project-subpages.css?v=53">
   <link rel="stylesheet" href="../static/css/visual-system.css?v=53">
-  <link rel="stylesheet" href="../static/css/current-research.css?v=74">
-  <script src="../static/js/site.js?v=74" defer></script>
-  <script src="../static/js/trajectory-cases-data.js?v=59" defer></script>
+  <link rel="stylesheet" href="../static/css/current-research.css?v=76">
+  <script src="../static/js/site.js?v=76" defer></script>
+  <script src="../static/js/trajectory-cases-data.js?v=76" defer></script>
   <script src="../static/js/trajectory-orbits.js?v=68" defer></script>
   <script src="../static/js/trajectory-graph.js?v=54" defer></script>
   <script src="../static/js/trajectory-linear.js?v=57" defer></script>
-  <script src="../static/js/trajectory-observatory.js?v=74" defer></script>
-  <script src="../static/js/recorded-timeline.js?v=74" defer></script>
-  <script src="../static/js/trajectory-cases.js?v=74" defer></script>
+  <script src="../static/js/trajectory-observatory.js?v=76" defer></script>
+  <script src="../static/js/trajectory-swimlane.js?v=77" defer></script>
+  <script src="../static/js/recorded-timeline.js?v=76" defer></script>
+  <script src="../static/js/trajectory-cases.js?v=76" defer></script>
   <link rel="preload" href="../static/fonts/et-book-roman-line-figures.woff" as="font" type="font/woff" crossorigin>
   <link rel="preload" href="../static/fonts/Inter.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="stylesheet" href="../static/css/typography.css?v=70">
@@ -39,6 +41,7 @@
   <a class="skip-link" href="#main-content">Skip to content</a>
   <header class="site-header"><div class="container nav-inner">
     <nav id="primary-navigation" aria-label="Main navigation">
+      <a href="../">Home</a>
       <div class="experiment-nav" role="group" aria-label="SwarmForm">
         <details class="nav-findings" name="research-navigation">
           <summary>SwarmForm</summary>
@@ -89,14 +92,22 @@
     <section class="overview" aria-labelledby="trajectory-title">
       <div class="container">
         <section class="trajectory-viewer" id="trajectory" aria-labelledby="trajectory-title">
-          <p class="traces-back-link"><a href="../">← Back to overview</a></p>
           <h1 class="traces-page-title" id="trajectory-title" tabindex="-1">Agent Trajectories</h1>
-          <p class="section-lead">Step through each run turn by turn in 3D, timeline, or graph view, or jump to a highlighted trace:</p>
+          <p class="section-lead">Follow each agent’s vertical lane to see what it does on its own and how files, grading rules, and completion records cross between peers:</p>
+          <div class="traces-study-filter" role="group" aria-label="Filter runs by study">
+            <button type="button" class="traces-study-btn" data-traces-study="all" aria-pressed="true">All runs <small></small></button>
+            <button type="button" class="traces-study-btn" data-traces-study="swarmharm" aria-pressed="false">SwarmHarm <small></small></button>
+            <button type="button" class="traces-study-btn" data-traces-study="swarmform" aria-pressed="false">SwarmForm <small></small></button>
+          </div>
           <div class="featured-cases" role="group" aria-label="Featured trajectories">
-            <a class="featured-pill" href="?case=form-source-sharing&amp;phase=1&amp;event=23#trajectory" data-show-case="form-source-sharing" data-show-phase="1">Channel discovery</a>
-            <a class="featured-pill" href="?case=harm-knowledge-grader&amp;phase=2&amp;event=131#trajectory" data-show-case="harm-knowledge-grader" data-show-phase="2">Grader manipulation</a>
-            <a class="featured-pill" href="?case=harm-knowledge-records&amp;phase=2&amp;event=98#trajectory" data-show-case="harm-knowledge-records" data-show-phase="2">Trace tampering</a>
-            <a class="featured-pill" href="?case=harm-knowledge-capacity&amp;phase=2&amp;event=68#trajectory" data-show-case="harm-knowledge-capacity" data-show-phase="2">Shared-resource interference</a>
+            <a class="featured-pill" href="?case=n4-deepseek-eng-records&amp;phase=2&amp;event=95#trajectory" data-show-case="n4-deepseek-eng-records" data-show-phase="2">Two-way trace tampering · DeepSeek V4.1</a>
+            <a class="featured-pill" href="?case=n4-deepseek-kw-grader&amp;phase=2&amp;event=371#trajectory" data-show-case="n4-deepseek-kw-grader" data-show-phase="2">Rule propagation · DeepSeek V4.1</a>
+            <a class="featured-pill" href="?case=n4-glm-eng-gaming&amp;phase=2&amp;event=68#trajectory" data-show-case="n4-glm-eng-gaming" data-show-phase="2">Two-way gaming · GLM-5.3</a>
+            <a class="featured-pill" href="?case=n4-kimi-kw-information&amp;phase=2&amp;event=108#trajectory" data-show-case="n4-kimi-kw-information" data-show-phase="2">Scope uptake · Kimi K3.1</a>
+            <a class="featured-pill" href="?case=n4-opus-eng-gaming&amp;phase=2&amp;event=48#trajectory" data-show-case="n4-opus-eng-gaming" data-show-phase="2">Peer refusal · Claude Opus 5.5</a>
+            <a class="featured-pill" href="?case=harm-knowledge-grader&amp;phase=2&amp;event=131#trajectory" data-show-case="harm-knowledge-grader" data-show-phase="2">Grader manipulation · Sol 6.1</a>
+            <a class="featured-pill" href="?case=harm-knowledge-capacity&amp;phase=2&amp;event=68#trajectory" data-show-case="harm-knowledge-capacity" data-show-phase="2">Compositional delay · Sol 6.1</a>
+            <a class="featured-pill" href="?case=form-source-sharing&amp;phase=1&amp;event=23#trajectory" data-show-case="form-source-sharing" data-show-phase="1">Channel discovery · SwarmForm</a>
           </div>
           <div class="trajectory-content">
             <div class="case-picker"><label for="trajectory-case">All recorded runs <small data-case-loading role="status"></small></label><select id="trajectory-case" data-case-select></select></div>
@@ -113,7 +124,7 @@
   </main>
   <footer class="site-footer">
   <nav class="compact-page-links" aria-label="Project links">
-      <a href="../">Overview</a>
+      <a href="../">Home</a>
       <a href="../traces/" aria-current="page">Traces</a>
       <a href="../team/">Team</a>
       <a href="../call-to-action/">Get involved</a>
