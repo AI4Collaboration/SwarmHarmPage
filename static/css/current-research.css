@@ -94,113 +94,86 @@ summary::-webkit-details-marker{display:none;}
 .experiment-taxonomy h3 {
   margin: 0;
   color: var(--text);
-  font: 400 24px/1.25 var(--editorial);
+  font: 400 clamp(28px, 3vw, 38px)/1.12 var(--editorial);
 }
 .experiment-taxonomy > p {
   margin: 10px 0 18px;
   color: var(--muted);
   font: 400 14.5px/1.6 var(--font);
 }
-.taxonomy-table-scroll {
-  overflow-x: auto;
-  border: 1px solid var(--line);
-  border-radius: 8px;
-}
+.taxonomy-table-scroll { overflow-x: auto; }
 .taxonomy-table-scroll:focus-visible {
   outline: 2px solid var(--finding-ink);
   outline-offset: 3px;
 }
 .experiment-taxonomy table {
   width: 100%;
-  min-width: 31rem;
   table-layout: fixed;
   border-collapse: collapse;
   color: var(--muted);
-  background: var(--bg);
-  font: 400 13px/1.45 var(--font);
+  font: 400 15px/1.45 var(--font);
 }
 .experiment-taxonomy :is(th, td) {
-  padding: 14px 16px;
-  border-right: 1px solid var(--line);
-  border-bottom: 1px solid var(--line);
+  padding: 14px 18px 14px 0;
   text-align: left;
   vertical-align: top;
-  line-height: 1.55;
+  border-bottom: 1px solid var(--line);
 }
-.experiment-taxonomy tr > :last-child { border-right: 0; }
-.experiment-taxonomy tbody tr:last-child > * { border-bottom: 0; }
+.experiment-taxonomy tr > :last-child { padding-right: 0; }
 .experiment-taxonomy th {
   color: var(--text);
-  background: var(--surface);
-  font-weight: 600;
+  font: 400 20px/1.18 var(--editorial);
 }
-.experiment-taxonomy th:first-child { width: 19%; }
-.experiment-taxonomy th span { display: block; color: var(--muted); font-weight: 400; }
-.experiment-taxonomy td strong { display: block; margin-bottom: 4px; color: var(--text); font-weight: 600; }
-.experiment-taxonomy .taxonomy-peer-mesh { background: var(--finding-fill); }
-.experiment-taxonomy .taxonomy-peer-mesh strong { color: var(--finding-ink); }
-.harm-taxonomy-groups {
-  display: grid;
-  gap: 24px clamp(24px, 3vw, 48px);
-  align-items: start;
-  margin-top: 18px;
-}
-@container (min-width: 76rem) {
-  .harm-taxonomy-groups { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-}
-.harm-taxonomy-groups table { min-width: 0; background: transparent; }
-.harm-taxonomy-groups caption {
-  padding: 10px 0;
-  border-top: 2px solid var(--scene-red);
-  color: var(--text);
-  font: 400 21px/1.25 var(--editorial);
-  text-align: left;
-}
-.harm-taxonomy-groups :is(th, td) {
-  border: 0;
-  border-bottom: 1px solid var(--line);
-  padding: 9px 10px;
-  background: transparent;
-}
-.harm-taxonomy-groups thead th {
+.experiment-taxonomy thead th { padding-top: 0; padding-bottom: 10px; }
+.experiment-taxonomy th span {
+  display: block;
+  margin-top: 3px;
   color: var(--muted);
-  background: var(--surface);
-  font-size: 12px;
+  font: 400 12px/1.5 var(--font);
 }
-.harm-taxonomy-groups th:first-child { width: 25%; }
-.harm-taxonomy-groups tbody th { font-weight: 600; }
-@container (max-width: 34rem) {
-  .harm-taxonomy-groups thead {
+#swarmform-taxonomy table { min-width: 44rem; }
+#swarmform-taxonomy thead th:first-child { width: 19%; }
+#swarmform-taxonomy tbody tr:last-child > * { border-bottom: 0; }
+.harm-comparison { margin-top: 22px; }
+.harm-comparison thead th { color: var(--muted); font: 500 13px/1.3 var(--font); }
+.harm-comparison thead th:first-child { width: 24%; }
+.harm-comparison thead th:nth-child(2) { width: 37%; }
+.harm-comparison tbody :is(th, td) { padding-block: 9px; }
+.harm-comparison tbody td { font-size: 14px; }
+.harm-comparison td strong { display: block; color: var(--text); font-weight: 550; }
+.harm-comparison .taxonomy-group th {
+  padding: 14px 0 3px;
+  border: 0;
+  color: var(--scene-red);
+  font: 600 13px/1.35 var(--font);
+}
+@container (max-width: 32rem) {
+  .harm-comparison thead {
     position: absolute;
     width: 1px;
     height: 1px;
     overflow: hidden;
     clip-path: inset(50%);
   }
-  .harm-taxonomy-groups tbody { display: block; }
-  .harm-taxonomy-groups tbody tr {
+  .harm-comparison tbody, .harm-comparison .taxonomy-group, .harm-comparison .taxonomy-group th { display: block; }
+  .harm-comparison tbody tr:not(.taxonomy-group) {
     display: grid;
     grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 6px 16px;
+    gap: 6px 14px;
     padding: 12px 0;
-    border-top: 1px solid var(--line);
+    border-bottom: 1px solid var(--line);
   }
-  .harm-taxonomy-groups tbody :is(th, td) { padding: 0; border: 0; }
-  .harm-taxonomy-groups tbody th:first-child { grid-column: 1 / -1; width: auto; }
-  .harm-taxonomy-groups td::before {
-    display: block;
-    margin-bottom: 3px;
-    font-size: 12px;
-    font-weight: 600;
-  }
-  .harm-taxonomy-groups td:nth-child(2)::before { content: "What the agent does" / ""; }
-  .harm-taxonomy-groups td:nth-child(3)::before { content: "Impact" / ""; }
+  .harm-comparison tbody tr:not(.taxonomy-group) > * { padding: 0; border: 0; }
+  .harm-comparison tbody th[scope="row"] { grid-column: 1 / -1; }
+  .harm-comparison td::before { display: block; margin-bottom: 4px; font: 600 12px/1.4 var(--font); }
+  .harm-comparison td:nth-child(2)::before { content: "What the agent does" / ""; }
+  .harm-comparison td:nth-child(3)::before { content: "Impact" / ""; }
 }
 .taxonomy-measures { margin-top: 24px; display: grid; gap: 6px; }
 .taxonomy-measures h4 { margin: 0 0 6px; color: var(--text); font: 600 14px/1.45 var(--font); }
 .taxonomy-measures p { margin: 4px 0 0; color: var(--muted); font: 400 13.5px/1.58 var(--font); }
 .taxonomy-measures strong { color: var(--text); font-weight: 600; }
 .experiment-taxonomy .taxonomy-scroll-hint { display: none; margin-bottom: 6px; font-size: 12px; }
-@container (width < calc(31rem + 2px)) {
+@container (width < 44rem) {
   #swarmform-taxonomy .taxonomy-scroll-hint { display: block; }
 }
