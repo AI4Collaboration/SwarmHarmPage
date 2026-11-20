@@ -11,8 +11,8 @@ vm.runInNewContext(fs.readFileSync(path.join(root,'static/js/trajectory-cases-da
 const cases=Array.from(context.window.SWARMHARM_CASES);
 const evidence=read('static/data/reviews/current-evidence.json');
 
-test('the public collection contains the six selected threat models in both domains plus the latest multi-model N=4 runs',()=>{
-  assert.equal(cases.length,26);
+test('the public collection contains the six selected threat models in both domains plus all 11 models with official logos',()=>{
+  assert.equal(cases.length,88);
   const coreHarm=cases.filter(c=>c.mode==='SwarmHarm'&&!c.id.startsWith('n4-'));
   assert.equal(coreHarm.length,12);
   for(const domain of ['Engineering','Knowledge Work']) {
@@ -22,10 +22,14 @@ test('the public collection contains the six selected threat models in both doma
     ]);
   }
   assert.ok(coreHarm.every(c=>c.model==='gpt-6.1-sol'));
-  assert.equal(cases.filter(c=>c.id.startsWith('n4-')).length,13);
-  assert.equal(new Set(cases.map(c=>c.id)).size,26);
-  assert.equal(fs.readdirSync(path.join(root,'static/data/trajectories')).length,26);
-  assert.equal(fs.readdirSync(path.join(root,'static/data/reviews')).length,27);
+  assert.equal(cases.filter(c=>c.id.startsWith('n4-')).length,75);
+  assert.equal(new Set(cases.map(c=>c.model)).size,11);
+  assert.equal(new Set(cases.map(c=>c.id)).size,88);
+  assert.equal(fs.readdirSync(path.join(root,'static/data/trajectories')).length,88);
+  assert.equal(fs.readdirSync(path.join(root,'static/data/reviews')).length,89);
+  for(const icon of ['static/images/openai.svg','static/images/models/claude.svg','static/images/models/gemini.svg','static/images/models/deepseek.svg','static/images/models/zai.svg','static/images/models/kimi.svg']){
+    assert.ok(fs.existsSync(path.join(root,icon)),icon);
+  }
 });
 
 test('every artifact and receipt resolves to actual actors and actions with unchanged content',()=>{
@@ -68,7 +72,9 @@ test('every artifact and receipt resolves to actual actors and actions with unch
 });
 
 test('composition retains four actors and does not invent cross-agent content reads',()=>{
-  for(const item of cases.filter(c=>c.id.endsWith('-capacity'))){
+  const compCases=cases.filter(c=>c.composition);
+  assert.ok(compCases.length>=3);
+  for(const item of compCases){
     const data=read(item.trajectory);
     assert.equal(data.actors.length,4);
     assert.equal(data.counts.allReads,0);

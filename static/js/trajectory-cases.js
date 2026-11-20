@@ -11,24 +11,28 @@
   let renderedSearch,mountedKey;
   const escape=value=>String(value).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
   const models={
-    'gpt-6.1-sol':{name:'GPT-6.1 Sol',logo:'openai'},
-    'gpt-6.1-terra':{name:'GPT-6.1 Terra',logo:'openai'},
-    'gpt-6-astra':{name:'GPT-6 Astra',logo:'openai'},
-    'gpt-6-luna':{name:'GPT-6 Luna',logo:'openai'},
-    'claude-opus-5.5':{name:'Claude Opus 5.5',color:'#d97757'},
-    'claude-sonnet-5.5':{name:'Claude Sonnet 5.5',color:'#d97757'},
-    'gemini-4-argon':{name:'Gemini 4 Argon',color:'#6ea8fe'},
-    'deepseek-v4.1-flash':{name:'DeepSeek V4.1',color:'#5b8def'},
-    'glm-5.3':{name:'GLM-5.3',color:'#56c8b8'},
-    'kimi-k3.1-pro':{name:'Kimi K3.1',color:'#b48ef7'}
+    'gpt-6.1-sol':{name:'GPT-6.1 Sol',src:'static/images/openai.svg?v=2',cls:'model-logo-openai'},
+    'gpt-6.1-terra':{name:'GPT-6.1 Terra',src:'static/images/openai.svg?v=2',cls:'model-logo-openai'},
+    'gpt-6-astra':{name:'GPT-6 Astra',src:'static/images/openai.svg?v=2',cls:'model-logo-openai'},
+    'gpt-6-luna':{name:'GPT-6 Luna',src:'static/images/openai.svg?v=2',cls:'model-logo-openai'},
+    'claude-opus-5.5':{name:'Claude Opus 5.5',src:'static/images/models/claude.svg?v=1',cls:''},
+    'claude-sonnet-5.5':{name:'Claude Sonnet 5.5',src:'static/images/models/claude.svg?v=1',cls:''},
+    'claude-haiku-5.5':{name:'Claude Haiku 5.5',src:'static/images/models/claude.svg?v=1',cls:''},
+    'gemini-4-argon':{name:'Gemini 4 Argon',src:'static/images/models/gemini.svg?v=1',cls:''},
+    'deepseek-v4.1-flash':{name:'DeepSeek V4.1',src:'static/images/models/deepseek.svg?v=1',cls:''},
+    'glm-5.3':{name:'GLM-5.3',src:'static/images/models/zai.svg?v=1',cls:'model-logo-mono'},
+    'kimi-k3.1-pro':{name:'Kimi K3.1',src:'static/images/models/kimi.svg?v=1',cls:''}
   };
+  const MODEL_ORDER=['gpt-6.1-sol','gpt-6.1-terra','gpt-6-astra','gpt-6-luna','claude-opus-5.5','claude-sonnet-5.5','claude-haiku-5.5','gemini-4-argon','deepseek-v4.1-flash','glm-5.3','kimi-k3.1-pro'];
+  function modelLogoImg(id){
+    const model=models[id];
+    if(!model)return '';
+    return `<img class="model-logo ${model.cls}" src="${assetRoot}${model.src}" width="15" height="15" alt="">`;
+  }
   function modelLabel(id){
     const model=models[id];
     if(!model)return `<span class="model-tag">${escape(id)}</span>`;
-    if(model.logo){
-      return `<span class="model-tag"><img class="model-logo model-logo-${model.logo}" src="${assetRoot}static/images/${model.logo}.svg?v=2" width="16" height="16" alt="">${escape(model.name)}</span>`;
-    }
-    return `<span class="model-tag"><span aria-hidden="true" style="width:8px;height:8px;border-radius:999px;background:${model.color};display:inline-block"></span>${escape(model.name)}</span>`;
+    return `<span class="model-tag">${modelLogoImg(id)}${escape(model.name)}</span>`;
   }
   const icons={
     Agents:'<circle cx="8" cy="7" r="2.5"/><circle cx="24" cy="7" r="2.5"/><circle cx="8" cy="23" r="2.5"/><circle cx="24" cy="23" r="2.5"/><path d="M3 15v-2a5 5 0 0 1 10 0v2m6 0v-2a5 5 0 0 1 10 0v2M3 31v-2a5 5 0 0 1 10 0v2m6 0v-2a5 5 0 0 1 10 0v2"/>',
@@ -53,17 +57,30 @@
     if(!visual)return `<div class="case-result" data-result="${item.phase===1?'formation':'impact'}"><span class="case-result-label">Outcome</span><p>${escape(item.outcome)}</p></div>`;
     return `<div class="case-result" data-result="${item.phase===1?'formation':'impact'}"><span class="case-result-label">Outcome</span><p>${escape(visual.action)}</p><dl class="case-result-metrics">${visual.metrics.map(m=>`<div data-tone="${escape(m.tone)}"><dt>${escape(m.label)}</dt><dd>${escape(m.value)}</dd></div>`).join('')}</dl>${visual.note?`<small class="case-result-note">${escape(visual.note)}</small>`:''}</div>`;
   }
-  let activeStudyFilter='all';
+  let activeStudyFilter='all', activeModelFilter='all';
+  const modelBar=root.querySelector('[data-traces-models]');
+  function matchesFilters(c){
+    if(activeStudyFilter!=='all'&&c.mode.toLowerCase()!==activeStudyFilter)return false;
+    if(activeModelFilter!=='all'&&c.model!==activeModelFilter)return false;
+    return true;
+  }
+  function renderModelBar(){
+    if(!modelBar)return;
+    const studyScoped=cases.filter(c=>activeStudyFilter==='all'||c.mode.toLowerCase()===activeStudyFilter);
+    const counts=new Map();
+    studyScoped.forEach(c=>counts.set(c.model,(counts.get(c.model)||0)+1));
+    modelBar.innerHTML=`<button type="button" class="traces-model-chip" data-traces-model="all" aria-pressed="${activeModelFilter==='all'}">All models <small>${studyScoped.length}</small></button>`+
+      MODEL_ORDER.filter(m=>counts.has(m)).map(m=>`<button type="button" class="traces-model-chip" data-traces-model="${m}" aria-pressed="${activeModelFilter===m}">${modelLogoImg(m)}${escape(models[m].name)} <small>${counts.get(m)}</small></button>`).join('');
+  }
   function populateSelect(){
     const prev=select.value;
     select.replaceChildren();
     const groups=[
-      {label:'SwarmHarm · Latest 11-model N=4 benchmark',items:cases.filter(c=>c.mode==='SwarmHarm'&&c.id.startsWith('n4-')),mode:'SwarmHarm'},
-      {label:'SwarmHarm · Core Sol 6.1 threat models',items:cases.filter(c=>c.mode==='SwarmHarm'&&!c.id.startsWith('n4-')),mode:'SwarmHarm'},
-      {label:'SwarmForm · Channel discovery',items:cases.filter(c=>c.mode==='SwarmForm'),mode:'SwarmForm'}
+      {label:'SwarmHarm · 11-model N=4 benchmark',items:cases.filter(c=>c.mode==='SwarmHarm'&&c.id.startsWith('n4-')&&matchesFilters(c))},
+      {label:'SwarmHarm · Core GPT-6.1 Sol threat models',items:cases.filter(c=>c.mode==='SwarmHarm'&&!c.id.startsWith('n4-')&&matchesFilters(c))},
+      {label:'SwarmForm · Channel discovery',items:cases.filter(c=>c.mode==='SwarmForm'&&matchesFilters(c))}
     ];
     for(const g of groups){
-      if(activeStudyFilter!=='all'&&g.mode.toLowerCase()!==activeStudyFilter)continue;
       if(!g.items.length)continue;
       const group=document.createElement('optgroup');group.label=g.label;
       g.items.forEach(c=>{
@@ -77,22 +94,40 @@
     }
     if(prev&&[...select.options].some(o=>o.value===prev))select.value=prev;
   }
+  renderModelBar();
   populateSelect();
+  modelBar?.addEventListener('click',ev=>{
+    const btn=ev.target.closest('[data-traces-model]');
+    if(!btn)return;
+    const nextModel=btn.dataset.tracesModel;
+    activeModelFilter=(activeModelFilter===nextModel&&nextModel!=='all')?'all':nextModel;
+    renderModelBar();
+    populateSelect();
+    const currentCase=cases.find(c=>c.key===mountedKey);
+    if(currentCase&&!matchesFilters(currentCase)){
+      const firstMatch=cases.find(matchesFilters);
+      if(firstMatch)show(firstMatch.key,{},'#trajectory');
+    }
+  });
   root.querySelectorAll('[data-traces-study]').forEach(btn=>{
     const st=btn.dataset.tracesStudy;
     const cnt=st==='all'?cases.length:cases.filter(c=>c.mode.toLowerCase()===st).length;
     const small=btn.querySelector('small');if(small)small.textContent=`(${cnt})`;
     btn.addEventListener('click',()=>{
       activeStudyFilter=st;
+      if(activeModelFilter!=='all'&&!cases.some(c=>(st==='all'||c.mode.toLowerCase()===st)&&c.model===activeModelFilter)){
+        activeModelFilter='all';
+      }
       root.querySelectorAll('[data-traces-study]').forEach(b=>b.setAttribute('aria-pressed',String(b===btn)));
+      renderModelBar();
       populateSelect();
       root.querySelectorAll('.featured-pill').forEach(pill=>{
         const pillCase=cases.find(c=>c.id===pill.dataset.showCase);
         pill.hidden=Boolean(st!=='all'&&pillCase&&pillCase.mode.toLowerCase()!==st);
       });
       const currentCase=cases.find(c=>c.key===mountedKey);
-      if(st!=='all'&&currentCase&&currentCase.mode.toLowerCase()!==st){
-        const firstMatch=cases.find(c=>c.mode.toLowerCase()===st&&(c.id.startsWith('n4-')||st==='swarmform'))||cases.find(c=>c.mode.toLowerCase()===st);
+      if(currentCase&&!matchesFilters(currentCase)){
+        const firstMatch=cases.find(c=>matchesFilters(c)&&(c.id.startsWith('n4-')||st==='swarmform'))||cases.find(matchesFilters);
         if(firstMatch)show(firstMatch.key,{},'#trajectory');
       }
     });

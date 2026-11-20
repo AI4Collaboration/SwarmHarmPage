@@ -1,0 +1,2 @@
+Model brand icons (claude.svg, gemini.svg, deepseek.svg, zai.svg, kimi.svg) sourced from @lobehub/icons-static-svg (MIT License).
+Trademarks and brand marks belong to their respective owners (Anthropic, Google, DeepSeek, Z.ai, Moonshot AI).

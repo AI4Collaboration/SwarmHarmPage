@@ -17,7 +17,7 @@
   <link rel="stylesheet" href="../static/css/research-layout.css?v=52">
   <link rel="stylesheet" href="../static/css/recorded-timeline.css?v=52">
   <link rel="stylesheet" href="../static/css/trajectory-observatory.css?v=71">
-  <link rel="stylesheet" href="../static/css/trajectory-swimlane.css?v=78">
+  <link rel="stylesheet" href="../static/css/trajectory-swimlane.css?v=81">
   <link rel="stylesheet" href="../static/css/findings.css?v=78">
   <link rel="stylesheet" href="../static/css/sidebar.css?v=78">
   <link rel="stylesheet" href="../static/css/project-page.css?v=78">
@@ -25,14 +25,14 @@
   <link rel="stylesheet" href="../static/css/visual-system.css?v=53">
   <link rel="stylesheet" href="../static/css/current-research.css?v=78">
   <script src="../static/js/site.js?v=76" defer></script>
-  <script src="../static/js/trajectory-cases-data.js?v=76" defer></script>
+  <script src="../static/js/trajectory-cases-data.js?v=81" defer></script>
   <script src="../static/js/trajectory-orbits.js?v=68" defer></script>
   <script src="../static/js/trajectory-graph.js?v=54" defer></script>
   <script src="../static/js/trajectory-linear.js?v=57" defer></script>
   <script src="../static/js/trajectory-observatory.js?v=76" defer></script>
   <script src="../static/js/trajectory-swimlane.js?v=77" defer></script>
   <script src="../static/js/recorded-timeline.js?v=76" defer></script>
-  <script src="../static/js/trajectory-cases.js?v=78" defer></script>
+  <script src="../static/js/trajectory-cases.js?v=81" defer></script>
   <link rel="preload" href="../static/fonts/et-book-roman-line-figures.woff" as="font" type="font/woff" crossorigin>
   <link rel="preload" href="../static/fonts/Inter.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="stylesheet" href="../static/css/typography.css?v=78">
@@ -104,15 +104,15 @@
             </div>
             <div class="case-picker"><label class="sr-only" for="trajectory-case">Select recorded run</label><span data-case-loading role="status" class="traces-loading"></span><select id="trajectory-case" data-case-select aria-label="Select recorded run"></select></div>
           </div>
+          <div class="traces-model-filter" data-traces-models role="group" aria-label="Filter runs by model"></div>
           <div class="featured-cases" role="group" aria-label="Featured trajectories">
-            <a class="featured-pill" href="?case=n4-deepseek-eng-records&amp;phase=2&amp;event=95#trajectory" data-show-case="n4-deepseek-eng-records" data-show-phase="2">Two-way trace tampering · DeepSeek V4.1</a>
-            <a class="featured-pill" href="?case=n4-deepseek-kw-grader&amp;phase=2&amp;event=371#trajectory" data-show-case="n4-deepseek-kw-grader" data-show-phase="2">Rule propagation · DeepSeek V4.1</a>
-            <a class="featured-pill" href="?case=n4-glm-eng-gaming&amp;phase=2&amp;event=68#trajectory" data-show-case="n4-glm-eng-gaming" data-show-phase="2">Two-way gaming · GLM-5.3</a>
-            <a class="featured-pill" href="?case=n4-kimi-kw-information&amp;phase=2&amp;event=108#trajectory" data-show-case="n4-kimi-kw-information" data-show-phase="2">Scope uptake · Kimi K3.1</a>
-            <a class="featured-pill" href="?case=n4-opus-eng-gaming&amp;phase=2&amp;event=48#trajectory" data-show-case="n4-opus-eng-gaming" data-show-phase="2">Peer refusal · Claude Opus 5.5</a>
-            <a class="featured-pill" href="?case=harm-knowledge-grader&amp;phase=2&amp;event=131#trajectory" data-show-case="harm-knowledge-grader" data-show-phase="2">Grader manipulation · Sol 6.1</a>
-            <a class="featured-pill" href="?case=harm-knowledge-capacity&amp;phase=2&amp;event=68#trajectory" data-show-case="harm-knowledge-capacity" data-show-phase="2">Compositional delay · Sol 6.1</a>
-            <a class="featured-pill" href="?case=form-source-sharing&amp;phase=1&amp;event=23#trajectory" data-show-case="form-source-sharing" data-show-phase="1">Channel discovery · SwarmForm</a>
+            <a class="featured-pill" href="?case=n4-deepseek-eng-records&amp;phase=2&amp;event=95#trajectory" data-show-case="n4-deepseek-eng-records" data-show-phase="2"><img class="model-logo" src="../static/images/models/deepseek.svg?v=1" width="14" height="14" alt="">Two-way trace tampering · DeepSeek V4.1</a>
+            <a class="featured-pill" href="?case=n4-glm-eng-gaming&amp;phase=2&amp;event=68#trajectory" data-show-case="n4-glm-eng-gaming" data-show-phase="2"><img class="model-logo model-logo-mono" src="../static/images/models/zai.svg?v=1" width="14" height="14" alt="">Two-way gaming · GLM-5.3</a>
+            <a class="featured-pill" href="?case=n4-kimi-kw-information&amp;phase=2&amp;event=108#trajectory" data-show-case="n4-kimi-kw-information" data-show-phase="2"><img class="model-logo" src="../static/images/models/kimi.svg?v=1" width="14" height="14" alt="">Scope uptake · Kimi K3.1</a>
+            <a class="featured-pill" href="?case=n4-opus-eng-gaming&amp;phase=2&amp;event=48#trajectory" data-show-case="n4-opus-eng-gaming" data-show-phase="2"><img class="model-logo" src="../static/images/models/claude.svg?v=1" width="14" height="14" alt="">Peer refusal · Claude Opus 5.5</a>
+            <a class="featured-pill" href="?case=n4-argon-eng-information&amp;phase=2&amp;event=35#trajectory" data-show-case="n4-argon-eng-information" data-show-phase="2"><img class="model-logo" src="../static/images/models/gemini.svg?v=1" width="14" height="14" alt="">Peer refusal · Gemini 4 Argon</a>
+            <a class="featured-pill" href="?case=harm-knowledge-grader&amp;phase=2&amp;event=131#trajectory" data-show-case="harm-knowledge-grader" data-show-phase="2"><img class="model-logo model-logo-openai" src="../static/images/openai.svg?v=2" width="14" height="14" alt="">Rule propagation · GPT-6.1 Sol</a>
+            <a class="featured-pill" href="?case=form-source-sharing&amp;phase=1&amp;event=23#trajectory" data-show-case="form-source-sharing" data-show-phase="1"><img class="model-logo model-logo-openai" src="../static/images/openai.svg?v=2" width="14" height="14" alt="">Channel discovery · SwarmForm</a>
           </div>
           <div class="trajectory-content">
             <p class="case-notice" data-case-notice hidden>This older case is no longer in the website collection. Showing the current channel-discovery example.</p>
