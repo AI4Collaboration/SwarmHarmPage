@@ -60,3 +60,5 @@ body { font-optical-sizing: auto; }
 .findings-primary .finding { scroll-margin-top: 96px; }
 .findings-primary .finding:target .finding-heading h4 { text-decoration: underline 2px var(--finding-ink); text-underline-offset: 5px; }
 @media (max-width: 640px) { .glance-columns { grid-template-columns: minmax(0, 1fr); } }
+.finding-story a { color: inherit; text-decoration: underline; text-decoration-color: color-mix(in srgb, var(--finding-ink) 55%, transparent); text-underline-offset: 3px; }
+.finding-story a:hover { color: var(--finding-ink); text-decoration-color: currentColor; }

@@ -432,6 +432,11 @@
       requestAnimationFrame(() => {
         host.querySelector(`[data-swimlane-event="${highlightEventId}"]`)?.scrollIntoView({ block: 'center', behavior: 'instant' });
       });
+    } else if (meta.position?.event === 'outcome') {
+      // Outcome links land on the case result (or counterfactual replay), not the top of the run.
+      requestAnimationFrame(() => {
+        viewerRoot?.querySelector('.composition-proof, .case-result')?.scrollIntoView({ block: 'center', behavior: 'instant' });
+      });
     }
     return () => controller.abort();
   };
