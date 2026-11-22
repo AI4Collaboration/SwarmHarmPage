@@ -23,7 +23,28 @@
     'glm-5.3':{name:'GLM-5.3',src:'static/images/models/zai.svg?v=1',cls:'model-logo-mono'},
     'kimi-k3.1-pro':{name:'Kimi K3.1',src:'static/images/models/kimi.svg?v=1',cls:''}
   };
-  const MODEL_ORDER=['gpt-6.1-sol','gpt-6.1-terra','gpt-6-astra','gpt-6-luna','claude-opus-5.5','claude-sonnet-5.5','claude-haiku-5.5','gemini-4-argon','deepseek-v4.1-flash','glm-5.3','kimi-k3.1-pro'];
+  const MODEL_ORDER=['deepseek-v4.1-flash','glm-5.3','kimi-k3.1-pro','gemini-4-argon','claude-opus-5.5','claude-sonnet-5.5','claude-haiku-5.5','gpt-6.1-sol','gpt-6.1-terra','gpt-6-astra','gpt-6-luna'];
+  const THREAT_MODES=[
+    {slug:'gaming',level:'Task',title:'Specification Gaming'},
+    {slug:'records',level:'Task',title:'Trace Tampering'},
+    {slug:'grader',level:'Task',title:'Grader Manipulation'},
+    {slug:'information',level:'Environment',title:'Information Scope Violation'},
+    {slug:'action',level:'Environment',title:'Action Scope Violation'},
+    {slug:'capacity',level:'Environment',title:'Shared-resource Interference'}
+  ];
+  function threatSlugOf(c){
+    if(c.mode!=='SwarmHarm')return '';
+    for(const tm of THREAT_MODES){
+      if(c.title.startsWith(tm.title))return tm.slug;
+    }
+    return '';
+  }
+  // Deduplicate overlapping Sol SwarmHarm runs in the UI list (prefer n4-sol-* with ATIF reasoning, plus harm-*-gaming for Spec Gaming -> exact 12 Sol SwarmHarm runs!)
+  const n4SolCovered=new Set(cases.filter(c=>c.id.startsWith('n4-sol-')).map(c=>threatSlugOf(c)+':'+c.domain));
+  const uiCases=cases.filter(c=>{
+    if(c.mode==='SwarmHarm'&&c.id.startsWith('harm-')&&n4SolCovered.has(threatSlugOf(c)+':'+c.domain))return false;
+    return true;
+  });
   function modelLogoImg(id){
     const model=models[id];
     if(!model)return '';
@@ -34,104 +55,137 @@
     if(!model)return `<span class="model-tag">${escape(id)}</span>`;
     return `<span class="model-tag">${modelLogoImg(id)}${escape(model.name)}</span>`;
   }
-  const icons={
-    Agents:'<circle cx="8" cy="7" r="2.5"/><circle cx="24" cy="7" r="2.5"/><circle cx="8" cy="23" r="2.5"/><circle cx="24" cy="23" r="2.5"/><path d="M3 15v-2a5 5 0 0 1 10 0v2m6 0v-2a5 5 0 0 1 10 0v2M3 31v-2a5 5 0 0 1 10 0v2m6 0v-2a5 5 0 0 1 10 0v2"/>',
-    Harness:'<rect x="3" y="5" width="26" height="22" rx="4"/><path d="m8 12 4 4-4 4m9 0h7"/>',
-    Feedback:'<rect x="3" y="5" width="26" height="20" rx="4"/><path d="m9 25-3 5v-5m3-13h14M9 18h9"/>'
-  };
-  // The page omits goal and reasoning settings from both the summary and the evidence panel.
-  const visibleSettings = rows => (rows || []).filter(([key]) => !/^(?:goal|reasoning)\b/i.test(key));
-  function settingsMarkup(item){
-    const settings = visibleSettings(item.settings);
-    if (!settings.length) return '';
-    const fields = settings.map(([key, value]) => {
-      return `<div class="case-setting" data-setting="${escape(key.toLowerCase())}" data-value="${escape(value.toLowerCase())}">
-        <span class="case-setting-icon" aria-hidden="true"><svg viewBox="0 0 32 34">${icons[key] || icons.Feedback}</svg></span>
-        <dt>${escape(key)}</dt><dd>${escape(value)}</dd>
-      </div>`;
-    });
-    return `<dl class="case-settings" style="--settings-count:${settings.length}" aria-label="Recorded experiment settings">${fields.join('')}</dl>`;
-  }
-  function outcomeMarkup(item){
-    const visual=item.outcomeVisual;
-    if(!visual)return `<div class="case-result" data-result="${item.phase===1?'formation':'impact'}"><span class="case-result-label">Outcome</span><p>${escape(item.outcome)}</p></div>`;
-    return `<div class="case-result" data-result="${item.phase===1?'formation':'impact'}"><span class="case-result-label">Outcome</span><p>${escape(visual.action)}</p><dl class="case-result-metrics">${visual.metrics.map(m=>`<div data-tone="${escape(m.tone)}"><dt>${escape(m.label)}</dt><dd>${escape(m.value)}</dd></div>`).join('')}</dl>${visual.note?`<small class="case-result-note">${escape(visual.note)}</small>`:''}</div>`;
-  }
-  let activeStudyFilter='all', activeModelFilter='all';
+  const initParams=new URLSearchParams(location.search);
+  let activeStudyFilter=['swarmharm','swarmform'].includes(initParams.get('study'))?initParams.get('study'):'all';
+  let activeThreatFilter=THREAT_MODES.some(t=>t.slug===initParams.get('threat'))?initParams.get('threat'):'all';
+  let activeModelFilter=models[initParams.get('model')]?initParams.get('model'):'all';
+  const threatBar=root.querySelector('[data-traces-threats]');
   const modelBar=root.querySelector('[data-traces-models]');
+
   function matchesFilters(c){
     if(activeStudyFilter!=='all'&&c.mode.toLowerCase()!==activeStudyFilter)return false;
+    if(activeStudyFilter!=='swarmform'&&activeThreatFilter!=='all'){
+      if(c.mode!=='SwarmHarm'||threatSlugOf(c)!==activeThreatFilter)return false;
+    }
     if(activeModelFilter!=='all'&&c.model!==activeModelFilter)return false;
     return true;
   }
+  function syncStudyTabs(){
+    root.querySelectorAll('[data-traces-study]').forEach(btn=>{
+      const st=btn.dataset.tracesStudy;
+      const cnt=st==='all'?uiCases.length:uiCases.filter(c=>c.mode.toLowerCase()===st).length;
+      const small=btn.querySelector('small');if(small)small.textContent=`(${cnt})`;
+      btn.setAttribute('aria-pressed',String(st===activeStudyFilter));
+    });
+  }
+  function renderThreatBar(){
+    if(!threatBar)return;
+    if(activeStudyFilter==='swarmform'){threatBar.hidden=true;return;}
+    threatBar.hidden=false;
+    const harmPool=uiCases.filter(c=>c.mode==='SwarmHarm'&&(activeModelFilter==='all'||c.model===activeModelFilter));
+    const counts=new Map();
+    harmPool.forEach(c=>{const s=threatSlugOf(c);counts.set(s,(counts.get(s)||0)+1);});
+    const chip=tm=>`<button type="button" class="traces-model-chip" data-traces-threat="${tm.slug}" aria-pressed="${activeThreatFilter===tm.slug}">${escape(tm.title)} <small>${counts.get(tm.slug)||0}</small></button>`;
+    const taskChips=THREAT_MODES.filter(t=>t.level==='Task').map(chip).join('');
+    const envChips=THREAT_MODES.filter(t=>t.level==='Environment').map(chip).join('');
+    threatBar.innerHTML=
+      `<button type="button" class="traces-model-chip" data-traces-threat="all" aria-pressed="${activeThreatFilter==='all'}">All failure modes <small>${harmPool.length}</small></button>`+
+      `<span class="traces-threat-sep" aria-hidden="true"></span>`+
+      `<div class="traces-threat-group"><span class="traces-threat-label">Task</span>${taskChips}</div>`+
+      `<span class="traces-threat-sep" aria-hidden="true"></span>`+
+      `<div class="traces-threat-group"><span class="traces-threat-label">Environment</span>${envChips}</div>`;
+  }
   function renderModelBar(){
     if(!modelBar)return;
-    const studyScoped=cases.filter(c=>activeStudyFilter==='all'||c.mode.toLowerCase()===activeStudyFilter);
+    const scoped=uiCases.filter(c=>{
+      if(activeStudyFilter!=='all'&&c.mode.toLowerCase()!==activeStudyFilter)return false;
+      if(activeStudyFilter!=='swarmform'&&activeThreatFilter!=='all'&&(c.mode!=='SwarmHarm'||threatSlugOf(c)!==activeThreatFilter))return false;
+      return true;
+    });
     const counts=new Map();
-    studyScoped.forEach(c=>counts.set(c.model,(counts.get(c.model)||0)+1));
-    modelBar.innerHTML=`<button type="button" class="traces-model-chip" data-traces-model="all" aria-pressed="${activeModelFilter==='all'}">All models <small>${studyScoped.length}</small></button>`+
+    scoped.forEach(c=>counts.set(c.model,(counts.get(c.model)||0)+1));
+    modelBar.innerHTML=`<button type="button" class="traces-model-chip" data-traces-model="all" aria-pressed="${activeModelFilter==='all'}">All models <small>${scoped.length}</small></button>`+
       MODEL_ORDER.filter(m=>counts.has(m)).map(m=>`<button type="button" class="traces-model-chip" data-traces-model="${m}" aria-pressed="${activeModelFilter===m}">${modelLogoImg(m)}${escape(models[m].name)} <small>${counts.get(m)}</small></button>`).join('');
   }
-  function populateSelect(){
-    const prev=select.value;
+  function sortGroupItems(items){
+    const mRank=m=>{const i=MODEL_ORDER.indexOf(m);return i<0?99:i;};
+    const dRank=d=>d==='Knowledge Work'?0:1;
+    return items.slice().sort((a,b)=>mRank(a.model)-mRank(b.model)||dRank(a.domain)-dRank(b.domain));
+  }
+  function populateSelect(activeItem){
+    const prev=activeItem?.key||select.value;
     select.replaceChildren();
-    const groups=[
-      {label:'SwarmHarm · 11-model N=4 benchmark',items:cases.filter(c=>c.mode==='SwarmHarm'&&c.id.startsWith('n4-')&&matchesFilters(c))},
-      {label:'SwarmHarm · Core GPT-6.1 Sol threat models',items:cases.filter(c=>c.mode==='SwarmHarm'&&!c.id.startsWith('n4-')&&matchesFilters(c))},
-      {label:'SwarmForm · Channel discovery',items:cases.filter(c=>c.mode==='SwarmForm'&&matchesFilters(c))}
-    ];
+    const pool=uiCases.filter(matchesFilters);
+    // Ensure explicitly deep-linked legacy Sol case remains selectable if active
+    if(activeItem&&!pool.some(c=>c.key===activeItem.key))pool.unshift(activeItem);
+    const groups=[];
+    for(const tm of THREAT_MODES){
+      const items=sortGroupItems(pool.filter(c=>c.mode==='SwarmHarm'&&threatSlugOf(c)===tm.slug));
+      if(items.length)groups.push({label:`${tm.level} · ${tm.title}`,items});
+    }
+    const formItems=sortGroupItems(pool.filter(c=>c.mode==='SwarmForm'));
+    if(formItems.length)groups.push({label:'SwarmForm · Autonomous Channel Discovery',items:formItems});
     for(const g of groups){
-      if(!g.items.length)continue;
       const group=document.createElement('optgroup');group.label=g.label;
       g.items.forEach(c=>{
         const option=document.createElement('option');
         option.value=c.key;
         const mName=models[c.model]?.name||c.modelLabel||c.model;
-        option.textContent=`${c.claim} · ${c.domain} (${mName})`;
+        option.textContent=c.mode==='SwarmHarm'
+          ? `${mName} · ${c.domain}${c.title.includes('Boundary held')?' (Boundary held)':''}`
+          : `${mName} · ${c.claim}`;
         group.append(option);
       });
       select.append(group);
     }
     if(prev&&[...select.options].some(o=>o.value===prev))select.value=prev;
   }
+  syncStudyTabs();
+  renderThreatBar();
   renderModelBar();
   populateSelect();
+
+  function pickFirstMatching(){
+    const pool=uiCases.filter(matchesFilters);
+    if(!pool.length)return null;
+    // Prefer a peer-communication rich run when switching filters
+    return pool.find(c=>(c.counts?.allReads||0)>0)||pool[0];
+  }
+  threatBar?.addEventListener('click',ev=>{
+    const btn=ev.target.closest('[data-traces-threat]');
+    if(!btn)return;
+    const next=btn.dataset.tracesThreat;
+    activeThreatFilter=(activeThreatFilter===next&&next!=='all')?'all':next;
+    if(activeThreatFilter!=='all'&&activeStudyFilter==='swarmform')activeStudyFilter='swarmharm';
+    if(activeModelFilter!=='all'&&!uiCases.some(matchesFilters))activeModelFilter='all';
+    syncStudyTabs();renderThreatBar();renderModelBar();populateSelect();
+    const cur=cases.find(c=>c.key===mountedKey);
+    if(!cur||!matchesFilters(cur)){const pick=pickFirstMatching();if(pick)show(pick.key,{},'#trajectory');}
+  });
   modelBar?.addEventListener('click',ev=>{
     const btn=ev.target.closest('[data-traces-model]');
     if(!btn)return;
     const nextModel=btn.dataset.tracesModel;
     activeModelFilter=(activeModelFilter===nextModel&&nextModel!=='all')?'all':nextModel;
-    renderModelBar();
-    populateSelect();
-    const currentCase=cases.find(c=>c.key===mountedKey);
-    if(currentCase&&!matchesFilters(currentCase)){
-      const firstMatch=cases.find(matchesFilters);
-      if(firstMatch)show(firstMatch.key,{},'#trajectory');
-    }
+    renderThreatBar();renderModelBar();populateSelect();
+    const cur=cases.find(c=>c.key===mountedKey);
+    if(!cur||!matchesFilters(cur)){const pick=pickFirstMatching();if(pick)show(pick.key,{},'#trajectory');}
   });
   root.querySelectorAll('[data-traces-study]').forEach(btn=>{
-    const st=btn.dataset.tracesStudy;
-    const cnt=st==='all'?cases.length:cases.filter(c=>c.mode.toLowerCase()===st).length;
-    const small=btn.querySelector('small');if(small)small.textContent=`(${cnt})`;
     btn.addEventListener('click',()=>{
-      activeStudyFilter=st;
-      if(activeModelFilter!=='all'&&!cases.some(c=>(st==='all'||c.mode.toLowerCase()===st)&&c.model===activeModelFilter)){
-        activeModelFilter='all';
-      }
-      root.querySelectorAll('[data-traces-study]').forEach(b=>b.setAttribute('aria-pressed',String(b===btn)));
-      renderModelBar();
-      populateSelect();
-      root.querySelectorAll('.featured-pill').forEach(pill=>{
-        const pillCase=cases.find(c=>c.id===pill.dataset.showCase);
-        pill.hidden=Boolean(st!=='all'&&pillCase&&pillCase.mode.toLowerCase()!==st);
-      });
-      const currentCase=cases.find(c=>c.key===mountedKey);
-      if(currentCase&&!matchesFilters(currentCase)){
-        const firstMatch=cases.find(c=>matchesFilters(c)&&(c.id.startsWith('n4-')||st==='swarmform'))||cases.find(matchesFilters);
-        if(firstMatch)show(firstMatch.key,{},'#trajectory');
-      }
+      activeStudyFilter=btn.dataset.tracesStudy;
+      if(activeStudyFilter==='swarmform')activeThreatFilter='all';
+      if(activeModelFilter!=='all'&&!uiCases.some(matchesFilters))activeModelFilter='all';
+      syncStudyTabs();renderThreatBar();renderModelBar();populateSelect();
+      const cur=cases.find(c=>c.key===mountedKey);
+      if(!cur||!matchesFilters(cur)){const pick=pickFirstMatching();if(pick)show(pick.key,{},'#trajectory');}
     });
   });
+  function outcomeMarkup(item){
+    const visual=item.outcomeVisual;
+    if(!visual)return `<div class="case-result" data-result="${item.phase===1?'formation':'impact'}"><span class="case-result-label">Outcome</span><p>${escape(item.outcome)}</p></div>`;
+    return `<div class="case-result" data-result="${item.phase===1?'formation':'impact'}"><span class="case-result-label">Outcome</span><p>${escape(visual.action)}</p><dl class="case-result-metrics">${visual.metrics.map(m=>`<div data-tone="${escape(m.tone)}"><dt>${escape(m.label)}</dt><dd>${escape(m.value)}</dd></div>`).join('')}</dl>${visual.note?`<small class="case-result-note">${escape(visual.note)}</small>`:''}</div>`;
+  }
   function renderSummary(item) {
     root.dataset.caseMode=item.full?'full':'review';full.hidden=!item.full;review.hidden=item.full;
     const agentCount=(item.settings||[]).find(([k])=>k==='Agents')?.[1];intro.innerHTML=`<div class="case-setup-inline">${modelLabel(item.model)}<span class="case-inline-sep">·</span><span class="case-inline-meta">${escape(item.mode)} · ${escape(item.domain)}${agentCount?` · ${escape(agentCount)} agents`:''}</span><span class="case-inline-sep">—</span><span class="case-inline-context">${escape(item.context)}</span></div>`;
@@ -170,10 +224,10 @@
     const layout=new URL(location.href).searchParams.get('layout');
     position={...position,layout:['straight','graph'].includes(layout)?layout:'spiral'};
     const selected=cases.find(c=>c.key===id)||cases.find(c=>c.id===id);
-    const retired=Boolean(id&&!selected),defaultCase=cases.find(c=>c.id==='n4-deepseek-eng-records')||cases[0],item=selected||(retired?cases[0]:defaultCase);
+    const retired=Boolean(id&&!selected),defaultCase=pickFirstMatching()||cases.find(c=>c.id==='n4-deepseek-eng-records')||cases[0],item=selected||(retired?cases[0]:defaultCase);
     notice.hidden=!retired;
     if(retired) position={layout:position.layout};
-    select.value=item.key;
+    populateSelect(item);select.value=item.key;
     root.querySelectorAll('.featured-pill').forEach(pill=>{
       pill.setAttribute('aria-current',pill.dataset.showCase===item.id?'true':'false');
     });

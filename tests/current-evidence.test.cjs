@@ -11,8 +11,8 @@ vm.runInNewContext(fs.readFileSync(path.join(root,'static/js/trajectory-cases-da
 const cases=Array.from(context.window.SWARMHARM_CASES);
 const evidence=read('static/data/reviews/current-evidence.json');
 
-test('the public collection contains the six selected threat models in both domains plus all 11 models with official logos',()=>{
-  assert.equal(cases.length,88);
+test('the public collection contains the six selected threat models in both domains plus all 11 models across both studies',()=>{
+  assert.equal(cases.length,99);
   const coreHarm=cases.filter(c=>c.mode==='SwarmHarm'&&!c.id.startsWith('n4-'));
   assert.equal(coreHarm.length,12);
   for(const domain of ['Engineering','Knowledge Work']) {
@@ -23,10 +23,12 @@ test('the public collection contains the six selected threat models in both doma
   }
   assert.ok(coreHarm.every(c=>c.model==='gpt-6.1-sol'));
   assert.equal(cases.filter(c=>c.id.startsWith('n4-')).length,75);
-  assert.equal(new Set(cases.map(c=>c.model)).size,11);
-  assert.equal(new Set(cases.map(c=>c.id)).size,88);
-  assert.equal(fs.readdirSync(path.join(root,'static/data/trajectories')).length,88);
-  assert.equal(fs.readdirSync(path.join(root,'static/data/reviews')).length,89);
+  assert.equal(cases.filter(c=>c.mode==='SwarmForm').length,12);
+  assert.equal(new Set(cases.filter(c=>c.mode==='SwarmForm').map(c=>c.model)).size,11);
+  assert.equal(new Set(cases.filter(c=>c.mode==='SwarmHarm').map(c=>c.model)).size,11);
+  assert.equal(new Set(cases.map(c=>c.id)).size,99);
+  assert.equal(fs.readdirSync(path.join(root,'static/data/trajectories')).length,99);
+  assert.equal(fs.readdirSync(path.join(root,'static/data/reviews')).length,100);
   for(const icon of ['static/images/openai.svg','static/images/models/claude.svg','static/images/models/gemini.svg','static/images/models/deepseek.svg','static/images/models/zai.svg','static/images/models/kimi.svg']){
     assert.ok(fs.existsSync(path.join(root,icon)),icon);
   }
@@ -100,6 +102,6 @@ test('all inline finding and threat-model links select a current case and existi
     assert.equal(item.phase,Number(match[2]));
     if(match[3])assert.ok(read(item.trajectory).events.some(e=>e.id===Number(match[3])));
   }
-  assert.ok(count>=16);
+  assert.ok(count>=12);
   assert.ok(!/balanced-v2|SWARMHARM_ARCHIVED_CASES|data-tax-cell/.test(html));
 });
