@@ -216,3 +216,5 @@
 .findings-primary .life-half { padding: 12px 0px; background: transparent; border: 0px; }
 .finding { padding: 10px 0px; border-inline: 0px; border-radius: 0px; background: transparent; }
 }
+/* The pipeline caption is visible, under the diagram, like every other figure. */
+.detection-pipeline .detection-caption { grid-column: 1 / -1; order: 99; margin: 4px 0 0; color: var(--muted); font: 400 13.5px/1.5 var(--font); }

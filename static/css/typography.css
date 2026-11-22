@@ -23,7 +23,7 @@ body { font-optical-sizing: auto; }
 #main-content > section > .container, body:has(#main-content) :is(.site-header .nav-inner, .site-footer .container) { width: var(--page-width); max-width: none; }
 /* --page-width is desktop-only; keep the essay off the screen edge on phones and tablets. */
 @media screen and (max-width: 900px) {
-#main-content:has(> .hero) > section > .container { padding-inline: clamp(18px, 5vw, 32px); }
+#main-content > section > .container { padding-inline: clamp(18px, 5vw, 32px); }
 }
 /* Essay measure: one shared column, roughly 70 characters per line of body text. */
 .hero .hero-intro, .hero .experiment-bridge { max-width: min(100%, 700px); }
