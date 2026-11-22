@@ -67,11 +67,17 @@ body { display: block; }
 .compact-page-links { display: flex; flex-wrap: wrap; justify-content: center; gap: 6px 20px; padding: 14px; }
 .compact-page-links a { display: inline-flex; align-items: center; min-height: 44px; color: var(--text); }
 }
+/* "Explore Trajectory" wraps onto two lines rather than widening the phone header. */
+@media (max-width: 480px) {
+.site-header .nav-inner nav > a[href$="traces/"] { flex: 0 1 auto; min-width: 0px; white-space: normal; text-align: center; line-height: 1.15; font-size: 14px; }
+.site-header .experiment-nav summary { font-size: 15px; }
+}
 /* The four top-level links only fit the smallest phones at a slightly smaller size. */
 @media (max-width: 359px) {
 .site-header .nav-inner > nav { gap: 4px; padding-inline: 0px; }
-.site-header .experiment-nav summary { font-size: 14.5px; }
-.site-header .nav-inner nav > a { font-size: 14px; }
+.site-header .experiment-nav summary { font-size: 14px; }
+.site-header .nav-inner nav > a { font-size: 13.5px; }
+.site-header .nav-inner nav > a[href$="traces/"] { font-size: 13px; }
 }
 @media (prefers-reduced-motion: reduce) {
 .site-header .nav-inner nav a::after { transition: none; }
