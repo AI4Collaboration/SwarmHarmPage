@@ -535,6 +535,6 @@ html[data-theme="light"] .swimlane-raw {
   background: color-mix(in srgb, var(--text) 8%, transparent);
 }
 .traces-model-chip small {
-  font-size: 10.5px;
+  font-size: 11px;
   opacity: .68;
 }

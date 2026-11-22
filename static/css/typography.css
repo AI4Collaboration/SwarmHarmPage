@@ -19,15 +19,20 @@ body { font-optical-sizing: auto; }
 @media screen and (min-width: 901px) {
 :root { --page-width: min(1140px, calc(100% - 2 * clamp(24px, 3vw, 48px))); }
 #main-content > section > .container, .subpage, .site-header .nav-inner, .site-footer .container, .institution-belt-inner { width: var(--page-width) !important; max-width: none !important; margin-inline: auto; }
-.hero .hero-intro, .hero .experiment-bridge { max-width: min(92%, 98ch); }
 }
 #main-content > section > .container, body:has(#main-content) :is(.site-header .nav-inner, .site-footer .container) { width: var(--page-width); max-width: none; }
-.hero .hero-intro, .hero .experiment-bridge { max-width: min(90%, 104ch); }
+/* --page-width is desktop-only; keep the essay off the screen edge on phones and tablets. */
+@media screen and (max-width: 900px) {
+#main-content:has(> .hero) > section > .container { padding-inline: clamp(18px, 5vw, 32px); }
 }
-.experiment-heading p { margin: 3px 4px 8px; font: 400 17px/1.4 var(--editorial); }
+/* Essay measure: one shared column, roughly 70 characters per line of body text. */
+.hero .hero-intro, .hero .experiment-bridge { max-width: min(100%, 700px); }
+.hero .hero-intro { font-size: clamp(21px, 1.7vw, 24px); line-height: 1.55; }
+.experiment-heading .study-prose p { max-width: 64ch; margin: 0; color: var(--text); font: 400 clamp(18px, 1.35vw, 19.5px)/1.55 var(--editorial); }
 .experiment-heading p strong, .experiment-heading h3 { font: 600 14px/1.3 var(--font); color: var(--finding-ink); }
 .experiment-heading p strong { margin-right: 0.3em; }
-.experiment-heading h3 { margin: 0px 4px; }
+.experiment-heading h3 { margin: 0px; }
+.experiment-heading h3 small { font-size: 13px; }
 
 /* Full-width diagrams on normal desktops; bounded reading distance on ultrawide screens. */
 @media(min-width:1900px){
@@ -35,6 +40,6 @@ body { font-optical-sizing: auto; }
  .record-map-section{margin-inline:0;}
 }
 
-.finding .finding-story, .finding > p { font: 400 16.5px/1.58 var(--editorial); color: var(--text); }
+.finding .finding-story p, .finding > p { font: 400 17px/1.55 var(--editorial); color: color-mix(in srgb, var(--text) 84%, var(--bg)); }
 .traces-page-title, .subpage h1 { font: 400 clamp(38px, 4.4vw, 52px)/1.12 var(--editorial) !important; letter-spacing: -0.025em !important; margin: 0; color: var(--text); }
 .traces-hero .sub-intro, .subpage .sub-intro { font: 400 clamp(19px, 1.55vw, 22px)/1.55 var(--editorial); color: var(--muted); max-width: 72ch; margin: 12px 0 0; }

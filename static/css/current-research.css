@@ -51,9 +51,9 @@ summary::-webkit-details-marker{display:none;}
  .study-tab strong{font-size:22px;}
 }
 .current-scene figcaption{margin:6px auto 0;text-align:center;font:400 13px/1.45 var(--font);max-width:44ch;color:var(--muted);}
-.study-prose{margin:12px 4px 20px;}
+.study-prose{margin:12px 0 22px;}
 .study-prose p{margin:0;color:var(--muted);font:400 15px/1.62 var(--font);max-width:88ch;}
-.finding-story{margin:6px 4px 12px;padding:0;}
+.finding-story{margin:4px 0 14px;padding:0;}
 .finding-story p{margin:0;color:var(--muted);font:400 14px/1.58 var(--font);}
 .section-lead{margin:10px 0 22px;max-width:78ch;color:var(--muted);font:400 16px/1.6 var(--font);}
 .traces-back-link{margin:0 0 12px;font:500 13px/1.4 var(--font);}

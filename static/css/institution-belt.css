@@ -73,8 +73,8 @@
 .institution-collaborators .institution-marquee {
   width: 0;
   flex: 1 1 0;
-  -webkit-mask-image: linear-gradient(90deg, transparent, #000 28px, #000 calc(100% - 28px), transparent);
-  mask-image: linear-gradient(90deg, transparent, #000 28px, #000 calc(100% - 28px), transparent);
+  -webkit-mask-image: linear-gradient(90deg, transparent, #000 56px, #000 calc(100% - 56px), transparent);
+  mask-image: linear-gradient(90deg, transparent, #000 56px, #000 calc(100% - 56px), transparent);
 }
 /* The moving marks share one optical height and a more generous rhythm. */
 .institution-collaborators .institution-list {

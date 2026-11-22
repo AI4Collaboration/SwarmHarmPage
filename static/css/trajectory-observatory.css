@@ -206,7 +206,7 @@
 .record-evidence > summary::-webkit-details-marker { display:none; }
 .record-evidence > summary span { display:grid; gap:1px; }
 .record-evidence > summary b { color:var(--text); font:500 13px/1.4 var(--font); }
-.record-evidence > summary small { color:var(--muted); font:10px/1.4 var(--font); }
+.record-evidence > summary small { color:var(--muted); font:11px/1.4 var(--font); }
 .record-evidence > summary > i { width:7px; height:7px; flex:none; transform:rotate(45deg); border:solid var(--muted); border-width:0 1px 1px 0; transition:transform .18s; }
 .record-evidence[open] > summary > i { transform:rotate(225deg); }
 .record-evidence > :not(summary) { margin-inline:14px; }

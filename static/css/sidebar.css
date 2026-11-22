@@ -52,6 +52,8 @@ body { display: block; }
 .site-header .finding-links { left: 12px; top: 100%; }
 }
 .compact-shortcuts, .compact-page-links { display: none; }
+/* A closed menu still lays out its panel in Chromium; at 320 px that widened the page. */
+.nav-findings:not([open]) > .finding-links { display: none; }
 @media (max-width: 900px) {
 .site-header .nav-inner > nav { display: flex; justify-content: space-between; align-items: center; gap: 8px; padding: 0px 4px; overflow: visible; }
 .site-header .experiment-shortcuts, .site-header .nav-inner nav > a[href*="team"], .site-header .nav-inner nav > a.nav-cta { display: none; }
@@ -64,6 +66,12 @@ body { display: block; }
 .site-header .nav-inner .finding-links a { min-height: 44px; }
 .compact-page-links { display: flex; flex-wrap: wrap; justify-content: center; gap: 6px 20px; padding: 14px; }
 .compact-page-links a { display: inline-flex; align-items: center; min-height: 44px; color: var(--text); }
+}
+/* The four top-level links only fit the smallest phones at a slightly smaller size. */
+@media (max-width: 359px) {
+.site-header .nav-inner > nav { gap: 4px; padding-inline: 0px; }
+.site-header .experiment-nav summary { font-size: 14.5px; }
+.site-header .nav-inner nav > a { font-size: 14px; }
 }
 @media (prefers-reduced-motion: reduce) {
 .site-header .nav-inner nav a::after { transition: none; }
