@@ -573,3 +573,23 @@ html[data-theme="light"] .swimlane-raw {
 @media (max-width: 760px) {
   .traces-threat-sep { display: none; }
 }
+
+.case-select-wrap {
+  position: relative;
+  display: flex;
+  align-items: center;
+  width: 100%;
+  min-width: 0;
+}
+.case-picker-logo {
+  position: absolute;
+  left: 10px;
+  display: inline-grid;
+  place-items: center;
+  pointer-events: none;
+  z-index: 1;
+}
+.traces-toolbar .case-picker select {
+  padding-left: 32px !important;
+  width: 100%;
+}

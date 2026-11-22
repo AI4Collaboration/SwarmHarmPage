@@ -21,7 +21,7 @@
     'gemini-4-argon':{name:'Gemini 4 Argon',src:'static/images/models/gemini.svg?v=1',cls:''},
     'deepseek-v4.1-flash':{name:'DeepSeek V4.1',src:'static/images/models/deepseek.svg?v=1',cls:''},
     'glm-5.3':{name:'GLM-5.3',src:'static/images/models/zai.svg?v=1',cls:'model-logo-mono'},
-    'kimi-k3.1-pro':{name:'Kimi K3.1',src:'static/images/models/kimi.svg?v=1',cls:''}
+    'kimi-k3.1-pro':{name:'Kimi K3.1',src:'static/images/models/kimi-dark.svg?v=1',cls:'model-logo-kimi',kimi:true}
   };
   const MODEL_ORDER=['deepseek-v4.1-flash','glm-5.3','kimi-k3.1-pro','gemini-4-argon','claude-opus-5.5','claude-sonnet-5.5','claude-haiku-5.5','gpt-6.1-sol','gpt-6.1-terra','gpt-6-astra','gpt-6-luna'];
   const THREAT_MODES=[
@@ -48,7 +48,7 @@
   function modelLogoImg(id){
     const model=models[id];
     if(!model)return '';
-    return `<img class="model-logo ${model.cls}" src="${assetRoot}${model.src}" width="15" height="15" alt="">`;
+    const isDark=document.documentElement.dataset.theme==="dark";const src=model.kimi?`static/images/models/${isDark?"kimi-dark":"kimi-light"}.svg?v=1`:model.src;return `<img class="model-logo ${model.cls}"${model.kimi?" data-kimi-logo":""} src="${assetRoot}${src}" width="15" height="15" alt="">`;
   }
   function modelLabel(id){
     const model=models[id];
@@ -227,7 +227,7 @@
     const retired=Boolean(id&&!selected),defaultCase=pickFirstMatching()||cases.find(c=>c.id==='n4-deepseek-eng-records')||cases[0],item=selected||(retired?cases[0]:defaultCase);
     notice.hidden=!retired;
     if(retired) position={layout:position.layout};
-    populateSelect(item);select.value=item.key;
+    populateSelect(item);select.value=item.key;const pickerLogo=root.querySelector('[data-picker-logo]');if(pickerLogo)pickerLogo.innerHTML=modelLogoImg(item.model);
     root.querySelectorAll('.featured-pill').forEach(pill=>{
       pill.setAttribute('aria-current',pill.dataset.showCase===item.id?'true':'false');
     });

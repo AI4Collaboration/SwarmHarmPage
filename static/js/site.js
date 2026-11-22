@@ -159,4 +159,18 @@
   });
   window.addEventListener('hashchange', () => revealTarget(location.hash, true));
   revealTarget(location.hash, true);
+
+  function syncKimiLogos() {
+    const isDark = document.documentElement.dataset.theme === 'dark';
+    const rootPrefix = document.body?.dataset?.root || '';
+    const target = `${rootPrefix}static/images/models/${isDark ? 'kimi-dark' : 'kimi-light'}.svg?v=1`;
+    document.querySelectorAll('[data-kimi-logo]').forEach(img => {
+      if (img.getAttribute('src') !== target) img.setAttribute('src', target);
+    });
+  }
+  syncKimiLogos();
+  if (typeof MutationObserver !== 'undefined') {
+    new MutationObserver(syncKimiLogos).observe(document.documentElement, { attributes: true, attributeFilter: ['data-theme'] });
+  }
+
 })();

@@ -268,3 +268,21 @@ summary::-webkit-details-marker{display:none;}
     gap: 22px;
   }
 }
+
+.failure-mode-providers {
+  grid-column: 2;
+  grid-row: 1 / span 2;
+  align-self: center;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-style: normal;
+}
+.failure-mode-providers .model-logo {
+  width: 14px;
+  height: 14px;
+  opacity: .9;
+}
+.failure-mode-providers i {
+  margin-left: 4px;
+}
