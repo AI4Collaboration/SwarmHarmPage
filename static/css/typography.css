@@ -62,3 +62,8 @@ body { font-optical-sizing: auto; }
 @media (max-width: 640px) { .glance-columns { grid-template-columns: minmax(0, 1fr); } }
 .finding-story a { color: inherit; text-decoration: underline; text-decoration-color: color-mix(in srgb, var(--finding-ink) 55%, transparent); text-underline-offset: 3px; }
 .finding-story a:hover { color: var(--finding-ink); text-decoration-color: currentColor; }
+/* SwarmHarm cards name their failure mode(s) above the finding, in the homepage index's vocabulary. */
+.finding-heading .finding-mode { grid-column: 1 / -1; margin: 0 0 6px; color: var(--finding-ink); font: 600 11.5px/1.4 var(--font); letter-spacing: .06em; text-transform: uppercase; }
+.finding-heading .finding-mode a { color: inherit; text-decoration: none; }
+.finding-heading .finding-mode a:hover { text-decoration: underline; text-underline-offset: 3px; }
+.glance-mode { display: block; margin-top: 1px; color: var(--muted); font: 500 12px/1.4 var(--font); }

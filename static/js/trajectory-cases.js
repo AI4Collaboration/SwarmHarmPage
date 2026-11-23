@@ -91,9 +91,9 @@
     threatBar.innerHTML=
       `<button type="button" class="traces-model-chip" data-traces-threat="all" aria-pressed="${activeThreatFilter==='all'}">All failure modes <small>${harmPool.length}</small></button>`+
       `<span class="traces-threat-sep" aria-hidden="true"></span>`+
-      `<div class="traces-threat-group"><span class="traces-threat-label">Task</span>${taskChips}</div>`+
+      `<div class="traces-threat-group"><span class="traces-threat-label">Task-level</span>${taskChips}</div>`+
       `<span class="traces-threat-sep" aria-hidden="true"></span>`+
-      `<div class="traces-threat-group"><span class="traces-threat-label">Environment</span>${envChips}</div>`;
+      `<div class="traces-threat-group"><span class="traces-threat-label">Environment-level</span>${envChips}</div>`;
   }
   function renderModelBar(){
     if(!modelBar)return;

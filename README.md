@@ -14,7 +14,7 @@ Read these sources before changing claims:
 
 - Root `README.md`: research scope and current results.
 - `rollouts/README.md`: portable tasks and communication conditions.
-- `swarmharm/docs/phase2-taxonomy.md`: six threat models and evidence requirements.
+- `swarmharm/docs/phase2-taxonomy.md`: six failure modes and evidence requirements.
 - `swarmharm/docs/research/mechanism-input-status.json`: the twelve selected inputs and their source-bound reviews.
 - `swarmform/docs/research/swarmform-publication-audit.json`: the completed channel-study audit.
 
