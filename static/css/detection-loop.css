@@ -1,0 +1,53 @@
+/* ---- heading matches the other section titles (e.g. "SwarmHarm taxonomy") ---- */
+#detection-title{font:400 clamp(28px,3vw,38px)/1.12 var(--editorial);color:var(--text)}
+#detection-title small{margin-left:4px;color:var(--muted);font:400 14.5px/1.6 var(--font)}
+/* ---- 3D detection loop (draft v3) ---- */
+#dl-loop{position:relative;display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1.35fr) minmax(0,1fr);grid-template-rows:1fr 1fr;
+  column-gap:40px;row-gap:6px;width:min(100%,980px);height:clamp(290px,24.5vw,370px);margin:4px auto 8px;outline:none;--dl-ink:#201c17;user-select:none;-webkit-user-select:none}
+#dl-loop:focus-visible{outline:2px solid var(--accent);outline-offset:6px;border-radius:8px}
+.dl-cell{position:relative;min-width:0;min-height:0;cursor:pointer;transition:opacity .7s ease,filter .7s ease;border-radius:12px}
+.dl-cell:not(.is-active){opacity:.38;filter:grayscale(.6)}
+.dl-cell:not(.is-active):hover{opacity:.55}
+.dl-cell:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.dl-rec{grid-column:1;grid-row:1/3;align-self:center;height:78%}
+.dl-act{grid-column:2;grid-row:1}
+.dl-trn{grid-column:2;grid-row:2}
+.dl-hum{grid-column:3;grid-row:1/3;align-self:center;height:78%}
+.dl-cell canvas{position:absolute;left:0;right:0;top:40px;bottom:0;width:100%;height:calc(100% - 40px);display:block}
+.dl-labels{position:absolute;left:0;right:0;top:40px;bottom:0;pointer-events:none;overflow:visible}
+.dl-ttl{position:absolute;left:6px;top:4px;pointer-events:none;z-index:2}
+.dl-ttl b{display:block;font:550 14.5px/1.3 var(--font);color:var(--text)}
+.dl-ttl span{display:block;font:400 12.5px/1.45 var(--font);color:var(--muted)}
+.dl-act .dl-ttl b{color:var(--scene-blue,var(--discovery,#3f8ea3))}
+.dl-trn .dl-ttl b{color:var(--scene-red,var(--risk,#c72b25))}
+#dl-loop .dl-lbl{position:absolute;left:0;top:0;opacity:0;white-space:nowrap;will-change:transform,opacity;font:600 11px/1 var(--font);color:var(--dl-ink);
+  padding:5px 8px;border-radius:999px;background:#fffdf8;border:1.25px solid var(--dl-ink);box-shadow:1.5px 1.5px 0 rgba(32,28,23,.85)}
+#dl-loop .dl-lbl.small{font-size:10px;font-weight:500;padding:3px 7px;box-shadow:none;border-width:1px;background:rgba(255,253,248,.9)}
+#dl-loop .dl-lbl.rec{color:#c8352a}
+#dl-loop .dl-lbl.rec::before{content:"";display:inline-block;width:7px;height:7px;border-radius:50%;background:#e0402f;margin-right:5px;vertical-align:-.5px;animation:dl-blink 1s steps(2) infinite}
+#dl-loop .dl-lbl.warn{background:#d9443a;color:#fff}
+#dl-loop .dl-lbl.action{background:#c6e6ee}
+#dl-loop .dl-lbl.transcript{background:#ffd6cf}
+#dl-loop .dl-lbl.ok{background:#b9e4c6}
+@keyframes dl-blink{50%{opacity:.15}}
+#dl-arrows{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;overflow:visible;z-index:1}
+#dl-arrows path{fill:none;stroke:var(--muted);stroke-width:1.6;stroke-linecap:round;opacity:.35;transition:opacity .5s,stroke-width .5s}
+#dl-arrows path.a{stroke:var(--scene-blue,var(--discovery,#3f8ea3))}
+#dl-arrows path.t{stroke:var(--scene-red,var(--risk,#c72b25))}
+#dl-arrows path.on{opacity:1;stroke-width:2.2;stroke-dasharray:7 6;animation:dl-flow 1s linear infinite}
+@keyframes dl-flow{to{stroke-dashoffset:-13}}
+.dl-controls{position:absolute;right:0;bottom:0;display:flex;align-items:center;gap:6px;z-index:3}
+.dl-ctl{all:unset;cursor:pointer;display:grid;place-items:center;width:30px;height:30px;border-radius:7px;color:var(--text);border:1px solid var(--line)}
+.dl-ctl:hover{border-color:var(--muted)}
+.dl-ctl:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.dl-ctl svg{width:15px;height:15px}
+.dl-timeline{width:64px;height:2px;border-radius:2px;background:var(--line);overflow:hidden;position:relative;margin-right:4px}
+#dl-tl{position:absolute;inset:0 auto 0 0;width:0;background:var(--text)}
+#dl-fallback{position:absolute;inset:0;display:none;place-items:center;text-align:center;color:var(--text);font:500 15px/1.5 var(--font)}
+@media (max-width:760px){
+  #dl-loop{grid-template-columns:1fr;grid-template-rows:none;height:auto;row-gap:14px;padding-bottom:40px}
+  .dl-cell,.dl-rec,.dl-hum{grid-column:1;grid-row:auto;height:auto;aspect-ratio:16/10;align-self:stretch}
+  #dl-arrows{display:none}
+}
+</style>
+</head>
