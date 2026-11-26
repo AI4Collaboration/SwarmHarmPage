@@ -5,22 +5,21 @@ body { display: block; }
 @media (min-width: 801px) {
 .site-header nav > :last-child { margin-right: 9px; }
 }
-.experiment-nav { display: flex; flex: 0 0 auto; align-items: center; gap: 10px; --experiment-color: var(--formation-ink,#285c8c); --shortcut-color: color-mix(in srgb,var(--experiment-color) 52%,var(--muted)); }
-.experiment-nav[aria-label="SwarmHarm"] { --experiment-color: var(--misalignment-ink,#9b3b49); }
+.experiment-nav { display: flex; flex: 0 0 auto; align-items: center; gap: 6px; --experiment-color: var(--formation-ink,#285c8c); --shortcut-color: color-mix(in srgb,var(--experiment-color) 65%,var(--muted)); }
+.experiment-nav[data-experiment="swarmharm"], .experiment-nav[aria-label="Evaluating swarm harms"], .experiment-nav[aria-label="SwarmHarm"] { --experiment-color: var(--misalignment-ink,#9b3b49); }
 :root[data-theme="dark"] .experiment-nav { --experiment-color: #94c5f5; }
-:root[data-theme="dark"] .experiment-nav[aria-label="SwarmHarm"] { --experiment-color: #f0a0ae; }
-.site-header .experiment-nav summary { min-height: 48px; font-size: 20px; font-weight: 650; color: var(--experiment-color); }
-.experiment-shortcuts { display: flex; align-items: center; gap: 10px; }
-.site-header .nav-inner .experiment-shortcuts a { min-height: 48px; color: var(--shortcut-color); font-size: 18px; }
+:root[data-theme="dark"] .experiment-nav[data-experiment="swarmharm"], :root[data-theme="dark"] .experiment-nav[aria-label="Evaluating swarm harms"], :root[data-theme="dark"] .experiment-nav[aria-label="SwarmHarm"] { --experiment-color: #f0a0ae; }
+.site-header .experiment-nav summary { min-height: 48px; font-size: 16px; font-weight: 600; color: var(--experiment-color); white-space: nowrap; }
+.experiment-shortcuts { display: none; }
 .nav-findings { position: relative; margin: 0px; }
 .experiment-nav .nav-findings[open] { z-index: 2; }
-.site-header summary { display: flex; align-items: center; gap: 7px; min-height: 54px; padding: 0px; color: var(--text); font: 500 17px/1.2 var(--font); cursor: pointer; list-style: none; }
+.site-header summary { display: flex; align-items: center; gap: 6px; min-height: 54px; padding: 0px; color: var(--text); font: 500 16px/1.2 var(--font); cursor: pointer; list-style: none; }
 .site-header summary::-webkit-details-marker { display: none; }
-.site-header summary::after { content: ""; width: 5px; height: 5px; border-right: 1.4px solid; border-bottom: 1.4px solid; transform: rotate(45deg); }
+.site-header summary::after { content: ""; flex: 0 0 auto; width: 5px; height: 5px; border-right: 1.4px solid; border-bottom: 1.4px solid; transform: rotate(45deg); }
 .site-header details[open] > summary::after { transform: rotate(225deg); }
-.nav-findings:has(a[aria-current="location"]) > summary { color: var(--scene-blue); }
-.finding-links { position: absolute; z-index: 1; top: 100%; left: 0px; display: grid; width: max-content; min-width: 180px; max-height: calc(100dvh - 115px); overflow: auto; padding: 5px 14px; border: 1px solid var(--line); border-radius: 8px; background: var(--bg); box-shadow: 0 8px 24px color-mix(in srgb,var(--text) 12%,transparent); }
-.site-header .nav-inner nav a { position: relative; display: inline-flex; align-items: center; flex: 0 0 auto; min-height: 54px; padding: 0px; border: 0px; border-radius: 0px; color: var(--text); font: 500 17px/1.2 var(--font); white-space: nowrap; }
+.nav-findings:has(a[aria-current="location"]) > summary { color: var(--experiment-color); }
+.finding-links { position: absolute; z-index: 1; top: 100%; left: 0px; display: grid; width: max-content; min-width: 240px; max-height: calc(100dvh - 115px); overflow: auto; padding: 6px 14px 8px; border: 1px solid var(--line); border-radius: 8px; background: var(--bg); box-shadow: 0 8px 24px color-mix(in srgb,var(--text) 12%,transparent); }
+.site-header .nav-inner nav a { position: relative; display: inline-flex; align-items: center; flex: 0 0 auto; min-height: 54px; padding: 0px; border: 0px; border-radius: 0px; color: var(--text); font: 500 15.5px/1.2 var(--font); white-space: nowrap; }
 .site-header .nav-inner nav a::after { content: ""; position: absolute; inset: auto 0px 0px; height: 2px; border-radius: 2px 2px 0px 0px; background: currentcolor; transform: scaleX(0); transform-origin: center center; transition: transform 0.18s; }
 .site-header .nav-inner nav a:is(:hover, :focus-visible) { color: var(--text); }
 .site-header .nav-inner nav a[aria-current="location"] { color: var(--nav-selected,var(--text)); }
@@ -41,57 +40,49 @@ body { display: block; }
 .site-header nav a[href="#contact"] { --nav-selected: #934557; --nav-selected-dark: #f1abb9; }
 .site-header .nav-inner .finding-links a { min-height: 40px; font-size: 15px; }
 .site-header .nav-inner nav a[aria-current="page"]::after { transform: scaleX(1); }
-@media (max-width: 1050px) {
+@media (max-width: 1080px) {
 .site-header .nav-inner { width: calc(100% - 24px); min-height: 48px; position: static; }
-.site-header .nav-inner > nav { position: static; flex-wrap: nowrap; justify-content: space-between; gap: 26px; padding-inline: 2px 12px; overflow-x: auto; scrollbar-width: thin; }
-.site-header .experiment-nav { gap: 8px; }
-.site-header .experiment-nav summary { font-size: 18px; }
-.site-header .nav-inner .experiment-shortcuts a { font-size: 16px; }
-.site-header .nav-inner nav > a { min-height: 48px; }
+.site-header .nav-inner > nav { position: static; flex-wrap: nowrap; justify-content: space-between; gap: 14px; padding-inline: 2px 8px; overflow: visible; }
+.site-header .experiment-nav summary { font-size: 14.5px; }
+.site-header .nav-inner nav > a { min-height: 48px; font-size: 14.5px; }
 .site-header .experiment-nav, .site-header .nav-findings { position: static; }
 .site-header .finding-links { left: 12px; top: 100%; }
 }
-.compact-shortcuts, .compact-page-links { display: none; }
+.compact-shortcuts { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; border-bottom: 1px solid var(--line); padding-bottom: 4px; margin-bottom: 4px; }
+.compact-shortcuts a { color: var(--experiment-color) !important; font-weight: 600 !important; }
+.compact-page-links { display: none; }
 /* A closed menu still lays out its panel in Chromium; at 320 px that widened the page. */
 .nav-findings:not([open]) > .finding-links { display: none; }
 @media (max-width: 900px) {
-.site-header .nav-inner > nav { display: flex; justify-content: space-between; align-items: center; gap: 8px; padding: 0px 4px; overflow: visible; }
-.site-header .experiment-shortcuts, .site-header .nav-inner nav > a[href*="team"], .site-header .nav-inner nav > a.nav-cta { display: none; }
-.site-header .nav-inner nav > a { min-height: 44px; font-size: 15px; }
-.site-header .experiment-nav summary { justify-content: center; min-height: 44px; font-size: 16px; }
-.site-header .experiment-nav, .site-header .nav-findings { display: block; width: auto; }
+.site-header .nav-inner { width: calc(100% - 20px); }
+.site-header .nav-inner > nav { display: flex; justify-content: space-between; align-items: center; gap: 8px; padding: 4px 4px; overflow: visible; }
+.site-header .nav-inner nav > a[href*="team"], .site-header .nav-inner nav > a.nav-cta { display: none; }
+.site-header .nav-inner nav > a { min-height: 44px; font-size: 14.5px; }
+.site-header .experiment-nav summary { justify-content: center; min-height: 44px; font-size: 14.5px; white-space: normal; text-align: center; line-height: 1.2; }
+.site-header .experiment-nav, .site-header .nav-findings { display: block; flex: 0 1 auto; min-width: 0px; width: auto; }
 .site-header .finding-links { left: 12px; right: 12px; width: auto; min-width: 0px; }
-.site-header .compact-shortcuts { display: grid; grid-template-columns: 1fr 1fr; border-bottom: 1px solid var(--line); }
-.site-header .compact-shortcuts a { color: var(--shortcut-color); font-weight: 600; }
 .site-header .nav-inner .finding-links a { min-height: 44px; }
 .compact-page-links { display: flex; flex-wrap: wrap; justify-content: center; gap: 6px 20px; padding: 14px; }
 .compact-page-links a { display: inline-flex; align-items: center; min-height: 44px; color: var(--text); }
 }
-/* "Explore Trajectory" wraps onto two lines rather than widening the phone header. */
-@media (max-width: 480px) {
-.site-header .nav-inner nav > a[href$="traces/"] { flex: 0 1 auto; min-width: 0px; white-space: normal; text-align: center; line-height: 1.15; font-size: 14px; }
-.site-header .experiment-nav summary { font-size: 15px; }
+/* Narrow mobile headers wrap longer headings cleanly onto two lines without overflow. */
+@media (max-width: 600px) {
+.site-header .nav-inner > nav { gap: 6px; padding: 4px 2px; }
+.site-header .nav-inner nav > a[href$="traces/"] { flex: 0 1 auto; min-width: 0px; white-space: normal; text-align: center; line-height: 1.15; font-size: 13px; }
+.site-header .experiment-nav summary { font-size: 13px; gap: 4px; }
+.site-header .nav-inner nav > a { font-size: 13px; }
 }
-/* The four top-level links only fit the smallest phones at a slightly smaller size. */
-@media (max-width: 359px) {
+@media (max-width: 390px) {
 .site-header .nav-inner > nav { gap: 4px; padding-inline: 0px; }
-.site-header .experiment-nav summary { font-size: 14px; }
-.site-header .nav-inner nav > a { font-size: 13.5px; }
-.site-header .nav-inner nav > a[href$="traces/"] { font-size: 13px; }
+.site-header .experiment-nav summary { font-size: 12px; gap: 3px; }
+.site-header .nav-inner nav > a { font-size: 12px; }
+.site-header .nav-inner nav > a[href$="traces/"] { font-size: 12px; }
 }
 @media (prefers-reduced-motion: reduce) {
 .site-header .nav-inner nav a::after { transition: none; }
 }
 @media print {
 .site-header { display: none; }
-}
-
-/* Intermediate screens retain the main links, with secondary links in the menus. */
-@media(min-width:901px) and (max-width:1120px){
- .site-header .experiment-shortcuts{display:none;}
- .site-header .compact-shortcuts{display:grid;grid-template-columns:1fr 1fr;gap:16px;border-bottom:1px solid var(--line);}
- .site-header .nav-inner>nav{overflow:visible;gap:18px;padding-right:10px;}
- .site-header .finding-links{min-width:230px;}
 }
 @media(max-height:500px){
  .site-header .finding-links{max-height:calc(100dvh - 72px);overscroll-behavior:contain;}
