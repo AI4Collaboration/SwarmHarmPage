@@ -65,20 +65,16 @@ body { display: block; }
 .compact-page-links { display: flex; flex-wrap: wrap; justify-content: center; gap: 6px 20px; padding: 14px; }
 .compact-page-links a { display: inline-flex; align-items: center; min-height: 44px; color: var(--text); }
 }
-/* Narrow mobile headers wrap longer headings cleanly onto two lines without overflow. */
-@media (max-width: 640px) {
-.site-header .nav-inner > nav { gap: 6px; padding: 4px 2px; }
-.site-header .nav-inner nav > a[href$="traces/"],
-.site-header .nav-inner nav > a[href$="#results-analysis"] { flex: 0 1 auto; min-width: 0px; white-space: normal; text-align: center; line-height: 1.15; font-size: 13px; }
-.site-header .experiment-nav summary { font-size: 13px; gap: 4px; }
-.site-header .nav-inner nav > a { font-size: 13px; }
+/* Narrow mobile headers wrap cleanly without squishing SwarmForm/SwarmHarm. */
+@media (max-width: 680px) {
+.site-header .nav-inner > nav { flex-wrap: wrap; justify-content: center; gap: 0px 14px; padding: 4px 2px; }
+.site-header .experiment-nav, .site-header .nav-findings { flex: 0 0 auto; }
+.site-header .experiment-nav summary { min-height: 40px; font-size: 13.5px; gap: 4px; white-space: nowrap; }
+.site-header .nav-inner nav > a { min-height: 40px; font-size: 13.5px; white-space: nowrap; }
 }
-@media (max-width: 420px) {
-.site-header .nav-inner > nav { gap: 4px; padding-inline: 0px; }
-.site-header .experiment-nav summary { font-size: 11.8px; gap: 3px; }
-.site-header .nav-inner nav > a { font-size: 11.8px; }
-.site-header .nav-inner nav > a[href$="traces/"],
-.site-header .nav-inner nav > a[href$="#results-analysis"] { font-size: 11.2px; }
+@media (max-width: 380px) {
+.site-header .nav-inner > nav { gap: 0px 10px; padding-inline: 0px; }
+.site-header .experiment-nav summary, .site-header .nav-inner nav > a { min-height: 38px; font-size: 12.5px; }
 }
 @media (prefers-reduced-motion: reduce) {
 .site-header .nav-inner nav a::after { transition: none; }
