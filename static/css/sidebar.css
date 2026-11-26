@@ -32,7 +32,7 @@ body { display: block; }
 .site-header nav a[href="#finding-2-3"] { --nav-selected: #7550a3; --nav-selected-dark: #c9a8f0; }
 .site-header nav a[href="#finding-2-1"] { --nav-selected: #b11d32; --nav-selected-dark: #ff8998; }
 .site-header nav a[href="#finding-2-2"] { --nav-selected: #a65c00; --nav-selected-dark: #efbd72; }
-.site-header nav a[href="#trajectory"] { --nav-selected: #087781; --nav-selected-dark: #83d4db; }
+.site-header nav a[href="#trajectory"], .site-header nav a[href="#results-analysis"] { --nav-selected: #087781; --nav-selected-dark: #83d4db; }
 .site-header nav a[href="#resources"] { --nav-selected: #49684e; --nav-selected-dark: #b2d6ad; }
 .site-header nav a[href="#team"] { --nav-selected: #3a528d; --nav-selected-dark: #a7bafa; }
 .site-header .nav-inner nav a.nav-cta { color: var(--text); font-weight: 650; }
@@ -66,17 +66,19 @@ body { display: block; }
 .compact-page-links a { display: inline-flex; align-items: center; min-height: 44px; color: var(--text); }
 }
 /* Narrow mobile headers wrap longer headings cleanly onto two lines without overflow. */
-@media (max-width: 600px) {
+@media (max-width: 640px) {
 .site-header .nav-inner > nav { gap: 6px; padding: 4px 2px; }
-.site-header .nav-inner nav > a[href$="traces/"] { flex: 0 1 auto; min-width: 0px; white-space: normal; text-align: center; line-height: 1.15; font-size: 13px; }
+.site-header .nav-inner nav > a[href$="traces/"],
+.site-header .nav-inner nav > a[href$="#results-analysis"] { flex: 0 1 auto; min-width: 0px; white-space: normal; text-align: center; line-height: 1.15; font-size: 13px; }
 .site-header .experiment-nav summary { font-size: 13px; gap: 4px; }
 .site-header .nav-inner nav > a { font-size: 13px; }
 }
-@media (max-width: 390px) {
+@media (max-width: 420px) {
 .site-header .nav-inner > nav { gap: 4px; padding-inline: 0px; }
-.site-header .experiment-nav summary { font-size: 12px; gap: 3px; }
-.site-header .nav-inner nav > a { font-size: 12px; }
-.site-header .nav-inner nav > a[href$="traces/"] { font-size: 12px; }
+.site-header .experiment-nav summary { font-size: 11.8px; gap: 3px; }
+.site-header .nav-inner nav > a { font-size: 11.8px; }
+.site-header .nav-inner nav > a[href$="traces/"],
+.site-header .nav-inner nav > a[href$="#results-analysis"] { font-size: 11.2px; }
 }
 @media (prefers-reduced-motion: reduce) {
 .site-header .nav-inner nav a::after { transition: none; }

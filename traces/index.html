@@ -4,8 +4,8 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <meta name="theme-color" content="#111315">
-  <meta name="description" content="Results and interactive trajectory analysis across SwarmForm and SwarmHarm.">
-  <title>Results &amp; Analysis | SwarmHarm</title>
+  <meta name="description" content="Explore recorded multi-agent trajectories across SwarmForm and SwarmHarm.">
+  <title>Explore Trajectory | SwarmHarm</title>
   <link rel="canonical" href="https://swarmharm.com/traces/">
   <link rel="icon" href="../static/images/swarmharm-mark.svg?v=11">
   <script src="../static/js/theme.js?v=52"></script>
@@ -19,11 +19,11 @@
   <link rel="stylesheet" href="../static/css/trajectory-observatory.css?v=72">
   <link rel="stylesheet" href="../static/css/trajectory-swimlane.css?v=86">
   <link rel="stylesheet" href="../static/css/findings.css?v=80">
-  <link rel="stylesheet" href="../static/css/sidebar.css?v=87">
+  <link rel="stylesheet" href="../static/css/sidebar.css?v=89">
   <link rel="stylesheet" href="../static/css/project-page.css?v=78">
   <link rel="stylesheet" href="../static/css/project-subpages.css?v=78">
   <link rel="stylesheet" href="../static/css/visual-system.css?v=53">
-  <link rel="stylesheet" href="../static/css/current-research.css?v=88">
+  <link rel="stylesheet" href="../static/css/current-research.css?v=89">
   <script src="../static/js/site.js?v=86" defer></script>
   <script src="../static/js/trajectory-cases-data.js?v=84" defer></script>
   <script src="../static/js/trajectory-orbits.js?v=68" defer></script>
@@ -42,9 +42,9 @@
   <header class="site-header"><div class="container nav-inner">
     <nav id="primary-navigation" aria-label="Main navigation">
       <a href="../">Home</a>
-      <div class="experiment-nav" data-experiment="swarmform" role="group" aria-label="Evaluating swarm formation">
+      <div class="experiment-nav" data-experiment="swarmform" role="group" aria-label="SwarmForm">
         <details class="nav-findings" name="research-navigation">
-          <summary>Evaluating swarm formation</summary>
+          <summary>SwarmForm</summary>
           <div class="finding-links">
             <div class="compact-shortcuts">
               <a href="../#swarmform-setting">Setting</a>
@@ -56,9 +56,9 @@
           </div>
         </details>
       </div>
-      <div class="experiment-nav" data-experiment="swarmharm" role="group" aria-label="Evaluating swarm harms">
+      <div class="experiment-nav" data-experiment="swarmharm" role="group" aria-label="SwarmHarm">
         <details class="nav-findings" name="research-navigation">
-          <summary>Evaluating swarm harms</summary>
+          <summary>SwarmHarm</summary>
           <div class="finding-links">
             <div class="compact-shortcuts">
               <a href="../#swarmharm-setting">Setting</a>
@@ -71,7 +71,8 @@
           </div>
         </details>
       </div>
-      <a href="../traces/" aria-current="page">Results &amp; Analysis</a>
+      <a href="../#results-analysis">Results &amp; Analysis</a>
+      <a href="../traces/" aria-current="page">Explore Trajectory</a>
       <a href="../team/">Team</a>
       <a class="nav-cta" href="../call-to-action/">Get involved</a>
     </nav>
@@ -85,8 +86,8 @@
       <div class="container">
         <section class="trajectory-viewer" id="trajectory" aria-labelledby="trajectory-title">
           <header class="traces-hero">
-            <h1 class="traces-page-title" id="trajectory-title" tabindex="-1">Results &amp; Analysis</h1>
-            <p class="sub-intro">89 recorded runs across 11 models — inspect agent lanes, byte-verified peer reads, and solo vs. joint replay.</p>
+            <h1 class="traces-page-title" id="trajectory-title" tabindex="-1">Explore Trajectory</h1>
+            <p class="sub-intro">Inspect 89 showcased runs across 11 frontier models. Follow each agent’s vertical lane to see what it does on its own and how files, grading rules, and completion records move between peers.</p>
           </header>
           <div class="traces-toolbar">
             <div class="traces-study-filter" role="group" aria-label="Filter runs by study">
@@ -113,7 +114,8 @@
   <footer class="site-footer">
   <nav class="compact-page-links" aria-label="Project links">
       <a href="../">Home</a>
-      <a href="../traces/" aria-current="page">Results &amp; Analysis</a>
+      <a href="../#results-analysis">Results &amp; Analysis</a>
+      <a href="../traces/" aria-current="page">Explore Trajectory</a>
       <a href="../team/">Team</a>
       <a href="../call-to-action/">Get involved</a>
   </nav>
