@@ -633,6 +633,16 @@ summary::-webkit-details-marker{display:none;}
 .results-matrix tbody tr:hover {
   background: color-mix(in srgb, var(--text) 3%, transparent);
 }
+.results-matrix tbody tr.family-start th,
+.results-matrix tbody tr.family-start td {
+  border-top: 1.5px solid color-mix(in srgb, var(--text) 18%, transparent);
+}
+.dl-hint {
+  margin: 8px 0 0;
+  text-align: center;
+  font: 500 12.5px/1.4 var(--font);
+  color: var(--muted);
+}
 .cell-pill {
   display: inline-flex;
   align-items: center;
