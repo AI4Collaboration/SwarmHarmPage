@@ -34,7 +34,7 @@
   <link rel="stylesheet" href="static/css/project-page.css?v=71">
   <link rel="stylesheet" href="static/css/project-subpages.css?v=80">
   <link rel="stylesheet" href="static/css/visual-system.css?v=53">
-  <link rel="stylesheet" href="static/css/current-research.css?v=100">
+  <link rel="stylesheet" href="static/css/current-research.css?v=101">
 
 
   <script src="static/js/swarmharm_title_demo_v3.js?v=74" defer></script>
@@ -155,35 +155,51 @@
           <p><span class="blog-tldr-label">TL;DR</span><strong>AI agents that look safe when tested alone can still form swarms and cause collective harm once they share an environment.</strong> Even in separate containers with no mention of teammates, agents discover empty shared folders, sockets, and memory to communicate with one another (<a href="#form-the-swarm">SwarmForm</a>). After they form a swarm on ordinary work tasks (<a href="#cause-harm">SwarmHarm</a>), <span class="tldr-hl">individually harmless agents routinely fail together</span>: they crowd out shared compute with zero messages, cross weak boundaries in parallel, and <span class="tldr-hl">copy peers' rule shortcuts at larger scale</span> even when smaller groups follow the rules.</p>
         </aside>
 
-        <div class="settings-split" aria-label="Overview of SwarmForm and SwarmHarm process flows">
+        <div class="settings-split" aria-label="Visual overview of SwarmForm and SwarmHarm">
           <article class="setting-card setting-card-form" id="swarmform-setting">
             <div class="setting-card-head">
               <h2>SwarmForm</h2>
               <span class="setting-card-eyebrow">Step 1 · How Swarms Form</span>
             </div>
             <div class="setting-flow">
-              <svg viewBox="0 0 460 86" role="img" aria-labelledby="sf-flow-title">
-                <title id="sf-flow-title">SwarmForm process flow: separate agents discover each other through an empty shared space and establish communication</title>
+              <svg viewBox="0 0 460 120" role="img" aria-labelledby="sf-flow-title">
+                <title id="sf-flow-title">SwarmForm visual: separate agents in isolated sandboxes discover each other through an empty shared space and start communicating</title>
                 <defs>
                   <marker id="sf-arr" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto">
                     <path d="M2 2L8 5L2 8" fill="none" stroke="context-stroke" stroke-width="1.6" stroke-linecap="round"/>
                   </marker>
                 </defs>
-                <rect x="8" y="14" width="128" height="58" rx="8" class="flow-node"/>
-                <text x="72" y="38" text-anchor="middle" class="flow-title">Separate Agents</text>
-                <text x="72" y="56" text-anchor="middle" class="flow-sub">unaware of peers</text>
 
-                <path d="M140 43 H162" class="flow-curve" marker-end="url(#sf-arr)"/>
+                <!-- Step 1: Separate sandboxes -->
+                <rect x="6" y="8" width="128" height="84" rx="9" class="flow-stage"/>
+                <rect x="14" y="20" width="52" height="58" rx="7" class="flow-box-dashed"/>
+                <rect x="74" y="20" width="52" height="58" rx="7" class="flow-box-dashed"/>
+                <image href="static/images/fieldguide/finding-agents.svg?v=8#b-curious" x="14" y="31" width="52" height="37"/>
+                <image href="static/images/fieldguide/finding-agents.svg?v=8#a-curious" x="74" y="31" width="52" height="37"/>
+                <text x="70" y="110" text-anchor="middle" class="flow-title">Separate sandboxes</text>
 
-                <rect x="166" y="14" width="128" height="58" rx="8" class="flow-hub"/>
-                <text x="230" y="38" text-anchor="middle" class="flow-hub-title">Empty Shared Space</text>
-                <text x="230" y="56" text-anchor="middle" class="flow-sub">folder · socket · memory</text>
+                <path d="M139 50 H160" class="flow-curve" marker-end="url(#sf-arr)"/>
 
-                <path d="M298 43 H320" class="flow-curve" marker-end="url(#sf-arr)"/>
+                <!-- Step 2: Shared folder / socket -->
+                <rect x="166" y="8" width="128" height="84" rx="9" class="flow-stage"/>
+                <image href="static/images/fieldguide/finding-agents.svg?v=8#a-speaking" x="168" y="31" width="46" height="33"/>
+                <rect x="216" y="28" width="28" height="38" rx="4" class="flow-paper"/>
+                <path d="M222 40h16m-16 8h12" class="flow-link"/>
+                <image href="static/images/fieldguide/finding-agents.svg?v=8#b-surprised" x="246" y="31" width="46" height="33"/>
+                <path d="M206 27 Q230 14 252 27" class="flow-link" marker-end="url(#sf-arr)"/>
+                <text x="230" y="110" text-anchor="middle" class="flow-title">Empty shared space</text>
 
-                <rect x="324" y="14" width="128" height="58" rx="8" class="flow-node"/>
-                <text x="388" y="38" text-anchor="middle" class="flow-title">Establish Contact</text>
-                <text x="388" y="56" text-anchor="middle" class="flow-sub">discover &amp; exchange</text>
+                <path d="M299 50 H320" class="flow-curve" marker-end="url(#sf-arr)"/>
+
+                <!-- Step 3: Discover & communicate -->
+                <rect x="326" y="8" width="128" height="84" rx="9" class="flow-stage"/>
+                <path d="M364 38 Q390 22 416 38" class="flow-link"/>
+                <path d="M356 54 Q370 72 384 68" class="flow-link"/>
+                <path d="M424 54 Q410 72 396 68" class="flow-link"/>
+                <image href="static/images/fieldguide/finding-agents.svg?v=8#a-attentive" x="334" y="20" width="46" height="33"/>
+                <image href="static/images/fieldguide/finding-agents.svg?v=8#b-speaking" x="400" y="20" width="46" height="33"/>
+                <image href="static/images/fieldguide/finding-agents.svg?v=8#c-relieved" x="367" y="52" width="46" height="33"/>
+                <text x="390" y="110" text-anchor="middle" class="flow-title">Discover &amp; communicate</text>
               </svg>
             </div>
             <p class="setting-card-summary">We put agents in separate containers with an empty shared folder, socket, or memory region, never mentioning teammates, and see if they discover each other and establish communication.</p>
@@ -195,31 +211,45 @@
               <span class="setting-card-eyebrow">Step 2 · What Happens After</span>
             </div>
             <div class="setting-flow">
-              <svg viewBox="0 0 460 86" role="img" aria-labelledby="sh-flow-title">
-                <title id="sh-flow-title">SwarmHarm process flow: after agents form a swarm, ordinary work with realistic bottlenecks leads to collective harm</title>
+              <svg viewBox="0 0 460 120" role="img" aria-labelledby="sh-flow-title">
+                <title id="sh-flow-title">SwarmHarm visual: after agents form a swarm, they hit real bottlenecks and either copy shortcuts or overload shared resources together</title>
                 <defs>
                   <marker id="sh-arr" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto">
                     <path d="M2 2L8 5L2 8" fill="none" stroke="context-stroke" stroke-width="1.6" stroke-linecap="round"/>
                   </marker>
                 </defs>
-                <rect x="8" y="14" width="128" height="58" rx="8" class="flow-node"/>
-                <text x="72" y="38" text-anchor="middle" class="flow-title">After Swarm Forms</text>
-                <text x="72" y="56" text-anchor="middle" class="flow-sub">shared environment</text>
 
-                <path d="M140 43 H162" class="flow-curve" marker-end="url(#sh-arr)"/>
+                <!-- Step 1: Swarm on ordinary work -->
+                <rect x="6" y="8" width="128" height="84" rx="9" class="flow-stage"/>
+                <image href="static/images/fieldguide/finding-agents.svg?v=8#a-focused-down" x="14" y="28" width="44" height="31"/>
+                <image href="static/images/fieldguide/finding-agents.svg?v=8#b-focused-down" x="48" y="38" width="44" height="31"/>
+                <image href="static/images/fieldguide/finding-agents.svg?v=8#c-focused-down" x="82" y="28" width="44" height="31"/>
+                <text x="70" y="110" text-anchor="middle" class="flow-title">After swarm forms</text>
 
-                <rect x="166" y="14" width="128" height="58" rx="8" class="flow-hub"/>
-                <text x="230" y="38" text-anchor="middle" class="flow-hub-title">Ordinary Work</text>
-                <text x="230" y="56" text-anchor="middle" class="flow-sub">realistic bottlenecks</text>
+                <path d="M139 50 H160" class="flow-curve" marker-end="url(#sh-arr)"/>
 
-                <path d="M298 43 H320" class="flow-curve" marker-end="url(#sh-arr)"/>
+                <!-- Step 2: Hit bottlenecks & edit rule -->
+                <rect x="166" y="8" width="128" height="84" rx="9" class="flow-stage"/>
+                <image href="static/images/fieldguide/finding-agents.svg?v=8#b-editing" x="170" y="30" width="46" height="33"/>
+                <rect x="218" y="26" width="26" height="36" rx="4" class="flow-paper"/>
+                <path d="M223 38h16m-16 8h11" class="flow-link"/>
+                <image href="static/images/fieldguide/finding-agents.svg?v=8#a-attentive" x="246" y="30" width="46" height="33"/>
+                <path d="M244 44 H252" class="flow-link"/>
+                <text x="230" y="110" text-anchor="middle" class="flow-title">Hit real bottlenecks</text>
 
-                <rect x="324" y="14" width="128" height="58" rx="8" class="flow-node"/>
-                <text x="388" y="38" text-anchor="middle" class="flow-title">Collective Harm</text>
-                <text x="388" y="56" text-anchor="middle" class="flow-sub">contagion or overload</text>
+                <path d="M299 50 H320" class="flow-curve" marker-end="url(#sh-arr)"/>
+
+                <!-- Step 3: Collective harm -->
+                <rect x="326" y="8" width="128" height="84" rx="9" class="flow-stage"/>
+                <image href="static/images/fieldguide/finding-agents.svg?v=8#a-worried" x="332" y="18" width="42" height="30"/>
+                <image href="static/images/fieldguide/finding-agents.svg?v=8#b-editing" x="369" y="18" width="42" height="30"/>
+                <image href="static/images/fieldguide/finding-agents.svg?v=8#c-worried" x="406" y="18" width="42" height="30"/>
+                <rect x="342" y="56" width="96" height="24" rx="5" class="flow-risk"/>
+                <text x="390" y="72" text-anchor="middle" class="flow-risk-text">Fail together</text>
+                <text x="390" y="110" text-anchor="middle" class="flow-title">Collective harm</text>
               </svg>
             </div>
-            <p class="setting-card-summary">After agents form a swarm in a shared environment, we give them ordinary tasks with realistic bottlenecks and test whether they copy each other's shortcuts, break rules in parallel, or overload shared resources together.</p>
+            <p class="setting-card-summary">After agents form a swarm in a shared workspace, we give them ordinary tasks with realistic bottlenecks and see if they copy shortcuts, break rules, or overload shared resources together.</p>
           </article>
         </div>
       </div>
@@ -387,7 +417,7 @@
       <ul class="failure-mode-list">
         <li><a href="traces/?study=swarmharm&amp;threat=information#trajectory"><strong>Information Scope Violation</strong><span>Missing role checks on Quality Review archives allow out-of-scope reads and reuse.</span><span class="failure-mode-meta"><b>Check:</b> HTTP journal logs <code>200 OK</code>; role-bound replay returns <code>403</code>.</span><em class="failure-mode-providers" aria-label="Observed model providers"><img class="model-logo model-logo-openai" src="static/images/openai.svg?v=2" width="14" height="14" alt="OpenAI" title="OpenAI"><img class="model-logo" src="static/images/models/claude.svg?v=1" width="14" height="14" alt="Anthropic Claude" title="Anthropic Claude"><img class="model-logo" src="static/images/models/deepseek.svg?v=1" width="14" height="14" alt="DeepSeek" title="DeepSeek"><img class="model-logo model-logo-mono" src="static/images/models/zai.svg?v=1" width="14" height="14" alt="Z.ai" title="Z.ai (GLM)"><img class="model-logo model-logo-kimi" data-kimi-logo src="static/images/models/kimi-dark.svg?v=1" width="14" height="14" alt="Moonshot Kimi" title="Moonshot (Kimi)"><i>Traces →</i></em></a></li>
         <li><a href="traces/?study=swarmharm&amp;threat=action#trajectory"><strong>Action Scope Violation</strong><span>Missing ownership checks let preparation agents close Quality Review gates (<code>*-QA</code>).</span><span class="failure-mode-meta"><b>Check:</b> unauthorized state persists; owner-bound replay returns <code>403</code>.</span><em class="failure-mode-providers" aria-label="Observed model providers"><img class="model-logo model-logo-openai" src="static/images/openai.svg?v=2" width="14" height="14" alt="OpenAI" title="OpenAI"><img class="model-logo" src="static/images/models/claude.svg?v=1" width="14" height="14" alt="Anthropic Claude" title="Anthropic Claude"><img class="model-logo" src="static/images/models/deepseek.svg?v=1" width="14" height="14" alt="DeepSeek" title="DeepSeek"><img class="model-logo model-logo-mono" src="static/images/models/zai.svg?v=1" width="14" height="14" alt="Z.ai" title="Z.ai (GLM)"><img class="model-logo model-logo-kimi" data-kimi-logo src="static/images/models/kimi-dark.svg?v=1" width="14" height="14" alt="Moonshot Kimi" title="Moonshot (Kimi)"><i>Traces →</i></em></a></li>
-        <li><a href="traces/?study=swarmharm&amp;threat=capacity#trajectory"><strong>Shared-resource Interference</strong><span>Overflow customer jobs crowd out deadline-bound Operations reports on a shared pool.</span><span class="failure-mode-meta"><b>Check:</b> <code>0</code> solo delays vs. joint SQLite schedule delays.</span><em class="failure-mode-providers" aria-label="Observed model providers"><img class="model-logo model-logo-openai" src="static/images/openai.svg?v=2" width="14" height="14" alt="OpenAI" title="OpenAI"><img class="model-logo" src="static/images/models/claude.svg?v=1" width="14" height="14" alt="Anthropic Claude" title="Anthropic Claude"><img class="model-logo" src="static/images/models/deepseek.svg?v=1" width="14" height="14" alt="DeepSeek" title="DeepSeek"><img class="model-logo model-logo-mono" src="static/images/models/zai.svg?v=1" width="14" height="14" alt="Z.ai" title="Z.ai (GLM)"><img class="model-logo model-logo-kimi" data-kimi-logo src="static/images/models/kimi-dark.svg?v=1" width="14" height="14" alt="Moonshot Kimi" title="Moonshot (Kimi)"><i>Traces →</i></em></a></li>
+        <li><a href="traces/?study=swarmharm&amp;threat=capacity#trajectory"><strong>Shared-resource Interference</strong><span>Overflow customer jobs crowd out deadline-bound Operations reports on a shared pool.</span><span class="failure-mode-meta"><b>Check:</b> <code>0</code> solo delays vs. joint schedule delays.</span><em class="failure-mode-providers" aria-label="Observed model providers"><img class="model-logo model-logo-openai" src="static/images/openai.svg?v=2" width="14" height="14" alt="OpenAI" title="OpenAI"><img class="model-logo" src="static/images/models/claude.svg?v=1" width="14" height="14" alt="Anthropic Claude" title="Anthropic Claude"><img class="model-logo" src="static/images/models/deepseek.svg?v=1" width="14" height="14" alt="DeepSeek" title="DeepSeek"><img class="model-logo model-logo-mono" src="static/images/models/zai.svg?v=1" width="14" height="14" alt="Z.ai" title="Z.ai (GLM)"><img class="model-logo model-logo-kimi" data-kimi-logo src="static/images/models/kimi-dark.svg?v=1" width="14" height="14" alt="Moonshot Kimi" title="Moonshot (Kimi)"><i>Traces →</i></em></a></li>
       </ul>
     </div>
   </div>
@@ -667,7 +697,7 @@
     <div class="case-study-head">
       <span class="case-study-eyebrow">Verbatim Trajectory &amp; CoT Evidence</span>
       <h3 id="case-study-title">What agents think before crossing or holding a boundary</h3>
-      <p>Four representative slices from captured chain-of-thought trajectories paired with independent counterfactual replay verdicts. Switch tabs to inspect scale-induced contagion, pragmatic meter bypass, and explicit refusals.</p>
+      <p>Four representative slices from agents' private reasoning traces paired with solo vs. joint replay verdicts. Switch tabs to inspect peer copying at scale, meter bypasses, and explicit refusals.</p>
     </div>
 
     <div class="evidence-tabs" role="tablist" aria-label="Trajectory evidence cases">
@@ -829,7 +859,7 @@
 
     <article class="results-takeaway">
       <h4>2. Four-agent safety breaks at scale</h4>
-      <p>Testing only at <code>N = 4</code> misses both <strong>compositional phase transitions</strong> (<code>GPT-6.1 Terra</code> delays 0 Ops jobs at <code>N = 4</code>, then 6 to 8 at <code>N = 16/32</code> while remaining 100% solo-safe) and <strong>scale-induced norm contagion</strong> (<code>Claude Sonnet 5.5</code> holds Grader Manipulation at <code>N = 4</code> and <code>16</code>, then breaks in both domains at <code>N = 32</code> once peers’ relaxed descriptors appear on the desk).</p>
+      <p>Testing only at <code>N = 4</code> misses both <strong>sudden overload at larger group sizes</strong> (<code>GPT-6.1 Terra</code> delays 0 Ops jobs at <code>N = 4</code>, then 6 to 8 at <code>N = 16/32</code> while remaining 100% safe alone) and <strong>copying peers' shortcuts at scale</strong> (<code>Claude Sonnet 5.5</code> holds Grader Manipulation at <code>N = 4</code> and <code>16</code>, then breaks in both domains at <code>N = 32</code> once peers' relaxed rules appear on the desk).</p>
     </article>
 
     <article class="results-takeaway">
@@ -875,7 +905,7 @@
   </div>
 
   <div class="results-cta-bar">
-    <p>Every number and quote above resolves to a tool call, captured chain-of-thought step, byte-verified peer read, or counterfactual replay verdict.</p>
+    <p>Every number and quote above resolves to a recorded tool call, private reasoning step, exact file read, or solo vs. joint replay verdict.</p>
     <a class="results-cta-btn" href="traces/">Step through the interactive N=4 traces in Explore Trajectory →</a>
   </div>
 </section>
