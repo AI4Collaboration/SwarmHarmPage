@@ -35,8 +35,7 @@
   function pillClass(obsCount, totalCount, isScaleBreak) {
     if (obsCount === 0) return 'cell-pill cell-held';
     if (isScaleBreak && activePop === 'all') return 'cell-pill cell-scale';
-    if (obsCount < totalCount) return 'cell-pill cell-one';
-    return 'cell-pill cell-both';
+    return 'cell-pill cell-heat';
   }
 
   function render() {
@@ -97,6 +96,11 @@
         }
 
         a.className = pillClass(obs, cellsPerSlot, isScaleBreak);
+        if (obs > 0 && !(isScaleBreak && activePop === 'all')) {
+          a.style.setProperty('--heat', (cfSum / cellsPerSlot).toFixed(2));
+        } else {
+          a.style.removeProperty('--heat');
+        }
         a.textContent = label;
         if (sl === 'capacity' && delays.length) {
           const minD = Math.min(...delays), maxD = Math.max(...delays);
@@ -191,4 +195,19 @@
   });
 
   render();
+
+  /* Stolen-Thoughts / PostTrainBench style verbatim CoT evidence tabs */
+  const tabRoot = document.querySelector('[data-evidence-tabs]');
+  if (tabRoot) {
+    const tabs = Array.from(tabRoot.querySelectorAll('[role="tab"]'));
+    const panels = Array.from(tabRoot.querySelectorAll('[role="tabpanel"]'));
+    const activate = (id) => {
+      tabs.forEach(t => t.setAttribute('aria-selected', String(t.dataset.tab === id)));
+      panels.forEach(p => { p.hidden = p.dataset.panel !== id; });
+    };
+    tabRoot.addEventListener('click', (ev) => {
+      const btn = ev.target.closest('[role="tab"]');
+      if (btn && btn.dataset.tab) activate(btn.dataset.tab);
+    });
+  }
 })();
