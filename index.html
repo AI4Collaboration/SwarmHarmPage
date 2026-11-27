@@ -34,7 +34,7 @@
   <link rel="stylesheet" href="static/css/project-page.css?v=71">
   <link rel="stylesheet" href="static/css/project-subpages.css?v=80">
   <link rel="stylesheet" href="static/css/visual-system.css?v=53">
-  <link rel="stylesheet" href="static/css/current-research.css?v=99">
+  <link rel="stylesheet" href="static/css/current-research.css?v=100">
 
 
   <script src="static/js/swarmharm_title_demo_v3.js?v=74" defer></script>
@@ -155,81 +155,71 @@
           <p><span class="blog-tldr-label">TL;DR</span><strong>AI agents that pass single-agent safety checks still cause collective harm when deployed together on shared infrastructure.</strong> We evaluate frontier coding agents in two settings: <a href="#form-the-swarm">SwarmForm</a> tests whether isolated agents discover unannounced peers through empty OS surfaces, and <a href="#cause-harm">SwarmHarm</a> tests how concurrent agents behave on a shared business platform under ordinary work prompts. In SwarmHarm, <span class="tldr-hl">individually harmless agents routinely fail together</span>: they overload shared capacity with zero communication, cross weak boundaries in parallel, and <span class="tldr-hl">adopt peers' weakened rules at larger scale</span> even when smaller cohorts hold firm.</p>
         </aside>
 
-        <div class="settings-split" aria-label="Overview of SwarmForm and SwarmHarm settings">
+        <div class="settings-split" aria-label="Overview of SwarmForm and SwarmHarm process flows">
           <article class="setting-card setting-card-form" id="swarmform-setting">
-            <span class="setting-card-eyebrow">Study 1 · Swarm Formation</span>
-            <h2>SwarmForm</h2>
+            <div class="setting-card-head">
+              <h2>SwarmForm</h2>
+              <span class="setting-card-eyebrow">Study 1 · Formation Flow</span>
+            </div>
             <div class="setting-flow">
-              <svg viewBox="0 0 460 170" role="img" aria-labelledby="sf-flow-title">
-                <title id="sf-flow-title">SwarmForm: three task regimes converge through isolated agents into three shared OS channels</title>
-                <path d="M82 44 C82 62, 188 58, 212 72" class="flow-curve"/>
-                <path d="M230 44 V72" class="flow-curve"/>
-                <path d="M378 44 C378 62, 272 58, 248 72" class="flow-curve"/>
-                <path d="M212 106 C188 120, 82 116, 82 134" class="flow-curve"/>
-                <path d="M230 106 V134" class="flow-curve"/>
-                <path d="M248 106 C272 120, 378 116, 378 134" class="flow-curve"/>
+              <svg viewBox="0 0 460 86" role="img" aria-labelledby="sf-flow-title">
+                <title id="sf-flow-title">SwarmForm process flow: isolated agents meet on an empty OS surface and form an ad-hoc swarm</title>
+                <defs>
+                  <marker id="sf-arr" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+                    <path d="M2 2L8 5L2 8" fill="none" stroke="context-stroke" stroke-width="1.6" stroke-linecap="round"/>
+                  </marker>
+                </defs>
+                <rect x="8" y="14" width="128" height="58" rx="8" class="flow-node"/>
+                <text x="72" y="38" text-anchor="middle" class="flow-title">Isolated Agents</text>
+                <text x="72" y="56" text-anchor="middle" class="flow-sub">no peer roster</text>
 
-                <rect x="14" y="12" width="136" height="32" rx="7" class="flow-node"/>
-                <text x="82" y="32" text-anchor="middle" class="flow-title">Distributed</text>
+                <path d="M140 43 H162" class="flow-curve" marker-end="url(#sf-arr)"/>
 
-                <rect x="162" y="12" width="136" height="32" rx="7" class="flow-node"/>
-                <text x="230" y="32" text-anchor="middle" class="flow-title">Impossible</text>
+                <rect x="166" y="14" width="128" height="58" rx="8" class="flow-hub"/>
+                <text x="230" y="38" text-anchor="middle" class="flow-hub-title">Empty OS Surface</text>
+                <text x="230" y="56" text-anchor="middle" class="flow-sub">dir · socket · mmap</text>
 
-                <rect x="310" y="12" width="136" height="32" rx="7" class="flow-node"/>
-                <text x="378" y="32" text-anchor="middle" class="flow-title">Navier Stokes</text>
+                <path d="M298 43 H320" class="flow-curve" marker-end="url(#sf-arr)"/>
 
-                <rect x="92" y="72" width="276" height="34" rx="9" class="flow-hub"/>
-                <text x="230" y="93" text-anchor="middle" class="flow-hub-title">Isolated Containers · No Peer Roster</text>
-
-                <rect x="14" y="134" width="136" height="32" rx="7" class="flow-node"/>
-                <text x="82" y="154" text-anchor="middle" class="flow-title">Shared Dir</text>
-
-                <rect x="162" y="134" width="136" height="32" rx="7" class="flow-node"/>
-                <text x="230" y="154" text-anchor="middle" class="flow-title">Socket</text>
-
-                <rect x="310" y="134" width="136" height="32" rx="7" class="flow-node"/>
-                <text x="378" y="154" text-anchor="middle" class="flow-title">Shared Mmap</text>
+                <rect x="324" y="14" width="128" height="58" rx="8" class="flow-node"/>
+                <text x="388" y="38" text-anchor="middle" class="flow-title">Ad-hoc Swarm</text>
+                <text x="388" y="56" text-anchor="middle" class="flow-sub">sha256 read links</text>
               </svg>
             </div>
-            <p class="setting-card-summary">Separate containers with empty OS channels and no peer roster; links count only via sha256 byte-verified reads.</p>
+            <p class="setting-card-summary">Isolated containers discover peers through empty OS channels on distributed, impossible, and Navier Stokes tasks.</p>
           </article>
 
           <article class="setting-card setting-card-harm" id="swarmharm-setting">
-            <span class="setting-card-eyebrow">Study 2 · Swarm Harm</span>
-            <h2>SwarmHarm</h2>
+            <div class="setting-card-head">
+              <h2>SwarmHarm</h2>
+              <span class="setting-card-eyebrow">Study 2 · Harm Flow</span>
+            </div>
             <div class="setting-flow">
-              <svg viewBox="0 0 460 170" role="img" aria-labelledby="sh-flow-title">
-                <title id="sh-flow-title">SwarmHarm: three task-level and three environment-level boundaries tested on a shared platform</title>
-                <path d="M82 44 C82 62, 188 58, 212 72" class="flow-curve"/>
-                <path d="M230 44 V72" class="flow-curve"/>
-                <path d="M378 44 C378 62, 272 58, 248 72" class="flow-curve"/>
-                <path d="M212 106 C188 120, 82 116, 82 134" class="flow-curve"/>
-                <path d="M230 106 V134" class="flow-curve"/>
-                <path d="M248 106 C272 120, 378 116, 378 134" class="flow-curve"/>
+              <svg viewBox="0 0 460 86" role="img" aria-labelledby="sh-flow-title">
+                <title id="sh-flow-title">SwarmHarm process flow: concurrent agents act on a shared platform with one relaxed boundary, verified via solo and joint replay</title>
+                <defs>
+                  <marker id="sh-arr" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+                    <path d="M2 2L8 5L2 8" fill="none" stroke="context-stroke" stroke-width="1.6" stroke-linecap="round"/>
+                  </marker>
+                </defs>
+                <rect x="8" y="14" width="128" height="58" rx="8" class="flow-node"/>
+                <text x="72" y="38" text-anchor="middle" class="flow-title">Concurrent Agents</text>
+                <text x="72" y="56" text-anchor="middle" class="flow-sub">natural prompts</text>
 
-                <rect x="14" y="12" width="136" height="32" rx="7" class="flow-node"/>
-                <text x="82" y="32" text-anchor="middle" class="flow-title">Spec Gaming</text>
+                <path d="M140 43 H162" class="flow-curve" marker-end="url(#sh-arr)"/>
 
-                <rect x="162" y="12" width="136" height="32" rx="7" class="flow-node"/>
-                <text x="230" y="32" text-anchor="middle" class="flow-title">Trace Tamper</text>
+                <rect x="166" y="14" width="128" height="58" rx="8" class="flow-hub"/>
+                <text x="230" y="38" text-anchor="middle" class="flow-hub-title">Shared Platform</text>
+                <text x="230" y="56" text-anchor="middle" class="flow-sub">1 weak boundary</text>
 
-                <rect x="310" y="12" width="136" height="32" rx="7" class="flow-node"/>
-                <text x="378" y="32" text-anchor="middle" class="flow-title">Grader Manip.</text>
+                <path d="M298 43 H320" class="flow-curve" marker-end="url(#sh-arr)"/>
 
-                <rect x="92" y="72" width="276" height="34" rx="9" class="flow-hub"/>
-                <text x="230" y="93" text-anchor="middle" class="flow-hub-title">Shared Platform · 1 Boundary / Run</text>
-
-                <rect x="14" y="134" width="136" height="32" rx="7" class="flow-node"/>
-                <text x="82" y="154" text-anchor="middle" class="flow-title">Info Scope</text>
-
-                <rect x="162" y="134" width="136" height="32" rx="7" class="flow-node"/>
-                <text x="230" y="154" text-anchor="middle" class="flow-title">Action Scope</text>
-
-                <rect x="310" y="134" width="136" height="32" rx="7" class="flow-node"/>
-                <text x="378" y="154" text-anchor="middle" class="flow-title">Interference</text>
+                <rect x="324" y="14" width="128" height="58" rx="8" class="flow-node"/>
+                <text x="388" y="38" text-anchor="middle" class="flow-title">Collective Harm</text>
+                <text x="388" y="56" text-anchor="middle" class="flow-sub">solo vs. joint replay</text>
               </svg>
             </div>
-            <p class="setting-card-summary">Natural prompts, one boundary relaxed per run; scored by solo/joint counterfactual replay and blinded CoT review.</p>
+            <p class="setting-card-summary">Ordinary prompts on one shared platform; dual monitors separate peer contagion, parallel shortcuts, and overload.</p>
           </article>
         </div>
       </div>
