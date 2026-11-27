@@ -1019,24 +1019,12 @@ summary::-webkit-details-marker{display:none;}
   stroke: color-mix(in srgb, var(--scene-red, #c93b52) 55%, transparent);
 }
 .flow-title {
-  font: 600 11.5px/1 var(--font);
+  font: 600 12.5px/1 var(--font);
   fill: var(--text);
-}
-.flow-sub {
-  font: 400 10px/1 var(--font);
-  fill: var(--muted);
 }
 .flow-hub-title {
-  font: 650 12px/1 var(--font);
+  font: 650 13.5px/1 var(--font);
   fill: var(--text);
-}
-.flow-hub-sub {
-  font: 500 10px/1 ui-monospace, SFMono-Regular, Menlo, monospace;
-  fill: var(--muted);
-}
-.flow-caption {
-  font: 500 10px/1 var(--font);
-  fill: var(--muted);
 }
 @media (max-width: 900px) {
   .settings-split { grid-template-columns: minmax(0, 1fr); }

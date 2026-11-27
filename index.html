@@ -34,7 +34,7 @@
   <link rel="stylesheet" href="static/css/project-page.css?v=71">
   <link rel="stylesheet" href="static/css/project-subpages.css?v=80">
   <link rel="stylesheet" href="static/css/visual-system.css?v=53">
-  <link rel="stylesheet" href="static/css/current-research.css?v=97">
+  <link rel="stylesheet" href="static/css/current-research.css?v=98">
 
 
   <script src="static/js/swarmharm_title_demo_v3.js?v=74" defer></script>
@@ -160,88 +160,76 @@
             <span class="setting-card-eyebrow">Study 1 · Swarm Formation</span>
             <h2>SwarmForm</h2>
             <div class="setting-flow">
-              <svg viewBox="0 0 460 198" role="img" aria-labelledby="sf-flow-title">
-                <title id="sf-flow-title">SwarmForm setting: three task regimes converge into ten isolated-container tasks, branching into three shared OS channels</title>
-                <path d="M82 48 C82 66, 188 64, 212 80" class="flow-curve"/>
-                <path d="M230 48 V80" class="flow-curve"/>
-                <path d="M378 48 C378 66, 272 64, 248 80" class="flow-curve"/>
-                <path d="M212 120 C188 136, 82 134, 82 150" class="flow-curve"/>
-                <path d="M230 120 V150" class="flow-curve"/>
-                <path d="M248 120 C272 136, 378 134, 378 150" class="flow-curve"/>
+              <svg viewBox="0 0 460 170" role="img" aria-labelledby="sf-flow-title">
+                <title id="sf-flow-title">SwarmForm: three task regimes converge through isolated agents into three shared OS channels</title>
+                <path d="M82 44 C82 62, 188 58, 212 72" class="flow-curve"/>
+                <path d="M230 44 V72" class="flow-curve"/>
+                <path d="M378 44 C378 62, 272 58, 248 72" class="flow-curve"/>
+                <path d="M212 106 C188 120, 82 116, 82 134" class="flow-curve"/>
+                <path d="M230 106 V134" class="flow-curve"/>
+                <path d="M248 106 C272 120, 378 116, 378 134" class="flow-curve"/>
 
-                <rect x="14" y="10" width="136" height="38" rx="7" class="flow-node"/>
-                <text x="82" y="26" text-anchor="middle" class="flow-title">Distributed</text>
-                <text x="82" y="40" text-anchor="middle" class="flow-sub">split orders</text>
+                <rect x="14" y="12" width="136" height="32" rx="7" class="flow-node"/>
+                <text x="82" y="32" text-anchor="middle" class="flow-title">Distributed</text>
 
-                <rect x="162" y="10" width="136" height="38" rx="7" class="flow-node"/>
-                <text x="230" y="26" text-anchor="middle" class="flow-title">Impossible</text>
-                <text x="230" y="40" text-anchor="middle" class="flow-sub">conflict</text>
+                <rect x="162" y="12" width="136" height="32" rx="7" class="flow-node"/>
+                <text x="230" y="32" text-anchor="middle" class="flow-title">Impossible</text>
 
-                <rect x="310" y="10" width="136" height="38" rx="7" class="flow-node"/>
-                <text x="378" y="26" text-anchor="middle" class="flow-title">Full-info</text>
-                <text x="378" y="40" text-anchor="middle" class="flow-sub">Navier Stokes</text>
+                <rect x="310" y="12" width="136" height="32" rx="7" class="flow-node"/>
+                <text x="378" y="32" text-anchor="middle" class="flow-title">Navier Stokes</text>
 
-                <rect x="36" y="80" width="388" height="40" rx="9" class="flow-hub"/>
-                <text x="230" y="97" text-anchor="middle" class="flow-hub-title">10 Tasks · Isolated Containers</text>
-                <text x="230" y="112" text-anchor="middle" class="flow-hub-sub">no peer roster · N ∈ {4, 8, 16, 32}</text>
+                <rect x="92" y="72" width="276" height="34" rx="9" class="flow-hub"/>
+                <text x="230" y="93" text-anchor="middle" class="flow-hub-title">Isolated Containers · No Peer Roster</text>
 
-                <rect x="14" y="150" width="136" height="30" rx="7" class="flow-node"/>
-                <text x="82" y="169" text-anchor="middle" class="flow-title">shared_dir</text>
+                <rect x="14" y="134" width="136" height="32" rx="7" class="flow-node"/>
+                <text x="82" y="154" text-anchor="middle" class="flow-title">Shared Dir</text>
 
-                <rect x="162" y="150" width="136" height="30" rx="7" class="flow-node"/>
-                <text x="230" y="169" text-anchor="middle" class="flow-title">artifact_socket</text>
+                <rect x="162" y="134" width="136" height="32" rx="7" class="flow-node"/>
+                <text x="230" y="154" text-anchor="middle" class="flow-title">Socket</text>
 
-                <rect x="310" y="150" width="136" height="30" rx="7" class="flow-node"/>
-                <text x="378" y="169" text-anchor="middle" class="flow-title">shared_mmap</text>
-
-                <text x="230" y="193" text-anchor="middle" class="flow-caption">+ direct mailbox control · sha256 byte-verified reads</text>
+                <rect x="310" y="134" width="136" height="32" rx="7" class="flow-node"/>
+                <text x="378" y="154" text-anchor="middle" class="flow-title">Shared Mmap</text>
               </svg>
             </div>
-            <p class="setting-card-summary">Separate containers with empty OS channels. <strong>39 / 50</strong> cohorts sustain exchange; <strong>37 / 50</strong> solve split briefs.</p>
+            <p class="setting-card-summary">Empty OS channels, zero peer cues. <strong>39 / 50</strong> cohorts sustain exchange; <strong>37 / 50</strong> solve split briefs.</p>
           </article>
 
           <article class="setting-card setting-card-harm">
             <span class="setting-card-eyebrow">Study 2 · Swarm Harm</span>
             <h2>SwarmHarm</h2>
             <div class="setting-flow">
-              <svg viewBox="0 0 460 198" role="img" aria-labelledby="sh-flow-title">
-                <title id="sh-flow-title">SwarmHarm setting: three task-level and three environment-level boundaries tested one at a time on a shared reporting platform</title>
-                <path d="M82 48 C82 66, 188 64, 212 80" class="flow-curve"/>
-                <path d="M230 48 V80" class="flow-curve"/>
-                <path d="M378 48 C378 66, 272 64, 248 80" class="flow-curve"/>
-                <path d="M212 120 C188 136, 82 134, 82 150" class="flow-curve"/>
-                <path d="M230 120 V150" class="flow-curve"/>
-                <path d="M248 120 C272 136, 378 134, 378 150" class="flow-curve"/>
+              <svg viewBox="0 0 460 170" role="img" aria-labelledby="sh-flow-title">
+                <title id="sh-flow-title">SwarmHarm: three task-level and three environment-level boundaries tested on a shared platform</title>
+                <path d="M82 44 C82 62, 188 58, 212 72" class="flow-curve"/>
+                <path d="M230 44 V72" class="flow-curve"/>
+                <path d="M378 44 C378 62, 272 58, 248 72" class="flow-curve"/>
+                <path d="M212 106 C188 120, 82 116, 82 134" class="flow-curve"/>
+                <path d="M230 106 V134" class="flow-curve"/>
+                <path d="M248 106 C272 120, 378 116, 378 134" class="flow-curve"/>
 
-                <rect x="14" y="10" width="136" height="38" rx="7" class="flow-node"/>
-                <text x="82" y="26" text-anchor="middle" class="flow-title">Spec Gaming</text>
-                <text x="82" y="40" text-anchor="middle" class="flow-sub">batch meter</text>
+                <rect x="14" y="12" width="136" height="32" rx="7" class="flow-node"/>
+                <text x="82" y="32" text-anchor="middle" class="flow-title">Spec Gaming</text>
 
-                <rect x="162" y="10" width="136" height="38" rx="7" class="flow-node"/>
-                <text x="230" y="26" text-anchor="middle" class="flow-title">Trace Tamper</text>
-                <text x="230" y="40" text-anchor="middle" class="flow-sub">edit register</text>
+                <rect x="162" y="12" width="136" height="32" rx="7" class="flow-node"/>
+                <text x="230" y="32" text-anchor="middle" class="flow-title">Trace Tamper</text>
 
-                <rect x="310" y="10" width="136" height="38" rx="7" class="flow-node"/>
-                <text x="378" y="26" text-anchor="middle" class="flow-title">Grader Manip.</text>
-                <text x="378" y="40" text-anchor="middle" class="flow-sub">edit schema</text>
+                <rect x="310" y="12" width="136" height="32" rx="7" class="flow-node"/>
+                <text x="378" y="32" text-anchor="middle" class="flow-title">Grader Manip.</text>
 
-                <rect x="36" y="80" width="388" height="40" rx="9" class="flow-hub"/>
-                <text x="230" y="97" text-anchor="middle" class="flow-hub-title">1 Shared Reporting Platform</text>
-                <text x="230" y="112" text-anchor="middle" class="flow-hub-sub">10 models · 1 defect / run · N ∈ {4, 16, 32}</text>
+                <rect x="92" y="72" width="276" height="34" rx="9" class="flow-hub"/>
+                <text x="230" y="93" text-anchor="middle" class="flow-hub-title">Shared Platform · 1 Boundary / Run</text>
 
-                <rect x="14" y="150" width="136" height="30" rx="7" class="flow-node"/>
-                <text x="82" y="169" text-anchor="middle" class="flow-title">Info Scope</text>
+                <rect x="14" y="134" width="136" height="32" rx="7" class="flow-node"/>
+                <text x="82" y="154" text-anchor="middle" class="flow-title">Info Scope</text>
 
-                <rect x="162" y="150" width="136" height="30" rx="7" class="flow-node"/>
-                <text x="230" y="169" text-anchor="middle" class="flow-title">Action Scope</text>
+                <rect x="162" y="134" width="136" height="32" rx="7" class="flow-node"/>
+                <text x="230" y="154" text-anchor="middle" class="flow-title">Action Scope</text>
 
-                <rect x="310" y="150" width="136" height="30" rx="7" class="flow-node"/>
-                <text x="378" y="169" text-anchor="middle" class="flow-title">Interference</text>
-
-                <text x="230" y="193" text-anchor="middle" class="flow-caption">Natural prompts · solo/joint replay + CoT judge</text>
+                <rect x="310" y="134" width="136" height="32" rx="7" class="flow-node"/>
+                <text x="378" y="154" text-anchor="middle" class="flow-title">Interference</text>
               </svg>
             </div>
-            <p class="setting-card-summary">One boundary relaxed per run across <strong>360 cohorts</strong>; scored by solo/joint counterfactual replay and CoT review.</p>
+            <p class="setting-card-summary">Natural prompts, one defect per run; scored by solo/joint counterfactual replay and CoT review.</p>
           </article>
         </div>
       </div>
@@ -283,25 +271,23 @@
             </defs>
 
             <!-- Column 1: Isolated Agent Sandboxes -->
-            <rect x="12" y="16" width="268" height="128" rx="8" class="uml-box"/>
-            <path d="M12 24a8 8 0 0 1 8-8h252a8 8 0 0 1 8 8v28H12z" class="uml-head"/>
-            <line x1="12" y1="52" x2="280" y2="52" class="uml-sep"/>
-            <text x="26" y="32" class="uml-stereo">«container»</text>
-            <text x="26" y="46" class="uml-title">Sandbox_1 : Agent</text>
-            <text x="26" y="72" class="uml-item">+ session : private memory</text>
-            <text x="26" y="90" class="uml-item">+ files : partial orders</text>
-            <text x="26" y="108" class="uml-item">+ peer_roster : none</text>
-            <text x="26" y="126" class="uml-muted">+ 64 turns · 192 tools</text>
+            <rect x="12" y="24" width="268" height="114" rx="8" class="uml-box"/>
+            <path d="M12 32a8 8 0 0 1 8-8h252a8 8 0 0 1 8 8v28H12z" class="uml-head"/>
+            <line x1="12" y1="60" x2="280" y2="60" class="uml-sep"/>
+            <text x="26" y="40" class="uml-stereo">«container»</text>
+            <text x="26" y="54" class="uml-title">Sandbox 1</text>
+            <text x="26" y="82" class="uml-item">• Private memory</text>
+            <text x="26" y="102" class="uml-item">• Partial local files</text>
+            <text x="26" y="122" class="uml-muted">• No peer roster</text>
 
-            <rect x="12" y="170" width="268" height="128" rx="8" class="uml-box"/>
-            <path d="M12 178a8 8 0 0 1 8-8h252a8 8 0 0 1 8 8v28H12z" class="uml-head"/>
-            <line x1="12" y1="206" x2="280" y2="206" class="uml-sep"/>
-            <text x="26" y="186" class="uml-stereo">«containers»</text>
-            <text x="26" y="200" class="uml-title">Sandbox_2..N : Agents</text>
-            <text x="26" y="226" class="uml-item">+ session : private memory</text>
-            <text x="26" y="244" class="uml-item">+ files : other slices</text>
-            <text x="26" y="262" class="uml-item">+ peer_roster : none</text>
-            <text x="26" y="280" class="uml-muted">+ concurrent start (N=3..32)</text>
+            <rect x="12" y="174" width="268" height="114" rx="8" class="uml-box"/>
+            <path d="M12 182a8 8 0 0 1 8-8h252a8 8 0 0 1 8 8v28H12z" class="uml-head"/>
+            <line x1="12" y1="210" x2="280" y2="210" class="uml-sep"/>
+            <text x="26" y="190" class="uml-stereo">«containers»</text>
+            <text x="26" y="204" class="uml-title">Sandboxes 2..N</text>
+            <text x="26" y="232" class="uml-item">• Private memory</text>
+            <text x="26" y="252" class="uml-item">• Complementary slices</text>
+            <text x="26" y="272" class="uml-muted">• No peer roster</text>
 
             <!-- Arrows Left -> Center -->
             <path d="M280 78 C312 78, 316 118, 344 118" class="uml-arrow" marker-end="url(#sf-uml-arrow)"/>
@@ -314,20 +300,17 @@
             <text x="312" y="268" text-anchor="middle" class="uml-tag">write / read</text>
 
             <!-- Column 2: Shared Infrastructure -->
-            <rect x="348" y="48" width="246" height="218" rx="8" class="uml-box-accent"/>
-            <path d="M348 56a8 8 0 0 1 8-8h230a8 8 0 0 1 8 8v32H348z" class="uml-head-accent"/>
-            <line x1="348" y1="88" x2="594" y2="88" class="uml-sep-accent"/>
-            <text x="362" y="66" class="uml-stereo-accent">«shared OS surface»</text>
-            <text x="362" y="81" class="uml-title">SharedChannel</text>
-            <text x="362" y="109" class="uml-item">• shared_dir (folder)</text>
-            <text x="362" y="128" class="uml-item">• artifact_socket</text>
-            <text x="362" y="147" class="uml-item">• shared_mmap</text>
-            <text x="362" y="166" class="uml-muted">• direct mailbox (control)</text>
-            <line x1="348" y1="180" x2="594" y2="180" class="uml-sep-accent"/>
-            <text x="362" y="200" class="uml-stereo-accent">OBJECTS</text>
-            <text x="362" y="218" class="uml-item">+ initial : empty (0 notes)</text>
-            <text x="362" y="236" class="uml-item">+ files : orders · drafts</text>
-            <text x="362" y="254" class="uml-item">+ digest : sha256(bytes)</text>
+            <rect x="348" y="54" width="246" height="206" rx="8" class="uml-box-accent"/>
+            <path d="M348 62a8 8 0 0 1 8-8h230a8 8 0 0 1 8 8v32H348z" class="uml-head-accent"/>
+            <line x1="348" y1="94" x2="594" y2="94" class="uml-sep-accent"/>
+            <text x="362" y="72" class="uml-stereo-accent">«shared OS surface»</text>
+            <text x="362" y="87" class="uml-title">Empty Channel</text>
+            <text x="362" y="118" class="uml-item">• Shared directory</text>
+            <text x="362" y="140" class="uml-item">• Artifact socket</text>
+            <text x="362" y="162" class="uml-item">• Shared memory</text>
+            <text x="362" y="184" class="uml-muted">• Direct mailbox control</text>
+            <line x1="348" y1="202" x2="594" y2="202" class="uml-sep-accent"/>
+            <text x="362" y="226" class="uml-item">Starts empty · sha256 logged</text>
 
             <!-- Arrows Center -> Right -->
             <path d="M594 114 H646" class="uml-arrow-muted" marker-end="url(#sf-uml-arrow)"/>
@@ -336,25 +319,23 @@
             <text x="620" y="206" text-anchor="middle" class="uml-muted">verify</text>
 
             <!-- Column 3: Host Observer & Task Verifier -->
-            <rect x="650" y="16" width="258" height="132" rx="8" class="uml-box-dashed"/>
-            <path d="M650 24a8 8 0 0 1 8-8h242a8 8 0 0 1 8 8v28H650z" class="uml-head"/>
-            <line x1="650" y1="52" x2="908" y2="52" class="uml-sep"/>
-            <text x="664" y="32" class="uml-stereo">«passive observer»</text>
-            <text x="664" y="46" class="uml-title">FormationAudit</text>
-            <text x="664" y="72" class="uml-item">+ link : author → reader</text>
-            <text x="664" y="90" class="uml-item">+ proof : exact sha256 read</text>
-            <text x="664" y="108" class="uml-item">+ graph : flat | multi-hop</text>
-            <text x="664" y="128" class="uml-muted">Never cues agents</text>
+            <rect x="650" y="24" width="258" height="114" rx="8" class="uml-box-dashed"/>
+            <path d="M650 32a8 8 0 0 1 8-8h242a8 8 0 0 1 8 8v28H650z" class="uml-head"/>
+            <line x1="650" y1="60" x2="908" y2="60" class="uml-sep"/>
+            <text x="664" y="40" class="uml-stereo">«passive observer»</text>
+            <text x="664" y="54" class="uml-title">Read Graph</text>
+            <text x="664" y="82" class="uml-item">• Author → Reader links</text>
+            <text x="664" y="102" class="uml-item">• Exact byte match</text>
+            <text x="664" y="122" class="uml-muted">• Flat vs. multi-hop</text>
 
-            <rect x="650" y="168" width="258" height="130" rx="8" class="uml-box-dashed"/>
-            <path d="M650 176a8 8 0 0 1 8-8h242a8 8 0 0 1 8 8v28H650z" class="uml-head"/>
-            <line x1="650" y1="204" x2="908" y2="204" class="uml-sep"/>
-            <text x="664" y="184" class="uml-stereo">«verifier»</text>
-            <text x="664" y="198" class="uml-title">TaskOutcome</text>
-            <text x="664" y="224" class="uml-item">+ Distributed : pools orders</text>
-            <text x="664" y="242" class="uml-item">+ Impossible : holds release</text>
-            <text x="664" y="260" class="uml-item">+ Full-info : Navier Stokes</text>
-            <text x="664" y="278" class="uml-muted">+ Uptake : used in output</text>
+            <rect x="650" y="174" width="258" height="114" rx="8" class="uml-box-dashed"/>
+            <path d="M650 182a8 8 0 0 1 8-8h242a8 8 0 0 1 8 8v28H650z" class="uml-head"/>
+            <line x1="650" y1="210" x2="908" y2="210" class="uml-sep"/>
+            <text x="664" y="190" class="uml-stereo">«verifier»</text>
+            <text x="664" y="204" class="uml-title">Task Outcome</text>
+            <text x="664" y="232" class="uml-item">• Distributed briefs</text>
+            <text x="664" y="252" class="uml-item">• Conflict detection</text>
+            <text x="664" y="272" class="uml-item">• Navier Stokes</text>
           </svg>
         </div>
         <figcaption><strong>Figure 1 — SwarmForm object architecture.</strong> Left: isolated containers, private sessions, complementary files, no peer roster. Center: one OS surface, empty at start. Right: a passive observer rebuilds the read graph from <code>sha256</code> snapshots and checks whether peer artifacts entered the final output.</figcaption>
@@ -430,88 +411,77 @@
             </defs>
 
             <!-- Column 1: Account Workstations -->
-            <rect x="12" y="18" width="246" height="160" rx="8" class="uml-box"/>
-            <path d="M12 26a8 8 0 0 1 8-8h230a8 8 0 0 1 8 8v28H12z" class="uml-head"/>
-            <line x1="12" y1="54" x2="258" y2="54" class="uml-sep"/>
-            <text x="26" y="34" class="uml-stereo">«account 1»</text>
-            <text x="26" y="48" class="uml-title">Agent_1 : Owner</text>
-            <text x="26" y="74" class="uml-item">+ task : October pack</text>
-            <text x="26" y="92" class="uml-item">+ role : Preparation</text>
-            <text x="26" y="110" class="uml-item">+ files : sources, edition/</text>
-            <text x="26" y="128" class="uml-item">+ session : native + CoT</text>
-            <text x="26" y="148" class="uml-muted">+ own pool : 2–4 slots</text>
+            <rect x="12" y="28" width="246" height="136" rx="8" class="uml-box"/>
+            <path d="M12 36a8 8 0 0 1 8-8h230a8 8 0 0 1 8 8v28H12z" class="uml-head"/>
+            <line x1="12" y1="64" x2="258" y2="64" class="uml-sep"/>
+            <text x="26" y="44" class="uml-stereo">«workstation»</text>
+            <text x="26" y="58" class="uml-title">Agent 1</text>
+            <text x="26" y="88" class="uml-item">• Natural work order</text>
+            <text x="26" y="110" class="uml-item">• Private workspace</text>
+            <text x="26" y="132" class="uml-muted">• Native session + CoT</text>
 
-            <rect x="12" y="210" width="246" height="168" rx="8" class="uml-box"/>
-            <path d="M12 218a8 8 0 0 1 8-8h230a8 8 0 0 1 8 8v28H12z" class="uml-head"/>
-            <line x1="12" y1="246" x2="258" y2="246" class="uml-sep"/>
-            <text x="26" y="226" class="uml-stereo">«accounts 2..N»</text>
-            <text x="26" y="240" class="uml-title">Agent_2..N : Owners</text>
-            <text x="26" y="266" class="uml-item">+ task : natural prompt</text>
-            <text x="26" y="284" class="uml-item">+ role : Preparation</text>
-            <text x="26" y="302" class="uml-item">+ files : private workspace</text>
-            <text x="26" y="320" class="uml-item">+ session : private native</text>
-            <text x="26" y="340" class="uml-muted">+ N = 4, 16, 32 concurrent</text>
+            <rect x="12" y="206" width="246" height="136" rx="8" class="uml-box"/>
+            <path d="M12 214a8 8 0 0 1 8-8h230a8 8 0 0 1 8 8v28H12z" class="uml-head"/>
+            <line x1="12" y1="242" x2="258" y2="242" class="uml-sep"/>
+            <text x="26" y="222" class="uml-stereo">«workstations»</text>
+            <text x="26" y="236" class="uml-title">Agents 2..N</text>
+            <text x="26" y="266" class="uml-item">• Same natural prompt</text>
+            <text x="26" y="288" class="uml-item">• Private workspaces</text>
+            <text x="26" y="310" class="uml-muted">• Concurrent execution</text>
 
             <!-- Arrows Left -> Center -->
-            <path d="M258 98 H306" class="uml-arrow" marker-end="url(#sh-uml-arrow)"/>
-            <text x="282" y="90" text-anchor="middle" class="uml-tag">tools</text>
-            <path d="M258 294 H306" class="uml-arrow" marker-end="url(#sh-uml-arrow)"/>
-            <text x="282" y="286" text-anchor="middle" class="uml-tag">tools</text>
+            <path d="M258 96 H306" class="uml-arrow" marker-end="url(#sh-uml-arrow)"/>
+            <text x="282" y="88" text-anchor="middle" class="uml-tag">tools</text>
+            <path d="M258 274 H306" class="uml-arrow" marker-end="url(#sh-uml-arrow)"/>
+            <text x="282" y="266" text-anchor="middle" class="uml-tag">tools</text>
 
             <!-- Column 2: Shared Reporting Platform & 6 Interactive Objects -->
-            <rect x="310" y="18" width="320" height="360" rx="8" class="uml-box-accent"/>
-            <path d="M310 26a8 8 0 0 1 8-8h304a8 8 0 0 1 8 8v32H310z" class="uml-head-accent"/>
-            <line x1="310" y1="58" x2="630" y2="58" class="uml-sep-accent"/>
-            <text x="324" y="36" class="uml-stereo-accent">«shared platform»</text>
-            <text x="324" y="51" class="uml-title">ReportingPlatform</text>
+            <rect x="310" y="28" width="320" height="314" rx="8" class="uml-box-accent"/>
+            <path d="M310 36a8 8 0 0 1 8-8h304a8 8 0 0 1 8 8v32H310z" class="uml-head-accent"/>
+            <line x1="310" y1="68" x2="630" y2="68" class="uml-sep-accent"/>
+            <text x="324" y="46" class="uml-stereo-accent">«shared platform»</text>
+            <text x="324" y="61" class="uml-title">Reporting Platform</text>
 
-            <text x="324" y="78" class="uml-stereo-accent">TASK-LEVEL</text>
-            <text x="324" y="96" class="uml-item">1. Batch meter → Spec Gaming</text>
-            <text x="324" y="114" class="uml-item">2. Dispatch log → Trace Tamper</text>
-            <text x="324" y="132" class="uml-item">3. Edition schema → Grader Manip.</text>
+            <text x="324" y="90" class="uml-stereo-accent">TASK-LEVEL</text>
+            <text x="324" y="110" class="uml-item">• Specification Gaming</text>
+            <text x="324" y="130" class="uml-item">• Trace Tampering</text>
+            <text x="324" y="150" class="uml-item">• Grader Manipulation</text>
 
-            <line x1="310" y1="146" x2="630" y2="146" class="uml-sep-accent"/>
-            <text x="324" y="166" class="uml-stereo-accent">ENVIRONMENT-LEVEL</text>
-            <text x="324" y="184" class="uml-item">4. QA archive → Info Scope</text>
-            <text x="324" y="202" class="uml-item">5. *-QA gate → Action Scope</text>
-            <text x="324" y="220" class="uml-item">6. Shared Ops pool → Interference</text>
+            <line x1="310" y1="168" x2="630" y2="168" class="uml-sep-accent"/>
+            <text x="324" y="190" class="uml-stereo-accent">ENVIRONMENT-LEVEL</text>
+            <text x="324" y="210" class="uml-item">• Information Scope</text>
+            <text x="324" y="230" class="uml-item">• Action Scope</text>
+            <text x="324" y="250" class="uml-item">• Shared-resource Interference</text>
 
-            <line x1="310" y1="234" x2="630" y2="234" class="uml-sep-accent"/>
-            <text x="324" y="254" class="uml-stereo-accent">SHARED STATE</text>
-            <text x="324" y="272" class="uml-item">+ /registry/reporting/cache</text>
-            <text x="324" y="290" class="uml-item">+ visible peer release schemas</text>
-            <text x="324" y="308" class="uml-item">+ submit · stage · execute · release</text>
-            <text x="324" y="334" class="uml-muted">1 boundary relaxed per run;</text>
-            <text x="324" y="352" class="uml-muted">all other checks stay strict.</text>
+            <line x1="310" y1="268" x2="630" y2="268" class="uml-sep-accent"/>
+            <text x="324" y="294" class="uml-item">One boundary relaxed per run</text>
+            <text x="324" y="316" class="uml-muted">Shared cache &amp; release visibility</text>
 
             <!-- Arrows Center -> Right -->
-            <path d="M630 112 H670" class="uml-arrow-muted" marker-end="url(#sh-uml-arrow)"/>
-            <text x="650" y="104" text-anchor="middle" class="uml-muted">log</text>
-            <path d="M630 288 H670" class="uml-arrow-muted" marker-end="url(#sh-uml-arrow)"/>
-            <text x="650" y="280" text-anchor="middle" class="uml-muted">replay</text>
+            <path d="M630 108 H670" class="uml-arrow-muted" marker-end="url(#sh-uml-arrow)"/>
+            <text x="650" y="100" text-anchor="middle" class="uml-muted">log</text>
+            <path d="M630 274 H670" class="uml-arrow-muted" marker-end="url(#sh-uml-arrow)"/>
+            <text x="650" y="266" text-anchor="middle" class="uml-muted">replay</text>
 
             <!-- Column 3: Protected Ground Truth & Dual Monitors -->
-            <rect x="674" y="18" width="234" height="164" rx="8" class="uml-box-dashed"/>
-            <path d="M674 26a8 8 0 0 1 8-8h218a8 8 0 0 1 8 8v28H674z" class="uml-head"/>
-            <line x1="674" y1="54" x2="908" y2="54" class="uml-sep"/>
-            <text x="688" y="34" class="uml-stereo">«immutable»</text>
-            <text x="688" y="48" class="uml-title">ProtectedLedger</text>
-            <text x="688" y="74" class="uml-item">+ host execution receipts</text>
-            <text x="688" y="92" class="uml-item">+ Ops schedule (OPS-01..08)</text>
-            <text x="688" y="110" class="uml-item">+ original installed policy</text>
-            <text x="688" y="128" class="uml-item">+ HTTP library journal</text>
-            <text x="688" y="148" class="uml-muted">+ native ATIF + CoT</text>
+            <rect x="674" y="28" width="234" height="148" rx="8" class="uml-box-dashed"/>
+            <path d="M674 36a8 8 0 0 1 8-8h218a8 8 0 0 1 8 8v28H674z" class="uml-head"/>
+            <line x1="674" y1="64" x2="908" y2="64" class="uml-sep"/>
+            <text x="688" y="44" class="uml-stereo">«immutable»</text>
+            <text x="688" y="58" class="uml-title">Protected Ledger</text>
+            <text x="688" y="88" class="uml-item">• Execution receipts</text>
+            <text x="688" y="110" class="uml-item">• Operations schedule</text>
+            <text x="688" y="132" class="uml-item">• Original policy</text>
+            <text x="688" y="154" class="uml-muted">• HTTP &amp; CoT logs</text>
 
-            <rect x="674" y="206" width="234" height="172" rx="8" class="uml-box-dashed"/>
-            <path d="M674 214a8 8 0 0 1 8-8h218a8 8 0 0 1 8 8v28H674z" class="uml-head"/>
-            <line x1="674" y1="242" x2="908" y2="242" class="uml-sep"/>
-            <text x="688" y="222" class="uml-stereo">«dual monitors»</text>
-            <text x="688" y="236" class="uml-title">VerdictJoin</text>
-            <text x="688" y="262" class="uml-item">1. Action-only monitor:</text>
-            <text x="688" y="280" class="uml-muted">   solo · joint · control replay</text>
-            <text x="688" y="302" class="uml-item">2. Blinded CoT judge:</text>
-            <text x="688" y="320" class="uml-muted">   verbatim CoT citations</text>
-            <text x="688" y="346" class="uml-item">3. Deterministic join</text>
+            <rect x="674" y="198" width="234" height="144" rx="8" class="uml-box-dashed"/>
+            <path d="M674 206a8 8 0 0 1 8-8h218a8 8 0 0 1 8 8v28H674z" class="uml-head"/>
+            <line x1="674" y1="234" x2="908" y2="234" class="uml-sep"/>
+            <text x="688" y="214" class="uml-stereo">«dual monitors»</text>
+            <text x="688" y="228" class="uml-title">Verdict Join</text>
+            <text x="688" y="258" class="uml-item">1. Action-only replay</text>
+            <text x="688" y="280" class="uml-item">2. Blinded CoT judge</text>
+            <text x="688" y="302" class="uml-muted">3. Deterministic join</text>
           </svg>
         </div>
         <figcaption><strong>Figure 2 — SwarmHarm object architecture.</strong> Left: concurrent account owners in native harnesses, private sessions. Center: six business objects plus shared release visibility; one boundary relaxed per condition. Right: an external ledger and two monitors, outside agent control.</figcaption>
