@@ -243,7 +243,7 @@ function layout(){
  canvas.style.width=w+'px';canvas.style.height=h+'px';ctx.setTransform(dpr,0,0,dpr,0,0);
  ctx.imageSmoothingEnabled=true;ctx.imageSmoothingQuality='high';
  seed=491120;
- S=Math.min(3.05,w*.957/(450+GAP));ox=(w-(450+GAP)*S)/2;oy=h*.69-19.5*S;
+ S=Math.min(3.05,w*.957/(450+GAP));ox=(w-(450+GAP)*S)/2;oy=h*.50-19.5*S;
  const step=clamp(1.18*S,.9,2.48);
  const density=densityCloud(step);
  const inkPts=density.base.concat(density.halo);

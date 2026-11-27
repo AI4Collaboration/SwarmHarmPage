@@ -897,10 +897,23 @@ summary::-webkit-details-marker{display:none;}
 }
 
 /* Full-width Maksym-style TL;DR + two-column SwarmForm / SwarmHarm settings overview */
+.hero .hero-layout {
+  padding-block: 16px 28px;
+}
+.hero-copy .emergence-title {
+  width: min(100%, 540px);
+  aspect-ratio: 470 / 87;
+  margin: 0 auto;
+  transform: none;
+}
+@media (max-width: 760px) {
+  .hero .hero-layout { padding-block: 12px 20px; }
+  .hero-copy .emergence-title { width: min(100%, 400px); margin: 0 auto; }
+}
 .blog-tldr {
   width: 100%;
   max-width: none;
-  margin: 18px 0 0;
+  margin: 14px 0 0;
   padding: 18px 22px;
   border: 1px solid var(--line);
   border-left: 3.5px solid var(--scene-blue, #285c8c);
