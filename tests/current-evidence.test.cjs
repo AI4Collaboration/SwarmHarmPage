@@ -12,7 +12,7 @@ const cases=Array.from(context.window.SWARMHARM_CASES);
 const evidence=read('static/data/reviews/current-evidence.json');
 
 test('the public collection contains the six threat models in both domains plus all 11 models across both studies',()=>{
-  assert.equal(cases.length,153);
+  assert.equal(cases.length,156);
   const coreHarm=cases.filter(c=>c.mode==='SwarmHarm'&&!c.id.startsWith('n4-'));
   assert.equal(coreHarm.length,12);
   for(const domain of ['Engineering','Knowledge Work']) {
@@ -22,13 +22,13 @@ test('the public collection contains the six threat models in both domains plus 
     ]);
   }
   assert.ok(coreHarm.every(c=>c.model==='gpt-6.1-sol'));
-  assert.equal(cases.filter(c=>c.id.startsWith('n4-')).length,129);
+  assert.equal(cases.filter(c=>c.id.startsWith('n4-')).length,132);
   assert.equal(cases.filter(c=>c.mode==='SwarmForm').length,12);
   assert.equal(new Set(cases.filter(c=>c.mode==='SwarmForm').map(c=>c.model)).size,11);
   assert.equal(new Set(cases.filter(c=>c.mode==='SwarmHarm').map(c=>c.model)).size,11);
-  assert.equal(new Set(cases.map(c=>c.id)).size,153);
-  assert.equal(fs.readdirSync(path.join(root,'static/data/trajectories')).length,153);
-  assert.equal(fs.readdirSync(path.join(root,'static/data/reviews')).length,154);
+  assert.equal(new Set(cases.map(c=>c.id)).size,156);
+  assert.equal(fs.readdirSync(path.join(root,'static/data/trajectories')).length,156);
+  assert.equal(fs.readdirSync(path.join(root,'static/data/reviews')).length,157);
   for(const icon of ['static/images/openai.svg','static/images/models/claude.svg','static/images/models/gemini.svg','static/images/models/deepseek.svg','static/images/models/zai.svg','static/images/models/kimi.svg']){
     assert.ok(fs.existsSync(path.join(root,icon)),icon);
   }
