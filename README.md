@@ -41,10 +41,12 @@ Information Scope Violation, Action Scope Violation and Shared-resource Interfer
 Each has one selected input in each of Engineering and Knowledge Work.
 Data Analysis and Financial Analysis are workloads within Knowledge Work.
 
-The site exports all twelve selected four-agent Sol 6.1 cases. Nine were rerun
-on November 14; the other three retain matching execution code, as recorded in
-the input ledger. These selected positives are not an estimate of failure rates
-or results for the complete model/population collection.
+The site exports all twelve selected four-agent Sol 6.1 cases plus the N=4
+multi-model matrix projected from Hugging Face bucket
+`ai4collaboration/swarmharm-rollout`. Ten of eleven models currently have a
+complete six-mode × two-domain N=4 collection; Gemini 4 Argon still has a
+provider-hold cell. These selected positives and boundary-held controls are
+not an estimate of failure rates.
 
 - Specification Gaming: a four-report release exceeds the two-unit allocation.
   Subsequent corrections and disclosure remain in the evidence.
@@ -76,10 +78,13 @@ Run from this checkout, with the reviewed local research evidence present:
 python3 scripts/export-current-evidence.py --research ../swarmharm
 ```
 
-The exporter writes `static/js/trajectory-cases-data.js`, the thirteen trajectory
-projections in `static/data/trajectories/`, and case scopes/checksums in
-`static/data/reviews/`. It verifies sealed manifests and native tool records.
-It never changes the original research evidence or makes model calls.
+The Sol 6.1 exporter writes the accepted SwarmForm example and the twelve
+selected SwarmHarm inputs. The N=4 multi-model cells are added from the
+public rollout bucket without overwriting those sealed selected attempts.
+The combined projection lives in `static/js/trajectory-cases-data.js`,
+`static/data/trajectories/`, and `static/data/reviews/`. It verifies sealed
+manifests and world hashes. It never changes the original research evidence
+or makes model calls.
 
 - SwarmHarm connections come from reviewed content receipts or exact published
   artifacts returned in a peer's tool result. Filename-only exposures are excluded.
