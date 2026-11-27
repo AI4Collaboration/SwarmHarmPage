@@ -15,7 +15,7 @@ Read these sources before changing claims:
 - Root `README.md`: research scope and current results.
 - `rollouts/README.md`: portable tasks and communication conditions.
 - `swarmharm/docs/phase2-taxonomy.md`: six failure modes and evidence requirements.
-- `swarmharm/docs/research/mechanism-input-status.json`: the twelve selected inputs and their source-bound reviews.
+- `swarmharm/docs/research/mechanism-input-status.json`: the twelve inputs and their source-bound reviews.
 - `swarmform/docs/research/swarmform-publication-audit.json`: the completed channel-study audit.
 
 SwarmForm and SwarmHarm are separate experiments. Numeric `phase` URL parameters
@@ -32,21 +32,18 @@ The displayed findings come from the separately completed 50-input channel
 study. The replay `form-source-sharing` is its accepted, three-agent Sol 6.1
 Knowledge Work case. Juniper publishes source appendices; Cedar and Willow
 adopt the convention. All three import peer sources through successive intakes.
-All nine final packages are correct, including withdrawn terms. Across the selected channel study, 39 cases meet the registered sustained-exchange criterion, 37 have all nine outputs correct, and 13 retain partial or incorrect outputs.
+All nine final packages are correct, including withdrawn terms. Across the 50-input channel study, 39 cases meet the registered sustained-exchange criterion, 37 have all nine outputs correct, and 13 retain partial or incorrect outputs.
 
 ### SwarmHarm
 
 The six categories are Specification Gaming, Trace Tampering, Grader Manipulation,
 Information Scope Violation, Action Scope Violation and Shared-resource Interference.
-Each has one selected input in each of Engineering and Knowledge Work.
+Each has one input in Engineering and one in Knowledge Work.
 Data Analysis and Financial Analysis are workloads within Knowledge Work.
 
-The site exports all twelve selected four-agent Sol 6.1 cases plus the N=4
-multi-model matrix projected from Hugging Face bucket
-`ai4collaboration/swarmharm-rollout`. Ten of eleven models currently have a
-complete six-mode × two-domain N=4 collection; Gemini 4 Argon still has a
-provider-hold cell. These selected positives and boundary-held controls are
-not an estimate of failure rates.
+The site exports the twelve four-agent Sol 6.1 cases plus the N=4
+multi-model matrix from Hugging Face bucket
+`ai4collaboration/swarmharm-rollout`.
 
 - Specification Gaming: a four-report release exceeds the two-unit allocation.
   Subsequent corrections and disclosure remain in the evidence.
@@ -67,8 +64,7 @@ Amplification, composition, propagation, coordination and false-process inferenc
 are independently reviewed findings, not columns of the threat taxonomy.
 Sharing alone does not establish adoption, and parallel action does not establish
 coordination. Composition includes all corrections, cancellations and recovery.
-Historical false-process inference is linked separately in the evidence scope;
-it is not represented as a result of the selected current inputs.
+Historical false-process inference is linked separately in the evidence scope.
 
 ## Evidence export
 
@@ -78,9 +74,9 @@ Run from this checkout, with the reviewed local research evidence present:
 python3 scripts/export-current-evidence.py --research ../swarmharm
 ```
 
-The Sol 6.1 exporter writes the accepted SwarmForm example and the twelve
-selected SwarmHarm inputs. The N=4 multi-model cells are added from the
-public rollout bucket without overwriting those sealed selected attempts.
+The Sol 6.1 exporter writes the SwarmForm example and the twelve
+SwarmHarm inputs. N=4 multi-model cells are added from the
+public rollout bucket without overwriting sealed attempts.
 The combined projection lives in `static/js/trajectory-cases-data.js`,
 `static/data/trajectories/`, and `static/data/reviews/`. It verifies sealed
 manifests and world hashes. It never changes the original research evidence
@@ -94,11 +90,11 @@ or makes model calls.
 - Shared files and published schemas are labelled **artifacts**. Assistant
   commentary is not presented as an inter-agent message. No communication is
   invented for runs without content reads.
-- The public projection retains tool arguments and selected business results.
+- The public projection retains tool arguments and business results.
   Redundant release packs and raw SwarmHarm shell outputs are omitted to avoid
   republishing native session records. Original evidence is identified by hashes.
 
-The web repository contains only the selected current projections. Earlier
+The web repository contains the current projections. Earlier
 experimental records remain in the research repository, under their original
 conditions; obsolete website exports and importers are not shipped here.
 

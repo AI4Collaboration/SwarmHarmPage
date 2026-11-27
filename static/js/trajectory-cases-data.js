@@ -83,7 +83,7 @@ window.SWARMHARM_CASES = [
       ],
       [
         "Study",
-        "Current selected input"
+        "Sol 6.1 input"
       ],
       [
         "Domain",
@@ -111,7 +111,7 @@ window.SWARMHARM_CASES = [
       "nativeToolEventsVerified": 84,
       "excludedFilenameOnlyExposures": 0,
       "selectedActionFields": true,
-      "scope": "Complete tool action sequence with selected business results. Raw shell outputs and redundant release packs are omitted. Connections show content delivered to peers, not filename exposure or inferred conversation."
+      "scope": "Complete tool action sequence with business results. Raw shell outputs and redundant release packs are omitted. Connections show content delivered to peers, not filename exposure or inferred conversation."
     }
   },
   {
@@ -142,7 +142,7 @@ window.SWARMHARM_CASES = [
       ],
       [
         "Study",
-        "Current selected input"
+        "Sol 6.1 input"
       ],
       [
         "Domain",
@@ -170,7 +170,7 @@ window.SWARMHARM_CASES = [
       "nativeToolEventsVerified": 99,
       "excludedFilenameOnlyExposures": 0,
       "selectedActionFields": true,
-      "scope": "Complete tool action sequence with selected business results. Raw shell outputs and redundant release packs are omitted. Connections show content delivered to peers, not filename exposure or inferred conversation."
+      "scope": "Complete tool action sequence with business results. Raw shell outputs and redundant release packs are omitted. Connections show content delivered to peers, not filename exposure or inferred conversation."
     }
   },
   {
@@ -201,7 +201,7 @@ window.SWARMHARM_CASES = [
       ],
       [
         "Study",
-        "Current selected input"
+        "Sol 6.1 input"
       ],
       [
         "Domain",
@@ -229,7 +229,7 @@ window.SWARMHARM_CASES = [
       "nativeToolEventsVerified": 163,
       "excludedFilenameOnlyExposures": 7,
       "selectedActionFields": true,
-      "scope": "Complete tool action sequence with selected business results. Raw shell outputs and redundant release packs are omitted. Connections show content delivered to peers, not filename exposure or inferred conversation."
+      "scope": "Complete tool action sequence with business results. Raw shell outputs and redundant release packs are omitted. Connections show content delivered to peers, not filename exposure or inferred conversation."
     }
   },
   {
@@ -260,7 +260,7 @@ window.SWARMHARM_CASES = [
       ],
       [
         "Study",
-        "Current selected input"
+        "Sol 6.1 input"
       ],
       [
         "Domain",
@@ -288,7 +288,7 @@ window.SWARMHARM_CASES = [
       "nativeToolEventsVerified": 87,
       "excludedFilenameOnlyExposures": 0,
       "selectedActionFields": true,
-      "scope": "Complete tool action sequence with selected business results. Raw shell outputs and redundant release packs are omitted. Connections show content delivered to peers, not filename exposure or inferred conversation."
+      "scope": "Complete tool action sequence with business results. Raw shell outputs and redundant release packs are omitted. Connections show content delivered to peers, not filename exposure or inferred conversation."
     }
   },
   {
@@ -319,7 +319,7 @@ window.SWARMHARM_CASES = [
       ],
       [
         "Study",
-        "Current selected input"
+        "Sol 6.1 input"
       ],
       [
         "Domain",
@@ -347,7 +347,7 @@ window.SWARMHARM_CASES = [
       "nativeToolEventsVerified": 79,
       "excludedFilenameOnlyExposures": 0,
       "selectedActionFields": true,
-      "scope": "Complete tool action sequence with selected business results. Raw shell outputs and redundant release packs are omitted. Connections show content delivered to peers, not filename exposure or inferred conversation."
+      "scope": "Complete tool action sequence with business results. Raw shell outputs and redundant release packs are omitted. Connections show content delivered to peers, not filename exposure or inferred conversation."
     }
   },
   {
@@ -378,7 +378,7 @@ window.SWARMHARM_CASES = [
       ],
       [
         "Study",
-        "Current selected input"
+        "Sol 6.1 input"
       ],
       [
         "Domain",
@@ -406,7 +406,7 @@ window.SWARMHARM_CASES = [
       "nativeToolEventsVerified": 86,
       "excludedFilenameOnlyExposures": 11,
       "selectedActionFields": true,
-      "scope": "Complete tool action sequence with selected business results. Raw shell outputs and redundant release packs are omitted. Connections show content delivered to peers, not filename exposure or inferred conversation."
+      "scope": "Complete tool action sequence with business results. Raw shell outputs and redundant release packs are omitted. Connections show content delivered to peers, not filename exposure or inferred conversation."
     },
     "composition": {
       "alone": "No protected reports delayed",
@@ -443,7 +443,7 @@ window.SWARMHARM_CASES = [
       ],
       [
         "Study",
-        "Current selected input"
+        "Sol 6.1 input"
       ],
       [
         "Domain",
@@ -471,7 +471,7 @@ window.SWARMHARM_CASES = [
       "nativeToolEventsVerified": 76,
       "excludedFilenameOnlyExposures": 0,
       "selectedActionFields": true,
-      "scope": "Complete tool action sequence with selected business results. Raw shell outputs and redundant release packs are omitted. Connections show content delivered to peers, not filename exposure or inferred conversation."
+      "scope": "Complete tool action sequence with business results. Raw shell outputs and redundant release packs are omitted. Connections show content delivered to peers, not filename exposure or inferred conversation."
     }
   },
   {
@@ -502,7 +502,7 @@ window.SWARMHARM_CASES = [
       ],
       [
         "Study",
-        "Current selected input"
+        "Sol 6.1 input"
       ],
       [
         "Domain",
@@ -530,7 +530,7 @@ window.SWARMHARM_CASES = [
       "nativeToolEventsVerified": 103,
       "excludedFilenameOnlyExposures": 0,
       "selectedActionFields": true,
-      "scope": "Complete tool action sequence with selected business results. Raw shell outputs and redundant release packs are omitted. Connections show content delivered to peers, not filename exposure or inferred conversation."
+      "scope": "Complete tool action sequence with business results. Raw shell outputs and redundant release packs are omitted. Connections show content delivered to peers, not filename exposure or inferred conversation."
     }
   },
   {
@@ -561,7 +561,7 @@ window.SWARMHARM_CASES = [
       ],
       [
         "Study",
-        "Current selected input"
+        "Sol 6.1 input"
       ],
       [
         "Domain",
@@ -589,7 +589,7 @@ window.SWARMHARM_CASES = [
       "nativeToolEventsVerified": 111,
       "excludedFilenameOnlyExposures": 78,
       "selectedActionFields": true,
-      "scope": "Complete tool action sequence with selected business results. Raw shell outputs and redundant release packs are omitted. Connections show content delivered to peers, not filename exposure or inferred conversation."
+      "scope": "Complete tool action sequence with business results. Raw shell outputs and redundant release packs are omitted. Connections show content delivered to peers, not filename exposure or inferred conversation."
     }
   },
   {
@@ -620,7 +620,7 @@ window.SWARMHARM_CASES = [
       ],
       [
         "Study",
-        "Current selected input"
+        "Sol 6.1 input"
       ],
       [
         "Domain",
@@ -648,7 +648,7 @@ window.SWARMHARM_CASES = [
       "nativeToolEventsVerified": 77,
       "excludedFilenameOnlyExposures": 0,
       "selectedActionFields": true,
-      "scope": "Complete tool action sequence with selected business results. Raw shell outputs and redundant release packs are omitted. Connections show content delivered to peers, not filename exposure or inferred conversation."
+      "scope": "Complete tool action sequence with business results. Raw shell outputs and redundant release packs are omitted. Connections show content delivered to peers, not filename exposure or inferred conversation."
     }
   },
   {
@@ -679,7 +679,7 @@ window.SWARMHARM_CASES = [
       ],
       [
         "Study",
-        "Current selected input"
+        "Sol 6.1 input"
       ],
       [
         "Domain",
@@ -707,7 +707,7 @@ window.SWARMHARM_CASES = [
       "nativeToolEventsVerified": 78,
       "excludedFilenameOnlyExposures": 0,
       "selectedActionFields": true,
-      "scope": "Complete tool action sequence with selected business results. Raw shell outputs and redundant release packs are omitted. Connections show content delivered to peers, not filename exposure or inferred conversation."
+      "scope": "Complete tool action sequence with business results. Raw shell outputs and redundant release packs are omitted. Connections show content delivered to peers, not filename exposure or inferred conversation."
     }
   },
   {
@@ -738,7 +738,7 @@ window.SWARMHARM_CASES = [
       ],
       [
         "Study",
-        "Current selected input"
+        "Sol 6.1 input"
       ],
       [
         "Domain",
@@ -766,7 +766,7 @@ window.SWARMHARM_CASES = [
       "nativeToolEventsVerified": 83,
       "excludedFilenameOnlyExposures": 0,
       "selectedActionFields": true,
-      "scope": "Complete tool action sequence with selected business results. Raw shell outputs and redundant release packs are omitted. Connections show content delivered to peers, not filename exposure or inferred conversation."
+      "scope": "Complete tool action sequence with business results. Raw shell outputs and redundant release packs are omitted. Connections show content delivered to peers, not filename exposure or inferred conversation."
     },
     "composition": {
       "alone": "No protected reports delayed",

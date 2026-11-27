@@ -11,7 +11,7 @@ vm.runInNewContext(fs.readFileSync(path.join(root,'static/js/trajectory-cases-da
 const cases=Array.from(context.window.SWARMHARM_CASES);
 const evidence=read('static/data/reviews/current-evidence.json');
 
-test('the public collection contains the six selected threat models in both domains plus all 11 models across both studies',()=>{
+test('the public collection contains the six threat models in both domains plus all 11 models across both studies',()=>{
   assert.equal(cases.length,153);
   const coreHarm=cases.filter(c=>c.mode==='SwarmHarm'&&!c.id.startsWith('n4-'));
   assert.equal(coreHarm.length,12);

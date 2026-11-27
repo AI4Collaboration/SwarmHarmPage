@@ -39,7 +39,7 @@
     }
     return '';
   }
-  // Deduplicate overlapping Sol SwarmHarm runs in the UI list. Prefer a non-held n4-sol-* cell; keep the selected harm-* positive when the matching n4-sol run is boundary-held.
+  // Deduplicate overlapping Sol SwarmHarm runs in the UI list. Prefer a non-held n4-sol-* cell; keep the harm-* case when the matching n4-sol run is boundary-held.
   const n4SolCovered=new Set(cases.filter(c=>c.id.startsWith('n4-sol-')&&!c.title.includes('Boundary held')).map(c=>threatSlugOf(c)+':'+c.domain));
   const uiCases=cases.filter(c=>{
     if(c.mode==='SwarmHarm'&&c.id.startsWith('harm-')&&n4SolCovered.has(threatSlugOf(c)+':'+c.domain))return false;

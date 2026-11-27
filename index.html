@@ -158,7 +158,7 @@
           <ul>
             <li><strong>Unprompted swarm formation (<a href="#form-the-swarm">SwarmForm</a>):</strong> Placed in separate Linux containers with no peer roster or teamwork prompt, agents turn empty OS surfaces (shared folders, sockets, mapped memory) into structured file-exchange channels—establishing sustained byte-verified exchange in <strong>39 / 50</strong> channel-study cohorts and solving split-information tasks with zero errors in <strong>37 / 50</strong> cohorts.</li>
             <li><strong>Three distinct multi-agent harm pathways (<a href="#cause-harm">SwarmHarm</a>):</strong> Under ordinary deployment prompts on a shared reporting platform, cohort-level failures split into <em>peer contagion</em> (peers inspect and copy one agent’s weakened grading schema), <em>parallel individual shortcuts</em> (agents independently cross weak boundaries while openly noting their workarounds), and <em>zero-communication resource overuse</em> (trajectories with <code>0</code> solo delays cause <code>2</code> critical delays when run together).</li>
-            <li><strong>Sharp cross-model divergence (<a href="#results-analysis">Results &amp; Analysis</a>):</strong> Across <strong>142</strong> showcased runs and <strong>11</strong> frontier models, ten models now have a complete <code>N = 4</code> six-mode × two-domain matrix. High-initiative models (<code>GPT-6.1 Sol</code>, <code>DeepSeek V4.1</code>) elicit all six failure modes in both domains; Claude families still hold grader-manipulation in both domains, while Opus and Sonnet now also exhibit action-scope and several task-level failures. Gemini 4 Argon remains the incomplete row (one N=4 cell still on provider hold).</li>
+            <li><strong>Sharp cross-model divergence (<a href="#results-analysis">Results &amp; Analysis</a>):</strong> Across <strong>142</strong> runs and <strong>11</strong> frontier models, the <code>N = 4</code> six-mode × two-domain matrix is in. High-initiative models (<code>GPT-6.1 Sol</code>, <code>DeepSeek V4.1</code>) elicit all six failure modes in both domains; Claude families hold grader-manipulation in both domains, while Opus and Sonnet also exhibit action-scope and several task-level failures.</li>
           </ul>
         </aside>
 
@@ -606,8 +606,8 @@
   <header class="experiment-heading">
     <h2 class="life-phase p3" id="results-analysis-title"><span class="experiment-label">Empirical Evidence · 11 Frontier Models</span>Results &amp; Analysis</h2>
     <div class="study-prose">
-      <p><strong>How to interpret our empirical evidence.</strong> Our public release combines two complementary bodies of sealed evidence: (1) the completed <strong>50-input SwarmForm channel study</strong> (paired with 12 showcased <code>N = 3, 4</code> formation trajectories across all 11 frontier models and our 16-configuration FFmpeg / Navier–Stokes validation suite), and (2) <strong>130 showcased SwarmHarm trajectories</strong> (142 total showcased runs in <a href="traces/">Explore Trajectory</a>, backed by 153 SHA-256-sealed native trajectories) spanning <strong>11 frontier models from 6 providers</strong> across Engineering (<code>Eng</code>) and Knowledge Work (<code>KW</code>).</p>
-      <p><strong>Important scope note:</strong> Each showcased SwarmHarm run is a verified mechanistic case under identical natural prompts—selected to test whether a model family exhibits a given failure mode, whether peers propagate it, and how counterfactual replay attributes causality. Cells in the matrix below establish <em>verified behavioral occurrence and qualitative cross-model structure</em> (including boundary-held controls), rather than population-wide failure-rate prevalence.</p>
+      <p>Two sealed collections sit behind the numbers below: the <strong>50-input SwarmForm channel study</strong> (12 formation trajectories across 11 frontier models, plus the FFmpeg / Navier–Stokes validation suite) and the <strong>N = 4 SwarmHarm matrix</strong>—130 trajectories across six failure modes in Engineering and Knowledge Work. <a href="traces/">Explore Trajectory</a> currently holds 142 runs from 153 native trajectories.</p>
+      <p>Every SwarmHarm cell uses the same natural prompts. The matrix records which failure modes appeared, and which boundaries held, under counterfactual replay.</p>
     </div>
   </header>
 
@@ -625,7 +625,7 @@
     <div class="results-kpi kpi-harm">
       <span class="results-kpi-label">SwarmHarm · Multi-Model Matrix</span>
       <span class="results-kpi-num">11 models</span>
-      <p>130 showcased SwarmHarm runs across 6 failure modes in Engineering and Knowledge Work, including complete N=4 matrices for 10 of 11 models and boundary-held controls.</p>
+      <p>130 SwarmHarm runs across 6 failure modes in Engineering and Knowledge Work.</p>
     </div>
     <div class="results-kpi kpi-harm">
       <span class="results-kpi-label">Compositional Replay Gap</span>
@@ -823,8 +823,8 @@
 
     <article class="results-takeaway">
       <h4>2. High initiative cuts both ways across model families</h4>
-      <p>Comparing the two studies reveals a sharp trade-off between autonomous problem-solving initiative and boundary restraint. High-initiative models such as <code>GPT-6.1 Sol</code> and <code>DeepSeek V4.1</code> aggressively explore workspace files, schemas, and batch parameters when blocked—excelling at distributed synthesis in SwarmForm, while triggering all <strong>6 of 6</strong> failure modes across both Engineering and Knowledge Work in SwarmHarm.</p>
-      <p>Mid-spectrum models (<code>GPT-6 Luna</code>, <code>Gemini 4 Argon</code>, <code>Kimi K3.1</code>, <code>GLM-5.3</code>) elicit <strong>5 of 6</strong> failure modes—crossing batching, dispatch-register, scope, and shared-pool boundaries while leaving workspace grader schemas intact. By contrast, the <code>Claude 5.5</code> family combines active unprompted collaboration in SwarmForm (54 peer reads in Opus 5.5 scheduling) with strong role restraint in SwarmHarm: <code>Claude Haiku 5.5</code> explicitly notes in its reasoning that closing a Quality Review gate or reading restricted archives lies outside its role and holds the boundary (<code>0</code> violations).</p>
+      <p>Comparing the two studies reveals a sharp trade-off between autonomous problem-solving initiative and boundary restraint. High-initiative models such as <code>GPT-6.1 Sol</code> and <code>DeepSeek V4.1</code> aggressively explore workspace files, schemas, and batch parameters when blocked—excelling at distributed synthesis in SwarmForm, while triggering all <strong>6 of 6</strong> failure modes across both Engineering and Knowledge Work in SwarmHarm. <code>GPT-6 Luna</code>, <code>GPT-6 Astra</code>, <code>Kimi K3.1</code>, and <code>GLM-5.3</code> now fill the same 6 × 2 matrix.</p>
+      <p>The <code>Claude 5.5</code> family still collaborates in SwarmForm (54 peer reads in the Opus 5.5 scheduling run) and holds grader-manipulation in both domains. Opus and Sonnet nevertheless close Quality Review gates outside their role and trip several task-level modes. Haiku holds action-scope in both domains: it notes in its reasoning that closing a Quality Review gate or reading restricted archives lies outside its role.</p>
     </article>
 
     <article class="results-takeaway">

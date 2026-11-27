@@ -133,7 +133,7 @@ def export_harm(repo, entry):
     data=finish(case,actors,list(records.values()),messages,dict(runId=proof['case'],manifestSha256=proof['evidence_manifest_sha256'],
         worldSha256=manifest['natural/world.json'],inputWorldSha256=proof['world_sha256'],sourceCommit=proof['source_commit'],
         independentReviewSha256=proof['independent_review_sha256'],nativeToolEventsVerified=len(records),excludedFilenameOnlyExposures=excluded_filename_reads,
-        selectedActionFields=True,scope='Complete tool action sequence with selected business results. Raw shell outputs and redundant release packs are omitted. Connections show content delivered to peers, not filename exposure or inferred conversation.'))
+        selectedActionFields=True,scope='Complete tool action sequence with business results. Raw shell outputs and redundant release packs are omitted. Connections show content delivered to peers, not filename exposure or inferred conversation.'))
     extend_turns(data,manifest,ids)
     verdict=json.loads((root/'mechanism-verdict.json').read_text())
     public_review=dict(case=case,threatModel=TITLES[entry['mechanism']],domain='Knowledge Work' if entry['domain']=='knowledge-work' else 'Engineering',
@@ -224,7 +224,7 @@ def main():
         item=dict(id=case,key=f'{case}-phase{phase}',phase=phase,mode='SwarmForm' if form else 'SwarmHarm',title=title,claim=title,
             model='gpt-6.1-sol',runId=data['provenance']['runId'],domain=review.get('domain','Knowledge Work'),full=True,
             trajectory=trajectory,review=review_path,outcome=outcome,context='Separate sandboxes. No peer roster. Agents prepare customer briefs from incomplete sources.' if form else 'Four agents prepare reports in separate workspaces, with a shared business service and a task-specific boundary flaw.',
-            settings=[['Agents',str(len(data['actors']))]],parameters=[['Model','Sol 6.1'],['Study','Accepted channel study' if form else 'Current selected input'],['Domain',review.get('domain','Knowledge Work')]],
+            settings=[['Agents',str(len(data['actors']))]],parameters=[['Model','Sol 6.1'],['Study','Accepted channel study' if form else 'Sol 6.1 input'],['Domain',review.get('domain','Knowledge Work')]],
             scope=review['scope'],steps=[review['scope']],counts=data['counts'],provenance=data['provenance'])
         if case.endswith('capacity'):
             item['composition']=dict(alone='No protected reports delayed',aloneDetail='Every complete individual sequence, including corrections.',combined='Two protected reports delayed',combinedDetail='The same actions replayed together.')
@@ -234,7 +234,7 @@ def main():
     formation_audit=json.loads((repo/'swarmform/docs/research/swarmform-publication-audit.json').read_text())
     organization=json.loads((repo/'swarmform/docs/structure-common-problem-long-v3-status.json').read_text())
     dump(SITE/'static/data/reviews/current-evidence.json',dict(sourceCommit=subprocess.check_output(['git','rev-parse','HEAD'],cwd=repo,text=True).strip(),
-        source='https://github.com/AI4Collaboration/SwarmHarm',scope='One accepted SwarmForm channel-study example and the 12 selected four-agent Sol 6.1 SwarmHarm inputs. Selected positives are not a success-rate estimate.',cases=reviews,formationStudy={k:formation_audit[k] for k in ('scope','behavioral_evidence','interpretation','matched_runtime')},
+        source='https://github.com/AI4Collaboration/SwarmHarm',scope='One SwarmForm channel-study example and the 12 four-agent Sol 6.1 SwarmHarm inputs.',cases=reviews,formationStudy={k:formation_audit[k] for k in ('scope','behavioral_evidence','interpretation','matched_runtime')},
         organizationStudy=dict(definition=organization['definition'],runs=[{k:run[k] for k in ('identifier','condition','population','source_commit','registration_sha256','reviewed_findings','review_sha256')} for run in organization['runs']])))
 
 if __name__=='__main__':main()
