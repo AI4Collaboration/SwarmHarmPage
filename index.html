@@ -38,7 +38,7 @@
 
 
   <script src="static/js/swarmharm_title_demo_v3.js?v=74" defer></script>
-  <script src="static/js/results-interactive.js?v=5" defer></script>
+  <script src="static/js/results-interactive.js?v=6" defer></script>
   <link rel="preload" href="static/fonts/et-book-roman-line-figures.woff" as="font" type="font/woff" crossorigin>
   <link rel="preload" href="static/fonts/Inter.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="stylesheet" href="static/css/typography.css?v=84">
@@ -474,16 +474,6 @@
           </tr>
         </thead>
         <tbody>
-          <tr data-model="sol">
-            <th scope="row"><a href="traces/?model=gpt-6.1-sol#trajectory"><img class="model-logo model-logo-openai" src="static/images/openai.svg?v=2" width="14" height="14" alt="">GPT-6.2 Sol</a></th>
-            <td data-mech="gaming"><a class="cell-pill cell-scale" href="traces/?study=swarmharm&amp;threat=gaming&amp;model=gpt-6.1-sol#trajectory" title="Held in KW at N=4; triggered in both domains at N=16 and N=32">5/6 · 26% ↑</a></td>
-            <td data-mech="records"><a class="cell-pill cell-both" href="traces/?study=swarmharm&amp;threat=records&amp;model=gpt-6.1-sol#trajectory">6/6 · 100%</a></td>
-            <td data-mech="grader"><a class="cell-pill cell-both" href="traces/?study=swarmharm&amp;threat=grader&amp;model=gpt-6.1-sol#trajectory">6/6 · 96%</a></td>
-            <td data-mech="info"><a class="cell-pill cell-both" href="traces/?study=swarmharm&amp;threat=information&amp;model=gpt-6.1-sol#trajectory">6/6 · 100%</a></td>
-            <td data-mech="action"><a class="cell-pill cell-both" href="traces/?study=swarmharm&amp;threat=action&amp;model=gpt-6.1-sol#trajectory">6/6 · 100%</a></td>
-            <td data-mech="capacity"><a class="cell-pill cell-both" href="traces/?study=swarmharm&amp;threat=capacity&amp;model=gpt-6.1-sol#trajectory">6/6 · 99%</a></td>
-            <td class="cell-total">35/36 · 87%</td>
-          </tr>
           <tr data-model="astra">
             <th scope="row"><a href="traces/?model=gpt-6-astra#trajectory"><img class="model-logo model-logo-openai" src="static/images/openai.svg?v=2" width="14" height="14" alt="">GPT-6.2 Astra</a></th>
             <td data-mech="gaming"><a class="cell-pill cell-both" href="traces/?study=swarmharm&amp;threat=gaming&amp;model=gpt-6-astra#trajectory">6/6 · 47%</a></td>
@@ -493,6 +483,16 @@
             <td data-mech="action"><a class="cell-pill cell-both" href="traces/?study=swarmharm&amp;threat=action&amp;model=gpt-6-astra#trajectory">6/6 · 100%</a></td>
             <td data-mech="capacity"><a class="cell-pill cell-both" href="traces/?study=swarmharm&amp;threat=capacity&amp;model=gpt-6-astra#trajectory">6/6 · 92%</a></td>
             <td class="cell-total">32/36 · 73%</td>
+          </tr>
+          <tr data-model="sol">
+            <th scope="row"><a href="traces/?model=gpt-6.1-sol#trajectory"><img class="model-logo model-logo-openai" src="static/images/openai.svg?v=2" width="14" height="14" alt="">GPT-6.2 Sol</a></th>
+            <td data-mech="gaming"><a class="cell-pill cell-scale" href="traces/?study=swarmharm&amp;threat=gaming&amp;model=gpt-6.1-sol#trajectory" title="Held in KW at N=4; triggered in both domains at N=16 and N=32">5/6 · 26% ↑</a></td>
+            <td data-mech="records"><a class="cell-pill cell-both" href="traces/?study=swarmharm&amp;threat=records&amp;model=gpt-6.1-sol#trajectory">6/6 · 100%</a></td>
+            <td data-mech="grader"><a class="cell-pill cell-both" href="traces/?study=swarmharm&amp;threat=grader&amp;model=gpt-6.1-sol#trajectory">6/6 · 96%</a></td>
+            <td data-mech="info"><a class="cell-pill cell-both" href="traces/?study=swarmharm&amp;threat=information&amp;model=gpt-6.1-sol#trajectory">6/6 · 100%</a></td>
+            <td data-mech="action"><a class="cell-pill cell-both" href="traces/?study=swarmharm&amp;threat=action&amp;model=gpt-6.1-sol#trajectory">6/6 · 100%</a></td>
+            <td data-mech="capacity"><a class="cell-pill cell-both" href="traces/?study=swarmharm&amp;threat=capacity&amp;model=gpt-6.1-sol#trajectory">6/6 · 99%</a></td>
+            <td class="cell-total">35/36 · 87%</td>
           </tr>
           <tr data-model="terra">
             <th scope="row"><a href="traces/?model=gpt-6.1-terra#trajectory"><img class="model-logo model-logo-openai" src="static/images/openai.svg?v=2" width="14" height="14" alt="">GPT-6.1 Terra</a></th>
@@ -658,8 +658,8 @@
         <text x="260" y="238" text-anchor="middle" class="chart-label">50%</text>
         <text x="321" y="238" text-anchor="middle" class="chart-label">75%</text>
         <text x="382" y="238" text-anchor="middle" class="chart-label">100%</text>
-        <text x="130" y="29" text-anchor="end" class="chart-model">GPT-6.2 Sol</text><rect data-bar-model="sol" x="138" y="18" width="212.0" height="13" rx="3" class="chart-bar-high"/><text data-bar-val="sol" x="355.0" y="29" class="chart-val">86.9%</text>
-        <text x="130" y="50" text-anchor="end" class="chart-model">GPT-6.2 Astra</text><rect data-bar-model="astra" x="138" y="39" width="179.1" height="13" rx="3" class="chart-bar-mid"/><text data-bar-val="astra" x="322.1" y="50" class="chart-val">73.4%</text>
+        <text x="130" y="29" text-anchor="end" class="chart-model">GPT-6.2 Astra</text><rect data-bar-model="astra" x="138" y="18" width="179.1" height="13" rx="3" class="chart-bar-mid"/><text data-bar-val="astra" x="322.1" y="29" class="chart-val">73.4%</text>
+        <text x="130" y="50" text-anchor="end" class="chart-model">GPT-6.2 Sol</text><rect data-bar-model="sol" x="138" y="39" width="212.0" height="13" rx="3" class="chart-bar-high"/><text data-bar-val="sol" x="355.0" y="50" class="chart-val">86.9%</text>
         <text x="130" y="71" text-anchor="end" class="chart-model">GPT-6.1 Terra</text><rect data-bar-model="terra" x="138" y="60" width="175.7" height="13" rx="3" class="chart-bar-mid"/><text data-bar-val="terra" x="318.7" y="71" class="chart-val">72.0%</text>
         <text x="130" y="92" text-anchor="end" class="chart-model">GPT-6 Luna</text><rect data-bar-model="luna" x="138" y="81" width="225.7" height="13" rx="3" class="chart-bar-high"/><text data-bar-val="luna" x="368.7" y="92" class="chart-val">92.5%</text>
         <text x="130" y="114" text-anchor="end" class="chart-model">Claude Opus 5.5</text><rect data-bar-model="opus" x="138" y="103" width="177.6" height="13" rx="3" class="chart-bar-mid"/><text data-bar-val="opus" x="320.6" y="114" class="chart-val">72.8%</text>

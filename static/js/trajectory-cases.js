@@ -11,9 +11,9 @@
   let renderedSearch,mountedKey;
   const escape=value=>String(value).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
   const models={
-    'gpt-6.1-sol':{name:'GPT-6.1 Sol',src:'static/images/openai.svg?v=2',cls:'model-logo-openai'},
+    'gpt-6-astra':{name:'GPT-6.2 Astra',src:'static/images/openai.svg?v=2',cls:'model-logo-openai'},
+    'gpt-6.1-sol':{name:'GPT-6.2 Sol',src:'static/images/openai.svg?v=2',cls:'model-logo-openai'},
     'gpt-6.1-terra':{name:'GPT-6.1 Terra',src:'static/images/openai.svg?v=2',cls:'model-logo-openai'},
-    'gpt-6-astra':{name:'GPT-6 Astra',src:'static/images/openai.svg?v=2',cls:'model-logo-openai'},
     'gpt-6-luna':{name:'GPT-6 Luna',src:'static/images/openai.svg?v=2',cls:'model-logo-openai'},
     'claude-opus-5.5':{name:'Claude Opus 5.5',src:'static/images/models/claude.svg?v=1',cls:''},
     'claude-sonnet-5.5':{name:'Claude Sonnet 5.5',src:'static/images/models/claude.svg?v=1',cls:''},
@@ -23,7 +23,7 @@
     'glm-5.3':{name:'GLM-5.3',src:'static/images/models/zai.svg?v=1',cls:'model-logo-mono'},
     'kimi-k3.1-pro':{name:'Kimi K3.1',src:'static/images/models/kimi-dark.svg?v=1',cls:'model-logo-kimi',kimi:true}
   };
-  const MODEL_ORDER=['deepseek-v4.1-flash','glm-5.3','kimi-k3.1-pro','gemini-4-argon','claude-opus-5.5','claude-sonnet-5.5','claude-haiku-5.5','gpt-6.1-sol','gpt-6.1-terra','gpt-6-astra','gpt-6-luna'];
+  const MODEL_ORDER=['gpt-6-astra','gpt-6.1-sol','gpt-6.1-terra','gpt-6-luna','claude-opus-5.5','claude-sonnet-5.5','claude-haiku-5.5','deepseek-v4.1-flash','glm-5.3','kimi-k3.1-pro','gemini-4-argon'];
   const THREAT_MODES=[
     {slug:'gaming',level:'Task',title:'Specification Gaming'},
     {slug:'records',level:'Task',title:'Trace Tampering'},
