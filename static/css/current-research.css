@@ -876,59 +876,220 @@ summary::-webkit-details-marker{display:none;}
   text-decoration: none;
 }
 
-/* ICLR Blogpost editorial callouts: TL;DR, Roadmap, Worked Examples, Detection Pillars, Mechanism Synthesis */
+/* Full-width Maksym-style TL;DR + two-column SwarmForm / SwarmHarm settings overview */
 .blog-tldr {
-  max-width: min(100%, 700px);
-  margin: 22px auto 0;
-  padding: 16px 20px 16px;
+  width: 100%;
+  max-width: none;
+  margin: 18px 0 0;
+  padding: 18px 22px;
   border: 1px solid var(--line);
-  border-left: 3px solid var(--scene-blue, #285c8c);
-  border-radius: 8px;
-  background: color-mix(in srgb, var(--surface) 62%, var(--bg));
+  border-left: 3.5px solid var(--scene-blue, #285c8c);
+  border-radius: 10px;
+  background: color-mix(in srgb, var(--surface) 64%, var(--bg));
   text-align: left;
 }
 .blog-tldr-label {
-  display: block;
-  margin: 0 0 8px;
-  font: 650 11.5px/1.3 var(--font);
+  display: inline-block;
+  margin: 0 8px 0 0;
+  padding: 2px 7px;
+  border-radius: 4px;
+  font: 700 11px/1.3 var(--font);
   letter-spacing: .07em;
   text-transform: uppercase;
+  background: color-mix(in srgb, var(--scene-blue, #285c8c) 14%, transparent);
   color: var(--scene-blue, #285c8c);
+  vertical-align: 1px;
 }
 :root[data-theme="dark"] .blog-tldr-label {
+  background: color-mix(in srgb, #94c5f5 16%, transparent);
   color: #94c5f5;
 }
-.blog-tldr ul {
+.blog-tldr p {
   margin: 0;
-  padding-left: 1.2em;
-  font: 400 clamp(16.5px, 1.22vw, 18px)/1.58 var(--editorial);
+  font: 400 clamp(17px, 1.32vw, 19px)/1.62 var(--editorial);
   color: var(--text);
 }
-.blog-tldr li + li {
-  margin-top: .55em;
+.blog-tldr strong {
+  font-weight: 700;
+  color: var(--text);
 }
-.blog-roadmap {
-  margin: 1.15em 0 0;
-  padding: 14px 18px;
-  border-top: 1px solid var(--line);
-  border-bottom: 1px solid var(--line);
+.blog-tldr .tldr-hl {
+  font-weight: 700;
+  text-decoration: underline;
+  text-decoration-thickness: 2px;
+  text-decoration-color: color-mix(in srgb, var(--scene-red, #c93b52) 65%, transparent);
+  text-underline-offset: 3px;
 }
-.blog-roadmap-title {
-  display: block;
-  margin: 0 0 8px;
-  font: 600 12px/1.3 var(--font);
+.blog-tldr .tldr-hl-blue {
+  font-weight: 700;
+  text-decoration: underline;
+  text-decoration-thickness: 2px;
+  text-decoration-color: color-mix(in srgb, var(--scene-blue, #285c8c) 65%, transparent);
+  text-underline-offset: 3px;
+}
+.hero-quick-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 10px;
+  margin-top: 12px;
+}
+.hero-quick-links a {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 5px 12px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: var(--bg);
+  color: var(--text);
+  font: 600 12.5px/1.25 var(--font);
+  text-decoration: none;
+  transition: border-color .15s ease, background .15s ease;
+}
+.hero-quick-links a:hover {
+  border-color: color-mix(in srgb, var(--text) 45%, transparent);
+  background: color-mix(in srgb, var(--text) 5%, var(--bg));
+}
+
+.settings-split {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 18px;
+  margin-top: 20px;
+  text-align: left;
+}
+.setting-card {
+  display: flex;
+  flex-direction: column;
+  padding: 18px 20px 16px;
+  border: 1px solid var(--line);
+  border-top: 3px solid var(--scene-blue, #285c8c);
+  border-radius: 10px;
+  background: color-mix(in srgb, var(--bg) 60%, var(--surface));
+}
+.setting-card-harm {
+  border-top-color: var(--scene-red, #c93b52);
+}
+.setting-card-eyebrow {
+  font: 650 11px/1.2 var(--font);
   letter-spacing: .06em;
   text-transform: uppercase;
-  color: var(--muted);
+  color: var(--scene-blue, #285c8c);
+  margin-bottom: 4px;
 }
-.blog-roadmap ol {
-  margin: 0;
-  padding-left: 1.25em;
-  font: 400 clamp(17px, 1.25vw, 18.5px)/1.58 var(--editorial);
+.setting-card-harm .setting-card-eyebrow {
+  color: var(--scene-red, #c93b52);
+}
+:root[data-theme="dark"] .setting-card-eyebrow { color: #94c5f5; }
+:root[data-theme="dark"] .setting-card-harm .setting-card-eyebrow { color: #f0a0ae; }
+.setting-card h2 {
+  margin: 0 0 6px;
+  font: 400 23px/1.2 var(--editorial);
   color: var(--text);
 }
-.blog-roadmap li + li {
-  margin-top: .5em;
+.setting-card-q {
+  margin: 0 0 12px;
+  font: 400 15px/1.5 var(--editorial);
+  color: var(--muted);
+}
+.setting-card-list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: grid;
+  gap: 8px;
+  font: 400 13.5px/1.5 var(--font);
+  color: color-mix(in srgb, var(--text) 88%, var(--bg));
+}
+.setting-card-list li {
+  padding-top: 7px;
+  border-top: 1px solid color-mix(in srgb, var(--line) 75%, transparent);
+}
+.setting-card-list strong {
+  color: var(--text);
+  font-weight: 650;
+}
+.setting-card-list code {
+  font: 500 .88em/1.2 ui-monospace, SFMono-Regular, Menlo, monospace;
+  padding: 1px 4px;
+  border-radius: 4px;
+  background: color-mix(in srgb, var(--text) 7%, transparent);
+}
+.setting-card-foot {
+  margin-top: auto;
+  padding-top: 12px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+  font: 600 12.5px/1.3 var(--font);
+}
+.setting-card-foot a {
+  color: var(--scene-blue, #285c8c);
+  text-decoration: none;
+}
+.setting-card-harm .setting-card-foot a {
+  color: var(--scene-red, #c93b52);
+}
+:root[data-theme="dark"] .setting-card-foot a { color: #94c5f5; }
+:root[data-theme="dark"] .setting-card-harm .setting-card-foot a { color: #f0a0ae; }
+.setting-card-foot a:hover { text-decoration: underline; text-underline-offset: 3px; }
+.setting-flow {
+  margin: 8px 0 12px;
+  padding: 10px 8px 6px;
+  border: 1px solid color-mix(in srgb, var(--line) 80%, transparent);
+  border-radius: 8px;
+  background: color-mix(in srgb, var(--bg) 78%, var(--surface));
+}
+.setting-flow svg {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+.flow-curve {
+  fill: none;
+  stroke: color-mix(in srgb, var(--scene-blue, #285c8c) 45%, var(--muted));
+  stroke-width: 1.5;
+  stroke-linecap: round;
+}
+.setting-card-harm .flow-curve {
+  stroke: color-mix(in srgb, var(--scene-red, #c93b52) 45%, var(--muted));
+}
+.flow-node {
+  fill: var(--bg);
+  stroke: color-mix(in srgb, var(--text) 22%, transparent);
+  stroke-width: 1.1;
+}
+.flow-hub {
+  fill: color-mix(in srgb, var(--scene-blue, #285c8c) 11%, var(--bg));
+  stroke: color-mix(in srgb, var(--scene-blue, #285c8c) 55%, transparent);
+  stroke-width: 1.4;
+}
+.setting-card-harm .flow-hub {
+  fill: color-mix(in srgb, var(--scene-red, #c93b52) 11%, var(--bg));
+  stroke: color-mix(in srgb, var(--scene-red, #c93b52) 55%, transparent);
+}
+.flow-title {
+  font: 600 11.5px/1 var(--font);
+  fill: var(--text);
+}
+.flow-sub {
+  font: 400 10px/1 var(--font);
+  fill: var(--muted);
+}
+.flow-hub-title {
+  font: 650 12px/1 var(--font);
+  fill: var(--text);
+}
+.flow-hub-sub {
+  font: 500 10px/1 ui-monospace, SFMono-Regular, Menlo, monospace;
+  fill: var(--muted);
+}
+.flow-caption {
+  font: 500 10px/1 var(--font);
+  fill: var(--muted);
+}
+@media (max-width: 900px) {
+  .settings-split { grid-template-columns: minmax(0, 1fr); }
 }
 
 .worked-example {
@@ -1364,42 +1525,4 @@ summary::-webkit-details-marker{display:none;}
   text-decoration: underline;
   text-decoration-color: color-mix(in srgb, currentColor 40%, transparent);
   text-underline-offset: 3px;
-}
-.bibtex-block {
-  position: relative;
-  border: 1px solid var(--line);
-  border-radius: 9px;
-  background: color-mix(in srgb, var(--text) 3.5%, var(--bg));
-  padding: 12px 14px;
-}
-.bibtex-head {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin-bottom: 8px;
-}
-.bibtex-head span {
-  font: 600 11.5px/1.2 var(--font);
-  letter-spacing: .05em;
-  text-transform: uppercase;
-  color: var(--muted);
-}
-.bibtex-copy {
-  appearance: none;
-  border: 1px solid var(--line);
-  background: var(--bg);
-  color: var(--text);
-  font: 600 11.5px/1.2 var(--font);
-  padding: 4px 10px;
-  border-radius: 6px;
-  cursor: pointer;
-}
-.bibtex-copy:hover {
-  border-color: color-mix(in srgb, var(--text) 45%, transparent);
-}
-.bibtex-block pre {
-  margin: 0;
-  overflow-x: auto;
-  font: 400 12px/1.48 ui-monospace, SFMono-Regular, Menlo, monospace;
-  color: color-mix(in srgb, var(--text) 90%, var(--bg));
 }
