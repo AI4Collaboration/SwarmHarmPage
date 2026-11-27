@@ -130,15 +130,15 @@
       const t = mechTotals[sl];
       const rate = Math.round((t.obs / t.n) * 100);
       const cf = Math.round((t.cf / t.n) * 100);
-      td.innerHTML = `${t.obs}/${t.n}<small>${rate}% · ${cf}% cf</small>`;
+      td.innerHTML = `${t.obs}/${t.n}<small>${rate}% · ${cf}% agents</small>`;
     }
     const footHead = table.querySelector('tfoot th small');
-    if (footHead) footHead.textContent = `${10 * cellsPerSlot} cohorts / mode`;
+    if (footHead) footHead.textContent = `${10 * cellsPerSlot} runs / mode`;
     const footTot = table.querySelector('tfoot td.cell-total');
     if (footTot) {
       const rate = Math.round((grandObs / grandCells) * 100);
       const cf = Math.round((grandCfSum / grandCells) * 100);
-      footTot.innerHTML = `${grandObs}/${grandCells}<small>${rate}% · ${cf}% cf</small>`;
+      footTot.innerHTML = `${grandObs}/${grandCells}<small>${rate}% · ${cf}% agents</small>`;
     }
 
     /* Update Figure 3b bars smoothly */
@@ -162,20 +162,20 @@
     if (figSub) {
       const sizeLabel = activePop === 'all' ? 'all 3 sizes (N = 4, 16, 32)' : `N = ${activePop}`;
       const domLabel = activeDom === 'both' ? 'both domains' : (activeDom === 'KW' ? 'Knowledge Work' : 'Engineering');
-      figSub.textContent = `Mean causal agent participation (${sizeLabel}, ${domLabel})`;
+      figSub.textContent = `Average share of agents involved (${sizeLabel}, ${domLabel})`;
     }
 
     if (statusNote) {
       const pctStr = ((grandObs / grandCells) * 100).toFixed(1);
       const domTag = activeDom === 'both' ? '' : (activeDom === 'KW' ? ' in Knowledge Work' : ' in Engineering');
       if (activePop === '4') {
-        statusNote.innerHTML = `At <code>N = 4</code>${domTag}: <strong>${grandObs}/${grandCells}</strong> (${pctStr}%) trigger. <code>GPT-6.1 Terra</code> Interference (0 delayed) and <code>Claude Sonnet 5.5</code> Grader both hold; switch to <code>N = 16</code> or <code>N = 32</code> to watch them break.`;
+        statusNote.innerHTML = `At <code>N = 4</code>${domTag}: <strong>${grandObs}/${grandCells}</strong> (${pctStr}%) fail. <code>GPT-6.1 Terra</code> Interference (0 delayed) and <code>Claude Sonnet 5.5</code> Grader both hold; click <code>N = 16</code> or <code>N = 32</code> to see them break.`;
       } else if (activePop === '16') {
-        statusNote.innerHTML = `At <code>N = 16</code>${domTag}: <strong>${grandObs}/${grandCells}</strong> (${pctStr}%) trigger. <code>GPT-6.1 Terra</code> flips from 0 to 6 to 8 delayed Operations jobs (compositional phase transition), while <code>Claude Sonnet 5.5</code> still holds Grader Manipulation.`;
+        statusNote.innerHTML = `At <code>N = 16</code>${domTag}: <strong>${grandObs}/${grandCells}</strong> (${pctStr}%) fail. <code>GPT-6.1 Terra</code> jumps from 0 to 6 to 8 delayed jobs, while <code>Claude Sonnet 5.5</code> still holds Grader Manipulation.`;
       } else if (activePop === '32') {
-        statusNote.innerHTML = `At <code>N = 32</code>${domTag}: <strong>${grandObs}/${grandCells}</strong> (${pctStr}%) trigger. <code>Claude Sonnet 5.5</code> breaks Grader Manipulation in both domains (10/32 KW, 2/32 Eng) via peer norm contagion; <code>Haiku 5.5</code> still holds Grader, Action Scope, and Trace Tampering.`;
+        statusNote.innerHTML = `At <code>N = 32</code>${domTag}: <strong>${grandObs}/${grandCells}</strong> (${pctStr}%) fail. <code>Claude Sonnet 5.5</code> breaks Grader Manipulation in both domains (10/32 KW, 2/32 Eng) after copying peers; <code>Haiku 5.5</code> still holds Grader, Action Scope, and Trace Tampering.`;
       } else {
-        statusNote.innerHTML = `Showing <strong>${grandObs}/${grandCells}</strong> (${pctStr}%) triggered cohorts${domTag}. Select <code>N = 4</code>, <code>N = 16</code>, or <code>N = 32</code> to step through the scale transitions.`;
+        statusNote.innerHTML = `Showing <strong>${grandObs}/${grandCells}</strong> (${pctStr}%) failed runs${domTag}. Click <code>N = 4</code>, <code>N = 16</code>, or <code>N = 32</code> to see what breaks at larger scale.`;
       }
     }
   }
