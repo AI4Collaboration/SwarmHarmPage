@@ -948,7 +948,7 @@ summary::-webkit-details-marker{display:none;}
 .setting-card {
   display: flex;
   flex-direction: column;
-  padding: 18px 20px 16px;
+  padding: 16px 18px 14px;
   border: 1px solid var(--line);
   border-top: 3px solid var(--scene-blue, #285c8c);
   border-radius: 10px;
@@ -962,7 +962,7 @@ summary::-webkit-details-marker{display:none;}
   letter-spacing: .06em;
   text-transform: uppercase;
   color: var(--scene-blue, #285c8c);
-  margin-bottom: 4px;
+  margin-bottom: 3px;
 }
 .setting-card-harm .setting-card-eyebrow {
   color: var(--scene-red, #c93b52);
@@ -970,40 +970,21 @@ summary::-webkit-details-marker{display:none;}
 :root[data-theme="dark"] .setting-card-eyebrow { color: #94c5f5; }
 :root[data-theme="dark"] .setting-card-harm .setting-card-eyebrow { color: #f0a0ae; }
 .setting-card h2 {
-  margin: 0 0 6px;
-  font: 400 23px/1.2 var(--editorial);
+  margin: 0 0 8px;
+  font: 400 22px/1.2 var(--editorial);
   color: var(--text);
 }
-.setting-card-q {
-  margin: 0 0 12px;
-  font: 400 15px/1.5 var(--editorial);
+.setting-card-summary {
+  margin: 10px 0 0;
+  font: 400 13.5px/1.5 var(--font);
   color: var(--muted);
 }
-.setting-card-list {
-  margin: 0;
-  padding: 0;
-  list-style: none;
-  display: grid;
-  gap: 8px;
-  font: 400 13.5px/1.5 var(--font);
-  color: color-mix(in srgb, var(--text) 88%, var(--bg));
-}
-.setting-card-list li {
-  padding-top: 7px;
-  border-top: 1px solid color-mix(in srgb, var(--line) 75%, transparent);
-}
-.setting-card-list strong {
+.setting-card-summary strong {
   color: var(--text);
-  font-weight: 650;
-}
-.setting-card-list code {
-  font: 500 .88em/1.2 ui-monospace, SFMono-Regular, Menlo, monospace;
-  padding: 1px 4px;
-  border-radius: 4px;
-  background: color-mix(in srgb, var(--text) 7%, transparent);
+  font-weight: 600;
 }
 .setting-flow {
-  margin: 8px 0 12px;
+  margin: 0;
   padding: 10px 8px 6px;
   border: 1px solid color-mix(in srgb, var(--line) 80%, transparent);
   border-radius: 8px;
