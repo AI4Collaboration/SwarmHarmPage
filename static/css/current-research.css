@@ -1067,3 +1067,339 @@ summary::-webkit-details-marker{display:none;}
 .mechanisms-table tbody tr:last-child td {
   border-bottom: 0;
 }
+
+/* Reading progress bar */
+.reading-progress {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2.5px;
+  z-index: 90;
+  pointer-events: none;
+  background: transparent;
+}
+.reading-progress > span {
+  display: block;
+  width: 100%;
+  height: 100%;
+  transform: scaleX(0);
+  transform-origin: 0 50%;
+  background: linear-gradient(90deg, var(--formation-ink, #285c8c), var(--results-accent, #2f6c8a), var(--misalignment-ink, #c93b52));
+}
+
+/* Formal attribution criteria definition box */
+.formal-criteria {
+  margin: 22px 0 6px;
+  padding: 16px 18px 18px;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  background: color-mix(in srgb, var(--text) 2.5%, var(--bg));
+}
+.formal-criteria-title {
+  margin: 0 0 12px;
+  font: 600 12px/1.3 var(--font);
+  letter-spacing: .06em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+.formal-criteria-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 14px 18px;
+}
+.formal-criterion {
+  padding-top: 10px;
+  border-top: 1px solid color-mix(in srgb, var(--line) 85%, transparent);
+}
+.formal-criterion strong {
+  display: block;
+  margin-bottom: 5px;
+  font: 600 13.5px/1.3 var(--font);
+  color: var(--text);
+}
+.formal-criterion .formal-expr {
+  display: block;
+  margin: 4px 0 6px;
+  padding: 6px 8px;
+  border-radius: 6px;
+  background: color-mix(in srgb, var(--text) 5.5%, transparent);
+  font: 500 11.5px/1.45 ui-monospace, SFMono-Regular, Menlo, monospace;
+  color: var(--text);
+}
+.formal-criterion p {
+  margin: 0;
+  font: 400 13px/1.48 var(--font);
+  color: var(--muted);
+}
+@media (max-width: 900px) {
+  .formal-criteria-grid { grid-template-columns: minmax(0, 1fr); }
+}
+
+/* Interactive matrix controls */
+.matrix-controls {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px 16px;
+  margin: 12px 0 10px;
+}
+.matrix-control-group {
+  display: inline-flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+}
+.matrix-control-label {
+  font: 600 11.5px/1.2 var(--font);
+  letter-spacing: .04em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+.matrix-seg {
+  display: inline-flex;
+  padding: 2px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: color-mix(in srgb, var(--text) 3.5%, var(--bg));
+}
+.matrix-seg button {
+  appearance: none;
+  border: 0;
+  background: transparent;
+  color: var(--muted);
+  font: 600 12px/1.2 var(--font);
+  padding: 6px 11px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background .14s ease, color .14s ease;
+}
+.matrix-seg button:hover {
+  color: var(--text);
+}
+.matrix-seg button[aria-pressed="true"] {
+  background: var(--text);
+  color: var(--bg);
+}
+.matrix-status-note {
+  margin: 0 0 12px;
+  padding: 9px 13px;
+  border-left: 3px solid var(--results-accent, #2f6c8a);
+  border-radius: 0 6px 6px 0;
+  background: color-mix(in srgb, var(--results-accent, #2f6c8a) 7%, var(--bg));
+  font: 400 13.5px/1.5 var(--font);
+  color: color-mix(in srgb, var(--text) 90%, var(--bg));
+}
+.matrix-status-note code {
+  font: 500 .88em/1.2 ui-monospace, SFMono-Regular, Menlo, monospace;
+  padding: 1px 4px;
+  border-radius: 4px;
+  background: color-mix(in srgb, var(--text) 8%, transparent);
+}
+.results-figure rect {
+  transition: width .24s ease;
+}
+
+/* Worked Case Study: Anatomy of Scale-Induced Norm Contagion */
+.case-study-box {
+  margin: 28px 0 30px;
+  padding: 20px 22px 22px;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  background: color-mix(in srgb, var(--misalignment-ink, #c93b52) 4%, var(--bg));
+}
+.case-study-head {
+  margin-bottom: 16px;
+}
+.case-study-eyebrow {
+  display: inline-block;
+  margin-bottom: 6px;
+  font: 600 11px/1.2 var(--font);
+  letter-spacing: .06em;
+  text-transform: uppercase;
+  color: var(--misalignment-ink, #a82038);
+}
+.case-study-head h3 {
+  margin: 0 0 6px;
+  font: 400 22px/1.25 var(--editorial);
+  color: var(--text);
+}
+.case-study-head p {
+  margin: 0;
+  font: 400 15.5px/1.58 var(--editorial);
+  color: color-mix(in srgb, var(--text) 86%, var(--bg));
+}
+.cot-timeline {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 14px;
+  margin-bottom: 14px;
+}
+.cot-step {
+  padding: 14px 15px;
+  border: 1px solid var(--line);
+  border-radius: 9px;
+  background: color-mix(in srgb, var(--bg) 72%, var(--surface));
+}
+.cot-step-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 8px;
+  font: 600 11px/1.2 var(--font);
+  letter-spacing: .04em;
+  text-transform: uppercase;
+}
+.cot-step-hold .cot-step-tag { color: #146c43; }
+:root[data-theme="dark"] .cot-step-hold .cot-step-tag { color: #98e6b8; }
+.cot-step-shift .cot-step-tag { color: #8f4e04; }
+:root[data-theme="dark"] .cot-step-shift .cot-step-tag { color: #f8cf8d; }
+.cot-step-break .cot-step-tag { color: #a82038; }
+:root[data-theme="dark"] .cot-step-break .cot-step-tag { color: #ffb8c4; }
+.cot-step h4 {
+  margin: 0 0 6px;
+  font: 600 13.5px/1.3 var(--font);
+  color: var(--text);
+}
+.cot-quote {
+  margin: 0 0 8px;
+  padding: 8px 10px;
+  border-left: 2.5px solid color-mix(in srgb, var(--text) 28%, transparent);
+  background: color-mix(in srgb, var(--text) 4%, transparent);
+  border-radius: 0 6px 6px 0;
+  font: italic 400 14px/1.5 var(--editorial);
+  color: var(--text);
+}
+.cot-step p.cot-note {
+  margin: 0;
+  font: 400 12.5px/1.45 var(--font);
+  color: var(--muted);
+}
+.cot-corroboration {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+  padding-top: 12px;
+  border-top: 1px solid color-mix(in srgb, var(--line) 80%, transparent);
+}
+.cot-mini {
+  font: 400 13.5px/1.5 var(--editorial);
+  color: color-mix(in srgb, var(--text) 88%, var(--bg));
+}
+.cot-mini strong {
+  font: 600 12.5px/1.3 var(--font);
+  color: var(--text);
+}
+@media (max-width: 900px) {
+  .cot-timeline,
+  .cot-corroboration { grid-template-columns: minmax(0, 1fr); }
+}
+
+/* Implications & Open Questions + References & BibTeX */
+.implications-block {
+  margin: 28px 0 28px;
+  padding-top: 22px;
+  border-top: 1px solid var(--line);
+}
+.implications-block h3 {
+  margin: 0 0 14px;
+  font: 400 23px/1.25 var(--editorial);
+  color: var(--text);
+}
+.implications-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 18px 22px;
+}
+.implication-card {
+  padding: 15px 16px;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  background: color-mix(in srgb, var(--bg) 60%, var(--surface));
+}
+.implication-num {
+  display: inline-block;
+  margin-bottom: 6px;
+  font: 600 11px/1.2 var(--font);
+  letter-spacing: .06em;
+  text-transform: uppercase;
+  color: var(--results-accent, #2f6c8a);
+}
+.implication-card h4 {
+  margin: 0 0 7px;
+  font: 600 14.5px/1.32 var(--font);
+  color: var(--text);
+}
+.implication-card p {
+  margin: 0;
+  font: 400 14.5px/1.55 var(--editorial);
+  color: color-mix(in srgb, var(--text) 86%, var(--bg));
+}
+@media (max-width: 900px) {
+  .implications-grid { grid-template-columns: minmax(0, 1fr); }
+}
+
+.blog-references {
+  margin: 28px 0 24px;
+  padding-top: 20px;
+  border-top: 1px solid var(--line);
+}
+.blog-references h3 {
+  margin: 0 0 10px;
+  font: 600 13px/1.3 var(--font);
+  letter-spacing: .05em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+.blog-references ol {
+  margin: 0 0 18px;
+  padding-left: 20px;
+  font: 400 14px/1.55 var(--editorial);
+  color: color-mix(in srgb, var(--text) 86%, var(--bg));
+}
+.blog-references li + li { margin-top: 5px; }
+.blog-references a {
+  color: inherit;
+  text-decoration: underline;
+  text-decoration-color: color-mix(in srgb, currentColor 40%, transparent);
+  text-underline-offset: 3px;
+}
+.bibtex-block {
+  position: relative;
+  border: 1px solid var(--line);
+  border-radius: 9px;
+  background: color-mix(in srgb, var(--text) 3.5%, var(--bg));
+  padding: 12px 14px;
+}
+.bibtex-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 8px;
+}
+.bibtex-head span {
+  font: 600 11.5px/1.2 var(--font);
+  letter-spacing: .05em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+.bibtex-copy {
+  appearance: none;
+  border: 1px solid var(--line);
+  background: var(--bg);
+  color: var(--text);
+  font: 600 11.5px/1.2 var(--font);
+  padding: 4px 10px;
+  border-radius: 6px;
+  cursor: pointer;
+}
+.bibtex-copy:hover {
+  border-color: color-mix(in srgb, var(--text) 45%, transparent);
+}
+.bibtex-block pre {
+  margin: 0;
+  overflow-x: auto;
+  font: 400 12px/1.48 ui-monospace, SFMono-Regular, Menlo, monospace;
+  color: color-mix(in srgb, var(--text) 90%, var(--bg));
+}
