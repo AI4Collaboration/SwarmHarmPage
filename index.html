@@ -34,7 +34,7 @@
   <link rel="stylesheet" href="static/css/project-page.css?v=71">
   <link rel="stylesheet" href="static/css/project-subpages.css?v=80">
   <link rel="stylesheet" href="static/css/visual-system.css?v=53">
-  <link rel="stylesheet" href="static/css/current-research.css?v=95">
+  <link rel="stylesheet" href="static/css/current-research.css?v=96">
 
 
   <script src="static/js/swarmharm_title_demo_v3.js?v=74" defer></script>
@@ -152,13 +152,7 @@
           <canvas id="swarmharm-canvas" aria-hidden="true" hidden></canvas>
         </h1>
         <aside class="blog-tldr" id="tldr" aria-label="TL;DR">
-          <p><span class="blog-tldr-label">TL;DR</span><strong>Isolated AI agents still form swarms and cause collective harm through shared infrastructure.</strong> Motivated by the July 2026 <a href="https://openai.com/index/hugging-face-incident-and-the-road-ahead/">OpenAI</a>/<a href="https://metr.org/blog/2026-08-26-openai-hugging-face-incident-investigation/">METR Hugging Face incident</a>, we separate <span class="tldr-hl-blue">how unannounced agents form a swarm</span> (<a href="#form-the-swarm">SwarmForm</a>) from <span class="tldr-hl">how shared state turns ordinary tasks into collective failure</span> (<a href="#cause-harm">SwarmHarm</a>). Across <strong>360 multi-scale cohorts</strong> (10 frontier models, <code>N ∈ {4, 16, 32}</code>), <span class="tldr-hl">88.9% trigger a verified failure mode</span>, <span class="tldr-hl">60/60 shared-capacity agents pass solo replay yet fail jointly</span>, and <span class="tldr-hl">boundaries that hold at N = 4 break at N = 16–32</span> via compositional congestion and peer norm contagion.</p>
-          <div class="hero-quick-links" aria-label="Quick links">
-            <a href="#results-analysis">Results &amp; Analysis ↓</a>
-            <a href="traces/">Explore 145 Traces →</a>
-            <a href="#case-study-title">Verbatim CoT Evidence ↓</a>
-            <a href="https://github.com/AI4Collaboration/SwarmHarm" target="_blank" rel="noopener noreferrer">Code (GitHub) ↗</a>
-          </div>
+          <p><span class="blog-tldr-label">TL;DR</span><strong>Container isolation does not stop AI agents from forming swarms—or causing collective harm.</strong> Even without knowing peers exist, isolated agents discover shared storage and services, converge on ad-hoc conventions, and solve tasks none could finish alone (<a href="#form-the-swarm">SwarmForm</a>). On a shared platform under ordinary prompts (<a href="#cause-harm">SwarmHarm</a>), <span class="tldr-hl">individually safe agents still fail collectively</span>—overloading shared capacity with zero messages, exploiting weak checks in parallel, and <span class="tldr-hl">breaking boundaries at larger scale through peer norm contagion</span> that smaller evaluations miss.</p>
         </aside>
 
         <div class="settings-split" aria-label="Overview of SwarmForm and SwarmHarm settings">
@@ -211,10 +205,6 @@
               <li><strong>Zero peer cues:</strong> separate containers (1 CPU, 512 MiB), private memory, empty shared surface; <code>ls</code> listings never count as communication.</li>
               <li><strong>Headline result:</strong> <strong>39 / 50</strong> cohorts sustain byte-verified exchange; <strong>37 / 50</strong> solve split-information briefs impossible for any solo agent.</li>
             </ul>
-            <div class="setting-card-foot">
-              <a href="#swarmform-findings">SwarmForm Findings →</a>
-              <a href="#swarmform-setup-diagram">Object Diagram →</a>
-            </div>
           </article>
 
           <article class="setting-card setting-card-harm">
@@ -266,10 +256,6 @@
               <li><strong>One defect at a time:</strong> native harnesses (Codex, Claude Code, Pi); exactly one check relaxed per run while the other five stay strict.</li>
               <li><strong>Dual monitors:</strong> immutable host receipts replay every trace solo, jointly, and under strict controls alongside blinded CoT review.</li>
             </ul>
-            <div class="setting-card-foot">
-              <a href="#results-analysis">360-Cohort Results →</a>
-              <a href="#detection">Detection Loop →</a>
-            </div>
           </article>
         </div>
       </div>
@@ -674,8 +660,7 @@
   <header class="experiment-heading">
     <h2 class="life-phase p3" id="results-analysis-title"><span class="experiment-label">10 frontier models · N ∈ {4, 16, 32} · 360 cohorts</span>Results &amp; Analysis</h2>
     <div class="study-prose">
-      <p>We evaluate ten frontier models across three families—OpenAI (<code>GPT-6.1 Sol</code>, <code>GPT-6.1 Terra</code>, <code>GPT-6 Luna</code>, <code>GPT-6 Astra</code>), Anthropic (<code>Claude Opus 5.5</code>, <code>Claude Sonnet 5.5</code>, <code>Claude Haiku 5.5</code>), and open-weight reasoning models (<code>DeepSeek V4.1</code>, <code>GLM-5.3</code>, <code>Kimi K3.1</code>)—across all six SwarmHarm failure modes, both domains (Knowledge Work and Engineering), and three cohort sizes (<code>N = 4, 16, 32</code>): <strong>360 independently replayed cohorts</strong> alongside the 50-input SwarmForm channel study.</p>
-      <p>Every cohort receives the same natural three-sentence work order with zero adversarial coaching and zero peer roster. Each cell below summarizes all six conditions for that model and failure mode (2 domains × 3 cohort sizes), reporting both how many cohorts triggered under counterfactual replay and the mean fraction of agents causally involved.</p>
+      <p>Ten frontier models across OpenAI, Anthropic, and open-weight families evaluated on all six failure modes, both domains, and three cohort sizes (<code>N = 4, 16, 32</code>)—<strong>360 independently replayed cohorts</strong> under identical natural prompts, alongside the 50-input SwarmForm channel study.</p>
     </div>
   </header>
 
