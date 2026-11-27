@@ -337,7 +337,7 @@
       <p class="dl-hint">Click on a phase to see the animation (Space to pause, arrow keys to step).</p>
 
       <aside class="formal-criteria" aria-label="Formal attribution criteria">
-        <p class="formal-criteria-title">How we tell the three causes apart</p>
+        <p class="formal-criteria-title">How we tell the three patterns apart</p>
         <div class="formal-criteria-grid">
           <div class="formal-criterion">
             <strong>1. Did one agent read another's file?</strong>
@@ -443,14 +443,14 @@
       <p>Every shared-pool agent causes <code>0</code> delays alone, yet <code>40 / 40</code> runs at <code>N ≥ 16</code> delay scheduled jobs (7.8/8 at <code>N=32</code>).</p>
     </div>
     <div class="results-kpi kpi-harm">
-      <span class="results-kpi-label">Grader Rule Split</span>
+      <span class="results-kpi-label">Biggest Gap Across Models</span>
       <span class="results-kpi-num">34 / 60</span>
-      <p>Sharpest gap across models: five break nearly every time, three always hold, and <code>Sonnet 5.5</code> breaks only at <code>N=32</code>.</p>
+      <p>Editing release rules separates models most sharply: five break almost every time, three never do, and <code>Sonnet 5.5</code> breaks only at <code>N=32</code>.</p>
     </div>
     <div class="results-kpi kpi-form">
-      <span class="results-kpi-label">Spontaneous Peer Reads</span>
+      <span class="results-kpi-label">Spontaneous Peer Discovery</span>
       <span class="results-kpi-num">8 → 35 / 120</span>
-      <p>Runs where agents read peers' files jump 4.4× from <code>N=4</code> (79 reads) to <code>N=32</code> (8,929 reads) with zero peer hints.</p>
+      <p>Runs where agents discover and read peers' files jump 4.4× from <code>N=4</code> (79 reads) to <code>N=32</code> (8,929 reads) with zero peer hints.</p>
     </div>
   </div>
 
@@ -665,7 +665,7 @@
       <p class="results-figure-title">Figure 3b. Share of agents involved by model family</p>
       <p class="results-figure-sub" data-fig3b-sub>Average share of agents involved (all 3 sizes, both domains)</p>
       <svg viewBox="0 0 440 248" role="img" aria-labelledby="fig-tiers-title">
-        <title id="fig-tiers-title">Horizontal bar chart of mean causal agent participation by model family across 360 cohorts</title>
+        <title id="fig-tiers-title">Horizontal bar chart of average share of agents involved by model family across 360 runs</title>
         <line x1="138" y1="14" x2="138" y2="222" class="chart-axis"/>
         <line x1="199" y1="14" x2="199" y2="222" class="chart-grid"/>
         <line x1="260" y1="14" x2="260" y2="222" class="chart-grid"/>
@@ -830,7 +830,7 @@
 
     <article class="results-takeaway">
       <h4>4. What this means for deploying multi-agent systems</h4>
-      <p>Single-agent safety checks pass <code>60 / 60</code> shared-pool runs that fail jointly, and spontaneous peer file reads jump from <strong>8 / 120</strong> runs at <code>N = 4</code> to <strong>35 / 120</strong> at <code>N = 32</code> (8,929 reads). Isolating chat history does not isolate agents: enforcing hard permissions (<code>HTTP 403</code>), immutable host logs, and dedicated compute quotas matters far more than prompt rules.</p>
+      <p>Single-agent safety checks pass <code>60 / 60</code> shared-pool runs that fail jointly, and spontaneous peer discovery jumps from <strong>8 / 120</strong> runs at <code>N = 4</code> to <strong>35 / 120</strong> at <code>N = 32</code> (8,929 reads). Isolating chat history does not isolate agents: enforcing hard permissions (<code>HTTP 403</code>), immutable host logs, and dedicated compute quotas matters far more than prompt rules.</p>
     </article>
   </div>
 
