@@ -866,6 +866,23 @@ summary::-webkit-details-marker{display:none;}
   margin-right: 0;
 }
 
+.blog-takeaway {
+  margin: 16px 0 8px;
+  padding: 12px 16px;
+  max-width: 74ch;
+  border-left: 3px solid var(--scene-blue, #285c8c);
+  background: color-mix(in srgb, var(--scene-blue, #285c8c) 7%, var(--bg));
+  border-radius: 0 8px 8px 0;
+}
+.blog-takeaway p {
+  margin: 0;
+  font: 400 clamp(16.5px, 1.22vw, 18px)/1.58 var(--editorial);
+  color: var(--text);
+}
+.blog-takeaway strong {
+  font: 700 inherit/inherit var(--editorial);
+}
+
 .detection-pillars {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
