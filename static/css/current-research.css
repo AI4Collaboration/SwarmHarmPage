@@ -1488,6 +1488,21 @@ summary::-webkit-details-marker{display:none;}
   text-decoration: underline;
   text-underline-offset: 3px;
 }
+.evidence-rule {
+  margin: -4px 0 12px;
+  font: 400 13.5px/1.45 var(--font);
+  color: color-mix(in srgb, var(--text) 82%, var(--bg));
+}
+.evidence-rule strong {
+  color: var(--text);
+  font-weight: 600;
+}
+.evidence-rule code {
+  font: 500 .86em/1.25 ui-monospace, SFMono-Regular, Menlo, monospace;
+  padding: 1px 4px;
+  border-radius: 4px;
+  background: color-mix(in srgb, var(--text) 8%, transparent);
+}
 .verdict-bar {
   margin-top: 12px;
   padding: 9px 12px;
