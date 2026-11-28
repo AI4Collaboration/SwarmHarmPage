@@ -131,9 +131,8 @@
     try { id = decodeURIComponent(hash.slice(1)); } catch { return; }
     // Preserve shared links when sections are renamed or consolidated.
     const original = id;
-    if (id === 'team') return location.replace('team/');
-    if (['contact', 'contact-title', 'stay-updated', 'updates-title'].includes(id)) {
-      return location.replace('call-to-action/');
+    if (id === 'team' || ['contact', 'contact-title', 'stay-updated', 'updates-title'].includes(id)) {
+      return;
     }
     if (["research", "rq1", "rq2", "rq3"].includes(id)) id = "tldr";
     if (formerReplayAnchors.includes(id) || id.startsWith('setup-') || id.startsWith('case-')) id = 'trajectory';
