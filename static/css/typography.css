@@ -29,9 +29,10 @@ body { font-optical-sizing: auto; }
 .hero .hero-intro, .hero .experiment-bridge { max-width: min(100%, 700px); }
 .hero .hero-intro { font-size: clamp(21px, 1.7vw, 24px); line-height: 1.55; }
 .experiment-heading .study-prose p { max-width: 64ch; margin: 0; color: var(--text); font: 400 clamp(18px, 1.35vw, 19.5px)/1.55 var(--editorial); }
-.experiment-heading p strong, .experiment-heading h3 { font: 600 14px/1.3 var(--font); color: var(--finding-ink); }
-.experiment-heading p strong { margin-right: 0.3em; }
-.experiment-heading h3 { margin: 0px; }
+.experiment-heading p strong { font: 600 14px/1.3 var(--font); color: var(--finding-ink); margin-right: 0.3em; }
+.experiment-heading h3 { margin: 12px 0 0; font: 400 clamp(21px, 1.8vw, 24px)/1.25 var(--editorial); letter-spacing: -0.014em; color: var(--text); }
+.experiment-heading #swarmharm-findings { margin-top: 34px; }
+.experiment-heading .detection-subheading { margin: 0 0 14px; }
 .experiment-heading h3 small { font-size: 13px; }
 
 /* Full-width diagrams on normal desktops; bounded reading distance on ultrawide screens. */

@@ -567,8 +567,9 @@ summary::-webkit-details-marker{display:none;}
 }
 .results-subhead h3 {
   margin: 0;
-  font: 600 14.5px/1.3 var(--font);
-  color: var(--results-accent);
+  font: 400 clamp(20px, 1.7vw, 23px)/1.25 var(--editorial);
+  letter-spacing: -0.014em;
+  color: var(--text);
 }
 .results-subhead small {
   font: 400 13px/1.4 var(--font);
@@ -772,8 +773,8 @@ summary::-webkit-details-marker{display:none;}
   background: color-mix(in srgb, var(--bg) 55%, var(--surface));
 }
 .results-figure-title {
-  margin: 0 0 2px;
-  font: 600 14.5px/1.3 var(--font);
+  margin: 0 0 3px;
+  font: 600 16px/1.3 var(--font);
   color: var(--text);
 }
 .results-figure-sub {
@@ -1161,9 +1162,10 @@ summary::-webkit-details-marker{display:none;}
   margin: 0 0 -8px;
 }
 .failure-modes-intro h3 {
-  margin: 0 0 6px;
-  font: 600 14px/1.3 var(--font);
-  color: var(--finding-ink);
+  margin: 0 0 8px;
+  font: 400 clamp(21px, 1.8vw, 24px)/1.25 var(--editorial);
+  letter-spacing: -0.014em;
+  color: var(--text);
 }
 .failure-modes-intro p {
   margin: 0;
@@ -1374,7 +1376,8 @@ summary::-webkit-details-marker{display:none;}
 }
 .case-study-head h3 {
   margin: 0 0 6px;
-  font: 400 22px/1.25 var(--editorial);
+  font: 400 clamp(21px, 1.8vw, 24px)/1.25 var(--editorial);
+  letter-spacing: -0.014em;
   color: var(--text);
 }
 .case-study-head p {
@@ -1576,10 +1579,9 @@ summary::-webkit-details-marker{display:none;}
 }
 .blog-references h3 {
   margin: 0 0 10px;
-  font: 600 13px/1.3 var(--font);
-  letter-spacing: .05em;
-  text-transform: uppercase;
-  color: var(--muted);
+  font: 400 clamp(20px, 1.7vw, 23px)/1.25 var(--editorial);
+  letter-spacing: -0.014em;
+  color: var(--text);
 }
 .blog-references ol {
   margin: 0 0 18px;
