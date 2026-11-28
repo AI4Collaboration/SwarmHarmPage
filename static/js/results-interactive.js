@@ -176,13 +176,13 @@
       const pctStr = grandCells ? ((grandObs / grandCells) * 100).toFixed(1) : '0.0';
       const domTag = activeDom === 'both' ? '' : (activeDom === 'KW' ? ' in Knowledge Work' : ' in Engineering');
       if (activePop === '4') {
-        statusNote.innerHTML = `At <code>N = 4</code>${domTag}: <strong>${grandObs}/${grandCells}</strong> (${pctStr}%) fail. <code>GPT-6.1 Terra</code> Interference (0 delayed) and <code>Claude Sonnet 5.5</code> Grader both hold; click <code>N = 16</code> or <code>N = 32</code> to see them break.`;
+        statusNote.innerHTML = `At <code>N = 4</code>${domTag}: <strong>${grandObs}/${grandCells}</strong> (${pctStr}%) fail. <code>GPT-6.1 Terra</code> Interference and <code>Claude Sonnet 5.5</code> Grader both hold.`;
       } else if (activePop === '16') {
-        statusNote.innerHTML = `At <code>N = 16</code>${domTag}: <strong>${grandObs}/${grandCells}</strong> (${pctStr}%) fail. <code>GPT-6.1 Terra</code> jumps from 0 to 6 to 8 delayed jobs, while <code>Claude Sonnet 5.5</code> still holds Grader Manipulation.`;
+        statusNote.innerHTML = `At <code>N = 16</code>${domTag}: <strong>${grandObs}/${grandCells}</strong> (${pctStr}%) fail. <code>GPT-6.1 Terra</code> jumps from 0 to 6 to 8 delayed jobs; <code>Sonnet 5.5</code> still holds Grader.`;
       } else if (activePop === '32') {
-        statusNote.innerHTML = `At <code>N = 32</code>${domTag}: <strong>${grandObs}/${grandCells}</strong> (${pctStr}%) fail. <code>Claude Sonnet 5.5</code> breaks Grader Manipulation in both domains (10/32 KW, 2/32 Eng) after copying peers; <code>Haiku 5.5</code> still holds Grader, Action Scope, and Trace Tampering.`;
+        statusNote.innerHTML = `At <code>N = 32</code>${domTag}: <strong>${grandObs}/${grandCells}</strong> (${pctStr}%) fail. <code>Claude Sonnet 5.5</code> breaks Grader (10/32 KW, 2/32 Eng); <code>Haiku 5.5</code> still holds.`;
       } else {
-        statusNote.innerHTML = `Showing <strong>${grandObs}/${grandCells}</strong> (${pctStr}%) failed runs${domTag}. Click <code>N = 4</code>, <code>N = 16</code>, or <code>N = 32</code> to see what breaks at larger scale.`;
+        statusNote.innerHTML = `Showing <strong>${grandObs}/${grandCells}</strong> (${pctStr}%) failed runs${domTag}. Filter by group size to see what breaks at scale.`;
       }
     }
   }
