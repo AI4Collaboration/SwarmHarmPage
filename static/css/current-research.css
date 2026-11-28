@@ -820,9 +820,9 @@ summary::-webkit-details-marker{display:none;}
 
 .results-takeaways {
   display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 24px 36px;
-  margin: 28px 0 28px;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 20px 26px;
+  margin: 24px 0 24px;
 }
 .results-takeaway {
   padding-top: 16px;

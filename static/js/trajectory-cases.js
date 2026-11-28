@@ -19,11 +19,11 @@
     'claude-sonnet-5.5':{name:'Claude Sonnet 5.5',src:'static/images/models/claude.svg?v=1',cls:''},
     'claude-haiku-5.5':{name:'Claude Haiku 5.5',src:'static/images/models/claude.svg?v=1',cls:''},
     'gemini-4-argon':{name:'Gemini 4 Argon',src:'static/images/models/gemini.svg?v=1',cls:''},
-    'deepseek-v4.1-flash':{name:'DeepSeek V4.1',src:'static/images/models/deepseek.svg?v=1',cls:''},
+    'kimi-k3.1-pro':{name:'Kimi K3.1 Pro',src:'static/images/models/kimi-dark.svg?v=1',cls:'model-logo-kimi',kimi:true},
     'glm-5.3':{name:'GLM-5.3',src:'static/images/models/zai.svg?v=1',cls:'model-logo-mono'},
-    'kimi-k3.1-pro':{name:'Kimi K3.1',src:'static/images/models/kimi-dark.svg?v=1',cls:'model-logo-kimi',kimi:true}
+    'deepseek-v4.1-flash':{name:'DeepSeek V4.1 Flash 1017',src:'static/images/models/deepseek.svg?v=1',cls:''}
   };
-  const MODEL_ORDER=['gpt-6-astra','gpt-6.1-sol','gpt-6.1-terra','gpt-6-luna','claude-opus-5.5','claude-sonnet-5.5','claude-haiku-5.5','deepseek-v4.1-flash','glm-5.3','kimi-k3.1-pro','gemini-4-argon'];
+  const MODEL_ORDER=['gpt-6-astra','gpt-6.1-sol','gpt-6.1-terra','gpt-6-luna','claude-opus-5.5','claude-sonnet-5.5','claude-haiku-5.5','gemini-4-argon','kimi-k3.1-pro','glm-5.3','deepseek-v4.1-flash'];
   const THREAT_MODES=[
     {slug:'gaming',level:'Task',title:'Specification Gaming'},
     {slug:'records',level:'Task',title:'Trace Tampering'},
